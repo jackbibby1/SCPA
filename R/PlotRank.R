@@ -54,7 +54,7 @@ plot_rank <- function(scpa_out,
       ggplot2::geom_point(shape = 21, cex = base_point_size, color = 'black', fill = base_point_color, stroke = 0.05) +
       ggrepel::geom_label_repel(data = path_lab, label = path_lab$Pathway,
                                 size = label_size, label.padding = ggplot2::unit(0.7, "mm"),
-                                label.r = unit(0.3, "mm"), nudge_x = -30) +
+                                label.r = ggplot2::unit(0.3, "mm"), nudge_x = -30) +
       ggplot2::geom_point(data = df_sub, shape = 21, cex = highlight_point_size, color = 'black', fill = highlight_point_color) +
       ggplot2::xlab("Qval") +
       ggplot2::ylab("Pathway rank") +

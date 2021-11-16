@@ -44,6 +44,8 @@ plot_rank <- function(scpa_out,
   path_ranking$path_rank <- dplyr::percent_rank(path_ranking[[population_name]])*100
 
   df_sub <- subset(path_ranking, path_ranking$Pathway %in% selected_paths)
+  df_sub$Pathway <- gsub(x = df_sub$Pathway, pattern = "_", replacement = " ")
+  df_sub$Pathway <- stringr::str_to_title(df_sub$Pathway)
 
   if (label_pathway == T) {
     path_lab <- grep(pattern = paste(pathway, collapse = "|"), path_ranking$Pathway, value = T, ignore.case = T)

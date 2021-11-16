@@ -46,7 +46,7 @@ plot_rank <- function(scpa_out,
   df_sub <- subset(path_ranking, path_ranking$Pathway %in% selected_paths)
 
   if (label_pathway == T) {
-    path_lab <- grep(pathway, path_ranking$Pathway, value = T, ignore.case = T)
+    path_lab <- grep(pattern = paste(pathway, collapse = "|"), path_ranking$Pathway, value = T, ignore.case = T)
     path_lab <- path_ranking[path_ranking$Pathway %in% path_lab, ]
 
     ggplot2::ggplot(path_ranking, ggplot2::aes(.data[[population_name]], path_rank)) +

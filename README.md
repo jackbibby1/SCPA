@@ -38,3 +38,8 @@ devtools::install_github("jackbibby1/SCPA")
 ```
 
 ## 2. Tutorials
+
+## 3. Issues
+
+To report any issues or submit comments:
+<https://github.com/jackbibby1/SCPA/issues>

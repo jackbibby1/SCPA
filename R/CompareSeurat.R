@@ -97,7 +97,7 @@ compare_seurat <- function(seurat_object,
     for (i in 1:length(pathways)) {
       samp_combined[[i]] <- cbind(avg_expression[[1]][[i]], avg_expression[[2]][[i]])
     }
-    samp_combined <- lapply(samp_combined, function(x) set_colnames(x, c("Pop1", "Pop2")))
+    samp_combined <- lapply(samp_combined, function(x) magrittr::set_colnames(x, c("Pop1", "Pop2")))
     samp_combined <- lapply(samp_combined, function(x) cbind(x, logFC = x[, "Pop1"]-x[, "Pop2"]))
     path_fc <- sapply(samp_combined, function(x) sum(x[, "logFC"]))
   }

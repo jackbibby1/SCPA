@@ -6,6 +6,8 @@
 #' @param samples List of samples, each supplied as an expression matrix
 #' @param pathways List of pathways and their genes
 #' @param downsample Option to downsample cell numbers. Default is 500
+#' @param min_genes Gene sets with fewer than this number of genes will be excluded
+#' @param max_genes Gene sets with more than this number of genes will be excluded
 #'
 #' @examples \dontrun{
 #' scpa_result <- compare_pathways(
@@ -54,7 +56,7 @@ compare_pathways <- function(samples,
   }
 
   # set pathway names
-  pop_paths <- lapply(pop_paths, function(x) set_names(x, path_names))
+  pop_paths <- lapply(pop_paths, function(x) purrr::set_names(x, path_names))
 
   # filter out pathways with < 15 genes or > 500
   filter_paths <- sapply(pop_paths[[1]], function(x) any(nrow(x) >= min_genes & nrow(x) <= max_genes))
@@ -73,7 +75,7 @@ compare_pathways <- function(samples,
     for (i in 1:length(pop_paths[[1]])) {
       samp_combined[[i]] <- cbind(avg_expression[[1]][[i]], avg_expression[[2]][[i]])
     }
-    samp_combined <- lapply(samp_combined, function(x) set_colnames(x, c("Pop1", "Pop2")))
+    samp_combined <- lapply(samp_combined, function(x) magrittr::set_colnames(x, c("Pop1", "Pop2")))
     samp_combined <- lapply(samp_combined, function(x) cbind(x, logFC = x[, "Pop1"]-x[, "Pop2"]))
     path_fc <- sapply(samp_combined, function(x) sum(x[, "logFC"]))
   }

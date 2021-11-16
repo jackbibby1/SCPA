@@ -39,7 +39,7 @@ plot_rank <- function(scpa_out,
   selected_paths <- grep(pattern = paste(pathway, collapse = "|"), x = scpa_out$Pathway, ignore.case = T,  value = T)
 
   path_ranking <- arrange(scpa_out, desc(population_name))
-  path_ranking$path_rank <- percent_rank(path_ranking[[population_name]])*100
+  path_ranking$path_rank <- dplyr::percent_rank(path_ranking[[population_name]])*100
 
   df_sub <- subset(path_ranking, path_ranking$Pathway %in% selected_paths)
 
@@ -47,36 +47,36 @@ plot_rank <- function(scpa_out,
     path_lab <- grep(pathway, path_ranking$Pathway, value = T, ignore.case = T)
     path_lab <- path_ranking[path_ranking$Pathway %in% path_lab, ]
 
-    ggplot(path_ranking, aes(.data[[population_name]], path_rank)) +
-      geom_hline(yintercept = c(0, 25, 50, 75, 100), linetype = 'dotted', lwd = 0.3, color = 'gray40') +
-      geom_point(shape = 21, cex = base_point_size, color = 'black', fill = base_point_color, stroke = 0.05) +
+    ggplot2::ggplot(path_ranking, ggplot2::aes(.data[[population_name]], path_rank)) +
+      ggplot2::geom_hline(yintercept = c(0, 25, 50, 75, 100), linetype = 'dotted', lwd = 0.3, color = 'gray40') +
+      ggplot2::geom_point(shape = 21, cex = base_point_size, color = 'black', fill = base_point_color, stroke = 0.05) +
       ggrepel::geom_label_repel(data = path_lab, label = path_lab$Pathway,
                                 size = label_size, label.padding = unit(0.7, "mm"),
                                 label.r = unit(0.3, "mm"), nudge_x = -30) +
-      geom_point(data = df_sub, shape = 21, cex = highlight_point_size, color = 'black', fill = highlight_point_color) +
-      xlab("Qval") +
-      ylab("Pathway rank") +
-      scale_y_continuous(expand = c(0.03, 0.03), breaks = c(0, 25, 50, 75, 100)) +
-      scale_x_continuous(expand = c(0.2, 0.2)) +
-      theme(panel.border = element_rect(fill = NA),
-            panel.background = element_blank(),
-            title = element_text(size = 9),
-            axis.title = element_text(size = 11))
+      ggplot2::geom_point(data = df_sub, shape = 21, cex = highlight_point_size, color = 'black', fill = highlight_point_color) +
+      ggplot2::xlab("Qval") +
+      ggplot2::ylab("Pathway rank") +
+      ggplot2::scale_y_continuous(expand = c(0.03, 0.03), breaks = c(0, 25, 50, 75, 100)) +
+      ggplot2::scale_x_continuous(expand = c(0.2, 0.2)) +
+      ggplot2::theme(panel.border = ggplot2::element_rect(fill = NA),
+            panel.background = ggplot2::element_blank(),
+            title = ggplot2::element_text(size = 9),
+            axis.title = ggplot2::element_text(size = 11))
 
   } else {
 
-    ggplot(path_ranking, aes(.data[[population_name]], path_rank)) +
-      geom_hline(yintercept = c(0, 25, 50, 75, 100), linetype = 'dotted', lwd = 0.3, color = 'gray40') +
-      geom_point(shape = 21, cex = base_point_size, color = 'black', fill = base_point_color, stroke = 0.05) +
-      geom_point(data = df_sub, shape = 21, cex = highlight_point_size, color = 'black', fill = highlight_point_color) +
-      xlab("Qval") +
-      ylab("Pathway rank") +
-      scale_y_continuous(expand = c(0.03, 0.03), breaks = c(0, 25, 50, 75, 100)) +
-      scale_x_continuous(expand = c(0.2, 0.2)) +
-      theme(panel.border = element_rect(fill = NA),
-            panel.background = element_blank(),
-            title = element_text(size = 9),
-            axis.title = element_text(size = 11))
+    ggplot2::ggplot(path_ranking, ggplot2::aes(.data[[population_name]], path_rank)) +
+      ggplot2::geom_hline(yintercept = c(0, 25, 50, 75, 100), linetype = 'dotted', lwd = 0.3, color = 'gray40') +
+      ggplot2::geom_point(shape = 21, cex = base_point_size, color = 'black', fill = base_point_color, stroke = 0.05) +
+      ggplot2::geom_point(data = df_sub, shape = 21, cex = highlight_point_size, color = 'black', fill = highlight_point_color) +
+      ggplot2::xlab("Qval") +
+      ggplot2::ylab("Pathway rank") +
+      ggplot2::scale_y_continuous(expand = c(0.03, 0.03), breaks = c(0, 25, 50, 75, 100)) +
+      ggplot2::scale_x_continuous(expand = c(0.2, 0.2)) +
+      ggplot2::theme(panel.border = ggplot2::element_rect(fill = NA),
+            panel.background = ggplot2::element_blank(),
+            title = ggplot2::element_text(size = 9),
+            axis.title = ggplot2::element_text(size = 11))
 
   }
 }

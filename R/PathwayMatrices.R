@@ -10,6 +10,10 @@
 #'   matrices. You can use the get_paths function to create
 #'   this list if you are using a csv file generated from a gmt
 #'   file.
+#' @param sample_names Names of the samples to be used in output
+#' @param pathway_names Names of pathways to be used in output
+#'
+#' @export
 #'
 #'
 

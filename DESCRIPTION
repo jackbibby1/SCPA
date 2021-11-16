@@ -1,12 +1,25 @@
 Package: SCPA
-Title: What the Package Does (One Line, Title Case)
+Title: Single Cell Pathway Analysis
 Version: 0.0.0.9000
 Authors@R: 
-    person("First", "Last", , "first.last@example.com", role = c("aut", "cre"),
-           comment = c(ORCID = "YOUR-ORCID-ID"))
-Description: What the package does (one paragraph).
-License: `use_mit_license()`, `use_gpl3_license()` or friends to pick a
-    license
+    person("Jack", "Bibby", , "jack.bibby@nih.gov", role = c("aut", "cre"))
+Description: SCPA performs pathway analysis on single cell data. 
+    It relies on understanding changes in multivariate distributions 
+    of pathways between samples as a basis for judging biological 
+    relevance. Two basic arguments are necessary: matrices of data
+    and pathways that you want to analyze. See the GitHub page:
+    https://github.com/jackbibby1/SCPA for a detailed description and tutorials.
+License: GPL (>= 3)
 Encoding: UTF-8
 Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.1.2
+Imports: 
+    dplyr,
+    ggplot2,
+    ggrepel,
+    magrittr,
+    multicross,
+    purrr,
+    stats,
+    tidyr,
+    utils

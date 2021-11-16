@@ -24,7 +24,7 @@ get_paths <- function(pathway_filepath,
                       max_genes = 500) {
 
   if (class(pathway_filepath)[1] == "character") {
-    pathways <- read.csv(pathway_filepath, row.names = 1, header = F)
+    pathways <- utils::read.csv(pathway_filepath, row.names = 1, header = F)
     pathways <- as.data.frame(t(pathways))
     pathways <- tidyr::pivot_longer(pathways, cols = 1:length(pathways), names_to = "Pathway", values_to = "Genes")
     pathways <- dplyr::group_split(pathways, Pathway)

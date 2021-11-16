@@ -44,12 +44,12 @@ plot_rank <- function(scpa_out,
   path_ranking$path_rank <- dplyr::percent_rank(path_ranking[[population_name]])*100
 
   df_sub <- subset(path_ranking, path_ranking$Pathway %in% selected_paths)
-  df_sub$Pathway <- gsub(x = df_sub$Pathway, pattern = "_", replacement = " ")
-  df_sub$Pathway <- stringr::str_to_title(df_sub$Pathway)
 
   if (label_pathway == T) {
     path_lab <- grep(pattern = paste(pathway, collapse = "|"), path_ranking$Pathway, value = T, ignore.case = T)
     path_lab <- path_ranking[path_ranking$Pathway %in% path_lab, ]
+    path_lab$Pathway <- gsub(x = path_lab$Pathway, pattern = "_", replacement = " ")
+    path_lab$Pathway <- stringr::str_to_title(path_lab$Pathway)
 
     ggplot2::ggplot(path_ranking, ggplot2::aes(.data[[population_name]], path_rank)) +
       ggplot2::geom_hline(yintercept = c(0, 25, 50, 75, 100), linetype = 'dotted', lwd = 0.3, color = 'gray40') +

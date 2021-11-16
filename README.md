@@ -1,12 +1,12 @@
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 
-# SCPA
+# Single Cell Pathway Analysis (SCPA)
 
 <!-- badges: start -->
 <!-- badges: end -->
 
-![SCPA outline](images/scpa_outline.png)
+![SCPA outline](man/figures/scpa_outline.png)
 
 SCPA is a method for pathway analysis in single cell RNA-seq data. It’s
 based on a novel approach to pathway analysis that defines pathway

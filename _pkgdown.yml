@@ -1,2 +1,11 @@
 url: ~
 
+title: Single Cell Pathway Analysis (SCPA)
+
+template:
+  params:
+    bootswatch: flatly
+
+repo:
+  url:
+    home: https://github.com/jackbibby1/SCPA

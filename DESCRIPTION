@@ -20,6 +20,7 @@ Imports:
     magrittr,
     multicross,
     purrr,
+    Seurat,
     stats,
     tidyr,
     utils

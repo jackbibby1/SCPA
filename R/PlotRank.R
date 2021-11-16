@@ -14,6 +14,8 @@
 #' @param base_point_color Color of the base points to plot on the graph
 #' @param highlight_point_size Size of the highlighted points to plot on the graph
 #' @param highlight_point_color Color of the highlighted points to plot on the graph
+#' @param label_pathway Should the selected pathway be labelled?
+#' @param label_size Text size of the pathway label
 #'
 #' @examples \dontrun{
 #' plot_rank(
@@ -33,12 +35,12 @@ plot_rank <- function(scpa_out,
                       base_point_color = "royalblue2",
                       highlight_point_size = 3,
                       highlight_point_color = "orangered2",
-                      label_pathway = NULL,
+                      label_pathway = T,
                       label_size = 4) {
 
   selected_paths <- grep(pattern = paste(pathway, collapse = "|"), x = scpa_out$Pathway, ignore.case = T,  value = T)
 
-  path_ranking <- arrange(scpa_out, desc(population_name))
+  path_ranking <- dplyr::arrange(scpa_out, dplyr::desc(population_name))
   path_ranking$path_rank <- dplyr::percent_rank(path_ranking[[population_name]])*100
 
   df_sub <- subset(path_ranking, path_ranking$Pathway %in% selected_paths)
@@ -51,7 +53,7 @@ plot_rank <- function(scpa_out,
       ggplot2::geom_hline(yintercept = c(0, 25, 50, 75, 100), linetype = 'dotted', lwd = 0.3, color = 'gray40') +
       ggplot2::geom_point(shape = 21, cex = base_point_size, color = 'black', fill = base_point_color, stroke = 0.05) +
       ggrepel::geom_label_repel(data = path_lab, label = path_lab$Pathway,
-                                size = label_size, label.padding = unit(0.7, "mm"),
+                                size = label_size, label.padding = ggplot2::unit(0.7, "mm"),
                                 label.r = unit(0.3, "mm"), nudge_x = -30) +
       ggplot2::geom_point(data = df_sub, shape = 21, cex = highlight_point_size, color = 'black', fill = highlight_point_color) +
       ggplot2::xlab("Qval") +

@@ -18,6 +18,6 @@
 format_pathways <- function(msigdbr_output) {
   msigdbr_output <- msigdbr_output[, c("gs_name", "gene_symbol")]
   colnames(msigdbr_output) <- c("Pathway", "Genes")
-  msigdbr_output <- dplyr::group_split(msigdbr_output, Pathway)
+  msigdbr_output <- dplyr::group_split(msigdbr_output, "Pathway")
   return(msigdbr_output)
 }

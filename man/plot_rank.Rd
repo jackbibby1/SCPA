@@ -12,7 +12,7 @@ plot_rank(
   base_point_color = "royalblue2",
   highlight_point_size = 3,
   highlight_point_color = "orangered2",
-  label_pathway = NULL,
+  label_pathway = T,
   label_size = 4
 )
 }
@@ -34,6 +34,10 @@ than one population present in the data frame}
 \item{highlight_point_size}{Size of the highlighted points to plot on the graph}
 
 \item{highlight_point_color}{Color of the highlighted points to plot on the graph}
+
+\item{label_pathway}{Should the selected pathway be labelled?}
+
+\item{label_size}{Text size of the pathway label}
 }
 \value{
 list of pathways with corresponding genes

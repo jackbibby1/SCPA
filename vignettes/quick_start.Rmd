@@ -52,6 +52,7 @@ DimPlot(naive_cd8, split.by = "Hour") +
   theme(aspect.ratio = 1)
 ```
 
+![](../man/figures/naive_cd8_umap.png){width=100%}
 
 ### Generating samples from a Seurat object
 Let's now generate two populations to compare. To do this we'll use the `seurat_extract` function 
@@ -77,7 +78,8 @@ generating gene sets for SCPA can be found [here](https://github.com/jackbibby1/
 
 
 ```{r get_pathways}
-pathways <- msigdbr("Homo sapiens", "H") %>%
+pathways <- msigdbr("Homo sapiens") %>%
+  filter(grepl(pattern = "KEGG", x = gs_name)) %>%
   format_pathways()
 ```
 
@@ -87,7 +89,7 @@ We're all set. We now have everything that we need to compare the two population
 
 ```{r compare_pathways, results='hide'}
 scpa_out <- compare_pathways(samples = list(resting, activated),
-                             pathways = pathways, downsample = 10)
+                             pathways = pathways)
 ```
 
 
@@ -99,7 +101,7 @@ head(scpa_out)
 ```
 
 ### Plotting some basic output
-You can use SCPA to plot some basic output. For example, we can highlight the "HALLMARK_GLYCOLYSIS" pathway using the `plot_rank` function.
+You can use SCPA to plot some basic output. For example, we can highlight the "KEGG_GLYCOLYSIS_GLUCONEOGENESIS" pathway using the `plot_rank` function.
 
 ```{r plot_rank, fig.width=4.5, fig.height=3, dpi=300, out.width="50%"}
 plot_rank(scpa_out = scpa_out,

@@ -32,6 +32,7 @@ library(SCPA)
 library(msigdbr)
 library(Seurat)
 library(dplyr)
+library(ggplot2)
 ```
 
 
@@ -46,9 +47,9 @@ naive_cd8 <- int_data_N8
 
 ### Quick Look at the data
 
-
-```{r plot_umap, fig.asp=1, out.width="50%", dpi=300}
-DimPlot(naive_cd8)
+```{r plot_umap, eval=F}
+DimPlot(naive_cd8, split.by = "Hour") +
+  theme(aspect.ratio = 1)
 ```
 
 
@@ -68,15 +69,15 @@ activated <- seurat_extract(naive_cd8,
 ```
 
 
-### Generating gene sets using msigdbr
+### Generate some gene sets using msigdbr
 We then need to generate our gene sets. msigdbr is a handy package
 that allows you to get this information. Here we're pulling all the KEGG pathways, and
 using the `format_pathways` function within SPCA to get them properly formatted. A detailed explanation of
 generating gene sets for SCPA can be found [here](https://github.com/jackbibby1/SCPA/blob/main/using_gene_sets.md)
 
+
 ```{r get_pathways}
-pathways <- msigdbr("Homo sapiens") %>%
-  filter(grepl("kegg", gs_name, ignore.case = T)) %>%
+pathways <- msigdbr("Homo sapiens", "H") %>%
   format_pathways()
 ```
 
@@ -86,7 +87,7 @@ We're all set. We now have everything that we need to compare the two population
 
 ```{r compare_pathways, results='hide'}
 scpa_out <- compare_pathways(samples = list(resting, activated),
-                             pathways = pathways)
+                             pathways = pathways, downsample = 10)
 ```
 
 
@@ -100,11 +101,9 @@ head(scpa_out)
 ### Plotting some basic output
 You can use SCPA to plot some basic output. For example, we can highlight the "HALLMARK_GLYCOLYSIS" pathway using the `plot_rank` function.
 
-```{r plot_rank, fig.width=4, fig.height=3, dpi=300, out.width="50%"}
+```{r plot_rank, fig.width=4.5, fig.height=3, dpi=300, out.width="50%"}
 plot_rank(scpa_out = scpa_out,
-          pathway = "glycolysis",
-          base_point_color = "gray70",
-          highlight_point_color = "cornflowerblue")
+          pathway = "glycolysis")
 ```
 
 

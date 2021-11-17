@@ -32,9 +32,9 @@ plot_rank <- function(scpa_out,
                       pathway,
                       population_name = "qval",
                       base_point_size = 2,
-                      base_point_color = "royalblue2",
+                      base_point_color = "gray70",
                       highlight_point_size = 3,
-                      highlight_point_color = "orangered2",
+                      highlight_point_color = "cornflowerblue",
                       label_pathway = T,
                       label_size = 4) {
 

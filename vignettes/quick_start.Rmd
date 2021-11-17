@@ -23,30 +23,69 @@ The two main bits of information we need are:
 - Pathway gene lists
 
 ### Loading in packages 
-For this simple example, we're just going to load in the SCPA package, msigdbr, and Seurat. msigdbr allows
-access to a large number of gene sets that are collated [here](https://www.gsea-msigdb.org/gsea/msigdb/genesets.jsp)
+For this simple example, we're just going to load in the SCPA package, msigdbr, Seurat, and dplyr. msigdbr allows access to a large number of gene sets that are collated [here](https://www.gsea-msigdb.org/gsea/msigdb/genesets.jsp)
 
 
 ```{r setup}
 library(SCPA)
 library(msigdbr)
 library(Seurat)
+library(dplyr)
 ```
 
+
+### Loading in data
+We can use a dataset from a paper we [recently published](paper_link), which is looking
+at naive CD4 T cell activation.
+
+```{r}
+load("~/Google Drive/scRNA_metabolism_paper/Processing scRNAseq data/Naive CD8/int_data_N8.RData")
+naive_cd8 <- int_data_N8
+```
+
+
 ### Generating samples from a Seurat object
-Let's generate two populations to compare. To do this we'll use the `seurat_extract` function 
+Let's now generate two populations to compare. To do this we'll use the `seurat_extract` function 
 to extract expression matrices from our Seurat object. This function takes a Seurat object as an input,
 subsets data based on the Seurat column metadata, and returns an expression file for that given subset.
 
 
 ```{r, eval=F}
-population1 <- seurat_extract(seurat_object,
-                              meta1 = "cell_type",
-                              value_meta1 = "cd4_t")
-population1 <- seurat_extract(seurat_object,
-                              meta1 = "cell_type",
-                              value_meta1 = "cd4_t")
+resting <- seurat_extract(naive_cd8,
+                          meta1 = "Hour",
+                          value_meta1 = 0)
+activated <- seurat_extract(naive_cd8,
+                            meta1 = "Hour",
+                            value_meta1 = "24")
 ```
+
+
+### Generating gene sets using msigdbr
+We then need to generate our gene sets. msigdbr is a handy package
+that allows you to get this information. Here we're pulling all the human 'Hallmark' pathways, and
+using the `format_pathways` function within SPCA to get them properly formatted. A detailed explanation of
+generating gene sets for SCPA can be found [here](https://github.com/jackbibby1/SCPA/blob/main/using_gene_sets.md)
+
+```{r}
+pathways <- msigdbr("Homo sapiens", "H") %>%
+    format_pathways()
+```
+
+### Comparing samples
+We're all set. We now have everything that we need to compare the two populations. So just run 
+`compare_pathways` and use the objects we created above.
+
+```{r}
+scpa_out <- compare_pathways(samples = list(resting, activated),
+                             pathways = pathways)
+```
+
+
+
+
+
+
+
 
 
 

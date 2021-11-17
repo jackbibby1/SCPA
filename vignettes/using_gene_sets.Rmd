@@ -16,6 +16,7 @@ knitr::opts_chunk$set(
 
 ## Using gene sets in SCPA
 There are a few different formats for gene sets that you can use in SCPA
+
 - Generate gene set lists in R (possibly the best option)
 - Use a classical gene set gmt file
 - Use a csv file

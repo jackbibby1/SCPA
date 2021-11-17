@@ -1,0 +1,55 @@
+---
+title: "Quick Start"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{quick_start}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+Here we're just going to show some general principles of what you need to get started in a basic pathway analysis. It acts as a quick reference to all the main points of the workflow, but more detailed examples can be found in our other tutorials
+
+### Basic information needed for pathway analysis
+The two main bits of information we need are:
+
+- Expression tables for each condition (this can be in separate data frames, or stored within a typical Seurat object)
+- Pathway gene lists
+
+### Loading in packages 
+For this simple example, we're just going to load in the SCPA package, msigdbr, and Seurat. msigdbr allows
+access to a large number of gene sets that are collated [here](https://www.gsea-msigdb.org/gsea/msigdb/genesets.jsp)
+
+
+```{r setup}
+library(SCPA)
+library(msigdbr)
+library(Seurat)
+```
+
+### Generating samples from a Seurat object
+Let's generate two populations to compare. To do this we'll use the `seurat_extract` function 
+to extract expression matrices from our Seurat object. This function takes a Seurat object as an input,
+subsets data based on the Seurat column metadata, and returns an expression file for that given subset.
+
+
+```{r, eval=F}
+population1 <- seurat_extract(seurat_object,
+                              meta1 = "cell_type",
+                              value_meta1 = "cd4_t")
+population1 <- seurat_extract(seurat_object,
+                              meta1 = "cell_type",
+                              value_meta1 = "cd4_t")
+```
+
+
+
+
+
+

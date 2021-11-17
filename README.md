@@ -39,6 +39,8 @@ devtools::install_github("jackbibby1/SCPA")
 
 ## 2. Tutorials
 
+For tutorials on how to use SCPA, see:
+
 ## 3. Issues
 
 To report any issues or submit comments:

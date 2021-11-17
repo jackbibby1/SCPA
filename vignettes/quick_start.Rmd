@@ -87,6 +87,8 @@ And in `scpa_out`, we have all our results.
 head(scpa_out)
 ```
 
+### Plotting some basic output
+You can use SCPA to plot some basic output. For example, we can highlight the "HALLMARK_GLYCOLYSIS" pathway using the `plot_rank` function.
 
 ```{r, fig.width=4, fig.height=3, dpi=300, out.width="50%"}
 plot_rank(scpa_out = scpa_out,

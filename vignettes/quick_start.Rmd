@@ -26,7 +26,8 @@ The two main bits of information we need are:
 For this simple example, we're just going to load in the SCPA package, msigdbr, Seurat, and dplyr. msigdbr allows access to a large number of gene sets that are collated [here](https://www.gsea-msigdb.org/gsea/msigdb/genesets.jsp)
 
 
-```{r setup}
+```{r setup, results='hide', warning=F, message=F}
+devtools::install_github("jackbibby1/SCPA")
 library(SCPA)
 library(msigdbr)
 library(Seurat)
@@ -50,13 +51,13 @@ to extract expression matrices from our Seurat object. This function takes a Seu
 subsets data based on the Seurat column metadata, and returns an expression file for that given subset.
 
 
-```{r, eval=F}
+```{r}
 resting <- seurat_extract(naive_cd8,
                           meta1 = "Hour",
                           value_meta1 = 0)
 activated <- seurat_extract(naive_cd8,
                             meta1 = "Hour",
-                            value_meta1 = "24")
+                            value_meta1 = 24)
 ```
 
 
@@ -75,11 +76,24 @@ pathways <- msigdbr("Homo sapiens", "H") %>%
 We're all set. We now have everything that we need to compare the two populations. So just run 
 `compare_pathways` and use the objects we created above.
 
-```{r}
+```{r, results='hide'}
 scpa_out <- compare_pathways(samples = list(resting, activated),
                              pathways = pathways)
 ```
 
+And in `scpa_out`, we have all our results.
+
+```{r}
+head(scpa_out)
+```
+
+
+```{r, fig.width=4, fig.height=3, dpi=300, out.width="50%"}
+plot_rank(scpa_out = scpa_out,
+          pathway = "glycolysis",
+          base_point_color = "gray70",
+          highlight_point_color = "cornflowerblue")
+```
 
 
 

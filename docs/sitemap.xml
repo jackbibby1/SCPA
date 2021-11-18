@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  <url>
+    <loc>https://scpathanalysis.com/index.html</loc>
+  </url>
+  <url>
+    <loc>https://scpathanalysis.com/reference/compare_pathways.html</loc>
+  </url>
+  <url>
+    <loc>https://scpathanalysis.com/reference/compare_seurat.html</loc>
+  </url>
+  <url>
+    <loc>https://scpathanalysis.com/reference/format_pathways.html</loc>
+  </url>
+  <url>
+    <loc>https://scpathanalysis.com/reference/get_paths.html</loc>
+  </url>
+  <url>
+    <loc>https://scpathanalysis.com/reference/pathway_matrices.html</loc>
+  </url>
+  <url>
+    <loc>https://scpathanalysis.com/reference/plot_rank.html</loc>
+  </url>
+  <url>
+    <loc>https://scpathanalysis.com/reference/random_cells.html</loc>
+  </url>
+  <url>
+    <loc>https://scpathanalysis.com/reference/seurat_extract.html</loc>
+  </url>
+</urlset>

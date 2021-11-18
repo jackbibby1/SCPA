@@ -147,7 +147,7 @@ compare_seurat <- function(seurat_object,
                                           n = nrow(mcm_output))
     mcm_output$qval <- sqrt(-log10(mcm_output$adjPval))
     mcm_output <- mcm_output[, c(3, 1, 4, 5, 2)]
-    mcm_output <- mcm_output[order(-mcm_output$FC), ]
+    mcm_output <- mcm_output[order(-mcm_output$qval), ]
     return(mcm_output)
   }
 }

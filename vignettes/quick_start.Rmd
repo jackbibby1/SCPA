@@ -53,10 +53,16 @@ library(ggplot2)
 We can use the dataset from a paper we [recently published](paper_link), which is looking
 at naive CD8 T cell activation.
 
-```{r load_data}
+```{r load_data, echo=F}
 load("~/Google Drive/scRNA_metabolism_paper/Processing scRNAseq data/Naive CD8/int_data_N8.RData")
 naive_cd8 <- int_data_N8
+rm(int_data_N8)
 ```
+
+```{r, eval=F}
+load("naive_cd8.RData")
+```
+
 
 ### Quick Look at the data
 In this experiment we isolated CD45RA+ CD8 T cells and either left them unstimulated, or stimulated them for 12 or 24 hours
@@ -101,10 +107,15 @@ pathways <- msigdbr("Homo sapiens") %>%
 We're all set. We now have everything that we need to compare the two populations. So just run 
 `compare_pathways` and use the objects we created above.
 
-```{r compare_pathways, results='hide'}
+```{r compare_pathways, eval=F}
 scpa_out <- compare_pathways(samples = list(resting, activated),
                              pathways = pathways)
 ```
+
+```{r, echo=F}
+scpa_out <- readRDS("~/Google Drive/scRNA_metabolism_paper/Paper/Fig4/metab_rest_act.rds")
+```
+
 
 And in `scpa_out`, we have all our results.
 

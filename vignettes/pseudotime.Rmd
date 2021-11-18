@@ -23,11 +23,14 @@ the transcriptional reprogramming of metabolic pathways after activation.
 Let's load in a few packages to start
 
 ```{r setup, results='hide', warning=FALSE, message=FALSE}
+devtools::install_github("jackbibby1/SCPA")
 library(SCPA)
 library(Seurat)
 library(dyno)
 library(tidyverse)
 library(magrittr)
+library(ComplexHeatmap)
+library(circlize)
 ```
 
 And load in our data. This is taken from our naive CD4+ T cell dataset that you can access [here]()
@@ -35,13 +38,14 @@ And load in our data. This is taken from our naive CD4+ T cell dataset that you 
 ```{r load_data}
 load("~/Google Drive/scRNA_metabolism_paper/Processing scRNAseq data/Naive CD4/int_data_N4.RData")
 naive_cd4 <- int_data_N4
+rm(int_data_N4)
 ```
 
 We can see that the populations include both naive/effector T cells, and Tregs
-```{r}
+```{r plot_umap, eval=F}
 DimPlot(naive_cd4, split.by = "Hour")
 ```
-
+![](../man/figures/naive_cd4_umap.png){width=100%}
 
 Then we'll get rid of the Tregs because we're just interested in naive T cell activation in the non Treg populations
 
@@ -73,28 +77,32 @@ And finally running the `infer_trajectory` function using slingshot as the model
 model_n4 <- infer_trajectory(dataset_n4, method = ti_slingshot(), verbose = T)
 ```
 
-```{r, echo=F}
+```{r load_n4_model, echo=F}
 load("~/Google Drive/scRNA_metabolism_paper/Paper/Fig2/NaiveCD4_ti_slingshot_model_1000var_feat.RData")
 ```
 
 We can visualise the trajectory
 
-```{r plot_dimred}
+```{r plot_dimred, eval=F}
 plot_dimred(model_n4, "pseudotime", pseudotime = calculate_pseudotime(model_n4), hex_cells = F,
             plot_trajectory = T, size_cells = 1, alpha_cells = 0.8) + 
   theme(aspect.ratio = 1)
 ```
+
+![](../man/figures/naive_cd4_pseudo.png){width=50%}
 
 Once we have our trajectory calculated, we can generate distinct nodes of cells across the trajectory
 to use as an input for SCPA. To generate the nodes, we can use the `group_onto_nearest_milestones` function, which assigns each cell to a node based on it's pseudotime value.
 
 We can then visualize the nodes that are calculated across the trajectory.
 
-```{r}
+```{r plot_dimred_milestones, eval=F}
 plot_dimred(model_n4, grouping = group_onto_nearest_milestones(model_n4), hex_cells = F,
             plot_trajectory = T, size_cells = 1, alpha_cells = 0.8) + 
   theme(aspect.ratio = 1)
 ```
+
+![](../man/figures/naive_cd4_milestone.png){width=50%}
 
 And extract the cells based on this grouping
 
@@ -107,7 +115,7 @@ mile_group <- data.frame(group_onto_nearest_milestones(model_n4)) %>%
 Once we have the pseudotime groupings, we can add this information to the Seurat
 object. 
 
-```{r}
+```{r add_milestones}
 naive_cd4$milestone <- mile_group$milestone
 ```
 
@@ -118,7 +126,7 @@ matrices to assess pathways across the 4 nodes.
 We can use the `seurat_extract` function from the SCPA package to get expression matrices,
 and use this within a for loop to get expression information for all cells in each population.
 
-```{r}
+```{r seurat_extract}
 cd4_pseudo <- list()
 for (i in 1:4) {
   cd4_pseudo[[i]] <- seurat_extract(naive_cd4, meta1 = "milestone", value_meta1 = i)
@@ -128,20 +136,23 @@ for (i in 1:4) {
 Now all the hard work is done, we just need to give this information to SCPA to analyse
 pathways over pseudotime, after defining the pathways
 
-```{r}
+```{r compare_pathways, eval=F}
 pathways <- "~/Google Drive/scRNA_metabolism_paper/Pathways_and_gene_sets/combined_metab/Combined_metab_paths_noGO.csv"
 
 cd4_metabolism <- compare_pathways(cd4_pseudo, pathways)
 ```
 
-All done. Let's plot the data (some annotations added later to highlight pathways)
+```{r load_scpa_result, echo=F}
+load("~/Google Drive/scRNA_metabolism_paper/Paper/mstone_out.RData")
+cd4_metabolism <- mstone_out
+```
 
+All done. Let's plot the data (some annotations have been added later to highlight pathways, but we can see the final heatmap from Fig4B in [our paper]())
 
-```{r}
+```{r plot_heatmap, eval=F}
 cd4_metabolism <- cd4_metabolism %>%
   data.frame() %>%
   select(Pathway, qval) %>%
-  remove_rownames() %>%
   column_to_rownames("Pathway")
 
 col_hm <- colorRamp2(colors = c("white", "red"), breaks = c(0, max(mstone_out)))
@@ -151,19 +162,25 @@ Heatmap(t(cd4_metabolism),
         col = col_hm,
         border = T,
         rect_gp = gpar(col = "white", lwd = 0.1),
+        heatmap_height = unit(2, "cm"),
         show_column_dend = F,
         show_row_names = F,
         show_column_names = F)
 ```
 
+![](../man/figures/metabolic_heatmap.png){width=80%}
+
 We can also extract a single pathway to highlight its rank in the analysis using the
 `plot_rank` function:
 
-```{r}
-
+```{r plot_rank, eval=F}
+cd4_metabolism <- rownames_to_column(cd4_metabolism, "Pathway")
+plot_rank(cd4_metabolism, 
+          "reactome_arachidonic", 
+          label_size = 2)
 ```
 
-
+![](../man/figures/aa_metab_rank.png){width=80%}
 
 
 

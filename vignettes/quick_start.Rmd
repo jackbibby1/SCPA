@@ -115,7 +115,7 @@ head(scpa_out, 10)
 ### Plotting some basic output
 You can use SCPA to plot some basic output. For example, we can highlight the "KEGG_GLYCOLYSIS_GLUCONEOGENESIS" pathway using the `plot_rank` function.
 
-```{r plot_rank, fig.width=4.5, fig.height=3, dpi=300, out.width="50%"}
+```{r plot_rank, fig.width=4.5, fig.height=3, dpi=600, out.width="50%"}
 plot_rank(scpa_out = scpa_out,
           pathway = "glycolysis")
 ```

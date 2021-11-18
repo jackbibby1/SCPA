@@ -45,7 +45,7 @@ pathways <- msigdbr("Homo sapiens", "H") %>%
 
 Now to compare the Th1 and Treg populations, we can use the compare_seurat function within SCPA as follows
 
-```{r compare_pathways}
+```{r compare_pathways, results='hide'}
 th1_treg <- compare_seurat(memory_cd4,
                            group1 = "Cell_Type", group1_population = c("Th1", "Treg"),
                            group2 = "Hour", group2_population = 24,

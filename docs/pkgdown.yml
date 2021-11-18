@@ -7,5 +7,8 @@ articles:
   quick_start: quick_start.html
   seurat_comparison: seurat_comparison.html
   using_gene_sets: using_gene_sets.html
-last_built: 2021-11-18T19:53Z
+last_built: 2021-11-18T20:27Z
+urls:
+  reference: jackbibby1.github.io/SCPA/reference
+  article: jackbibby1.github.io/SCPA/articles
 

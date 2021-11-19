@@ -5,3 +5,15 @@ title: Single Cell Pathway Analysis (SCPA)
 template:
   params:
     bootswatch: flatly
+
+articles:
+- title: All vignettes
+  desc: ~
+  contents:
+  - '`SCPA`'
+  - '`quick_start'
+  - '`using_gene_sets`'
+  - '`comparing_two_populations`'
+  - '`seurat_comparison`'
+  - '`pseudotime`'
+

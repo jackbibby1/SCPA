@@ -51,7 +51,7 @@ th1_treg <- compare_seurat(memory_cd4,
                            pathways = pathways)
 ```
 
-```{r}
+```{r, echo=F}
 th1_treg <- readRDS("~/Google Drive/scRNA_metabolism_paper/Paper/th1_treg.rds")
 ```
 

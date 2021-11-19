@@ -35,7 +35,7 @@ library(circlize)
 
 And load in our data. This is taken from our naive CD4+ T cell dataset that you can access [here]()
 
-```{r load_data}
+```{r load_data, eval=F}
 load("~/Google Drive/scRNA_metabolism_paper/Processing scRNAseq data/Naive CD4/int_data_N4.RData")
 naive_cd4 <- int_data_N4
 rm(int_data_N4)
@@ -49,13 +49,13 @@ DimPlot(naive_cd4, split.by = "Hour")
 
 Then we'll get rid of the Tregs because we're just interested in naive T cell activation in the non Treg populations
 
-```{r remove_treg}
+```{r remove_treg, eval=F}
 naive_cd4 <- subset(naive_cd4, idents = "Treg", invert = T)
 ```
 
 We'll then take the top 1000 most variable genes to model a trajectory
 
-```{r var_genes}
+```{r var_genes, eval=F}
 df <- as.matrix(naive_cd4[["RNA"]]@data)
 var_genes <- names(sort(apply(df, 1, var), decreasing = TRUE))[1:1000]
 ```
@@ -64,7 +64,7 @@ And then these steps are broadly taken from the dyno website. We're just taking 
 data and adding it to the object so it's able to be used in the `infer_trajectory`
 function.
 
-```{r make_matrix}
+```{r make_matrix, eval=F}
 counts <- Matrix::t(as(as.matrix(naive_cd4@assays$RNA@counts[var_genes,]), 'sparseMatrix'))
 expression <- Matrix::t(as(as.matrix(naive_cd4@assays$RNA@data[var_genes,]), 'sparseMatrix'))
 
@@ -106,7 +106,7 @@ plot_dimred(model_n4, grouping = group_onto_nearest_milestones(model_n4), hex_ce
 
 And extract the cells based on this grouping
 
-```{r get_milestones}
+```{r get_milestones, eval=F}
 mile_group <- data.frame(group_onto_nearest_milestones(model_n4)) %>%
   set_colnames("milestone") %>%
   rownames_to_column("cell")
@@ -115,7 +115,7 @@ mile_group <- data.frame(group_onto_nearest_milestones(model_n4)) %>%
 Once we have the pseudotime groupings, we can add this information to the Seurat
 object. 
 
-```{r add_milestones}
+```{r add_milestones, eval=F}
 naive_cd4$milestone <- mile_group$milestone
 ```
 
@@ -126,7 +126,7 @@ matrices to assess pathways across the 4 nodes.
 We can use the `seurat_extract` function from the SCPA package to get expression matrices,
 and use this within a for loop to get expression information for all cells in each population.
 
-```{r seurat_extract}
+```{r seurat_extract, eval=F}
 cd4_pseudo <- list()
 for (i in 1:4) {
   cd4_pseudo[[i]] <- seurat_extract(naive_cd4, meta1 = "milestone", value_meta1 = i)

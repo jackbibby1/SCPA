@@ -22,7 +22,7 @@ the transcriptional reprogramming of metabolic pathways after activation.
 
 Let's load in a few packages to start
 
-```{r setup, results='hide', warning=FALSE, message=FALSE}
+```{r setup, results='hide', warning=FALSE, message=FALSE, eval=F}
 devtools::install_github("jackbibby1/SCPA")
 library(SCPA)
 library(Seurat)

@@ -40,7 +40,7 @@ The two main bits of information we need are:
 ### Loading in packages 
 For this simple example, we're going to load in a few packages. msigdbr allows access to a large number of gene sets that are collated [here](https://www.gsea-msigdb.org/gsea/msigdb/genesets.jsp)
 
-```{r setup, results='hide', warning=F, message=F, eval=F}
+```{r setup, results='hide', warning=F, message=F}
 devtools::install_github("jackbibby1/SCPA")
 library(SCPA)
 library(msigdbr)

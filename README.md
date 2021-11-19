@@ -31,6 +31,7 @@ methods, including:
 
 To see the stats behind SCPA, you can see our paper in JASA
 [here](https://www.tandfonline.com/doi/full/10.1080/01621459.2020.1791131)
+
 To see SCPA applied to a scRNA-seq dataset, you can see our paper on
 bioRxiv [here]()
 

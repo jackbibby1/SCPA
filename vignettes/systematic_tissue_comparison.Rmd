@@ -1,8 +1,8 @@
 ---
-title: "SCPA"
+title: "systematic_tissue_comparison"
 output: rmarkdown::html_vignette
 vignette: >
-  %\VignetteIndexEntry{SCPA}
+  %\VignetteIndexEntry{systematic_tissue_comparison}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---

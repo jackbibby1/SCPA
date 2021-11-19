@@ -45,7 +45,6 @@ rm(int_data_N4)
 load("naive_cd4.RData")
 ```
 
-
 We can see that the populations include both naive/effector T cells, and Tregs
 ```{r plot_umap, eval=F}
 DimPlot(naive_cd4, split.by = "Hour")

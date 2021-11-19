@@ -123,10 +123,8 @@
                            group1 <span class="op">=</span> <span class="st">"Cell_Type"</span>, group1_population <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"Th1"</span>, <span class="st">"Treg"</span><span class="op">)</span>,
                            group2 <span class="op">=</span> <span class="st">"Hour"</span>, group2_population <span class="op">=</span> <span class="fl">24</span>,
                            pathways <span class="op">=</span> <span class="va">pathways</span><span class="op">)</span></code></pre></div>
-<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">th1_treg</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/readRDS.html">readRDS</a></span><span class="op">(</span><span class="st">"~/Google Drive/scRNA_metabolism_paper/Paper/th1_treg.rds"</span><span class="op">)</span></code></pre></div>
 <p>And we can see some of the topmost diferentially regulated pathways</p>
-<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="va">th1_treg</span>, <span class="fl">10</span><span class="op">)</span>
 <span class="co">#&gt;                               Pathway         Pval      adjPval     qval</span>
 <span class="co">#&gt; 2        HALLMARK_ALLOGRAFT_REJECTION 4.522036e-82 2.261018e-80 8.924444</span>

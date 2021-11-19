@@ -40,7 +40,7 @@ The two main bits of information we need are:
 ### Loading in packages 
 For this simple example, we're going to load in a few packages. msigdbr allows access to a large number of gene sets that are collated [here](https://www.gsea-msigdb.org/gsea/msigdb/genesets.jsp)
 
-```{r setup, results='hide', warning=F, message=F}
+```{r setup, results='hide', warning=F, message=F, eval=F}
 devtools::install_github("jackbibby1/SCPA")
 library(SCPA)
 library(msigdbr)
@@ -53,7 +53,7 @@ library(ggplot2)
 We can use the dataset from a paper we [recently published](paper_link), which is looking
 at naive CD8 T cell activation.
 
-```{r load_data, echo=F}
+```{r load_data, echo=F, eval=F}
 load("~/Google Drive/scRNA_metabolism_paper/Processing scRNAseq data/Naive CD8/int_data_N8.RData")
 naive_cd8 <- int_data_N8
 rm(int_data_N8)
@@ -78,7 +78,7 @@ Let's now generate two populations to compare. To do this we'll use the `seurat_
 to extract expression matrices from our Seurat object. This function takes a Seurat object as an input,
 subsets data based on the Seurat column metadata, and returns an expression file for that given subset.
 
-```{r extract_data}
+```{r extract_data, eval=F}
 resting <- seurat_extract(naive_cd8,
                           meta1 = "Hour",
                           value_meta1 = 0,
@@ -97,7 +97,7 @@ that allows you to get this information. Here we're pulling all the KEGG pathway
 using the `format_pathways` function within SPCA to get them properly formatted. A detailed explanation of
 generating gene sets for SCPA can be found [here](https://github.com/jackbibby1/SCPA/blob/main/using_gene_sets.md)
 
-```{r get_pathways}
+```{r get_pathways, eval=F}
 pathways <- msigdbr("Homo sapiens") %>%
   filter(grepl(pattern = "KEGG", x = gs_name)) %>%
   format_pathways()

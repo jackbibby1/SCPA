@@ -6,14 +6,18 @@ template:
   params:
     bootswatch: flatly
 
-articles:
-- title: All vignettes
-  desc: ~
-  contents:
-  - '`SCPA`'
-  - '`quick_start'
-  - '`using_gene_sets`'
-  - '`comparing_two_populations`'
-  - '`seurat_comparison`'
-  - '`pseudotime`'
-
+navbar:
+  components:
+    articles:
+      text: Vignettes
+      menu:
+      - text: Quick start
+        href: articles/quick_start.html
+      - text: Using gene sets
+        href: articles/using_gene_sets.html
+      - text: Comparing two populations
+        href: articles/comparing_two_populations.html
+      - text: Seurat comparison
+        href: articles/seurat_comparison.html
+      - text: Comparing across pseudotime
+        href: articles/pseudotime.html

@@ -51,25 +51,25 @@
 </li>
 <li class="dropdown">
   <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
-    Articles
+    Vignettes
      
     <span class="caret"></span>
   </a>
   <ul class="dropdown-menu" role="menu">
 <li>
+      <a href="../articles/quick_start.html">Quick start</a>
+    </li>
+    <li>
+      <a href="../articles/using_gene_sets.html">Using gene sets</a>
+    </li>
+    <li>
       <a href="../articles/comparing_two_populations.html">Comparing two populations</a>
     </li>
     <li>
-      <a href="../articles/pseudotime.html">Comparing pathways over pseudotime</a>
+      <a href="../articles/seurat_comparison.html">Seurat comparison</a>
     </li>
     <li>
-      <a href="../articles/quick_start.html">Quick Start</a>
-    </li>
-    <li>
-      <a href="../articles/seurat_comparison.html">Comparison within Seurat object</a>
-    </li>
-    <li>
-      <a href="../articles/using_gene_sets.html">Generating gene sets</a>
+      <a href="../articles/pseudotime.html">Comparing across pseudotime</a>
     </li>
   </ul>
 </li>
@@ -108,20 +108,8 @@
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/jackbibby1/SCPA/">SCPA</a></span><span class="op">)</span>
 <span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://tidyverse.tidyverse.org">tidyverse</a></span><span class="op">)</span>
-<span class="co">#&gt; ── Attaching packages ─────────────────────────────────────── tidyverse 1.3.1 ──</span>
-<span class="co">#&gt; ✓ ggplot2 3.3.5     ✓ purrr   0.3.4</span>
-<span class="co">#&gt; ✓ tibble  3.1.6     ✓ dplyr   1.0.7</span>
-<span class="co">#&gt; ✓ tidyr   1.1.4     ✓ stringr 1.4.0</span>
-<span class="co">#&gt; ✓ readr   2.1.0     ✓ forcats 0.5.1</span>
-<span class="co">#&gt; ── Conflicts ────────────────────────────────────────── tidyverse_conflicts() ──</span>
-<span class="co">#&gt; x dplyr::filter() masks stats::filter()</span>
-<span class="co">#&gt; x dplyr::lag()    masks stats::lag()</span>
 <span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://igordot.github.io/msigdbr/">msigdbr</a></span><span class="op">)</span>
-<span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://satijalab.org/seurat">Seurat</a></span><span class="op">)</span>
-<span class="co">#&gt; Registered S3 method overwritten by 'spatstat.geom':</span>
-<span class="co">#&gt;   method     from</span>
-<span class="co">#&gt;   print.boxx cli</span>
-<span class="co">#&gt; Attaching SeuratObject</span></code></pre></div>
+<span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://satijalab.org/seurat">Seurat</a></span><span class="op">)</span></code></pre></div>
 <p>We’re going to compare Th1 cells to Treg cells at 24 hours post activation, using all Hallmark gene sets to see if they differ in any broad sense. So first we can load in our memory CD4 data that can be found here</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/base/load.html">load</a></span><span class="op">(</span><span class="st">"memory_cd4.RData"</span><span class="op">)</span></code></pre></div>
@@ -134,10 +122,11 @@
 <code class="sourceCode R"><span class="va">th1_treg</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/compare_seurat.html">compare_seurat</a></span><span class="op">(</span><span class="va">memory_cd4</span>,
                            group1 <span class="op">=</span> <span class="st">"Cell_Type"</span>, group1_population <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"Th1"</span>, <span class="st">"Treg"</span><span class="op">)</span>,
                            group2 <span class="op">=</span> <span class="st">"Hour"</span>, group2_population <span class="op">=</span> <span class="fl">24</span>,
-                           pathways <span class="op">=</span> <span class="va">pathways</span><span class="op">)</span>
-<span class="co">#&gt; Conducting 2-sample test</span></code></pre></div>
-<p>And we can see some of the topmost diferentially regulated pathways</p>
+                           pathways <span class="op">=</span> <span class="va">pathways</span><span class="op">)</span></code></pre></div>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">th1_treg</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/readRDS.html">readRDS</a></span><span class="op">(</span><span class="st">"~/Google Drive/scRNA_metabolism_paper/Paper/th1_treg.rds"</span><span class="op">)</span></code></pre></div>
+<p>And we can see some of the topmost diferentially regulated pathways</p>
+<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="va">th1_treg</span>, <span class="fl">10</span><span class="op">)</span>
 <span class="co">#&gt;                               Pathway         Pval      adjPval     qval</span>
 <span class="co">#&gt; 2        HALLMARK_ALLOGRAFT_REJECTION 4.522036e-82 2.261018e-80 8.924444</span>

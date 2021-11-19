@@ -51,25 +51,25 @@
 </li>
 <li class="dropdown">
   <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
-    Articles
+    Vignettes
      
     <span class="caret"></span>
   </a>
   <ul class="dropdown-menu" role="menu">
 <li>
+      <a href="../articles/quick_start.html">Quick start</a>
+    </li>
+    <li>
+      <a href="../articles/using_gene_sets.html">Using gene sets</a>
+    </li>
+    <li>
       <a href="../articles/comparing_two_populations.html">Comparing two populations</a>
     </li>
     <li>
-      <a href="../articles/pseudotime.html">Comparing pathways over pseudotime</a>
+      <a href="../articles/seurat_comparison.html">Seurat comparison</a>
     </li>
     <li>
-      <a href="../articles/quick_start.html">Quick Start</a>
-    </li>
-    <li>
-      <a href="../articles/seurat_comparison.html">Comparison within Seurat object</a>
-    </li>
-    <li>
-      <a href="../articles/using_gene_sets.html">Generating gene sets</a>
+      <a href="../articles/pseudotime.html">Comparing across pseudotime</a>
     </li>
   </ul>
 </li>
@@ -122,12 +122,10 @@
 <code class="sourceCode R"><span class="va">resting</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/seurat_extract.html">seurat_extract</a></span><span class="op">(</span><span class="va">naive_cd4</span>,
                           meta1 <span class="op">=</span> <span class="st">"Cell_Type"</span>, value_meta1 <span class="op">=</span> <span class="st">"Resting"</span>,
                           meta2 <span class="op">=</span> <span class="st">"Hour"</span>, value_meta2 <span class="op">=</span> <span class="fl">0</span><span class="op">)</span>
-<span class="co">#&gt; [1] "Subsetting Seurat object based on metadata 1 and 2"</span>
 
 <span class="va">activated</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/seurat_extract.html">seurat_extract</a></span><span class="op">(</span><span class="va">naive_cd4</span>,
                             meta1 <span class="op">=</span> <span class="st">"Cell_Type"</span>, value_meta1 <span class="op">=</span> <span class="st">"Activated"</span>,
-                            meta2 <span class="op">=</span> <span class="st">"Hour"</span>, value_meta2 <span class="op">=</span> <span class="fl">24</span><span class="op">)</span>
-<span class="co">#&gt; [1] "Subsetting Seurat object based on metadata 1 and 2"</span></code></pre></div>
+                            meta2 <span class="op">=</span> <span class="st">"Hour"</span>, value_meta2 <span class="op">=</span> <span class="fl">24</span><span class="op">)</span></code></pre></div>
 <p>After we have our data, we can define the pathways to compare. For the Fig 4 analysis, we curated a list of metabolic pathways from a few different sources, which can be found here. The file is in standard gmt file format with pathway name in column 1 and genes of that pathway in subsequent columns. Here we just converted a gmt file to csv, and manually curated a single file with all metabolic gene sets. SCPA just needs the filepath to these gene sets, so we can add this as an object to simplify our final chunk of code</p>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">pathways</span> <span class="op">&lt;-</span> <span class="st">"combined_metabolic_pathways.csv"</span></code></pre></div>

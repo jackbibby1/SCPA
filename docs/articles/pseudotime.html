@@ -51,25 +51,25 @@
 </li>
 <li class="dropdown">
   <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
-    Articles
+    Vignettes
      
     <span class="caret"></span>
   </a>
   <ul class="dropdown-menu" role="menu">
 <li>
+      <a href="../articles/quick_start.html">Quick start</a>
+    </li>
+    <li>
+      <a href="../articles/using_gene_sets.html">Using gene sets</a>
+    </li>
+    <li>
       <a href="../articles/comparing_two_populations.html">Comparing two populations</a>
     </li>
     <li>
-      <a href="../articles/pseudotime.html">Comparing pathways over pseudotime</a>
+      <a href="../articles/seurat_comparison.html">Seurat comparison</a>
     </li>
     <li>
-      <a href="../articles/quick_start.html">Quick Start</a>
-    </li>
-    <li>
-      <a href="../articles/seurat_comparison.html">Comparison within Seurat object</a>
-    </li>
-    <li>
-      <a href="../articles/using_gene_sets.html">Generating gene sets</a>
+      <a href="../articles/pseudotime.html">Comparing across pseudotime</a>
     </li>
   </ul>
 </li>
@@ -171,11 +171,7 @@
 <code class="sourceCode R"><span class="va">cd4_pseudo</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span><span class="op">)</span>
 <span class="kw">for</span> <span class="op">(</span><span class="va">i</span> <span class="kw">in</span> <span class="fl">1</span><span class="op">:</span><span class="fl">4</span><span class="op">)</span> <span class="op">{</span>
   <span class="va">cd4_pseudo</span><span class="op">[[</span><span class="va">i</span><span class="op">]</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/seurat_extract.html">seurat_extract</a></span><span class="op">(</span><span class="va">naive_cd4</span>, meta1 <span class="op">=</span> <span class="st">"milestone"</span>, value_meta1 <span class="op">=</span> <span class="va">i</span><span class="op">)</span>
-<span class="op">}</span>
-<span class="co">#&gt; [1] "Subsetting Seurat object based on metadata 1"</span>
-<span class="co">#&gt; [1] "Subsetting Seurat object based on metadata 1"</span>
-<span class="co">#&gt; [1] "Subsetting Seurat object based on metadata 1"</span>
-<span class="co">#&gt; [1] "Subsetting Seurat object based on metadata 1"</span></code></pre></div>
+<span class="op">}</span></code></pre></div>
 <p>Now all the hard work is done, we just need to give this information to SCPA to analyse pathways over pseudotime, after defining the pathways</p>
 <div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">pathways</span> <span class="op">&lt;-</span> <span class="st">"~/Google Drive/scRNA_metabolism_paper/Pathways_and_gene_sets/combined_metab/Combined_metab_paths_noGO.csv"</span>

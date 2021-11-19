@@ -35,11 +35,16 @@ library(circlize)
 
 And load in our data. This is taken from our naive CD4+ T cell dataset that you can access [here]()
 
-```{r load_data, eval=F}
+```{r load_data, eval=F, echo=F}
 load("~/Google Drive/scRNA_metabolism_paper/Processing scRNAseq data/Naive CD4/int_data_N4.RData")
 naive_cd4 <- int_data_N4
 rm(int_data_N4)
 ```
+
+```{r, eval=F}
+load("naive_cd4.RData")
+```
+
 
 We can see that the populations include both naive/effector T cells, and Tregs
 ```{r plot_umap, eval=F}

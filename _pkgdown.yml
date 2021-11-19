@@ -21,3 +21,5 @@ navbar:
         href: articles/seurat_comparison.html
       - text: Comparing across pseudotime
         href: articles/pseudotime.html
+      - text: Systematic comparisons of many cell types
+        href: articles/systematic_tissue_comparison.html

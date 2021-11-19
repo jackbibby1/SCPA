@@ -16,7 +16,7 @@ knitr::opts_chunk$set(
 
 We've shown that you can compare pathways if you have expression matrices, but you can also compare populations within a given Seurat object in one function within SCPA. To do this, you just need the Seurat object that should be annotated with the groups you want to compare
 
-```{r setup}
+```{r setup, eval=F}
 library(SCPA)
 library(tidyverse)
 library(msigdbr)
@@ -25,7 +25,7 @@ library(Seurat)
 
 We're going to compare Th1 cells to Treg cells at 24 hours post activation, using all Hallmark gene sets to see if they differ in any broad sense. So first we can load in our memory CD4 data that can be found here
 
-```{r load_data, echo=F}
+```{r load_data, echo=F, eval=FALSE}
 load("~/Google Drive/scRNA_metabolism_paper/Processing scRNAseq data/Memory CD4/int_data_M4.RData")
 memory_cd4 <- int_data_M4
 rm(int_data_M4)
@@ -35,22 +35,26 @@ rm(int_data_M4)
 load("memory_cd4.RData")
 ```
 
-
 We need to define our gene sets, and we can do this through the msigdbr package that contains a bunch of biological gene sets that can be found here. Here we just take the Hallmark gene sets (using the "H" call to msigdbr), and use the format_pathways function to get them in a readable format
 
-```{r get_pathways}
+```{r get_pathways, eval=F}
 pathways <- msigdbr("Homo sapiens", "H") %>%
   format_pathways()
 ```
 
 Now to compare the Th1 and Treg populations, we can use the compare_seurat function within SCPA as follows
 
-```{r compare_pathways, results='hide'}
+```{r compare_pathways, results='hide', eval=F}
 th1_treg <- compare_seurat(memory_cd4,
                            group1 = "Cell_Type", group1_population = c("Th1", "Treg"),
                            group2 = "Hour", group2_population = 24,
                            pathways = pathways)
 ```
+
+```{r}
+th1_treg <- readRDS("~/Google Drive/scRNA_metabolism_paper/Paper/th1_treg.rds")
+```
+
 
 And we can see some of the topmost diferentially regulated pathways
 

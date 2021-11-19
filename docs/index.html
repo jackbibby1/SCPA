@@ -104,11 +104,21 @@
 <!-- badges: start -->
 <!-- badges: end -->
 <p><img src="reference/figures/scpa_outline.png" alt="SCPA outline"></p>
-<p>SCPA is a method for pathway analysis in single cell RNA-seq data. It’s based on a novel approach to pathway analysis that defines pathway activity as a change in multivariate distribution of a given pathway across conditions, rather than enrichment or overrepresentation of genes. This approach allows for a number of benefits over current methods, but mainly:</p>
+<div id="about-scpa" class="section level2">
+<h2 class="hasAnchor">
+<a href="#about-scpa" class="anchor"></a>About SCPA</h2>
+<p>SCPA is a method for pathway analysis in single cell RNA-seq data. It’s based on a novel approach to pathway analysis that defines pathway activity as a change in multivariate distribution of a given pathway across conditions, rather than enrichment or over representation of genes. This approach allows for a number of benefits over current methods, including:</p>
 <ol>
 <li><p>You will identify pathways that show enrichment in a given population AND also identify pathways with no overall enrichment but alterations in the multivariate distribution of that pathway. You essentially get the best of both worlds, as pathways with changes in multivariate distribution but no overall enrichment are still interestingly different pathways.</p></li>
 <li><p>You can compare multiple conditions simultaneously e.g. compare across 3 time points, or across multiple phases of a pseuodotime trajectory. This means you can assess pathway activity through multiple stimulation times, or across cell differentiation</p></li>
 </ol>
+<ul>
+<li>To see the stats behind SCPA, you can see our paper in JASA <a href="https://www.tandfonline.com/doi/full/10.1080/01621459.2020.1791131">here</a>
+</li>
+<li>To see SCPA applied to a scRNA-seq dataset, you can see our paper <a href="">here</a>
+</li>
+</ul>
+</div>
 <div id="1-installation" class="section level2">
 <h2 class="hasAnchor">
 <a href="#1-installation" class="anchor"></a>1. Installation</h2>

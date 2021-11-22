@@ -14,7 +14,7 @@ knitr::opts_chunk$set(
 )
 ```
 
-Here we're going to use SCPA to do a more systems level analysis of T cell gene set perturbations across many cell types and multiple tissues (this will basically replicate Figure 5 from [our paper]()). For the analysis, we're using data from [this paper](https://www.nature.com/articles/s41467-019-12464-3) by Szabo, P... Sims, P. In their protocol they sorted CD3+ T cells from the blood, bone marrow, lymph node, and lung, and either left them unstimulated, or stimulated the cells for 16 hours.
+Here we're going to use SCPA to do a more systems level analysis of T cell gene set perturbations across many cell types and multiple tissues (this will basically replicate Figure 5 from [our paper]()). For the analysis, we're using data from [this paper](https://www.nature.com/articles/s41467-019-12464-3) by Szabo, P... Sims, P. In their protocol they sorted CD3^+^ T cells from the blood, bone marrow, lymph node, and lung, and either left them unstimulated, or stimulated the cells for 16 hours.
 
 ### Loading in packages and data
 So first let's load in a few packages
@@ -26,7 +26,7 @@ library(magrittr)
 library(ComplexHeatmap)
 ```
 
-And load in the dataset -- this R data file can be found [here]().
+And load in the dataset. To see how we processed and integrated the datasets to generate this file, you can see the script [here]().
 
 ```{r, eval=F, echo=F}
 df <- readRDS("~/Google Drive/scRNA_metabolism_paper/Paper/Fig6/Disease_data/CD4_healthy_tissues_Sims_GSE126030/biowulf_comparisons/tissue_final_doublets.rds")
@@ -35,6 +35,16 @@ df <- readRDS("~/Google Drive/scRNA_metabolism_paper/Paper/Fig6/Disease_data/CD4
 ```{r, eval=F}
 tissue_data <- readRDS("t_cell_tissue_data.rds")
 ```
+
+### Quick look at the data
+Let's have a quick look at the data
+
+```{r, eval=F}
+DimPlot(tissue_data, split.by = "tis_stim", ncol = 4, group.by = "fine")
+```
+
+![](../man/figures/tissue_umap.png){width=100%}
+
 
 ### Defining gene sets to analyze
 Now we're going to define all the pathways that we want to use. For this analysis we're going to use a bunch of different gene sets that include many of the canonical pathways listed on the [MSigDB website](https://www.gsea-msigdb.org/gsea/msigdb/genesets.jsp). In total, this list contains around 3000 pathways.
@@ -182,7 +192,7 @@ col_an <- HeatmapAnnotation(Stimulation = stim,
 \
 
 ### Plotting a global summary of the data
-We can now plot a broad summary using the qvals from each comparison. For this, we're just going to represent the data in a heatmap, using the cool ComplexHeatmap package.
+We can now plot a broad summary using the qvals from each comparison. For this, we're just going to represent the data in a heatmap, using the great [ComplexHeatmap] (https://jokergoo.github.io/ComplexHeatmap-reference/book/) package.
 ```{r, eval=F}
 hm <- all_data %>%
   Heatmap(name = "Qval",
@@ -221,7 +231,7 @@ apply(all_data, 1, var) %>%
 
 
 ### Highlighting genes from the antimicrobial pathway
-And after going back to the pathway gene expression, we can see that a large effect of this pathway signature was driven by expression of alpha defensin proteins, exclusively in T cells from the bone marrow
+And after going back to the pathway gene expression, we can see that a large effect of this pathway signature was driven by expression of alpha defensin proteins, exclusively in T cells from the bone marrow. In [our paper]() we followed this up and showed it was true at the protein level, highlighting the utility of doing a systems level pathway analysis, and the relative ease of doing it with SCPA.
 
 ```{r, eval=F}
 tissue_data$neat <- case_when(tissue_data$tissue == "bl" ~ "Blood",

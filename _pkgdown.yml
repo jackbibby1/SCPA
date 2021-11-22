@@ -7,6 +7,9 @@ template:
     bootswatch: flatly
 
 navbar:
+  structure:
+    left: [home, articles, reference]
+    right: [github]
   components:
     articles:
       text: Vignettes

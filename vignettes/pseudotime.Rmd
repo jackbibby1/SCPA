@@ -32,7 +32,7 @@ library(ComplexHeatmap)
 library(circlize)
 ```
 
-And load in our data. This is taken from our naive CD4+ T cell dataset that you can access [here]()
+And load in our data. This is taken from our naive CD4^+^ T cell dataset that you can access [here]()
 
 ```{r load_data, eval=F, echo=F}
 load("~/Google Drive/scRNA_metabolism_paper/Processing scRNAseq data/Naive CD4/int_data_N4.RData")

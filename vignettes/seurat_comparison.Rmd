@@ -14,8 +14,9 @@ knitr::opts_chunk$set(
 )
 ```
 
-We've shown that you can compare pathways if you have expression matrices, but you can also compare populations within a given Seurat object in one function within SCPA. To do this, you just need the Seurat object that should be annotated with the groups you want to compare
+We've shown that you can compare pathways if you have expression matrices, but you can also compare populations within a given Seurat object in one function within SCPA. To do this, you just need the Seurat object that should be annotated with the groups you want to compare.
 
+Let's load in a few packages.
 ```{r setup, eval=F}
 library(SCPA)
 library(tidyverse)
@@ -35,14 +36,14 @@ rm(int_data_M4)
 load("memory_cd4.RData")
 ```
 
-We need to define our gene sets, and we can do this through the msigdbr package that contains a bunch of biological gene sets that can be found here. Here we just take the Hallmark gene sets (using the "H" call to msigdbr), and use the format_pathways function to get them in a readable format
+We need to define our gene sets, and we can do this through the msigdbr package that contains a bunch of biological gene sets that can be found [here](https://www.gsea-msigdb.org/gsea/msigdb/genesets.jsp). Here we just take the Hallmark gene sets (using the "H" call to msigdbr), and use the format_pathways function to get them in a readable format for SCPA.
 
 ```{r get_pathways, eval=F}
 pathways <- msigdbr("Homo sapiens", "H") %>%
   format_pathways()
 ```
 
-Now to compare the Th1 and Treg populations, we can use the compare_seurat function within SCPA as follows
+Now to compare the Th1 and Treg populations, we can use the compare_seurat function within SCPA.
 
 ```{r compare_pathways, results='hide', eval=F}
 th1_treg <- compare_seurat(memory_cd4,

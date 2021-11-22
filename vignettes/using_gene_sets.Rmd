@@ -34,8 +34,8 @@ library(msigdbr)
 ### Generic example
 In a simple example, you can generate formatted gene sets using two simple lines of code. We'll just extract all the Hallmark pathways from msigdbr
 
-```{r}
-pathways <- msigdbr("Homo sapiens", "H") %>%
+```{r, eval=F}
+pathways <- msigdbr(species = "Homo sapiens", category = "H") %>%
       format_pathways()
 ```
 
@@ -79,7 +79,7 @@ This will result in a list of pathways and all the genes of that pathway. We can
 head(hallmark[[1]])
 ```
 
-Now we've generated pathways that can be analysed directly in the `compare_pathways` function of SCPA, as above
+Now we've generated pathways that can be analysed directly in the `compare_pathways` function of SCPA
 
 
 ### Versatility in using msigdbr
@@ -88,7 +88,7 @@ or collection of gene sets. For example, if we wanted all pathways related to in
 we could use grepl to filter the gs_names column:
 
 ```{r, eval=F}
-interferon <- msigdbr("Homo sapiens") %>%
+ifn_pathways <- msigdbr("Homo sapiens") %>%
   filter(grepl("interferon", gs_name, ignore.case = T)) %>%
   format_pathways()
 ```
@@ -97,22 +97,27 @@ Or we could specify a combination of collections so we get all of the Hallmark,
 KEGG, and Reactome gene sets:
 
 ```{r, eval=F}
-pws <- c("hallmark", "kegg", "reactome")
+pathways <- c("hallmark", "kegg", "reactome")
 hkr_sets <- msigdbr("Homo sapiens") %>%
-  filter(grepl(paste(pws, collapse = "|"), gs_name, ignore.case = T)) %>%
+  filter(grepl(paste(pathways, collapse = "|"), gs_name, ignore.case = T)) %>%
   format_pathways()
 ```
 
-Using something like this probably makes it easier to quickly generate interesting
-gene set collections.
+Using something like this makes it easy to pull large and/or relevant gene set lists for direct use within SCPA.
 
 ## 2. Using a gmt file
 SCPA has a built in function to read gmt files and format them properly. All you need to do is specify the filepath.
 
 ```{r, eval=F}
 pathways <- "path/to/geneset/file.gmt"
+```
+
+And then you can just use this in the `compare_pathways` function
+
+```{r, eval=F}
 scpa_out <- compare_pathways(samples = samples, pathways = pathways)
 ```
+
 
 ## 3. Using a csv file
 In this example, we need to create the csv file, but once that's done,
@@ -127,7 +132,7 @@ scpa_out <- compare_pathways(samples = samples, pathways = pathways)
 ### How to create the csv file
 The csv file needs to be formatted in the style of a classical
 gene set gmt file. This being the pathway name in column 1, and genes of that pathway in subsequent
-columns. For example:
+columns. To generate something like this, all you need to do is download a gmt file, open it in something like excel, delete the second column containing a url, and save it as a csv file. Using this method means you can manually create a list of gene sets you're interested in, where you're not limited to existing databases. The file should look something like this:
 
 ![](../man/figures/pathway_screenshot.png){width=100%}
 

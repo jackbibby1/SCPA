@@ -12,7 +12,7 @@ navbar:
     right: [github]
   components:
     articles:
-      text: Vignettes
+      text: Tutorials
       menu:
       - text: Quick start
         href: articles/quick_start.html

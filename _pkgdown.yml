@@ -23,5 +23,5 @@ navbar:
         href: articles/pseudotime.html
       - text: Systematic comparisons of many cell types
         href: articles/systematic_tissue_comparison.html
-      - text: Systems level pathway analysis of disease
+      - text: Systems level pathway analysis in disease
         href: articles/disease_comparison.html

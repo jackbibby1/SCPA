@@ -1,5 +1,5 @@
 ---
-title: "disease_comparison"
+title: "Systems level pathway analysis in disease"
 output: rmarkdown::html_vignette
 vignette: >
   %\VignetteIndexEntry{disease_comparison}

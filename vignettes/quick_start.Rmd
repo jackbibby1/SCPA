@@ -14,7 +14,7 @@ knitr::opts_chunk$set(
 )
 ```
 
-## Broad overview of the workflow
+## 1. Broad overview of the workflow
 
 ```{r, eval=F}
 pathways <- msigdbr("Homo sapiens") %>%
@@ -27,21 +27,20 @@ scpa_out <- compare_pathways(samples = list(population1, population2),
 
 ```
 
-## Full workflow on an example dataset
+## 2. Full workflow on an example dataset
 
 Here we're just going to show some general principles of what you need to get started in a basic pathway analysis. It acts as a quick reference to all the main points of the workflow, but more detailed examples can be found in our other tutorials
 
 ### Basic information needed for pathway analysis
 The two main bits of information we need are:
 
-- Expression tables for each condition (this can be formatted as separate data frames/matrices, or stored within a typical Seurat object)
+- Expression matrix for each condition (this can be formatted as separate data frames/matrices, or stored within a typical Seurat object)
 - Pathway gene lists
 
 ### Loading in packages 
 For this simple example, we're going to load in a few packages. msigdbr allows access to a large number of gene sets that are collated [here](https://www.gsea-msigdb.org/gsea/msigdb/genesets.jsp)
 
 ```{r setup, results='hide', warning=F, message=F}
-devtools::install_github("jackbibby1/SCPA")
 library(SCPA)
 library(msigdbr)
 library(Seurat)
@@ -71,7 +70,7 @@ DimPlot(naive_cd8, split.by = "Hour") +
   theme(aspect.ratio = 1)
 ```
 
-![](../man/figures/naive_cd8_umap.png){width=100%}
+![](../man/figures/naive_cd8_umap.png){width=80%}
 
 ### Generating samples from a Seurat object
 Let's now generate two populations to compare. To do this we'll use the `seurat_extract` function 

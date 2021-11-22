@@ -110,29 +110,28 @@
 <p>Here we’re going to look at tracking gene set changes across a pseudotime trajectory. To do this, we’ll replicate some data from our <a href="link">recent paper</a> where we characterised the transcriptional reprogramming of metabolic pathways after activation.</p>
 <p>Let’s load in a few packages to start</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu">devtools</span><span class="fu">::</span><span class="fu"><a href="https://devtools.r-lib.org//reference/remote-reexports.html">install_github</a></span><span class="op">(</span><span class="st">"jackbibby1/SCPA"</span><span class="op">)</span>
-<span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/jackbibby1/SCPA/">SCPA</a></span><span class="op">)</span>
+<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/jackbibby1/SCPA/">SCPA</a></span><span class="op">)</span>
 <span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://satijalab.org/seurat">Seurat</a></span><span class="op">)</span>
 <span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/dynverse/dyno">dyno</a></span><span class="op">)</span>
 <span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://tidyverse.tidyverse.org">tidyverse</a></span><span class="op">)</span>
 <span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://magrittr.tidyverse.org">magrittr</a></span><span class="op">)</span>
 <span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/jokergoo/ComplexHeatmap">ComplexHeatmap</a></span><span class="op">)</span>
 <span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/jokergoo/circlize">circlize</a></span><span class="op">)</span></code></pre></div>
-<p>And load in our data. This is taken from our naive CD4+ T cell dataset that you can access <a href="">here</a></p>
+<p>And load in our data. This is taken from our naive CD4<sup>+</sup> T cell dataset that you can access <a href="">here</a></p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/base/load.html">load</a></span><span class="op">(</span><span class="st">"naive_cd4.RData"</span><span class="op">)</span></code></pre></div>
 <p>We can see that the populations include both naive/effector T cells, and Tregs</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://satijalab.org/seurat/reference/DimPlot.html">DimPlot</a></span><span class="op">(</span><span class="va">naive_cd4</span>, split.by <span class="op">=</span> <span class="st">"Hour"</span><span class="op">)</span></code></pre></div>
 <p><img src="../man/figures/naive_cd4_umap.png" style="width:100.0%"></p>
-<p>Then we’ll get rid of the Tregs because we’re just interested in naive T cell activation in the non Treg populations</p>
+<p>We’ll get rid of the Tregs because we’re just interested in naive T cell activation in the non Treg populations</p>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">naive_cd4</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/subset.html">subset</a></span><span class="op">(</span><span class="va">naive_cd4</span>, idents <span class="op">=</span> <span class="st">"Treg"</span>, invert <span class="op">=</span> <span class="cn">T</span><span class="op">)</span></code></pre></div>
 <p>We’ll then take the top 1000 most variable genes to model a trajectory</p>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">df</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/matrix.html">as.matrix</a></span><span class="op">(</span><span class="va">naive_cd4</span><span class="op">[[</span><span class="st">"RNA"</span><span class="op">]</span><span class="op">]</span><span class="op">@</span><span class="va">data</span><span class="op">)</span>
 <span class="va">var_genes</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/names.html">names</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/sort.html">sort</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/apply.html">apply</a></span><span class="op">(</span><span class="va">df</span>, <span class="fl">1</span>, <span class="va">var</span><span class="op">)</span>, decreasing <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span><span class="op">)</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">1000</span><span class="op">]</span></code></pre></div>
-<p>And then these steps are broadly taken from the dyno website. We’re just taking expression data and adding it to the object so it’s able to be used in the <code>infer_trajectory</code> function.</p>
+<p>And then these steps are broadly taken from the <a href="https://dynverse.org/users/3-user-guide/">dyno vignettes</a>. We’re just taking expression data and adding it to the object so it’s able to be used in the <code>infer_trajectory</code> function.</p>
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">counts</span> <span class="op">&lt;-</span> <span class="fu">Matrix</span><span class="fu">::</span><span class="fu">t</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/methods/as.html">as</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/matrix.html">as.matrix</a></span><span class="op">(</span><span class="va">naive_cd4</span><span class="op">@</span><span class="va">assays</span><span class="op">$</span><span class="va">RNA</span><span class="op">@</span><span class="va">counts</span><span class="op">[</span><span class="va">var_genes</span>,<span class="op">]</span><span class="op">)</span>, <span class="st">'sparseMatrix'</span><span class="op">)</span><span class="op">)</span>
 <span class="va">expression</span> <span class="op">&lt;-</span> <span class="fu">Matrix</span><span class="fu">::</span><span class="fu">t</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/methods/as.html">as</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/matrix.html">as.matrix</a></span><span class="op">(</span><span class="va">naive_cd4</span><span class="op">@</span><span class="va">assays</span><span class="op">$</span><span class="va">RNA</span><span class="op">@</span><span class="va">data</span><span class="op">[</span><span class="va">var_genes</span>,<span class="op">]</span><span class="op">)</span>, <span class="st">'sparseMatrix'</span><span class="op">)</span><span class="op">)</span>
@@ -164,7 +163,7 @@
 <div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">naive_cd4</span><span class="op">$</span><span class="va">milestone</span> <span class="op">&lt;-</span> <span class="va">mile_group</span><span class="op">$</span><span class="va">milestone</span></code></pre></div>
 <p>We then need to extract expression matrices for all the cells across the distinct nodes, so we effectively have 4 populations across the trajectory. We can use these expression matrices to assess pathways across the 4 nodes.</p>
-<p>We can use the <code>seurat_extract</code> function from the SCPA package to get expression matrices, and use this within a for loop to get expression information for all cells in each population.</p>
+<p>We can loop the <code>seurat_extract</code> function to get expression matrices for all cells in each population.</p>
 <div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">cd4_pseudo</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span><span class="op">)</span>
 <span class="kw">for</span> <span class="op">(</span><span class="va">i</span> <span class="kw">in</span> <span class="fl">1</span><span class="op">:</span><span class="fl">4</span><span class="op">)</span> <span class="op">{</span>
@@ -172,7 +171,7 @@
 <span class="op">}</span></code></pre></div>
 <p>Now all the hard work is done, we just need to give this information to SCPA to analyse pathways over pseudotime, after defining the pathways</p>
 <div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">pathways</span> <span class="op">&lt;-</span> <span class="st">"~/Google Drive/scRNA_metabolism_paper/Pathways_and_gene_sets/combined_metab/Combined_metab_paths_noGO.csv"</span>
+<code class="sourceCode R"><span class="va">pathways</span> <span class="op">&lt;-</span> <span class="st">"combined_metabolic_pathways.csv"</span>
 
 <span class="va">cd4_metabolism</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/compare_pathways.html">compare_pathways</a></span><span class="op">(</span><span class="va">cd4_pseudo</span>, <span class="va">pathways</span><span class="op">)</span></code></pre></div>
 <p>All done. Let’s plot the data (some annotations have been added later to highlight pathways, but we can see the final heatmap from Fig4B in <a href="">our paper</a>)</p>
@@ -193,14 +192,14 @@
         show_column_dend <span class="op">=</span> <span class="cn">F</span>,
         show_row_names <span class="op">=</span> <span class="cn">F</span>,
         show_column_names <span class="op">=</span> <span class="cn">F</span><span class="op">)</span></code></pre></div>
-<p><img src="../man/figures/metabolic_heatmap.png" style="width:80.0%"></p>
+<p><img src="../man/figures/metabolic_heatmap.png" style="width:70.0%"></p>
 <p>We can also extract a single pathway to highlight its rank in the analysis using the <code>plot_rank</code> function:</p>
 <div class="sourceCode" id="cb15"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">cd4_metabolism</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://tibble.tidyverse.org/reference/rownames.html">rownames_to_column</a></span><span class="op">(</span><span class="va">cd4_metabolism</span>, <span class="st">"Pathway"</span><span class="op">)</span>
 <span class="fu"><a href="../reference/plot_rank.html">plot_rank</a></span><span class="op">(</span><span class="va">cd4_metabolism</span>, 
           <span class="st">"reactome_arachidonic"</span>, 
           label_size <span class="op">=</span> <span class="fl">2</span><span class="op">)</span></code></pre></div>
-<p><img src="../man/figures/aa_metab_rank.png" style="width:80.0%"></p>
+<p><img src="../man/figures/aa_metab_rank.png" style="width:70.0%"></p>
 </div>
   </div>
 

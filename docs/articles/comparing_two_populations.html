@@ -104,15 +104,16 @@
 
     
     
-<p>Let’s load in a couple of packages</p>
+<p>Here we’re going to do a basic comparison of pathways between two populations. We’ll look at replicating some data in our <a href="">recent paper</a>. In the paper, we took resting naive CD4<sup>+</sup> T cells at 0hr, and compared metabolic pathways to activated naive CD4<sup>+</sup> T cells at 24hr.</p>
+<p>Let’s load in a few packages we’ll need</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/jackbibby1/SCPA/">SCPA</a></span><span class="op">)</span>
 <span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://satijalab.org/seurat">Seurat</a></span><span class="op">)</span>
 <span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://tidyverse.tidyverse.org">tidyverse</a></span><span class="op">)</span></code></pre></div>
-<p>Here we’ll look at replicating some data in our recent paper. In the paper, we took resting naive CD4+ T cells at 0hr, and compared metabolic pathways to activated naive CD4+ T cells at 24hr. Let’s first load in the data we’re going to use</p>
+<p>And let’s load in the data we’re going to use</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/base/load.html">load</a></span><span class="op">(</span><span class="st">"naive_cd4.RData"</span><span class="op">)</span></code></pre></div>
-<p>In the <code>naive_cd4</code> object, we have all our naive CD4 T cells with metadata specifying the identified cell types and the hour specifying time point of cell harvesting.</p>
+<p>In the <code>naive_cd4</code> object, we have all our naive CD4<sup>+</sup> T cells with metadata specifying the identified cell types and the hour specifying time point of cell harvesting.</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://satijalab.org/seurat/reference/DimPlot.html">DimPlot</a></span><span class="op">(</span><span class="va">naive_cd4</span>, split.by <span class="op">=</span> <span class="st">"Hour"</span><span class="op">)</span> <span class="op">+</span>
   <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/theme.html">theme</a></span><span class="op">(</span>aspect.ratio <span class="op">=</span> <span class="fl">1</span><span class="op">)</span></code></pre></div>
@@ -126,14 +127,14 @@
 <span class="va">activated</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/seurat_extract.html">seurat_extract</a></span><span class="op">(</span><span class="va">naive_cd4</span>,
                             meta1 <span class="op">=</span> <span class="st">"Cell_Type"</span>, value_meta1 <span class="op">=</span> <span class="st">"Activated"</span>,
                             meta2 <span class="op">=</span> <span class="st">"Hour"</span>, value_meta2 <span class="op">=</span> <span class="fl">24</span><span class="op">)</span></code></pre></div>
-<p>After we have our data, we can define the pathways to compare. For the Fig 4 analysis, we curated a list of metabolic pathways from a few different sources, which can be found here. The file is in standard gmt file format with pathway name in column 1 and genes of that pathway in subsequent columns. Here we just converted a gmt file to csv, and manually curated a single file with all metabolic gene sets. SCPA just needs the filepath to these gene sets, so we can add this as an object to simplify our final chunk of code</p>
+<p>After we have our data, we can define the pathways to compare. For the Fig 4 analysis, we curated a list of metabolic pathways from a few different sources, which can be found <a href="">here</a>. The file is in standard gmt file format with the pathway name in column 1 and genes of that pathway in subsequent columns. Here we just converted a gmt file to csv, and manually curated a single file with all metabolic gene sets. SCPA just needs the filepath to these gene sets, so we can add this as an object to simplify our final chunk of code</p>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">pathways</span> <span class="op">&lt;-</span> <span class="st">"combined_metabolic_pathways.csv"</span></code></pre></div>
 <p>So now we have our samples and metabolic gene sets. To compare these pathways, we can just run the compare_pathways function. NB, the samples need to be supplied as a list</p>
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">rest_act</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/compare_pathways.html">compare_pathways</a></span><span class="op">(</span>samples <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span><span class="va">resting</span>, <span class="va">activated</span><span class="op">)</span>, 
                              pathways <span class="op">=</span> <span class="va">pathways</span><span class="op">)</span></code></pre></div>
-<p>Now we have the results stored in the rest_act object, which we can then visualize. In the paper, we present the data as a classical volcano plot where the q value (SCPA statistic) is plotted against fold change of each pathway. We just need to do some formatting before plotting the data.</p>
+<p>Now we have the results stored in the rest_act object, which we can then visualize. In the paper, we present the data as a classical volcano plot where the q value (SCPA statistic) is plotted against fold change of each pathway. So just need to do some formatting before plotting the data.</p>
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">rest_act</span><span class="op">$</span><span class="va">FC</span> <span class="op">&lt;-</span> <span class="op">-</span><span class="va">rest_act</span><span class="op">$</span><span class="va">FC</span>
 <span class="va">rest_act</span> <span class="op">&lt;-</span> <span class="va">rest_act</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span>
@@ -144,8 +145,6 @@
 
 <span class="va">aa_path</span> <span class="op">&lt;-</span> <span class="va">rest_act</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> 
   <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/grep.html">grepl</a></span><span class="op">(</span>pattern <span class="op">=</span> <span class="st">"reactomeome_arachi"</span>, ignore.case <span class="op">=</span> <span class="cn">T</span>, x <span class="op">=</span> <span class="va">Pathway</span><span class="op">)</span><span class="op">)</span>
-
-<span class="va">rest_act</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/arrange.html">arrange</a></span><span class="op">(</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/desc.html">desc</a></span><span class="op">(</span><span class="va">qval</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span><span class="op">(</span><span class="va">color</span> <span class="op">==</span> <span class="st">"#84b0f0"</span><span class="op">)</span>
 
 <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="va">rest_act</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span><span class="va">FC</span>, <span class="va">qval</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span>
   <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_abline.html">geom_vline</a></span><span class="op">(</span>xintercept <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="op">-</span><span class="fl">5</span>, <span class="fl">5</span><span class="op">)</span>, linetype <span class="op">=</span> <span class="st">"dashed"</span>, col <span class="op">=</span> <span class="st">'black'</span>, lwd <span class="op">=</span> <span class="fl">0.3</span><span class="op">)</span> <span class="op">+</span>
@@ -159,6 +158,7 @@
         panel.border <span class="op">=</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/element.html">element_rect</a></span><span class="op">(</span>fill <span class="op">=</span> <span class="cn">NA</span><span class="op">)</span>,
         aspect.ratio <span class="op">=</span> <span class="fl">1</span><span class="op">)</span></code></pre></div>
 <p><img src="../man/figures/v_plot_rest_act.png" style="width:45.0%"></p>
+<p>An important aspect of SCPA is highlighted here, in that pathways showing large changes in multivariate distribution (i.e. pathway ‘activity’) do not always show mean changes. So looking at the plot, we see a large number of pathways that have high qvals, but no enrichment in any given population. In the plot above we highlight arachidonic acid as one particular pathway that shows this pattern, and in [our paper] we show that these pathways are also very relevant when understanding pathway importance. So here we suggest that the qval should be used as the primary statistic when judging biological relevance, and the pathway fold change/enirchment should only be a secondary informative value.</p>
   </div>
 
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">

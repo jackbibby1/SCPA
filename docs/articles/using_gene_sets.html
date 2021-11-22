@@ -126,7 +126,7 @@
 <a href="#generic-example" class="anchor"></a>Generic example</h3>
 <p>In a simple example, you can generate formatted gene sets using two simple lines of code. We’ll just extract all the Hallmark pathways from msigdbr</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">pathways</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://igordot.github.io/msigdbr/reference/msigdbr.html">msigdbr</a></span><span class="op">(</span><span class="st">"Homo sapiens"</span>, <span class="st">"H"</span><span class="op">)</span> <span class="op"><a href="https://igordot.github.io/msigdbr/reference/pipe.html">%&gt;%</a></span>
+<code class="sourceCode R"><span class="va">pathways</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://igordot.github.io/msigdbr/reference/msigdbr.html">msigdbr</a></span><span class="op">(</span>species <span class="op">=</span> <span class="st">"Homo sapiens"</span>, category <span class="op">=</span> <span class="st">"H"</span><span class="op">)</span> <span class="op"><a href="https://igordot.github.io/msigdbr/reference/pipe.html">%&gt;%</a></span>
       <span class="fu"><a href="../reference/format_pathways.html">format_pathways</a></span><span class="op">(</span><span class="op">)</span></code></pre></div>
 </div>
 <div id="more-detailed-example" class="section level3">
@@ -174,23 +174,23 @@
 <span class="co">#&gt; 4 HALLMARK_ADIPOGENESIS ACADL</span>
 <span class="co">#&gt; 5 HALLMARK_ADIPOGENESIS ACADM</span>
 <span class="co">#&gt; 6 HALLMARK_ADIPOGENESIS ACADS</span></code></pre></div>
-<p>Now we’ve generated pathways that can be analysed directly in the <code>compare_pathways</code> function of SCPA, as above</p>
+<p>Now we’ve generated pathways that can be analysed directly in the <code>compare_pathways</code> function of SCPA</p>
 </div>
 <div id="versatility-in-using-msigdbr" class="section level3">
 <h3 class="hasAnchor">
 <a href="#versatility-in-using-msigdbr" class="anchor"></a>Versatility in using msigdbr</h3>
 <p>An advantage of using something like msigdbr is its versatility in subsetting specific pathways, or collection of gene sets. For example, if we wanted all pathways related to interferon, we could use grepl to filter the gs_names column:</p>
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">interferon</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://igordot.github.io/msigdbr/reference/msigdbr.html">msigdbr</a></span><span class="op">(</span><span class="st">"Homo sapiens"</span><span class="op">)</span> <span class="op"><a href="https://igordot.github.io/msigdbr/reference/pipe.html">%&gt;%</a></span>
+<code class="sourceCode R"><span class="va">ifn_pathways</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://igordot.github.io/msigdbr/reference/msigdbr.html">msigdbr</a></span><span class="op">(</span><span class="st">"Homo sapiens"</span><span class="op">)</span> <span class="op"><a href="https://igordot.github.io/msigdbr/reference/pipe.html">%&gt;%</a></span>
   <span class="fu"><a href="https://rdrr.io/r/stats/filter.html">filter</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/grep.html">grepl</a></span><span class="op">(</span><span class="st">"interferon"</span>, <span class="va">gs_name</span>, ignore.case <span class="op">=</span> <span class="cn">T</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://igordot.github.io/msigdbr/reference/pipe.html">%&gt;%</a></span>
   <span class="fu"><a href="../reference/format_pathways.html">format_pathways</a></span><span class="op">(</span><span class="op">)</span></code></pre></div>
 <p>Or we could specify a combination of collections so we get all of the Hallmark, KEGG, and Reactome gene sets:</p>
 <div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">pws</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"hallmark"</span>, <span class="st">"kegg"</span>, <span class="st">"reactome"</span><span class="op">)</span>
+<code class="sourceCode R"><span class="va">pathways</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"hallmark"</span>, <span class="st">"kegg"</span>, <span class="st">"reactome"</span><span class="op">)</span>
 <span class="va">hkr_sets</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://igordot.github.io/msigdbr/reference/msigdbr.html">msigdbr</a></span><span class="op">(</span><span class="st">"Homo sapiens"</span><span class="op">)</span> <span class="op"><a href="https://igordot.github.io/msigdbr/reference/pipe.html">%&gt;%</a></span>
-  <span class="fu"><a href="https://rdrr.io/r/stats/filter.html">filter</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/grep.html">grepl</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste</a></span><span class="op">(</span><span class="va">pws</span>, collapse <span class="op">=</span> <span class="st">"|"</span><span class="op">)</span>, <span class="va">gs_name</span>, ignore.case <span class="op">=</span> <span class="cn">T</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://igordot.github.io/msigdbr/reference/pipe.html">%&gt;%</a></span>
+  <span class="fu"><a href="https://rdrr.io/r/stats/filter.html">filter</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/grep.html">grepl</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste</a></span><span class="op">(</span><span class="va">pathways</span>, collapse <span class="op">=</span> <span class="st">"|"</span><span class="op">)</span>, <span class="va">gs_name</span>, ignore.case <span class="op">=</span> <span class="cn">T</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://igordot.github.io/msigdbr/reference/pipe.html">%&gt;%</a></span>
   <span class="fu"><a href="../reference/format_pathways.html">format_pathways</a></span><span class="op">(</span><span class="op">)</span></code></pre></div>
-<p>Using something like this probably makes it easier to quickly generate interesting gene set collections.</p>
+<p>Using something like this makes it easy to pull large and/or relevant gene set lists for direct use within SCPA.</p>
 </div>
 </div>
 <div id="using-a-gmt-file" class="section level2">
@@ -198,20 +198,22 @@
 <a href="#using-a-gmt-file" class="anchor"></a>2. Using a gmt file</h2>
 <p>SCPA has a built in function to read gmt files and format them properly. All you need to do is specify the filepath.</p>
 <div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">pathways</span> <span class="op">&lt;-</span> <span class="st">"path/to/geneset/file.gmt"</span>
-<span class="va">scpa_out</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/compare_pathways.html">compare_pathways</a></span><span class="op">(</span>samples <span class="op">=</span> <span class="va">samples</span>, pathways <span class="op">=</span> <span class="va">pathways</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span class="va">pathways</span> <span class="op">&lt;-</span> <span class="st">"path/to/geneset/file.gmt"</span></code></pre></div>
+<p>And then you can just use this in the <code>compare_pathways</code> function</p>
+<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">scpa_out</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/compare_pathways.html">compare_pathways</a></span><span class="op">(</span>samples <span class="op">=</span> <span class="va">samples</span>, pathways <span class="op">=</span> <span class="va">pathways</span><span class="op">)</span></code></pre></div>
 </div>
 <div id="using-a-csv-file" class="section level2">
 <h2 class="hasAnchor">
 <a href="#using-a-csv-file" class="anchor"></a>3. Using a csv file</h2>
 <p>In this example, we need to create the csv file, but once that’s done, it’s a simple line of code. As with gmt files, SCPA can directly read properly formatted csv gene set files – you just need to supply the filepath</p>
-<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">pathways</span> <span class="op">&lt;-</span> <span class="st">"path/to/geneset/file.csv"</span>
 <span class="va">scpa_out</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/compare_pathways.html">compare_pathways</a></span><span class="op">(</span>samples <span class="op">=</span> <span class="va">samples</span>, pathways <span class="op">=</span> <span class="va">pathways</span><span class="op">)</span></code></pre></div>
 <div id="how-to-create-the-csv-file" class="section level3">
 <h3 class="hasAnchor">
 <a href="#how-to-create-the-csv-file" class="anchor"></a>How to create the csv file</h3>
-<p>The csv file needs to be formatted in the style of a classical gene set gmt file. This being the pathway name in column 1, and genes of that pathway in subsequent columns. For example:</p>
+<p>The csv file needs to be formatted in the style of a classical gene set gmt file. This being the pathway name in column 1, and genes of that pathway in subsequent columns. To generate something like this, all you need to do is download a gmt file, open it in something like excel, delete the second column containing a url, and save it as a csv file. Using this method means you can manually create a list of gene sets you’re interested in, where you’re not limited to existing databases. The file should look something like this:</p>
 <p><img src="../man/figures/pathway_screenshot.png" style="width:100.0%"></p>
 </div>
 </div>

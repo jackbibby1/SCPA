@@ -3,12 +3,13 @@ pkgdown: 1.6.1
 pkgdown_sha: ~
 articles:
   comparing_two_populations: comparing_two_populations.html
+  disease_comparison: disease_comparison.html
   pseudotime: pseudotime.html
   quick_start: quick_start.html
   seurat_comparison: seurat_comparison.html
   systematic_tissue_comparison: systematic_tissue_comparison.html
   using_gene_sets: using_gene_sets.html
-last_built: 2021-11-22T17:16Z
+last_built: 2021-11-22T20:06Z
 urls:
   reference: jackbibby1.github.io/SCPA/reference
   article: jackbibby1.github.io/SCPA/articles

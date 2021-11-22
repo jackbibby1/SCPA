@@ -93,8 +93,6 @@ for (i in cell_types) {
 ```
 
 ## Plotting the output
-Now we have all the results, we can plot a summary of the data to get an idea of any broad patterns.
-
 ```{r, echo=F}
 load("~/Google Drive/scRNA_metabolism_paper/Paper/Fig6/Disease_data/Tilo_COVID/mcross_bloodatlas_10k_gene_sets.RData")
 scpa_out <- mcross_blood_atlas
@@ -122,7 +120,7 @@ blood_paths <- c("HALLMARK_TNFA_SIGNALING_VIA_NFKB", "HALLMARK_INFLAMMATORY_RESP
                  "HALLMARK_MYC_TARGETS_V1", "HALLMARK_OXIDATIVE_PHOSPHORYLATION")
 ```
 
-And create rown annotations for the heatmap to highlight these pathways
+And create row annotations for the heatmap to highlight these pathways, and color scale
 ```{r, eval=F}
 position <- which(rownames(scpa_out) %in% blood_paths)
 row_an <- rowAnnotation(Genes = anno_mark(at = which(rownames(scpa_out) %in% blood_paths),
@@ -131,15 +129,15 @@ row_an <- rowAnnotation(Genes = anno_mark(at = which(rownames(scpa_out) %in% blo
                                           link_width = unit(2.5, "mm"),
                                           padding = unit(1, "mm"),
                                           link_gp = gpar(lwd = 0.5)))
+col_hm <- colorRamp2(colors = c("blue", "white", "red"), breaks = c(0, 3, 6))
 ```
 
 </details>
 \
 
-Any we can now plot the heatmap. Interestingly, we see a large dysregulation of pathways in CD14^+^ monocytes in the peripheral blood of COVID-19 patients, suggesting that these cell show the greatest deviation from CD14^+^ monocytes from healthy donors. These pathways include well defined immunologcal signatures in response to viral infection, including interferon response pathways, and complement cascades. We've just chosen to highlight a few on the heatmap below.
+Now we have all the results, we can plot a heatmap of the qvals to get an idea of any broad patterns. Interestingly, we see a large dysregulation of pathways in CD14^+^ monocytes in the peripheral blood of COVID-19 patients, suggesting that these cell show the greatest deviation from CD14^+^ monocytes from healthy donors. These pathways include well defined immunologcal signatures in response to viral infection, including interferon response pathways, and complement cascades. We've just chosen to highlight a few on the heatmap below.
 
 ```{r, eval=F}
-col_hm <- colorRamp2(colors = c("blue", "white", "red"), breaks = c(0, 3, 6))
 Heatmap(scpa_out,
         col = col_hm,
         name = "Qval",

@@ -23,7 +23,6 @@ the transcriptional reprogramming of metabolic pathways after activation.
 Let's load in a few packages to start
 
 ```{r setup, results='hide', warning=FALSE, message=FALSE, eval=F}
-devtools::install_github("jackbibby1/SCPA")
 library(SCPA)
 library(Seurat)
 library(dyno)
@@ -51,7 +50,7 @@ DimPlot(naive_cd4, split.by = "Hour")
 ```
 ![](../man/figures/naive_cd4_umap.png){width=100%}
 
-Then we'll get rid of the Tregs because we're just interested in naive T cell activation in the non Treg populations
+We'll get rid of the Tregs because we're just interested in naive T cell activation in the non Treg populations
 
 ```{r remove_treg, eval=F}
 naive_cd4 <- subset(naive_cd4, idents = "Treg", invert = T)
@@ -64,7 +63,7 @@ df <- as.matrix(naive_cd4[["RNA"]]@data)
 var_genes <- names(sort(apply(df, 1, var), decreasing = TRUE))[1:1000]
 ```
 
-And then these steps are broadly taken from the dyno website. We're just taking expression
+And then these steps are broadly taken from the [dyno vignettes](https://dynverse.org/users/3-user-guide/). We're just taking expression
 data and adding it to the object so it's able to be used in the `infer_trajectory`
 function.
 
@@ -127,8 +126,7 @@ We then need to extract expression matrices for all the cells across the distinc
 so we effectively have 4 populations across the trajectory. We can use these expression
 matrices to assess pathways across the 4 nodes.
 
-We can use the `seurat_extract` function from the SCPA package to get expression matrices,
-and use this within a for loop to get expression information for all cells in each population.
+We can loop the `seurat_extract` function to get expression matrices for all cells in each population.
 
 ```{r seurat_extract, eval=F}
 cd4_pseudo <- list()
@@ -141,7 +139,7 @@ Now all the hard work is done, we just need to give this information to SCPA to 
 pathways over pseudotime, after defining the pathways
 
 ```{r compare_pathways, eval=F}
-pathways <- "~/Google Drive/scRNA_metabolism_paper/Pathways_and_gene_sets/combined_metab/Combined_metab_paths_noGO.csv"
+pathways <- "combined_metabolic_pathways.csv"
 
 cd4_metabolism <- compare_pathways(cd4_pseudo, pathways)
 ```
@@ -172,7 +170,7 @@ Heatmap(t(cd4_metabolism),
         show_column_names = F)
 ```
 
-![](../man/figures/metabolic_heatmap.png){width=80%}
+![](../man/figures/metabolic_heatmap.png){width=70%}
 
 We can also extract a single pathway to highlight its rank in the analysis using the
 `plot_rank` function:
@@ -184,7 +182,7 @@ plot_rank(cd4_metabolism,
           label_size = 2)
 ```
 
-![](../man/figures/aa_metab_rank.png){width=80%}
+![](../man/figures/aa_metab_rank.png){width=70%}
 
 
 

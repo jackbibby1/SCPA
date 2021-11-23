@@ -20,10 +20,12 @@ Imports:
     ggplot2,
     ggrepel,
     magrittr,
+    msigdbr,
     multicross,
     purrr,
     Seurat,
     stats,
+    stringr,
     tidyr,
     utils
 Suggests: 

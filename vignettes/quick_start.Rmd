@@ -1,5 +1,5 @@
 ---
-title: "Quick Start"
+title: "Quick Start" 
 output: rmarkdown::html_vignette
 vignette: >
   %\VignetteIndexEntry{quick_start}

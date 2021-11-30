@@ -13,7 +13,7 @@ knitr::opts_chunk$set(
 )
 ```
 
-# <img src="man/figures/logo.png" align="right" height="100" /> Single Cell Pathway Analysis (SCPA) 
+# <img src="man/figures/logo.png" align="center" style="padding-right:20px" height="80" /> Single Cell Pathway Analysis (SCPA) 
 
 <!-- badges: start -->
 <!-- badges: end -->

@@ -1,7 +1,7 @@
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 
-# <img src="man/figures/logo.png" align="center" style="padding-right:20px" height="80" /> Single Cell Pathway Analysis (SCPA)
+# <img src="man/figures/logo.png" align="center" style="padding-right:20px" height="70" /> Single Cell Pathway Analysis (SCPA)
 
 <!-- badges: start -->
 <!-- badges: end -->

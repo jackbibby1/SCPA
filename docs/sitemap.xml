@@ -1,37 +1,22 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
-    <loc>jackbibby1.github.io/SCPA/index.html</loc>
+    <loc>jackbibby1.github.io/SCPA/404.html</loc>
   </url>
   <url>
-    <loc>jackbibby1.github.io/SCPA/reference/compare_pathways.html</loc>
+    <loc>jackbibby1.github.io/SCPA/LICENSE.html</loc>
   </url>
   <url>
-    <loc>jackbibby1.github.io/SCPA/reference/compare_seurat.html</loc>
-  </url>
-  <url>
-    <loc>jackbibby1.github.io/SCPA/reference/format_pathways.html</loc>
-  </url>
-  <url>
-    <loc>jackbibby1.github.io/SCPA/reference/get_paths.html</loc>
-  </url>
-  <url>
-    <loc>jackbibby1.github.io/SCPA/reference/pathway_matrices.html</loc>
-  </url>
-  <url>
-    <loc>jackbibby1.github.io/SCPA/reference/plot_rank.html</loc>
-  </url>
-  <url>
-    <loc>jackbibby1.github.io/SCPA/reference/random_cells.html</loc>
-  </url>
-  <url>
-    <loc>jackbibby1.github.io/SCPA/reference/seurat_extract.html</loc>
+    <loc>jackbibby1.github.io/SCPA/articles/SCPA.html</loc>
   </url>
   <url>
     <loc>jackbibby1.github.io/SCPA/articles/comparing_two_populations.html</loc>
   </url>
   <url>
     <loc>jackbibby1.github.io/SCPA/articles/disease_comparison.html</loc>
+  </url>
+  <url>
+    <loc>jackbibby1.github.io/SCPA/articles/index.html</loc>
   </url>
   <url>
     <loc>jackbibby1.github.io/SCPA/articles/pseudotime.html</loc>
@@ -47,5 +32,38 @@
   </url>
   <url>
     <loc>jackbibby1.github.io/SCPA/articles/using_gene_sets.html</loc>
+  </url>
+  <url>
+    <loc>jackbibby1.github.io/SCPA/authors.html</loc>
+  </url>
+  <url>
+    <loc>jackbibby1.github.io/SCPA/index.html</loc>
+  </url>
+  <url>
+    <loc>jackbibby1.github.io/SCPA/reference/compare_pathways.html</loc>
+  </url>
+  <url>
+    <loc>jackbibby1.github.io/SCPA/reference/compare_seurat.html</loc>
+  </url>
+  <url>
+    <loc>jackbibby1.github.io/SCPA/reference/format_pathways.html</loc>
+  </url>
+  <url>
+    <loc>jackbibby1.github.io/SCPA/reference/get_paths.html</loc>
+  </url>
+  <url>
+    <loc>jackbibby1.github.io/SCPA/reference/index.html</loc>
+  </url>
+  <url>
+    <loc>jackbibby1.github.io/SCPA/reference/pathway_matrices.html</loc>
+  </url>
+  <url>
+    <loc>jackbibby1.github.io/SCPA/reference/plot_rank.html</loc>
+  </url>
+  <url>
+    <loc>jackbibby1.github.io/SCPA/reference/random_cells.html</loc>
+  </url>
+  <url>
+    <loc>jackbibby1.github.io/SCPA/reference/seurat_extract.html</loc>
   </url>
 </urlset>

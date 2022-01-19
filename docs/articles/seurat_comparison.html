@@ -26,6 +26,8 @@
 <![endif]-->
 </head>
 <body data-spy="scroll" data-target="#toc">
+    
+
     <div class="container template-article">
       <header><div class="navbar navbar-default navbar-fixed-top" role="navigation">
   <div class="container">
@@ -38,18 +40,12 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">Single Cell Pathway Analysis (SCPA)</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.0.0.9000</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.0.0.9000</span>
       </span>
     </div>
 
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
-<li>
-  <a href="../index.html">
-    <span class="fas fa-home fa-lg"></span>
-     
-  </a>
-</li>
 <li class="dropdown">
   <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
     Tutorials
@@ -86,7 +82,7 @@
       </ul>
 <ul class="nav navbar-nav navbar-right">
 <li>
-  <a href="https://github.com/jackbibby1/SCPA/">
+  <a href="https://github.com/jackbibby1/SCPA/" class="external-link">
     <span class="fab fa-github fa-lg"></span>
      
   </a>
@@ -101,13 +97,13 @@
 
       
 
-      </header><script src="seurat_comparison_files/header-attrs-2.11/header-attrs.js"></script><div class="row">
+      </header><div class="row">
   <div class="col-md-9 contents">
     <div class="page-header toc-ignore">
       <h1 data-toc-skip>Comparison within Seurat object</h1>
             
       
-      <small class="dont-index">Source: <a href="https://github.com/jackbibby1/SCPA/blob/master/vignettes/seurat_comparison.Rmd"><code>vignettes/seurat_comparison.Rmd</code></a></small>
+      <small class="dont-index">Source: <a href="https://github.com/jackbibby1/SCPA/blob/HEAD/vignettes/seurat_comparison.Rmd" class="external-link"><code>vignettes/seurat_comparison.Rmd</code></a></small>
       <div class="hidden name"><code>seurat_comparison.Rmd</code></div>
 
     </div>
@@ -117,26 +113,26 @@
 <p>We’ve shown that you can compare pathways if you have expression matrices, but you can also compare populations within a given Seurat object in one function within SCPA. To do this, you just need the Seurat object that should be annotated with the groups you want to compare.</p>
 <p>Let’s load in a few packages.</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/jackbibby1/SCPA/">SCPA</a></span><span class="op">)</span>
-<span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://tidyverse.tidyverse.org">tidyverse</a></span><span class="op">)</span>
-<span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://igordot.github.io/msigdbr/">msigdbr</a></span><span class="op">)</span>
-<span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://satijalab.org/seurat">Seurat</a></span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/jackbibby1/SCPA/" class="external-link">SCPA</a></span><span class="op">)</span>
+<span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://tidyverse.tidyverse.org" class="external-link">tidyverse</a></span><span class="op">)</span>
+<span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://igordot.github.io/msigdbr/" class="external-link">msigdbr</a></span><span class="op">)</span>
+<span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://satijalab.org/seurat" class="external-link">Seurat</a></span><span class="op">)</span></code></pre></div>
 <p>We’re going to compare Th1 cells to Treg cells at 24 hours post activation, using all Hallmark gene sets to see if they differ in any broad sense. So first we can load in our memory CD4 data that can be found here</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/base/load.html">load</a></span><span class="op">(</span><span class="st">"memory_cd4.RData"</span><span class="op">)</span></code></pre></div>
-<p>We need to define our gene sets, and we can do this through the msigdbr package that contains a bunch of biological gene sets that can be found <a href="https://www.gsea-msigdb.org/gsea/msigdb/genesets.jsp">here</a>. Here we just take the Hallmark gene sets (using the “H” call to msigdbr), and use the format_pathways function to get them in a readable format for SCPA.</p>
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/base/load.html" class="external-link">load</a></span><span class="op">(</span><span class="st">"memory_cd4.RData"</span><span class="op">)</span></code></pre></div>
+<p>We need to define our gene sets, and we can do this through the msigdbr package that contains a bunch of biological gene sets that can be found <a href="https://www.gsea-msigdb.org/gsea/msigdb/genesets.jsp" class="external-link">here</a>. Here we just take the Hallmark gene sets (using the “H” call to msigdbr), and use the format_pathways function to get them in a readable format for SCPA.</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">pathways</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://igordot.github.io/msigdbr/reference/msigdbr.html">msigdbr</a></span><span class="op">(</span><span class="st">"Homo sapiens"</span>, <span class="st">"H"</span><span class="op">)</span> <span class="op"><a href="https://igordot.github.io/msigdbr/reference/pipe.html">%&gt;%</a></span>
+<code class="sourceCode R"><span class="va">pathways</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://igordot.github.io/msigdbr/reference/msigdbr.html" class="external-link">msigdbr</a></span><span class="op">(</span><span class="st">"Homo sapiens"</span>, <span class="st">"H"</span><span class="op">)</span> <span class="op"><a href="https://igordot.github.io/msigdbr/reference/pipe.html" class="external-link">%&gt;%</a></span>
   <span class="fu"><a href="../reference/format_pathways.html">format_pathways</a></span><span class="op">(</span><span class="op">)</span></code></pre></div>
 <p>Now to compare the Th1 and Treg populations, we can use the compare_seurat function within SCPA.</p>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">th1_treg</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/compare_seurat.html">compare_seurat</a></span><span class="op">(</span><span class="va">memory_cd4</span>,
-                           group1 <span class="op">=</span> <span class="st">"Cell_Type"</span>, group1_population <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"Th1"</span>, <span class="st">"Treg"</span><span class="op">)</span>,
+                           group1 <span class="op">=</span> <span class="st">"Cell_Type"</span>, group1_population <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"Th1"</span>, <span class="st">"Treg"</span><span class="op">)</span>,
                            group2 <span class="op">=</span> <span class="st">"Hour"</span>, group2_population <span class="op">=</span> <span class="fl">24</span>,
                            pathways <span class="op">=</span> <span class="va">pathways</span><span class="op">)</span></code></pre></div>
 <p>And we can see some of the topmost diferentially regulated pathways</p>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="va">th1_treg</span>, <span class="fl">10</span><span class="op">)</span>
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="va">th1_treg</span>, <span class="fl">10</span><span class="op">)</span>
 <span class="co">#&gt;                               Pathway         Pval      adjPval     qval</span>
 <span class="co">#&gt; 2        HALLMARK_ALLOGRAFT_REJECTION 4.522036e-82 2.261018e-80 8.924444</span>
 <span class="co">#&gt; 23       HALLMARK_IL2_STAT5_SIGNALING 2.259219e-73 1.129609e-71 8.423008</span>
@@ -170,11 +166,13 @@
 
 
       <footer><div class="copyright">
-  <p>Developed by Jack Bibby.</p>
+  <p></p>
+<p>Developed by Jack Bibby.</p>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
+  <p></p>
+<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.1.</p>
 </div>
 
       </footer>
@@ -182,6 +180,8 @@
 
   
 
+
+  
 
   </body>
 </html>

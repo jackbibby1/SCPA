@@ -26,6 +26,8 @@
 <![endif]-->
 </head>
 <body data-spy="scroll" data-target="#toc">
+    
+
     <div class="container template-article">
       <header><div class="navbar navbar-default navbar-fixed-top" role="navigation">
   <div class="container">
@@ -38,18 +40,12 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">Single Cell Pathway Analysis (SCPA)</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.0.0.9000</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.0.0.9000</span>
       </span>
     </div>
 
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
-<li>
-  <a href="../index.html">
-    <span class="fas fa-home fa-lg"></span>
-     
-  </a>
-</li>
 <li class="dropdown">
   <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
     Tutorials
@@ -86,7 +82,7 @@
       </ul>
 <ul class="nav navbar-nav navbar-right">
 <li>
-  <a href="https://github.com/jackbibby1/SCPA/">
+  <a href="https://github.com/jackbibby1/SCPA/" class="external-link">
     <span class="fab fa-github fa-lg"></span>
      
   </a>
@@ -101,67 +97,67 @@
 
       
 
-      </header><script src="systematic_tissue_comparison_files/header-attrs-2.11/header-attrs.js"></script><div class="row">
+      </header><div class="row">
   <div class="col-md-9 contents">
     <div class="page-header toc-ignore">
       <h1 data-toc-skip>Systems level tissue comarison</h1>
             
       
-      <small class="dont-index">Source: <a href="https://github.com/jackbibby1/SCPA/blob/master/vignettes/systematic_tissue_comparison.Rmd"><code>vignettes/systematic_tissue_comparison.Rmd</code></a></small>
+      <small class="dont-index">Source: <a href="https://github.com/jackbibby1/SCPA/blob/HEAD/vignettes/systematic_tissue_comparison.Rmd" class="external-link"><code>vignettes/systematic_tissue_comparison.Rmd</code></a></small>
       <div class="hidden name"><code>systematic_tissue_comparison.Rmd</code></div>
 
     </div>
 
     
     
-<p>Here we’re going to use SCPA to do a more systems level analysis of T cell gene set perturbations across many cell types and multiple tissues (this will basically replicate Figure 5 from <a href="">our paper</a>). For the analysis, we’re using data from <a href="https://www.nature.com/articles/s41467-019-12464-3">this paper</a> by Szabo, P… Sims, P. In their protocol they sorted CD3<sup>+</sup> T cells from the blood, bone marrow, lymph node, and lung, and either left them unstimulated, or stimulated the cells for 16 hours.</p>
-<div id="loading-in-packages-and-data" class="section level3">
-<h3 class="hasAnchor">
-<a href="#loading-in-packages-and-data" class="anchor"></a>Loading in packages and data</h3>
+<p>Here we’re going to use SCPA to do a more systems level analysis of T cell gene set perturbations across many cell types and multiple tissues (this will basically replicate Figure 5 from <a href="">our paper</a>). For the analysis, we’re using data from <a href="https://www.nature.com/articles/s41467-019-12464-3" class="external-link">this paper</a> by Szabo, P… Sims, P. In their protocol they sorted CD3<sup>+</sup> T cells from the blood, bone marrow, lymph node, and lung, and either left them unstimulated, or stimulated the cells for 16 hours.</p>
+<div class="section level3">
+<h3 id="loading-in-packages-and-data">Loading in packages and data<a class="anchor" aria-label="anchor" href="#loading-in-packages-and-data"></a>
+</h3>
 <p>So first let’s load in a few packages</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/jackbibby1/SCPA/">SCPA</a></span><span class="op">)</span>
-<span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://satijalab.org/seurat">Seurat</a></span><span class="op">)</span>
-<span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://igordot.github.io/msigdbr/">msigdbr</a></span><span class="op">)</span>
-<span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://magrittr.tidyverse.org">magrittr</a></span><span class="op">)</span>
-<span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/jokergoo/ComplexHeatmap">ComplexHeatmap</a></span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/jackbibby1/SCPA/" class="external-link">SCPA</a></span><span class="op">)</span>
+<span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://satijalab.org/seurat" class="external-link">Seurat</a></span><span class="op">)</span>
+<span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://igordot.github.io/msigdbr/" class="external-link">msigdbr</a></span><span class="op">)</span>
+<span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://magrittr.tidyverse.org" class="external-link">magrittr</a></span><span class="op">)</span>
+<span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/jokergoo/ComplexHeatmap" class="external-link">ComplexHeatmap</a></span><span class="op">)</span></code></pre></div>
 <p>And load in the dataset. To see how we processed and integrated the datasets to generate this file, you can see the script <a href="">here</a>.</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">tissue_data</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/readRDS.html">readRDS</a></span><span class="op">(</span><span class="st">"t_cell_tissue_data.rds"</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span class="va">tissue_data</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/readRDS.html" class="external-link">readRDS</a></span><span class="op">(</span><span class="st">"t_cell_tissue_data.rds"</span><span class="op">)</span></code></pre></div>
 </div>
-<div id="quick-look-at-the-data" class="section level3">
-<h3 class="hasAnchor">
-<a href="#quick-look-at-the-data" class="anchor"></a>Quick look at the data</h3>
+<div class="section level3">
+<h3 id="quick-look-at-the-data">Quick look at the data<a class="anchor" aria-label="anchor" href="#quick-look-at-the-data"></a>
+</h3>
 <p>Let’s have a quick look at the data</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="https://satijalab.org/seurat/reference/DimPlot.html">DimPlot</a></span><span class="op">(</span><span class="va">tissue_data</span>, split.by <span class="op">=</span> <span class="st">"tis_stim"</span>, ncol <span class="op">=</span> <span class="fl">4</span>, group.by <span class="op">=</span> <span class="st">"fine"</span><span class="op">)</span></code></pre></div>
-<p><img src="../man/figures/tissue_umap.png" style="width:100.0%"></p>
+<code class="sourceCode R"><span class="fu"><a href="https://satijalab.org/seurat/reference/DimPlot.html" class="external-link">DimPlot</a></span><span class="op">(</span><span class="va">tissue_data</span>, split.by <span class="op">=</span> <span class="st">"tis_stim"</span>, ncol <span class="op">=</span> <span class="fl">4</span>, group.by <span class="op">=</span> <span class="st">"fine"</span><span class="op">)</span></code></pre></div>
+<p><img src="../reference/figures/tissue_umap.png" style="width:100.0%"></p>
 </div>
-<div id="defining-gene-sets-to-analyze" class="section level3">
-<h3 class="hasAnchor">
-<a href="#defining-gene-sets-to-analyze" class="anchor"></a>Defining gene sets to analyze</h3>
-<p>Now we’re going to define all the pathways that we want to use. For this analysis we’re going to use a bunch of different gene sets that include many of the canonical pathways listed on the <a href="https://www.gsea-msigdb.org/gsea/msigdb/genesets.jsp">MSigDB website</a>. In total, this list contains around 3000 pathways.</p>
+<div class="section level3">
+<h3 id="defining-gene-sets-to-analyze">Defining gene sets to analyze<a class="anchor" aria-label="anchor" href="#defining-gene-sets-to-analyze"></a>
+</h3>
+<p>Now we’re going to define all the pathways that we want to use. For this analysis we’re going to use a bunch of different gene sets that include many of the canonical pathways listed on the <a href="https://www.gsea-msigdb.org/gsea/msigdb/genesets.jsp" class="external-link">MSigDB website</a>. In total, this list contains around 3000 pathways.</p>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">pws</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"kegg"</span>, <span class="st">"reactome"</span>, <span class="st">"biocarta"</span>, <span class="st">"wiki"</span>, <span class="st">"pid"</span><span class="op">)</span>
-<span class="va">pathways</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://igordot.github.io/msigdbr/reference/msigdbr.html">msigdbr</a></span><span class="op">(</span><span class="st">"Homo sapiens"</span><span class="op">)</span> <span class="op"><a href="https://igordot.github.io/msigdbr/reference/pipe.html">%&gt;%</a></span>
-  <span class="fu"><a href="https://rdrr.io/r/stats/filter.html">filter</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/grep.html">grepl</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste</a></span><span class="op">(</span><span class="va">pws</span>, collapse <span class="op">=</span> <span class="st">"|"</span><span class="op">)</span>, <span class="va">gs_subcat</span>, ignore.case <span class="op">=</span> <span class="cn">T</span><span class="op">)</span> <span class="op">|</span>
-           <span class="fu"><a href="https://rdrr.io/r/base/grep.html">grepl</a></span><span class="op">(</span><span class="st">"HALLMARK"</span>, x <span class="op">=</span> <span class="va">gs_name</span>, ignore.case <span class="op">=</span> <span class="cn">T</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://igordot.github.io/msigdbr/reference/pipe.html">%&gt;%</a></span>
+<code class="sourceCode R"><span class="va">pws</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"kegg"</span>, <span class="st">"reactome"</span>, <span class="st">"biocarta"</span>, <span class="st">"wiki"</span>, <span class="st">"pid"</span><span class="op">)</span>
+<span class="va">pathways</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://igordot.github.io/msigdbr/reference/msigdbr.html" class="external-link">msigdbr</a></span><span class="op">(</span><span class="st">"Homo sapiens"</span><span class="op">)</span> <span class="op"><a href="https://igordot.github.io/msigdbr/reference/pipe.html" class="external-link">%&gt;%</a></span>
+  <span class="fu"><a href="https://rdrr.io/r/stats/filter.html" class="external-link">filter</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/grep.html" class="external-link">grepl</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste</a></span><span class="op">(</span><span class="va">pws</span>, collapse <span class="op">=</span> <span class="st">"|"</span><span class="op">)</span>, <span class="va">gs_subcat</span>, ignore.case <span class="op">=</span> <span class="cn">T</span><span class="op">)</span> <span class="op">|</span>
+           <span class="fu"><a href="https://rdrr.io/r/base/grep.html" class="external-link">grepl</a></span><span class="op">(</span><span class="st">"HALLMARK"</span>, x <span class="op">=</span> <span class="va">gs_name</span>, ignore.case <span class="op">=</span> <span class="cn">T</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://igordot.github.io/msigdbr/reference/pipe.html" class="external-link">%&gt;%</a></span>
   <span class="fu"><a href="../reference/format_pathways.html">format_pathways</a></span><span class="op">(</span><span class="op">)</span></code></pre></div>
 </div>
-<div id="small-bit-of-data-prep" class="section level3">
-<h3 class="hasAnchor">
-<a href="#small-bit-of-data-prep" class="anchor"></a>Small bit of data prep</h3>
+<div class="section level3">
+<h3 id="small-bit-of-data-prep">Small bit of data prep<a class="anchor" aria-label="anchor" href="#small-bit-of-data-prep"></a>
+</h3>
 <p>For this analysis we want to keep blood T cells as a reference, and understand what happens to T cells when they migrate into the respective tissues; either the bone marrow, lymph node, or lung.</p>
 <p>First we need to define our cell types that we want to analyse. We’re going to compare every cell type across the tissues, so we can just pull this from the metadata of the Seurat object.</p>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">cell_types</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/unique.html">unique</a></span><span class="op">(</span><span class="va">tissue_data</span><span class="op">$</span><span class="va">fine</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span class="va">cell_types</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/unique.html" class="external-link">unique</a></span><span class="op">(</span><span class="va">tissue_data</span><span class="op">$</span><span class="va">fine</span><span class="op">)</span></code></pre></div>
 <p>We’re also going to split the Seurat object by tissue to make the comparisons easier. This will make a list of Seurat objects that are split by tissue site</p>
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">split_tissue</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://satijalab.org/seurat/reference/SplitObject.html">SplitObject</a></span><span class="op">(</span><span class="va">tissue_data</span>, split.by <span class="op">=</span> <span class="st">"tissue"</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span class="va">split_tissue</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://satijalab.org/seurat/reference/SplitObject.html" class="external-link">SplitObject</a></span><span class="op">(</span><span class="va">tissue_data</span>, split.by <span class="op">=</span> <span class="st">"tissue"</span><span class="op">)</span></code></pre></div>
 </div>
-<div id="pathway-analysis-across-tissues" class="section level3">
-<h3 class="hasAnchor">
-<a href="#pathway-analysis-across-tissues" class="anchor"></a>Pathway analysis across tissues</h3>
+<div class="section level3">
+<h3 id="pathway-analysis-across-tissues">Pathway analysis across tissues<a class="anchor" aria-label="anchor" href="#pathway-analysis-across-tissues"></a>
+</h3>
 <p>Now we just need to create a loop that will cycle over all the cell types for each tissue and extract their expression values, before doing the pathway analysis. Just to break this down a bit:</p>
 <ul>
 <li>We first create empty lists to store results from the for loop</li>
@@ -171,7 +167,7 @@
 </ul>
 <p>Given the number of cells, pathways, and samples we’re comparing, this may take a while. Here we’re showing how to run a comparison sequentially, but you can significantly reduce the time taken for the analysis if you split the three comparisons across e.g. different scripts.</p>
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">bl_bm</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span><span class="op">)</span>; <span class="va">bl_ln</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span><span class="op">)</span>; <span class="va">bl_lung</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span><span class="op">)</span>
+<code class="sourceCode R"><span class="va">bl_bm</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="op">)</span>; <span class="va">bl_ln</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="op">)</span>; <span class="va">bl_lung</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="op">)</span>
 <span class="kw">for</span> <span class="op">(</span><span class="va">i</span> <span class="kw">in</span> <span class="va">cell_types</span><span class="op">)</span> <span class="op">{</span>
   
   <span class="va">blood</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/seurat_extract.html">seurat_extract</a></span><span class="op">(</span><span class="va">split_tissue</span><span class="op">$</span><span class="va">bl</span>, 
@@ -190,91 +186,91 @@
                          meta1 <span class="op">=</span> <span class="st">"fine"</span>, value_meta1 <span class="op">=</span> <span class="va">i</span>,
                          meta2 <span class="op">=</span> <span class="st">"stimulation"</span>, value_meta2 <span class="op">=</span> <span class="st">"none"</span><span class="op">)</span>
   
-  <span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste</a></span><span class="op">(</span><span class="st">"comparing"</span>, <span class="va">i</span><span class="op">)</span><span class="op">)</span>
-  <span class="va">bl_bm</span><span class="op">[[</span><span class="va">i</span><span class="op">]</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/compare_pathways.html">compare_pathways</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span><span class="va">blood</span>, <span class="va">bm</span><span class="op">)</span>, <span class="va">pathways</span><span class="op">)</span>
-  <span class="va">bl_ln</span><span class="op">[[</span><span class="va">i</span><span class="op">]</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/compare_pathways.html">compare_pathways</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span><span class="va">blood</span>, <span class="va">ln</span><span class="op">)</span>, <span class="va">pathways</span><span class="op">)</span>
-  <span class="va">bl_lung</span><span class="op">[[</span><span class="va">i</span><span class="op">]</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/compare_pathways.html">compare_pathways</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span><span class="va">blood</span>, <span class="va">lung</span><span class="op">)</span>, <span class="va">pathways</span><span class="op">)</span>
+  <span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste</a></span><span class="op">(</span><span class="st">"comparing"</span>, <span class="va">i</span><span class="op">)</span><span class="op">)</span>
+  <span class="va">bl_bm</span><span class="op">[[</span><span class="va">i</span><span class="op">]</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/compare_pathways.html">compare_pathways</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="va">blood</span>, <span class="va">bm</span><span class="op">)</span>, <span class="va">pathways</span><span class="op">)</span>
+  <span class="va">bl_ln</span><span class="op">[[</span><span class="va">i</span><span class="op">]</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/compare_pathways.html">compare_pathways</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="va">blood</span>, <span class="va">ln</span><span class="op">)</span>, <span class="va">pathways</span><span class="op">)</span>
+  <span class="va">bl_lung</span><span class="op">[[</span><span class="va">i</span><span class="op">]</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/compare_pathways.html">compare_pathways</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="va">blood</span>, <span class="va">lung</span><span class="op">)</span>, <span class="va">pathways</span><span class="op">)</span>
   
 <span class="op">}</span></code></pre></div>
 </div>
-<div id="extracting-all-the-useful-information-for-plotting" class="section level3">
-<h3 class="hasAnchor">
-<a href="#extracting-all-the-useful-information-for-plotting" class="anchor"></a>Extracting all the useful information for plotting</h3>
+<div class="section level3">
+<h3 id="extracting-all-the-useful-information-for-plotting">Extracting all the useful information for plotting<a class="anchor" aria-label="anchor" href="#extracting-all-the-useful-information-for-plotting"></a>
+</h3>
 <p>That’s it – we have the results. Above we only showed the unstimulated analysis, but we did the same comparison, only changing the <code>meta2 = "stimulation", value_meta2 = "none"</code> to <code>meta2 = "stimulation", value_meta2 = "stim"</code> to get the pathway analysis done on the stimulated cells. Now we just need to extract the results in a sensible way to plot the data.</p>
 <details><summary><strong>Click here for the data wrangling for plotting</strong>
 </summary><p>For the extraction, we can do something like the below, which extracts the pathway name and qval for each comparison, and assigns a column name that adds the tissue of each cell type comparison to the column name</p>
 <div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">get_qvals</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">scpa_out</span>, <span class="va">name</span><span class="op">)</span> <span class="op">{</span>
   
-  <span class="va">df</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span><span class="op">)</span>
-  <span class="kw">for</span> <span class="op">(</span><span class="va">i</span> <span class="kw">in</span> <span class="fu"><a href="https://rdrr.io/r/base/names.html">names</a></span><span class="op">(</span><span class="va">scpa_out</span><span class="op">)</span><span class="op">)</span> <span class="op">{</span>
-    <span class="va">df</span><span class="op">[[</span><span class="va">i</span><span class="op">]</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="va">scpa_out</span><span class="op">[[</span><span class="va">i</span><span class="op">]</span><span class="op">]</span> <span class="op"><a href="https://igordot.github.io/msigdbr/reference/pipe.html">%&gt;%</a></span>
-      <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span><span class="op">(</span><span class="va">Pathway</span>, <span class="va">qval</span><span class="op">)</span>
+  <span class="va">df</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="op">)</span>
+  <span class="kw">for</span> <span class="op">(</span><span class="va">i</span> <span class="kw">in</span> <span class="fu"><a href="https://rdrr.io/r/base/names.html" class="external-link">names</a></span><span class="op">(</span><span class="va">scpa_out</span><span class="op">)</span><span class="op">)</span> <span class="op">{</span>
+    <span class="va">df</span><span class="op">[[</span><span class="va">i</span><span class="op">]</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="va">scpa_out</span><span class="op">[[</span><span class="va">i</span><span class="op">]</span><span class="op">]</span> <span class="op"><a href="https://igordot.github.io/msigdbr/reference/pipe.html" class="external-link">%&gt;%</a></span>
+      <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span><span class="op">(</span><span class="va">Pathway</span>, <span class="va">qval</span><span class="op">)</span>
   <span class="op">}</span>
   
-  <span class="va">col_names</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/names.html">names</a></span><span class="op">(</span><span class="va">df</span><span class="op">)</span>
-  <span class="kw">for</span> <span class="op">(</span><span class="va">i</span> <span class="kw">in</span> <span class="fl">1</span><span class="op">:</span><span class="fu"><a href="https://rdrr.io/r/base/length.html">length</a></span><span class="op">(</span><span class="va">df</span><span class="op">)</span><span class="op">)</span> <span class="op">{</span>
-    <span class="va">df</span><span class="op">[[</span><span class="va">i</span><span class="op">]</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://magrittr.tidyverse.org/reference/aliases.html">set_colnames</a></span><span class="op">(</span><span class="va">df</span><span class="op">[[</span><span class="va">i</span><span class="op">]</span><span class="op">]</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"pathway"</span>, <span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste</a></span><span class="op">(</span><span class="va">name</span>, <span class="va">col_names</span><span class="op">[[</span><span class="va">i</span><span class="op">]</span><span class="op">]</span>, sep <span class="op">=</span> <span class="st">"_"</span><span class="op">)</span><span class="op">)</span><span class="op">)</span>
+  <span class="va">col_names</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/names.html" class="external-link">names</a></span><span class="op">(</span><span class="va">df</span><span class="op">)</span>
+  <span class="kw">for</span> <span class="op">(</span><span class="va">i</span> <span class="kw">in</span> <span class="fl">1</span><span class="op">:</span><span class="fu"><a href="https://rdrr.io/r/base/length.html" class="external-link">length</a></span><span class="op">(</span><span class="va">df</span><span class="op">)</span><span class="op">)</span> <span class="op">{</span>
+    <span class="va">df</span><span class="op">[[</span><span class="va">i</span><span class="op">]</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://magrittr.tidyverse.org/reference/aliases.html" class="external-link">set_colnames</a></span><span class="op">(</span><span class="va">df</span><span class="op">[[</span><span class="va">i</span><span class="op">]</span><span class="op">]</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"pathway"</span>, <span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste</a></span><span class="op">(</span><span class="va">name</span>, <span class="va">col_names</span><span class="op">[[</span><span class="va">i</span><span class="op">]</span><span class="op">]</span>, sep <span class="op">=</span> <span class="st">"_"</span><span class="op">)</span><span class="op">)</span><span class="op">)</span>
   <span class="op">}</span>
   
-  <span class="kw"><a href="https://rdrr.io/r/base/function.html">return</a></span><span class="op">(</span><span class="va">df</span><span class="op">)</span>
+  <span class="kw"><a href="https://rdrr.io/r/base/function.html" class="external-link">return</a></span><span class="op">(</span><span class="va">df</span><span class="op">)</span>
   
 <span class="op">}</span></code></pre></div>
 <p>And now we can use this function to format all the comparisons into a single data frame</p>
 <div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">scpa_results</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/funprog.html">Reduce</a></span><span class="op">(</span><span class="va">full_join</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fu">get_qvals</span><span class="op">(</span><span class="va">bl_bm</span>, <span class="st">"bm"</span><span class="op">)</span>,
+<code class="sourceCode R"><span class="va">scpa_results</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/funprog.html" class="external-link">Reduce</a></span><span class="op">(</span><span class="va">full_join</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fu">get_qvals</span><span class="op">(</span><span class="va">bl_bm</span>, <span class="st">"bm"</span><span class="op">)</span>,
                                     <span class="fu">get_qvals</span><span class="op">(</span><span class="va">bl_ln</span>, <span class="st">"ln"</span><span class="op">)</span>,
                                     <span class="fu">get_qvals</span><span class="op">(</span><span class="va">bl_lung</span>, <span class="st">"lung"</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></code></pre></div>
 <p>Here we’re just combining the unstimulated and stimulated conditions, and then extracting information from the column names to be used in the heatmap. We’re also defining a heatmap annotation that will add tiles above the heatmap.</p>
 <div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">pway_rest</span> <span class="op">&lt;-</span> <span class="va">pway_rest</span> <span class="op"><a href="https://igordot.github.io/msigdbr/reference/pipe.html">%&gt;%</a></span>
-   <span class="fu"><a href="https://tibble.tidyverse.org/reference/rownames.html">column_to_rownames</a></span><span class="op">(</span><span class="st">"pathway"</span><span class="op">)</span> <span class="op"><a href="https://igordot.github.io/msigdbr/reference/pipe.html">%&gt;%</a></span>
-   <span class="fu"><a href="https://magrittr.tidyverse.org/reference/aliases.html">set_colnames</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste</a></span><span class="op">(</span><span class="st">"rest"</span>, <span class="fu"><a href="https://rdrr.io/r/base/colnames.html">colnames</a></span><span class="op">(</span><span class="va">.</span><span class="op">)</span>, sep <span class="op">=</span> <span class="st">"_"</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://igordot.github.io/msigdbr/reference/pipe.html">%&gt;%</a></span>
-   <span class="fu"><a href="https://tibble.tidyverse.org/reference/rownames.html">rownames_to_column</a></span><span class="op">(</span><span class="st">"pathway"</span><span class="op">)</span>
+<code class="sourceCode R"><span class="va">pway_rest</span> <span class="op">&lt;-</span> <span class="va">pway_rest</span> <span class="op"><a href="https://igordot.github.io/msigdbr/reference/pipe.html" class="external-link">%&gt;%</a></span>
+   <span class="fu"><a href="https://tibble.tidyverse.org/reference/rownames.html" class="external-link">column_to_rownames</a></span><span class="op">(</span><span class="st">"pathway"</span><span class="op">)</span> <span class="op"><a href="https://igordot.github.io/msigdbr/reference/pipe.html" class="external-link">%&gt;%</a></span>
+   <span class="fu"><a href="https://magrittr.tidyverse.org/reference/aliases.html" class="external-link">set_colnames</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste</a></span><span class="op">(</span><span class="st">"rest"</span>, <span class="fu"><a href="https://rdrr.io/r/base/colnames.html" class="external-link">colnames</a></span><span class="op">(</span><span class="va">.</span><span class="op">)</span>, sep <span class="op">=</span> <span class="st">"_"</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://igordot.github.io/msigdbr/reference/pipe.html" class="external-link">%&gt;%</a></span>
+   <span class="fu"><a href="https://tibble.tidyverse.org/reference/rownames.html" class="external-link">rownames_to_column</a></span><span class="op">(</span><span class="st">"pathway"</span><span class="op">)</span>
 
-<span class="va">pway_act</span> <span class="op">&lt;-</span> <span class="va">pway_act</span> <span class="op"><a href="https://igordot.github.io/msigdbr/reference/pipe.html">%&gt;%</a></span>
-   <span class="fu"><a href="https://tibble.tidyverse.org/reference/rownames.html">column_to_rownames</a></span><span class="op">(</span><span class="st">"pathway"</span><span class="op">)</span> <span class="op"><a href="https://igordot.github.io/msigdbr/reference/pipe.html">%&gt;%</a></span>
-   <span class="fu"><a href="https://magrittr.tidyverse.org/reference/aliases.html">set_colnames</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste</a></span><span class="op">(</span><span class="st">"stim"</span>, <span class="fu"><a href="https://rdrr.io/r/base/colnames.html">colnames</a></span><span class="op">(</span><span class="va">.</span><span class="op">)</span>, sep <span class="op">=</span> <span class="st">"_"</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://igordot.github.io/msigdbr/reference/pipe.html">%&gt;%</a></span>
-   <span class="fu"><a href="https://tibble.tidyverse.org/reference/rownames.html">rownames_to_column</a></span><span class="op">(</span><span class="st">"pathway"</span><span class="op">)</span>
+<span class="va">pway_act</span> <span class="op">&lt;-</span> <span class="va">pway_act</span> <span class="op"><a href="https://igordot.github.io/msigdbr/reference/pipe.html" class="external-link">%&gt;%</a></span>
+   <span class="fu"><a href="https://tibble.tidyverse.org/reference/rownames.html" class="external-link">column_to_rownames</a></span><span class="op">(</span><span class="st">"pathway"</span><span class="op">)</span> <span class="op"><a href="https://igordot.github.io/msigdbr/reference/pipe.html" class="external-link">%&gt;%</a></span>
+   <span class="fu"><a href="https://magrittr.tidyverse.org/reference/aliases.html" class="external-link">set_colnames</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste</a></span><span class="op">(</span><span class="st">"stim"</span>, <span class="fu"><a href="https://rdrr.io/r/base/colnames.html" class="external-link">colnames</a></span><span class="op">(</span><span class="va">.</span><span class="op">)</span>, sep <span class="op">=</span> <span class="st">"_"</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://igordot.github.io/msigdbr/reference/pipe.html" class="external-link">%&gt;%</a></span>
+   <span class="fu"><a href="https://tibble.tidyverse.org/reference/rownames.html" class="external-link">rownames_to_column</a></span><span class="op">(</span><span class="st">"pathway"</span><span class="op">)</span>
 
-<span class="va">all_data</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate-joins.html">full_join</a></span><span class="op">(</span><span class="va">pway_rest</span>, <span class="va">pway_act</span>, <span class="st">"pathway"</span><span class="op">)</span> <span class="op"><a href="https://igordot.github.io/msigdbr/reference/pipe.html">%&gt;%</a></span>
-  <span class="fu"><a href="https://tibble.tidyverse.org/reference/rownames.html">column_to_rownames</a></span><span class="op">(</span><span class="st">"pathway"</span><span class="op">)</span>
+<span class="va">all_data</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate-joins.html" class="external-link">full_join</a></span><span class="op">(</span><span class="va">pway_rest</span>, <span class="va">pway_act</span>, <span class="st">"pathway"</span><span class="op">)</span> <span class="op"><a href="https://igordot.github.io/msigdbr/reference/pipe.html" class="external-link">%&gt;%</a></span>
+  <span class="fu"><a href="https://tibble.tidyverse.org/reference/rownames.html" class="external-link">column_to_rownames</a></span><span class="op">(</span><span class="st">"pathway"</span><span class="op">)</span>
 
-<span class="va">stim</span> <span class="op">&lt;-</span> <span class="va">all_data</span> <span class="op"><a href="https://igordot.github.io/msigdbr/reference/pipe.html">%&gt;%</a></span>
-  <span class="fu"><a href="https://rdrr.io/r/base/colnames.html">colnames</a></span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="https://igordot.github.io/msigdbr/reference/pipe.html">%&gt;%</a></span>
-  <span class="fu"><a href="https://rdrr.io/r/base/substr.html">substr</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">4</span><span class="op">)</span> <span class="op"><a href="https://igordot.github.io/msigdbr/reference/pipe.html">%&gt;%</a></span>
-  <span class="fu"><a href="https://stringr.tidyverse.org/reference/case.html">str_to_sentence</a></span><span class="op">(</span><span class="op">)</span>
+<span class="va">stim</span> <span class="op">&lt;-</span> <span class="va">all_data</span> <span class="op"><a href="https://igordot.github.io/msigdbr/reference/pipe.html" class="external-link">%&gt;%</a></span>
+  <span class="fu"><a href="https://rdrr.io/r/base/colnames.html" class="external-link">colnames</a></span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="https://igordot.github.io/msigdbr/reference/pipe.html" class="external-link">%&gt;%</a></span>
+  <span class="fu"><a href="https://rdrr.io/r/base/substr.html" class="external-link">substr</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">4</span><span class="op">)</span> <span class="op"><a href="https://igordot.github.io/msigdbr/reference/pipe.html" class="external-link">%&gt;%</a></span>
+  <span class="fu"><a href="https://stringr.tidyverse.org/reference/case.html" class="external-link">str_to_sentence</a></span><span class="op">(</span><span class="op">)</span>
 
-<span class="va">tissue</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/colnames.html">colnames</a></span><span class="op">(</span><span class="va">all_data</span><span class="op">)</span> <span class="op"><a href="https://igordot.github.io/msigdbr/reference/pipe.html">%&gt;%</a></span>
-  <span class="fu"><a href="https://rdrr.io/r/base/substr.html">substr</a></span><span class="op">(</span><span class="fl">6</span>, <span class="fl">9</span><span class="op">)</span> <span class="op"><a href="https://igordot.github.io/msigdbr/reference/pipe.html">%&gt;%</a></span>
-  <span class="fu"><a href="https://rdrr.io/r/base/grep.html">sub</a></span><span class="op">(</span>pattern <span class="op">=</span> <span class="st">"_[a-z]"</span>, replacement <span class="op">=</span> <span class="st">""</span><span class="op">)</span> <span class="op"><a href="https://igordot.github.io/msigdbr/reference/pipe.html">%&gt;%</a></span>
-  <span class="fu"><a href="https://rdrr.io/r/base/grep.html">gsub</a></span><span class="op">(</span>pattern <span class="op">=</span> <span class="st">"bm"</span>, replacement <span class="op">=</span> <span class="st">"BM"</span><span class="op">)</span> <span class="op"><a href="https://igordot.github.io/msigdbr/reference/pipe.html">%&gt;%</a></span>
-  <span class="fu"><a href="https://rdrr.io/r/base/grep.html">gsub</a></span><span class="op">(</span>pattern <span class="op">=</span> <span class="st">"ln"</span>, replacement <span class="op">=</span> <span class="st">"LN"</span><span class="op">)</span> <span class="op"><a href="https://igordot.github.io/msigdbr/reference/pipe.html">%&gt;%</a></span>
-  <span class="fu"><a href="https://rdrr.io/r/base/grep.html">gsub</a></span><span class="op">(</span>pattern <span class="op">=</span> <span class="st">"lung"</span>, replacement <span class="op">=</span> <span class="st">"Lung"</span><span class="op">)</span>
+<span class="va">tissue</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/colnames.html" class="external-link">colnames</a></span><span class="op">(</span><span class="va">all_data</span><span class="op">)</span> <span class="op"><a href="https://igordot.github.io/msigdbr/reference/pipe.html" class="external-link">%&gt;%</a></span>
+  <span class="fu"><a href="https://rdrr.io/r/base/substr.html" class="external-link">substr</a></span><span class="op">(</span><span class="fl">6</span>, <span class="fl">9</span><span class="op">)</span> <span class="op"><a href="https://igordot.github.io/msigdbr/reference/pipe.html" class="external-link">%&gt;%</a></span>
+  <span class="fu"><a href="https://rdrr.io/r/base/grep.html" class="external-link">sub</a></span><span class="op">(</span>pattern <span class="op">=</span> <span class="st">"_[a-z]"</span>, replacement <span class="op">=</span> <span class="st">""</span><span class="op">)</span> <span class="op"><a href="https://igordot.github.io/msigdbr/reference/pipe.html" class="external-link">%&gt;%</a></span>
+  <span class="fu"><a href="https://rdrr.io/r/base/grep.html" class="external-link">gsub</a></span><span class="op">(</span>pattern <span class="op">=</span> <span class="st">"bm"</span>, replacement <span class="op">=</span> <span class="st">"BM"</span><span class="op">)</span> <span class="op"><a href="https://igordot.github.io/msigdbr/reference/pipe.html" class="external-link">%&gt;%</a></span>
+  <span class="fu"><a href="https://rdrr.io/r/base/grep.html" class="external-link">gsub</a></span><span class="op">(</span>pattern <span class="op">=</span> <span class="st">"ln"</span>, replacement <span class="op">=</span> <span class="st">"LN"</span><span class="op">)</span> <span class="op"><a href="https://igordot.github.io/msigdbr/reference/pipe.html" class="external-link">%&gt;%</a></span>
+  <span class="fu"><a href="https://rdrr.io/r/base/grep.html" class="external-link">gsub</a></span><span class="op">(</span>pattern <span class="op">=</span> <span class="st">"lung"</span>, replacement <span class="op">=</span> <span class="st">"Lung"</span><span class="op">)</span>
 
-<span class="va">lineage</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/colnames.html">colnames</a></span><span class="op">(</span><span class="va">all_data</span><span class="op">)</span> <span class="op"><a href="https://igordot.github.io/msigdbr/reference/pipe.html">%&gt;%</a></span>
-  <span class="fu"><a href="https://stringr.tidyverse.org/reference/str_extract.html">str_extract</a></span><span class="op">(</span>pattern <span class="op">=</span> <span class="st">"cd[48]"</span><span class="op">)</span> <span class="op"><a href="https://igordot.github.io/msigdbr/reference/pipe.html">%&gt;%</a></span>
-  <span class="fu"><a href="https://stringr.tidyverse.org/reference/case.html">str_to_upper</a></span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="https://igordot.github.io/msigdbr/reference/pipe.html">%&gt;%</a></span>
-  <span class="fu"><a href="https://tidyr.tidyverse.org/reference/replace_na.html">replace_na</a></span><span class="op">(</span><span class="st">"CD4"</span><span class="op">)</span>
+<span class="va">lineage</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/colnames.html" class="external-link">colnames</a></span><span class="op">(</span><span class="va">all_data</span><span class="op">)</span> <span class="op"><a href="https://igordot.github.io/msigdbr/reference/pipe.html" class="external-link">%&gt;%</a></span>
+  <span class="fu"><a href="https://stringr.tidyverse.org/reference/str_extract.html" class="external-link">str_extract</a></span><span class="op">(</span>pattern <span class="op">=</span> <span class="st">"cd[48]"</span><span class="op">)</span> <span class="op"><a href="https://igordot.github.io/msigdbr/reference/pipe.html" class="external-link">%&gt;%</a></span>
+  <span class="fu"><a href="https://stringr.tidyverse.org/reference/case.html" class="external-link">str_to_upper</a></span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="https://igordot.github.io/msigdbr/reference/pipe.html" class="external-link">%&gt;%</a></span>
+  <span class="fu"><a href="https://tidyr.tidyverse.org/reference/replace_na.html" class="external-link">replace_na</a></span><span class="op">(</span><span class="st">"CD4"</span><span class="op">)</span>
 
-<span class="va">col_an</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/ComplexHeatmap/man/HeatmapAnnotation.html">HeatmapAnnotation</a></span><span class="op">(</span>Stimulation <span class="op">=</span> <span class="va">stim</span>,
+<span class="va">col_an</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/ComplexHeatmap/man/HeatmapAnnotation.html" class="external-link">HeatmapAnnotation</a></span><span class="op">(</span>Stimulation <span class="op">=</span> <span class="va">stim</span>,
                             Tissue <span class="op">=</span> <span class="va">tissue</span>,
                             Lineage <span class="op">=</span> <span class="va">lineage</span>,
-                            col <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span>Stimulation <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"Rest"</span> <span class="op">=</span> <span class="st">"gray70"</span>, <span class="st">"Stim"</span> <span class="op">=</span> <span class="st">"orangered2"</span><span class="op">)</span>,
-                                       Tissue <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"BM"</span> <span class="op">=</span> <span class="st">"#cccccc"</span>, <span class="st">"LN"</span> <span class="op">=</span> <span class="st">"#be83e6"</span>, <span class="st">"Lung"</span> <span class="op">=</span> <span class="st">"#84c476"</span><span class="op">)</span>,
-                                       Lineage <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"CD4"</span> <span class="op">=</span> <span class="st">"#4589ff"</span>, <span class="st">"CD8"</span> <span class="op">=</span> <span class="st">"#ff6363"</span><span class="op">)</span><span class="op">)</span>,
-                            gp <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/grid/gpar.html">gpar</a></span><span class="op">(</span>col <span class="op">=</span> <span class="st">"white"</span>, lwd <span class="op">=</span> <span class="fl">0.05</span><span class="op">)</span>,
-                            annotation_name_gp <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/grid/gpar.html">gpar</a></span><span class="op">(</span>fontsize <span class="op">=</span> <span class="fl">9</span><span class="op">)</span>,
-                            simple_anno_size <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/grid/unit.html">unit</a></span><span class="op">(</span><span class="fl">3</span>, <span class="st">"mm"</span><span class="op">)</span><span class="op">)</span></code></pre></div>
+                            col <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>Stimulation <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"Rest"</span> <span class="op">=</span> <span class="st">"gray70"</span>, <span class="st">"Stim"</span> <span class="op">=</span> <span class="st">"orangered2"</span><span class="op">)</span>,
+                                       Tissue <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"BM"</span> <span class="op">=</span> <span class="st">"#cccccc"</span>, <span class="st">"LN"</span> <span class="op">=</span> <span class="st">"#be83e6"</span>, <span class="st">"Lung"</span> <span class="op">=</span> <span class="st">"#84c476"</span><span class="op">)</span>,
+                                       Lineage <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"CD4"</span> <span class="op">=</span> <span class="st">"#4589ff"</span>, <span class="st">"CD8"</span> <span class="op">=</span> <span class="st">"#ff6363"</span><span class="op">)</span><span class="op">)</span>,
+                            gp <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/grid/gpar.html" class="external-link">gpar</a></span><span class="op">(</span>col <span class="op">=</span> <span class="st">"white"</span>, lwd <span class="op">=</span> <span class="fl">0.05</span><span class="op">)</span>,
+                            annotation_name_gp <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/grid/gpar.html" class="external-link">gpar</a></span><span class="op">(</span>fontsize <span class="op">=</span> <span class="fl">9</span><span class="op">)</span>,
+                            simple_anno_size <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/grid/unit.html" class="external-link">unit</a></span><span class="op">(</span><span class="fl">3</span>, <span class="st">"mm"</span><span class="op">)</span><span class="op">)</span></code></pre></div>
 </details><p><br></p>
 </div>
-<div id="plotting-a-global-summary-of-the-data" class="section level3">
-<h3 class="hasAnchor">
-<a href="#plotting-a-global-summary-of-the-data" class="anchor"></a>Plotting a global summary of the data</h3>
-<p>We can now plot a broad summary using the qvals from each comparison. For this, we’re just going to represent the data in a heatmap, using the great [ComplexHeatmap] (<a href="https://jokergoo.github.io/ComplexHeatmap-reference/book/" class="uri">https://jokergoo.github.io/ComplexHeatmap-reference/book/</a>) package.</p>
+<div class="section level3">
+<h3 id="plotting-a-global-summary-of-the-data">Plotting a global summary of the data<a class="anchor" aria-label="anchor" href="#plotting-a-global-summary-of-the-data"></a>
+</h3>
+<p>We can now plot a broad summary using the qvals from each comparison. For this, we’re just going to represent the data in a heatmap, using the great [ComplexHeatmap] (<a href="https://jokergoo.github.io/ComplexHeatmap-reference/book/" class="external-link uri">https://jokergoo.github.io/ComplexHeatmap-reference/book/</a>) package.</p>
 <div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">hm</span> <span class="op">&lt;-</span> <span class="va">all_data</span> <span class="op"><a href="https://igordot.github.io/msigdbr/reference/pipe.html">%&gt;%</a></span>
-  <span class="fu"><a href="https://rdrr.io/pkg/ComplexHeatmap/man/Heatmap.html">Heatmap</a></span><span class="op">(</span>name <span class="op">=</span> <span class="st">"Qval"</span>,
+<code class="sourceCode R"><span class="va">hm</span> <span class="op">&lt;-</span> <span class="va">all_data</span> <span class="op"><a href="https://igordot.github.io/msigdbr/reference/pipe.html" class="external-link">%&gt;%</a></span>
+  <span class="fu"><a href="https://rdrr.io/pkg/ComplexHeatmap/man/Heatmap.html" class="external-link">Heatmap</a></span><span class="op">(</span>name <span class="op">=</span> <span class="st">"Qval"</span>,
           show_row_names <span class="op">=</span> <span class="cn">F</span>, 
           top_annotation <span class="op">=</span> <span class="va">col_an</span>,
           border <span class="op">=</span> <span class="cn">T</span>,
@@ -282,56 +278,56 @@
           show_column_dend <span class="op">=</span> <span class="cn">F</span>,
           show_column_names <span class="op">=</span> <span class="cn">F</span><span class="op">)</span>
 
-<span class="va">ht</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/ComplexHeatmap/man/draw-dispatch.html">draw</a></span><span class="op">(</span><span class="va">hm</span><span class="op">)</span></code></pre></div>
-<p><img src="../man/figures/tissue_heatmap.png" style="width:60.0%"></p>
+<span class="va">ht</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/ComplexHeatmap/man/draw-dispatch.html" class="external-link">draw</a></span><span class="op">(</span><span class="va">hm</span><span class="op">)</span></code></pre></div>
+<p><img src="../reference/figures/tissue_heatmap.png" style="width:60.0%"></p>
 </div>
-<div id="finding-something-a-bit-more-specific" class="section level3">
-<h3 class="hasAnchor">
-<a href="#finding-something-a-bit-more-specific" class="anchor"></a>Finding something a bit more specific</h3>
+<div class="section level3">
+<h3 id="finding-something-a-bit-more-specific">Finding something a bit more specific<a class="anchor" aria-label="anchor" href="#finding-something-a-bit-more-specific"></a>
+</h3>
 <p>You obviously now want to use this data to find something a bit more biologically relevant. So in our paper, we had a look to see if any pathway was tissue specific. To do this, we calculated the most variable pathways across comparisons, and plotting the variance against the pathway (pathway names added later).</p>
 <div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/base/apply.html">apply</a></span><span class="op">(</span><span class="va">all_data</span>, <span class="fl">1</span>, <span class="va">var</span><span class="op">)</span> <span class="op"><a href="https://igordot.github.io/msigdbr/reference/pipe.html">%&gt;%</a></span>
-  <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="https://igordot.github.io/msigdbr/reference/pipe.html">%&gt;%</a></span> 
-  <span class="fu"><a href="https://magrittr.tidyverse.org/reference/aliases.html">set_colnames</a></span><span class="op">(</span><span class="st">"variation"</span><span class="op">)</span> <span class="op"><a href="https://igordot.github.io/msigdbr/reference/pipe.html">%&gt;%</a></span>
-  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/arrange.html">arrange</a></span><span class="op">(</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/desc.html">desc</a></span><span class="op">(</span><span class="va">variation</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://igordot.github.io/msigdbr/reference/pipe.html">%&gt;%</a></span> 
-  <span class="fu"><a href="https://tibble.tidyverse.org/reference/rownames.html">rownames_to_column</a></span><span class="op">(</span><span class="st">"pathway"</span><span class="op">)</span> <span class="op"><a href="https://igordot.github.io/msigdbr/reference/pipe.html">%&gt;%</a></span>
-  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/reorder.factor.html">reorder</a></span><span class="op">(</span><span class="va">pathway</span>, <span class="va">variation</span><span class="op">)</span>, <span class="va">variation</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span>
-  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_point.html">geom_point</a></span><span class="op">(</span>shape <span class="op">=</span> <span class="fl">21</span>, cex <span class="op">=</span> <span class="fl">3</span>, fill <span class="op">=</span> <span class="st">"royalblue2"</span>, color <span class="op">=</span> <span class="st">'black'</span>, stroke <span class="op">=</span> <span class="fl">0.2</span><span class="op">)</span> <span class="op">+</span>
-  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_discrete.html">scale_x_discrete</a></span><span class="op">(</span>expand <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">0.04</span>, <span class="fl">0.04</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span>
-  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html">labs</a></span><span class="op">(</span>x <span class="op">=</span> <span class="st">"Pathway"</span>, y <span class="op">=</span> <span class="st">"Variance"</span><span class="op">)</span> <span class="op">+</span>
-  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/theme.html">theme</a></span><span class="op">(</span>axis.text.x <span class="op">=</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/element.html">element_blank</a></span><span class="op">(</span><span class="op">)</span>,
-        axis.ticks.x <span class="op">=</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/element.html">element_blank</a></span><span class="op">(</span><span class="op">)</span>,
-        panel.background <span class="op">=</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/element.html">element_blank</a></span><span class="op">(</span><span class="op">)</span>,
-        panel.border <span class="op">=</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/element.html">element_rect</a></span><span class="op">(</span>fill <span class="op">=</span> <span class="cn">NA</span><span class="op">)</span><span class="op">)</span></code></pre></div>
-<p><img src="../man/figures/tissue_variance.png" style="width:30.0%"></p>
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/base/apply.html" class="external-link">apply</a></span><span class="op">(</span><span class="va">all_data</span>, <span class="fl">1</span>, <span class="va">var</span><span class="op">)</span> <span class="op"><a href="https://igordot.github.io/msigdbr/reference/pipe.html" class="external-link">%&gt;%</a></span>
+  <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html" class="external-link">data.frame</a></span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="https://igordot.github.io/msigdbr/reference/pipe.html" class="external-link">%&gt;%</a></span> 
+  <span class="fu"><a href="https://magrittr.tidyverse.org/reference/aliases.html" class="external-link">set_colnames</a></span><span class="op">(</span><span class="st">"variation"</span><span class="op">)</span> <span class="op"><a href="https://igordot.github.io/msigdbr/reference/pipe.html" class="external-link">%&gt;%</a></span>
+  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/arrange.html" class="external-link">arrange</a></span><span class="op">(</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/desc.html" class="external-link">desc</a></span><span class="op">(</span><span class="va">variation</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://igordot.github.io/msigdbr/reference/pipe.html" class="external-link">%&gt;%</a></span> 
+  <span class="fu"><a href="https://tibble.tidyverse.org/reference/rownames.html" class="external-link">rownames_to_column</a></span><span class="op">(</span><span class="st">"pathway"</span><span class="op">)</span> <span class="op"><a href="https://igordot.github.io/msigdbr/reference/pipe.html" class="external-link">%&gt;%</a></span>
+  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html" class="external-link">ggplot</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html" class="external-link">aes</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/reorder.factor.html" class="external-link">reorder</a></span><span class="op">(</span><span class="va">pathway</span>, <span class="va">variation</span><span class="op">)</span>, <span class="va">variation</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span>
+  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_point.html" class="external-link">geom_point</a></span><span class="op">(</span>shape <span class="op">=</span> <span class="fl">21</span>, cex <span class="op">=</span> <span class="fl">3</span>, fill <span class="op">=</span> <span class="st">"royalblue2"</span>, color <span class="op">=</span> <span class="st">'black'</span>, stroke <span class="op">=</span> <span class="fl">0.2</span><span class="op">)</span> <span class="op">+</span>
+  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_discrete.html" class="external-link">scale_x_discrete</a></span><span class="op">(</span>expand <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">0.04</span>, <span class="fl">0.04</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span>
+  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html" class="external-link">labs</a></span><span class="op">(</span>x <span class="op">=</span> <span class="st">"Pathway"</span>, y <span class="op">=</span> <span class="st">"Variance"</span><span class="op">)</span> <span class="op">+</span>
+  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/theme.html" class="external-link">theme</a></span><span class="op">(</span>axis.text.x <span class="op">=</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/element.html" class="external-link">element_blank</a></span><span class="op">(</span><span class="op">)</span>,
+        axis.ticks.x <span class="op">=</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/element.html" class="external-link">element_blank</a></span><span class="op">(</span><span class="op">)</span>,
+        panel.background <span class="op">=</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/element.html" class="external-link">element_blank</a></span><span class="op">(</span><span class="op">)</span>,
+        panel.border <span class="op">=</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/element.html" class="external-link">element_rect</a></span><span class="op">(</span>fill <span class="op">=</span> <span class="cn">NA</span><span class="op">)</span><span class="op">)</span></code></pre></div>
+<p><img src="../reference/figures/tissue_variance.png" style="width:30.0%"></p>
 </div>
-<div id="highlighting-genes-from-the-antimicrobial-pathway" class="section level3">
-<h3 class="hasAnchor">
-<a href="#highlighting-genes-from-the-antimicrobial-pathway" class="anchor"></a>Highlighting genes from the antimicrobial pathway</h3>
+<div class="section level3">
+<h3 id="highlighting-genes-from-the-antimicrobial-pathway">Highlighting genes from the antimicrobial pathway<a class="anchor" aria-label="anchor" href="#highlighting-genes-from-the-antimicrobial-pathway"></a>
+</h3>
 <p>And after going back to the pathway gene expression, we can see that a large effect of this pathway signature was driven by expression of alpha defensin proteins, exclusively in T cells from the bone marrow. In <a href="">our paper</a> we followed this up and showed it was true at the protein level, highlighting the utility of doing a systems level pathway analysis, and the relative ease of doing it with SCPA.</p>
 <div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">tissue_data</span><span class="op">$</span><span class="va">neat</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/case_when.html">case_when</a></span><span class="op">(</span><span class="va">tissue_data</span><span class="op">$</span><span class="va">tissue</span> <span class="op">==</span> <span class="st">"bl"</span> <span class="op">~</span> <span class="st">"Blood"</span>,
+<code class="sourceCode R"><span class="va">tissue_data</span><span class="op">$</span><span class="va">neat</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/case_when.html" class="external-link">case_when</a></span><span class="op">(</span><span class="va">tissue_data</span><span class="op">$</span><span class="va">tissue</span> <span class="op">==</span> <span class="st">"bl"</span> <span class="op">~</span> <span class="st">"Blood"</span>,
                               <span class="va">tissue_data</span><span class="op">$</span><span class="va">tissue</span> <span class="op">==</span> <span class="st">"bm"</span> <span class="op">~</span> <span class="st">"BM"</span>,
                               <span class="va">tissue_data</span><span class="op">$</span><span class="va">tissue</span> <span class="op">==</span> <span class="st">"lung"</span> <span class="op">~</span> <span class="st">"Lung"</span>,
                               <span class="va">tissue_data</span><span class="op">$</span><span class="va">tissue</span> <span class="op">==</span> <span class="st">"ln"</span> <span class="op">~</span> <span class="st">"LN"</span><span class="op">)</span>
 
-<span class="va">plots</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://satijalab.org/seurat/reference/VlnPlot.html">VlnPlot</a></span><span class="op">(</span><span class="va">df</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"DEFA1"</span>, <span class="st">"DEFA3"</span><span class="op">)</span>, pt.size <span class="op">=</span> <span class="fl">0</span>, group.by <span class="op">=</span> <span class="st">"neat"</span>, ncol <span class="op">=</span> <span class="fl">1</span>, combine <span class="op">=</span> <span class="cn">F</span><span class="op">)</span>
+<span class="va">plots</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://satijalab.org/seurat/reference/VlnPlot.html" class="external-link">VlnPlot</a></span><span class="op">(</span><span class="va">df</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"DEFA1"</span>, <span class="st">"DEFA3"</span><span class="op">)</span>, pt.size <span class="op">=</span> <span class="fl">0</span>, group.by <span class="op">=</span> <span class="st">"neat"</span>, ncol <span class="op">=</span> <span class="fl">1</span>, combine <span class="op">=</span> <span class="cn">F</span><span class="op">)</span>
 
-<span class="va">p1</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://satijalab.org/seurat/reference/VlnPlot.html">VlnPlot</a></span><span class="op">(</span><span class="va">df</span>, <span class="st">"DEFA1"</span>, pt.size <span class="op">=</span> <span class="fl">0</span>, group.by <span class="op">=</span> <span class="st">"neat"</span>, ncol <span class="op">=</span> <span class="fl">1</span><span class="op">)</span> <span class="op">+</span>
-  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/theme.html">theme</a></span><span class="op">(</span>axis.text.x <span class="op">=</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/element.html">element_blank</a></span><span class="op">(</span><span class="op">)</span>,
-        axis.title.x <span class="op">=</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/element.html">element_blank</a></span><span class="op">(</span><span class="op">)</span>,
-        plot.title <span class="op">=</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/element.html">element_blank</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span> 
-  <span class="fu"><a href="https://satijalab.org/seurat/reference/SeuratTheme.html">NoLegend</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span>
-  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html">ylab</a></span><span class="op">(</span><span class="st">"Log1p"</span><span class="op">)</span>
+<span class="va">p1</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://satijalab.org/seurat/reference/VlnPlot.html" class="external-link">VlnPlot</a></span><span class="op">(</span><span class="va">df</span>, <span class="st">"DEFA1"</span>, pt.size <span class="op">=</span> <span class="fl">0</span>, group.by <span class="op">=</span> <span class="st">"neat"</span>, ncol <span class="op">=</span> <span class="fl">1</span><span class="op">)</span> <span class="op">+</span>
+  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/theme.html" class="external-link">theme</a></span><span class="op">(</span>axis.text.x <span class="op">=</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/element.html" class="external-link">element_blank</a></span><span class="op">(</span><span class="op">)</span>,
+        axis.title.x <span class="op">=</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/element.html" class="external-link">element_blank</a></span><span class="op">(</span><span class="op">)</span>,
+        plot.title <span class="op">=</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/element.html" class="external-link">element_blank</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span> 
+  <span class="fu"><a href="https://satijalab.org/seurat/reference/SeuratTheme.html" class="external-link">NoLegend</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span>
+  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html" class="external-link">ylab</a></span><span class="op">(</span><span class="st">"Log1p"</span><span class="op">)</span>
 
-<span class="va">p2</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://satijalab.org/seurat/reference/VlnPlot.html">VlnPlot</a></span><span class="op">(</span><span class="va">df</span>, <span class="st">"DEFA3"</span>, pt.size <span class="op">=</span> <span class="fl">0</span>, group.by <span class="op">=</span> <span class="st">"neat"</span>, ncol <span class="op">=</span> <span class="fl">1</span><span class="op">)</span> <span class="op">+</span>
-  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/theme.html">theme</a></span><span class="op">(</span>axis.title.x <span class="op">=</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/element.html">element_blank</a></span><span class="op">(</span><span class="op">)</span>,
-        plot.title <span class="op">=</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/element.html">element_blank</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span> 
-  <span class="fu"><a href="https://satijalab.org/seurat/reference/SeuratTheme.html">NoLegend</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span>
-  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html">ylab</a></span><span class="op">(</span><span class="st">"Log1p"</span><span class="op">)</span>
+<span class="va">p2</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://satijalab.org/seurat/reference/VlnPlot.html" class="external-link">VlnPlot</a></span><span class="op">(</span><span class="va">df</span>, <span class="st">"DEFA3"</span>, pt.size <span class="op">=</span> <span class="fl">0</span>, group.by <span class="op">=</span> <span class="st">"neat"</span>, ncol <span class="op">=</span> <span class="fl">1</span><span class="op">)</span> <span class="op">+</span>
+  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/theme.html" class="external-link">theme</a></span><span class="op">(</span>axis.title.x <span class="op">=</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/element.html" class="external-link">element_blank</a></span><span class="op">(</span><span class="op">)</span>,
+        plot.title <span class="op">=</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/element.html" class="external-link">element_blank</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span> 
+  <span class="fu"><a href="https://satijalab.org/seurat/reference/SeuratTheme.html" class="external-link">NoLegend</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span>
+  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html" class="external-link">ylab</a></span><span class="op">(</span><span class="st">"Log1p"</span><span class="op">)</span>
 
-<span class="fu">patchwork</span><span class="fu">::</span><span class="fu"><a href="https://patchwork.data-imaginist.com/reference/wrap_plots.html">wrap_plots</a></span><span class="op">(</span><span class="va">p1</span>, <span class="va">p2</span>, ncol <span class="op">=</span> <span class="fl">1</span><span class="op">)</span></code></pre></div>
-<p><img src="../man/figures/defa_expression.png" style="width:40.0%"></p>
+<span class="fu">patchwork</span><span class="fu">::</span><span class="fu"><a href="https://patchwork.data-imaginist.com/reference/wrap_plots.html" class="external-link">wrap_plots</a></span><span class="op">(</span><span class="va">p1</span>, <span class="va">p2</span>, ncol <span class="op">=</span> <span class="fl">1</span><span class="op">)</span></code></pre></div>
+<p><img src="../reference/figures/defa_expression.png" style="width:40.0%"></p>
 </div>
   </div>
 
@@ -344,11 +340,13 @@
 
 
       <footer><div class="copyright">
-  <p>Developed by Jack Bibby.</p>
+  <p></p>
+<p>Developed by Jack Bibby.</p>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
+  <p></p>
+<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.1.</p>
 </div>
 
       </footer>
@@ -356,6 +354,8 @@
 
   
 
+
+  
 
   </body>
 </html>

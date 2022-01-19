@@ -26,6 +26,8 @@
 <![endif]-->
 </head>
 <body data-spy="scroll" data-target="#toc">
+    
+
     <div class="container template-article">
       <header><div class="navbar navbar-default navbar-fixed-top" role="navigation">
   <div class="container">
@@ -38,18 +40,12 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">Single Cell Pathway Analysis (SCPA)</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.0.0.9000</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.0.0.9000</span>
       </span>
     </div>
 
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
-<li>
-  <a href="../index.html">
-    <span class="fas fa-home fa-lg"></span>
-     
-  </a>
-</li>
 <li class="dropdown">
   <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
     Tutorials
@@ -86,7 +82,7 @@
       </ul>
 <ul class="nav navbar-nav navbar-right">
 <li>
-  <a href="https://github.com/jackbibby1/SCPA/">
+  <a href="https://github.com/jackbibby1/SCPA/" class="external-link">
     <span class="fab fa-github fa-lg"></span>
      
   </a>
@@ -101,81 +97,81 @@
 
       
 
-      </header><script src="pseudotime_files/header-attrs-2.11/header-attrs.js"></script><div class="row">
+      </header><div class="row">
   <div class="col-md-9 contents">
     <div class="page-header toc-ignore">
       <h1 data-toc-skip>Comparing pathways over pseudotime</h1>
             
       
-      <small class="dont-index">Source: <a href="https://github.com/jackbibby1/SCPA/blob/master/vignettes/pseudotime.Rmd"><code>vignettes/pseudotime.Rmd</code></a></small>
+      <small class="dont-index">Source: <a href="https://github.com/jackbibby1/SCPA/blob/HEAD/vignettes/pseudotime.Rmd" class="external-link"><code>vignettes/pseudotime.Rmd</code></a></small>
       <div class="hidden name"><code>pseudotime.Rmd</code></div>
 
     </div>
 
     
     
-<div id="comparing-pathways-across-pseudotime-with-scpa" class="section level2">
-<h2 class="hasAnchor">
-<a href="#comparing-pathways-across-pseudotime-with-scpa" class="anchor"></a>Comparing pathways across pseudotime with SCPA</h2>
+<div class="section level2">
+<h2 id="comparing-pathways-across-pseudotime-with-scpa">Comparing pathways across pseudotime with SCPA<a class="anchor" aria-label="anchor" href="#comparing-pathways-across-pseudotime-with-scpa"></a>
+</h2>
 <p>Here we’re going to look at tracking gene set changes across a pseudotime trajectory. To do this, we’ll replicate some data from our <a href="link">recent paper</a> where we characterised the transcriptional reprogramming of metabolic pathways after activation.</p>
 <p>Let’s load in a few packages to start</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/jackbibby1/SCPA/">SCPA</a></span><span class="op">)</span>
-<span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://satijalab.org/seurat">Seurat</a></span><span class="op">)</span>
-<span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/dynverse/dyno">dyno</a></span><span class="op">)</span>
-<span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://tidyverse.tidyverse.org">tidyverse</a></span><span class="op">)</span>
-<span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://magrittr.tidyverse.org">magrittr</a></span><span class="op">)</span>
-<span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/jokergoo/ComplexHeatmap">ComplexHeatmap</a></span><span class="op">)</span>
-<span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/jokergoo/circlize">circlize</a></span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/jackbibby1/SCPA/" class="external-link">SCPA</a></span><span class="op">)</span>
+<span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://satijalab.org/seurat" class="external-link">Seurat</a></span><span class="op">)</span>
+<span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/dynverse/dyno" class="external-link">dyno</a></span><span class="op">)</span>
+<span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://tidyverse.tidyverse.org" class="external-link">tidyverse</a></span><span class="op">)</span>
+<span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://magrittr.tidyverse.org" class="external-link">magrittr</a></span><span class="op">)</span>
+<span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/jokergoo/ComplexHeatmap" class="external-link">ComplexHeatmap</a></span><span class="op">)</span>
+<span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/jokergoo/circlize" class="external-link">circlize</a></span><span class="op">)</span></code></pre></div>
 <p>And load in our data. This is taken from our naive CD4<sup>+</sup> T cell dataset that you can access <a href="">here</a></p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/base/load.html">load</a></span><span class="op">(</span><span class="st">"naive_cd4.RData"</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/base/load.html" class="external-link">load</a></span><span class="op">(</span><span class="st">"naive_cd4.RData"</span><span class="op">)</span></code></pre></div>
 <p>We can see that the populations include both naive/effector T cells, and Tregs</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="https://satijalab.org/seurat/reference/DimPlot.html">DimPlot</a></span><span class="op">(</span><span class="va">naive_cd4</span>, split.by <span class="op">=</span> <span class="st">"Hour"</span><span class="op">)</span></code></pre></div>
-<p><img src="../man/figures/naive_cd4_umap.png" style="width:100.0%"></p>
+<code class="sourceCode R"><span class="fu"><a href="https://satijalab.org/seurat/reference/DimPlot.html" class="external-link">DimPlot</a></span><span class="op">(</span><span class="va">naive_cd4</span>, split.by <span class="op">=</span> <span class="st">"Hour"</span><span class="op">)</span></code></pre></div>
+<p><img src="../reference/figures/naive_cd4_umap.png" style="width:100.0%"></p>
 <p>We’ll get rid of the Tregs because we’re just interested in naive T cell activation in the non Treg populations</p>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">naive_cd4</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/subset.html">subset</a></span><span class="op">(</span><span class="va">naive_cd4</span>, idents <span class="op">=</span> <span class="st">"Treg"</span>, invert <span class="op">=</span> <span class="cn">T</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span class="va">naive_cd4</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/subset.html" class="external-link">subset</a></span><span class="op">(</span><span class="va">naive_cd4</span>, idents <span class="op">=</span> <span class="st">"Treg"</span>, invert <span class="op">=</span> <span class="cn">T</span><span class="op">)</span></code></pre></div>
 <p>We’ll then take the top 1000 most variable genes to model a trajectory</p>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">df</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/matrix.html">as.matrix</a></span><span class="op">(</span><span class="va">naive_cd4</span><span class="op">[[</span><span class="st">"RNA"</span><span class="op">]</span><span class="op">]</span><span class="op">@</span><span class="va">data</span><span class="op">)</span>
-<span class="va">var_genes</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/names.html">names</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/sort.html">sort</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/apply.html">apply</a></span><span class="op">(</span><span class="va">df</span>, <span class="fl">1</span>, <span class="va">var</span><span class="op">)</span>, decreasing <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span><span class="op">)</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">1000</span><span class="op">]</span></code></pre></div>
-<p>And then these steps are broadly taken from the <a href="https://dynverse.org/users/3-user-guide/">dyno vignettes</a>. We’re just taking expression data and adding it to the object so it’s able to be used in the <code>infer_trajectory</code> function.</p>
+<code class="sourceCode R"><span class="va">df</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/matrix.html" class="external-link">as.matrix</a></span><span class="op">(</span><span class="va">naive_cd4</span><span class="op">[[</span><span class="st">"RNA"</span><span class="op">]</span><span class="op">]</span><span class="op">@</span><span class="va">data</span><span class="op">)</span>
+<span class="va">var_genes</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/names.html" class="external-link">names</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/sort.html" class="external-link">sort</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/apply.html" class="external-link">apply</a></span><span class="op">(</span><span class="va">df</span>, <span class="fl">1</span>, <span class="va">var</span><span class="op">)</span>, decreasing <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span><span class="op">)</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">1000</span><span class="op">]</span></code></pre></div>
+<p>And then these steps are broadly taken from the <a href="https://dynverse.org/users/3-user-guide/" class="external-link">dyno vignettes</a>. We’re just taking expression data and adding it to the object so it’s able to be used in the <code>infer_trajectory</code> function.</p>
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">counts</span> <span class="op">&lt;-</span> <span class="fu">Matrix</span><span class="fu">::</span><span class="fu">t</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/methods/as.html">as</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/matrix.html">as.matrix</a></span><span class="op">(</span><span class="va">naive_cd4</span><span class="op">@</span><span class="va">assays</span><span class="op">$</span><span class="va">RNA</span><span class="op">@</span><span class="va">counts</span><span class="op">[</span><span class="va">var_genes</span>,<span class="op">]</span><span class="op">)</span>, <span class="st">'sparseMatrix'</span><span class="op">)</span><span class="op">)</span>
-<span class="va">expression</span> <span class="op">&lt;-</span> <span class="fu">Matrix</span><span class="fu">::</span><span class="fu">t</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/methods/as.html">as</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/matrix.html">as.matrix</a></span><span class="op">(</span><span class="va">naive_cd4</span><span class="op">@</span><span class="va">assays</span><span class="op">$</span><span class="va">RNA</span><span class="op">@</span><span class="va">data</span><span class="op">[</span><span class="va">var_genes</span>,<span class="op">]</span><span class="op">)</span>, <span class="st">'sparseMatrix'</span><span class="op">)</span><span class="op">)</span>
+<code class="sourceCode R"><span class="va">counts</span> <span class="op">&lt;-</span> <span class="fu">Matrix</span><span class="fu">::</span><span class="fu">t</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/methods/as.html" class="external-link">as</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/matrix.html" class="external-link">as.matrix</a></span><span class="op">(</span><span class="va">naive_cd4</span><span class="op">@</span><span class="va">assays</span><span class="op">$</span><span class="va">RNA</span><span class="op">@</span><span class="va">counts</span><span class="op">[</span><span class="va">var_genes</span>,<span class="op">]</span><span class="op">)</span>, <span class="st">'sparseMatrix'</span><span class="op">)</span><span class="op">)</span>
+<span class="va">expression</span> <span class="op">&lt;-</span> <span class="fu">Matrix</span><span class="fu">::</span><span class="fu">t</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/methods/as.html" class="external-link">as</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/matrix.html" class="external-link">as.matrix</a></span><span class="op">(</span><span class="va">naive_cd4</span><span class="op">@</span><span class="va">assays</span><span class="op">$</span><span class="va">RNA</span><span class="op">@</span><span class="va">data</span><span class="op">[</span><span class="va">var_genes</span>,<span class="op">]</span><span class="op">)</span>, <span class="st">'sparseMatrix'</span><span class="op">)</span><span class="op">)</span>
 
-<span class="va">dataset_n4</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/dynwrap/man/wrap_expression.html">wrap_expression</a></span><span class="op">(</span>expression <span class="op">=</span> <span class="va">expression</span>,
+<span class="va">dataset_n4</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/dynwrap/man/wrap_expression.html" class="external-link">wrap_expression</a></span><span class="op">(</span>expression <span class="op">=</span> <span class="va">expression</span>,
                               counts <span class="op">=</span> <span class="va">counts</span><span class="op">)</span></code></pre></div>
 <p>And finally running the <code>infer_trajectory</code> function using slingshot as the modeller</p>
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">model_n4</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/dynwrap/man/infer_trajectories.html">infer_trajectory</a></span><span class="op">(</span><span class="va">dataset_n4</span>, method <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/pkg/dynmethods/man/ti_slingshot.html">ti_slingshot</a></span><span class="op">(</span><span class="op">)</span>, verbose <span class="op">=</span> <span class="cn">T</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span class="va">model_n4</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/dynwrap/man/infer_trajectories.html" class="external-link">infer_trajectory</a></span><span class="op">(</span><span class="va">dataset_n4</span>, method <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/pkg/dynmethods/man/ti_slingshot.html" class="external-link">ti_slingshot</a></span><span class="op">(</span><span class="op">)</span>, verbose <span class="op">=</span> <span class="cn">T</span><span class="op">)</span></code></pre></div>
 <p>We can visualise the trajectory</p>
 <div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/pkg/dynplot/man/plot_dimred.html">plot_dimred</a></span><span class="op">(</span><span class="va">model_n4</span>, <span class="st">"pseudotime"</span>, pseudotime <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/pkg/dynwrap/man/add_pseudotime.html">calculate_pseudotime</a></span><span class="op">(</span><span class="va">model_n4</span><span class="op">)</span>, hex_cells <span class="op">=</span> <span class="cn">F</span>,
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/pkg/dynplot/man/plot_dimred.html" class="external-link">plot_dimred</a></span><span class="op">(</span><span class="va">model_n4</span>, <span class="st">"pseudotime"</span>, pseudotime <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/pkg/dynwrap/man/add_pseudotime.html" class="external-link">calculate_pseudotime</a></span><span class="op">(</span><span class="va">model_n4</span><span class="op">)</span>, hex_cells <span class="op">=</span> <span class="cn">F</span>,
             plot_trajectory <span class="op">=</span> <span class="cn">T</span>, size_cells <span class="op">=</span> <span class="fl">1</span>, alpha_cells <span class="op">=</span> <span class="fl">0.8</span><span class="op">)</span> <span class="op">+</span> 
-  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/theme.html">theme</a></span><span class="op">(</span>aspect.ratio <span class="op">=</span> <span class="fl">1</span><span class="op">)</span></code></pre></div>
-<p><img src="../man/figures/naive_cd4_pseudo.png" style="width:50.0%"></p>
+  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/theme.html" class="external-link">theme</a></span><span class="op">(</span>aspect.ratio <span class="op">=</span> <span class="fl">1</span><span class="op">)</span></code></pre></div>
+<p><img src="../reference/figures/naive_cd4_pseudo.png" style="width:50.0%"></p>
 <p>Once we have our trajectory calculated, we can generate distinct nodes of cells across the trajectory to use as an input for SCPA. To generate the nodes, we can use the <code>group_onto_nearest_milestones</code> function, which assigns each cell to a node based on it’s pseudotime value.</p>
 <p>We can then visualize the nodes that are calculated across the trajectory.</p>
 <div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/pkg/dynplot/man/plot_dimred.html">plot_dimred</a></span><span class="op">(</span><span class="va">model_n4</span>, grouping <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/pkg/dynwrap/man/group_from_trajectory.html">group_onto_nearest_milestones</a></span><span class="op">(</span><span class="va">model_n4</span><span class="op">)</span>, hex_cells <span class="op">=</span> <span class="cn">F</span>,
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/pkg/dynplot/man/plot_dimred.html" class="external-link">plot_dimred</a></span><span class="op">(</span><span class="va">model_n4</span>, grouping <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/pkg/dynwrap/man/group_from_trajectory.html" class="external-link">group_onto_nearest_milestones</a></span><span class="op">(</span><span class="va">model_n4</span><span class="op">)</span>, hex_cells <span class="op">=</span> <span class="cn">F</span>,
             plot_trajectory <span class="op">=</span> <span class="cn">T</span>, size_cells <span class="op">=</span> <span class="fl">1</span>, alpha_cells <span class="op">=</span> <span class="fl">0.8</span><span class="op">)</span> <span class="op">+</span> 
-  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/theme.html">theme</a></span><span class="op">(</span>aspect.ratio <span class="op">=</span> <span class="fl">1</span><span class="op">)</span></code></pre></div>
-<p><img src="../man/figures/naive_cd4_milestone.png" style="width:50.0%"></p>
+  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/theme.html" class="external-link">theme</a></span><span class="op">(</span>aspect.ratio <span class="op">=</span> <span class="fl">1</span><span class="op">)</span></code></pre></div>
+<p><img src="../reference/figures/naive_cd4_milestone.png" style="width:50.0%"></p>
 <p>And extract the cells based on this grouping</p>
 <div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">mile_group</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/pkg/dynwrap/man/group_from_trajectory.html">group_onto_nearest_milestones</a></span><span class="op">(</span><span class="va">model_n4</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span>
-  <span class="fu"><a href="https://magrittr.tidyverse.org/reference/aliases.html">set_colnames</a></span><span class="op">(</span><span class="st">"milestone"</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span>
-  <span class="fu"><a href="https://tibble.tidyverse.org/reference/rownames.html">rownames_to_column</a></span><span class="op">(</span><span class="st">"cell"</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span class="va">mile_group</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html" class="external-link">data.frame</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/pkg/dynwrap/man/group_from_trajectory.html" class="external-link">group_onto_nearest_milestones</a></span><span class="op">(</span><span class="va">model_n4</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span>
+  <span class="fu"><a href="https://magrittr.tidyverse.org/reference/aliases.html" class="external-link">set_colnames</a></span><span class="op">(</span><span class="st">"milestone"</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span>
+  <span class="fu"><a href="https://tibble.tidyverse.org/reference/rownames.html" class="external-link">rownames_to_column</a></span><span class="op">(</span><span class="st">"cell"</span><span class="op">)</span></code></pre></div>
 <p>Once we have the pseudotime groupings, we can add this information to the Seurat object.</p>
 <div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">naive_cd4</span><span class="op">$</span><span class="va">milestone</span> <span class="op">&lt;-</span> <span class="va">mile_group</span><span class="op">$</span><span class="va">milestone</span></code></pre></div>
 <p>We then need to extract expression matrices for all the cells across the distinct nodes, so we effectively have 4 populations across the trajectory. We can use these expression matrices to assess pathways across the 4 nodes.</p>
 <p>We can loop the <code>seurat_extract</code> function to get expression matrices for all cells in each population.</p>
 <div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">cd4_pseudo</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span><span class="op">)</span>
+<code class="sourceCode R"><span class="va">cd4_pseudo</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="op">)</span>
 <span class="kw">for</span> <span class="op">(</span><span class="va">i</span> <span class="kw">in</span> <span class="fl">1</span><span class="op">:</span><span class="fl">4</span><span class="op">)</span> <span class="op">{</span>
   <span class="va">cd4_pseudo</span><span class="op">[[</span><span class="va">i</span><span class="op">]</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/seurat_extract.html">seurat_extract</a></span><span class="op">(</span><span class="va">naive_cd4</span>, meta1 <span class="op">=</span> <span class="st">"milestone"</span>, value_meta1 <span class="op">=</span> <span class="va">i</span><span class="op">)</span>
 <span class="op">}</span></code></pre></div>
@@ -186,30 +182,30 @@
 <span class="va">cd4_metabolism</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/compare_pathways.html">compare_pathways</a></span><span class="op">(</span><span class="va">cd4_pseudo</span>, <span class="va">pathways</span><span class="op">)</span></code></pre></div>
 <p>All done. Let’s plot the data (some annotations have been added later to highlight pathways, but we can see the final heatmap from Fig4B in <a href="">our paper</a>)</p>
 <div class="sourceCode" id="cb14"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">cd4_metabolism</span> <span class="op">&lt;-</span> <span class="va">cd4_metabolism</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span>
-  <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span>
-  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span><span class="op">(</span><span class="va">Pathway</span>, <span class="va">qval</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span>
-  <span class="fu"><a href="https://tibble.tidyverse.org/reference/rownames.html">column_to_rownames</a></span><span class="op">(</span><span class="st">"Pathway"</span><span class="op">)</span>
+<code class="sourceCode R"><span class="va">cd4_metabolism</span> <span class="op">&lt;-</span> <span class="va">cd4_metabolism</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span>
+  <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html" class="external-link">data.frame</a></span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span>
+  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span><span class="op">(</span><span class="va">Pathway</span>, <span class="va">qval</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span>
+  <span class="fu"><a href="https://tibble.tidyverse.org/reference/rownames.html" class="external-link">column_to_rownames</a></span><span class="op">(</span><span class="st">"Pathway"</span><span class="op">)</span>
 
-<span class="va">col_hm</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/circlize/man/colorRamp2.html">colorRamp2</a></span><span class="op">(</span>colors <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"white"</span>, <span class="st">"red"</span><span class="op">)</span>, breaks <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fu"><a href="https://rdrr.io/r/base/Extremes.html">max</a></span><span class="op">(</span><span class="va">mstone_out</span><span class="op">)</span><span class="op">)</span><span class="op">)</span>
+<span class="va">col_hm</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/circlize/man/colorRamp2.html" class="external-link">colorRamp2</a></span><span class="op">(</span>colors <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"white"</span>, <span class="st">"red"</span><span class="op">)</span>, breaks <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fu"><a href="https://rdrr.io/r/base/Extremes.html" class="external-link">max</a></span><span class="op">(</span><span class="va">mstone_out</span><span class="op">)</span><span class="op">)</span><span class="op">)</span>
 
-<span class="fu"><a href="https://rdrr.io/pkg/ComplexHeatmap/man/Heatmap.html">Heatmap</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/t.html">t</a></span><span class="op">(</span><span class="va">cd4_metabolism</span><span class="op">)</span>,
+<span class="fu"><a href="https://rdrr.io/pkg/ComplexHeatmap/man/Heatmap.html" class="external-link">Heatmap</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/t.html" class="external-link">t</a></span><span class="op">(</span><span class="va">cd4_metabolism</span><span class="op">)</span>,
         name <span class="op">=</span> <span class="st">"Qvalue"</span>,
         col <span class="op">=</span> <span class="va">col_hm</span>,
         border <span class="op">=</span> <span class="cn">T</span>,
-        rect_gp <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/grid/gpar.html">gpar</a></span><span class="op">(</span>col <span class="op">=</span> <span class="st">"white"</span>, lwd <span class="op">=</span> <span class="fl">0.1</span><span class="op">)</span>,
-        heatmap_height <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/grid/unit.html">unit</a></span><span class="op">(</span><span class="fl">2</span>, <span class="st">"cm"</span><span class="op">)</span>,
+        rect_gp <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/grid/gpar.html" class="external-link">gpar</a></span><span class="op">(</span>col <span class="op">=</span> <span class="st">"white"</span>, lwd <span class="op">=</span> <span class="fl">0.1</span><span class="op">)</span>,
+        heatmap_height <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/grid/unit.html" class="external-link">unit</a></span><span class="op">(</span><span class="fl">2</span>, <span class="st">"cm"</span><span class="op">)</span>,
         show_column_dend <span class="op">=</span> <span class="cn">F</span>,
         show_row_names <span class="op">=</span> <span class="cn">F</span>,
         show_column_names <span class="op">=</span> <span class="cn">F</span><span class="op">)</span></code></pre></div>
-<p><img src="../man/figures/metabolic_heatmap.png" style="width:70.0%"></p>
+<p><img src="../reference/figures/metabolic_heatmap.png" style="width:70.0%"></p>
 <p>We can also extract a single pathway to highlight its rank in the analysis using the <code>plot_rank</code> function:</p>
 <div class="sourceCode" id="cb15"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">cd4_metabolism</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://tibble.tidyverse.org/reference/rownames.html">rownames_to_column</a></span><span class="op">(</span><span class="va">cd4_metabolism</span>, <span class="st">"Pathway"</span><span class="op">)</span>
+<code class="sourceCode R"><span class="va">cd4_metabolism</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://tibble.tidyverse.org/reference/rownames.html" class="external-link">rownames_to_column</a></span><span class="op">(</span><span class="va">cd4_metabolism</span>, <span class="st">"Pathway"</span><span class="op">)</span>
 <span class="fu"><a href="../reference/plot_rank.html">plot_rank</a></span><span class="op">(</span><span class="va">cd4_metabolism</span>, 
           <span class="st">"reactome_arachidonic"</span>, 
           label_size <span class="op">=</span> <span class="fl">2</span><span class="op">)</span></code></pre></div>
-<p><img src="../man/figures/aa_metab_rank.png" style="width:70.0%"></p>
+<p><img src="../reference/figures/aa_metab_rank.png" style="width:70.0%"></p>
 </div>
   </div>
 
@@ -224,11 +220,13 @@
 
 
       <footer><div class="copyright">
-  <p>Developed by Jack Bibby.</p>
+  <p></p>
+<p>Developed by Jack Bibby.</p>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
+  <p></p>
+<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.1.</p>
 </div>
 
       </footer>
@@ -236,6 +234,8 @@
 
   
 
+
+  
 
   </body>
 </html>

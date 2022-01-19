@@ -31,6 +31,8 @@
 <![endif]-->
 </head>
 <body data-spy="scroll" data-target="#toc">
+    
+
     <div class="container template-home">
       <header><div class="navbar navbar-default navbar-fixed-top" role="navigation">
   <div class="container">
@@ -43,18 +45,12 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="index.html">Single Cell Pathway Analysis (SCPA)</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.0.0.9000</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.0.0.9000</span>
       </span>
     </div>
 
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
-<li>
-  <a href="index.html">
-    <span class="fas fa-home fa-lg"></span>
-     
-  </a>
-</li>
 <li class="dropdown">
   <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
     Tutorials
@@ -91,7 +87,7 @@
       </ul>
 <ul class="nav navbar-nav navbar-right">
 <li>
-  <a href="https://github.com/jackbibby1/SCPA/">
+  <a href="https://github.com/jackbibby1/SCPA/" class="external-link">
     <span class="fab fa-github fa-lg"></span>
      
   </a>
@@ -108,78 +104,90 @@
 
       </header><div class="row">
   <div class="contents col-md-9">
-<div id="-single-cell-pathway-analysis-scpa" class="section level1">
-<div class="page-header"><h1 class="hasAnchor">
-<a href="#-single-cell-pathway-analysis-scpa" class="anchor"></a><img src="reference/figures/logo.png" align="center" style="padding-right:20px" height="70"> Single Cell Pathway Analysis (SCPA)</h1></div>
+<div class="section level1">
+<div class="page-header"><h1 id="single-cell-pathway-analysis-scpa">Single Cell Pathway Analysis (SCPA)<a class="anchor" aria-label="anchor" href="#single-cell-pathway-analysis-scpa"></a>
+</h1></div>
 <!-- badges: start -->
 <!-- badges: end -->
-<p><img src="reference/figures/scpa_outline.png" alt="SCPA outline"></p>
-<div id="about-scpa" class="section level2">
-<h2 class="hasAnchor">
-<a href="#about-scpa" class="anchor"></a>About SCPA</h2>
+<p><img src="reference/figures/scpa_outline.png"></p>
+<div class="section level2">
+<h2 id="about-scpa">About SCPA<a class="anchor" aria-label="anchor" href="#about-scpa"></a>
+</h2>
 <p>SCPA is a method for pathway analysis in single cell RNA-seq data. It’s based on a novel approach to pathway analysis that defines pathway activity as a change in multivariate distribution of a given pathway across conditions, rather than enrichment or over representation of genes. This approach allows for a number of benefits over current methods, including:</p>
-<ol>
+<ol style="list-style-type: decimal">
 <li><p>You will identify pathways that show enrichment in a given population AND also identify pathways with no overall enrichment but alterations in the multivariate distribution of that pathway. You essentially get the best of both worlds, as pathways with changes in multivariate distribution but no overall enrichment are still interestingly different pathways.</p></li>
 <li><p>You can compare multiple conditions simultaneously e.g. compare across 3 time points, or across multiple phases of a pseuodotime trajectory. This means you can assess pathway activity through multiple stimulation times, or across cell differentiation</p></li>
 </ol>
-<p>To see the stats behind SCPA, you can see our paper in JASA <a href="https://www.tandfonline.com/doi/full/10.1080/01621459.2020.1791131">here</a></p>
+<p>To see the stats behind SCPA, you can see our paper in JASA <a href="https://www.tandfonline.com/doi/full/10.1080/01621459.2020.1791131" class="external-link">here</a></p>
 <p>To see SCPA applied to a scRNA-seq dataset, you can see our paper on bioRxiv <a href="">here</a></p>
 </div>
-<div id="1-installation" class="section level2">
-<h2 class="hasAnchor">
-<a href="#1-installation" class="anchor"></a>1. Installation</h2>
-<p>You can install the development version of SCPA from <a href="https://github.com/">GitHub</a> with:</p>
+<div class="section level2">
+<h2 id="1-installation">1. Installation<a class="anchor" aria-label="anchor" href="#1-installation"></a>
+</h2>
+<p>You can install the development version of SCPA from <a href="https://github.com/" class="external-link">GitHub</a> with:</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># install.packages("devtools")</span>
-<span class="fu">devtools</span><span class="fu">::</span><span class="fu"><a href="https://devtools.r-lib.org//reference/remote-reexports.html">install_github</a></span><span class="op">(</span><span class="st">"jackbibby1/SCPA"</span><span class="op">)</span></code></pre></div>
+<span class="fu">devtools</span><span class="fu">::</span><span class="fu"><a href="https://devtools.r-lib.org/reference/remote-reexports.html" class="external-link">install_github</a></span><span class="op">(</span><span class="st">"jackbibby1/SCPA"</span><span class="op">)</span></code></pre></div>
 </div>
-<div id="2-tutorials" class="section level2">
-<h2 class="hasAnchor">
-<a href="#2-tutorials" class="anchor"></a>2. Tutorials</h2>
+<div class="section level2">
+<h2 id="2-tutorials">2. Tutorials<a class="anchor" aria-label="anchor" href="#2-tutorials"></a>
+</h2>
 <p>For tutorials on how to use SCPA, <a href="jackbibby1.github.io/SCPA">click this link</a></p>
 </div>
-<div id="3-issues" class="section level2">
-<h2 class="hasAnchor">
-<a href="#3-issues" class="anchor"></a>3. Issues</h2>
-<p>To report any issues or submit comments: <a href="https://github.com/jackbibby1/SCPA/issues" class="uri">https://github.com/jackbibby1/SCPA/issues</a></p>
+<div class="section level2">
+<h2 id="3-issues">3. Issues<a class="anchor" aria-label="anchor" href="#3-issues"></a>
+</h2>
+<p>To report any issues or submit comments: <a href="https://github.com/jackbibby1/SCPA/issues" class="external-link uri">https://github.com/jackbibby1/SCPA/issues</a></p>
 </div>
 </div>
   </div>
 
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <div class="links">
-<h2>Links</h2>
+<h2 data-toc-skip>Links</h2>
 <ul class="list-unstyled">
-<li>Browse source code at <br><a href="https://github.com/jackbibby1/SCPA/">https://​github.com/​jackbibby1/​SCPA/​</a>
-</li>
-<li>Report a bug at <br><a href="https://github.com/jackbibby1/SCPA/issues/">https://​github.com/​jackbibby1/​SCPA/​issues/​</a>
-</li>
+<li><a href="https://github.com/jackbibby1/SCPA/" class="external-link">Browse source code</a></li>
+<li><a href="https://github.com/jackbibby1/SCPA/issues/" class="external-link">Report a bug</a></li>
 </ul>
 </div>
+
 <div class="license">
-<h2>License</h2>
+<h2 data-toc-skip>License</h2>
 <ul class="list-unstyled">
 <li><a href="LICENSE.html">Full license</a></li>
 <li><small>GPL (&gt;= 3)</small></li>
 </ul>
 </div>
+
+
+<div class="citation">
+<h2 data-toc-skip>Citation</h2>
+<ul class="list-unstyled">
+<li><a href="authors.html#citation">Citing SCPA</a></li>
+</ul>
+</div>
+
 <div class="developers">
-<h2>Developers</h2>
+<h2 data-toc-skip>Developers</h2>
 <ul class="list-unstyled">
 <li>Jack Bibby <br><small class="roles"> Author, maintainer </small>  </li>
 </ul>
 </div>
+
+
 
   </div>
 </div>
 
 
       <footer><div class="copyright">
-  <p>Developed by Jack Bibby.</p>
+  <p></p>
+<p>Developed by Jack Bibby.</p>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
+  <p></p>
+<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.1.</p>
 </div>
 
       </footer>
@@ -187,6 +195,8 @@
 
   
 
+
+  
 
   </body>
 </html>

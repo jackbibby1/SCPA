@@ -26,6 +26,8 @@
 <![endif]-->
 </head>
 <body data-spy="scroll" data-target="#toc">
+    
+
     <div class="container template-article">
       <header><div class="navbar navbar-default navbar-fixed-top" role="navigation">
   <div class="container">
@@ -38,18 +40,12 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">Single Cell Pathway Analysis (SCPA)</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.0.0.9000</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.0.0.9000</span>
       </span>
     </div>
 
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
-<li>
-  <a href="../index.html">
-    <span class="fas fa-home fa-lg"></span>
-     
-  </a>
-</li>
 <li class="dropdown">
   <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
     Tutorials
@@ -86,7 +82,7 @@
       </ul>
 <ul class="nav navbar-nav navbar-right">
 <li>
-  <a href="https://github.com/jackbibby1/SCPA/">
+  <a href="https://github.com/jackbibby1/SCPA/" class="external-link">
     <span class="fab fa-github fa-lg"></span>
      
   </a>
@@ -101,13 +97,13 @@
 
       
 
-      </header><script src="disease_comparison_files/header-attrs-2.11/header-attrs.js"></script><div class="row">
+      </header><div class="row">
   <div class="col-md-9 contents">
     <div class="page-header toc-ignore">
       <h1 data-toc-skip>Systems level pathway analysis in disease</h1>
             
       
-      <small class="dont-index">Source: <a href="https://github.com/jackbibby1/SCPA/blob/master/vignettes/disease_comparison.Rmd"><code>vignettes/disease_comparison.Rmd</code></a></small>
+      <small class="dont-index">Source: <a href="https://github.com/jackbibby1/SCPA/blob/HEAD/vignettes/disease_comparison.Rmd" class="external-link"><code>vignettes/disease_comparison.Rmd</code></a></small>
       <div class="hidden name"><code>disease_comparison.Rmd</code></div>
 
     </div>
@@ -121,48 +117,48 @@
 <li>Shared and unique pathway perturbations across cell types</li>
 </ul>
 <p>Because SCPA can be easily applied in a systems level way, it allows for the identification of the most relevant pathways and cell types in any given disease.</p>
-<div id="loading-in-datapackages" class="section level2">
-<h2 class="hasAnchor">
-<a href="#loading-in-datapackages" class="anchor"></a>Loading in data/packages</h2>
+<div class="section level2">
+<h2 id="loading-in-datapackages">Loading in data/packages<a class="anchor" aria-label="anchor" href="#loading-in-datapackages"></a>
+</h2>
 <p>Let’s load in a few packages</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/jackbibby1/SCPA/">SCPA</a></span><span class="op">)</span>
-<span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://satijalab.org/seurat">Seurat</a></span><span class="op">)</span>
-<span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://tidyverse.tidyverse.org">tidyverse</a></span><span class="op">)</span>
-<span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/jokergoo/ComplexHeatmap">ComplexHeatmap</a></span><span class="op">)</span>
-<span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/jokergoo/circlize">circlize</a></span><span class="op">)</span></code></pre></div>
-<p>And load in a dataset from <a href="https://www.nature.com/articles/s41591-020-0944-y">Wilk, A…Blish, C</a> that creates a single cell atlas of peripheral blood immune cells in COVID-19 patients.</p>
+<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/jackbibby1/SCPA/" class="external-link">SCPA</a></span><span class="op">)</span>
+<span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://satijalab.org/seurat" class="external-link">Seurat</a></span><span class="op">)</span>
+<span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://tidyverse.tidyverse.org" class="external-link">tidyverse</a></span><span class="op">)</span>
+<span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/jokergoo/ComplexHeatmap" class="external-link">ComplexHeatmap</a></span><span class="op">)</span>
+<span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/jokergoo/circlize" class="external-link">circlize</a></span><span class="op">)</span></code></pre></div>
+<p>And load in a dataset from <a href="https://www.nature.com/articles/s41591-020-0944-y" class="external-link">Wilk, A…Blish, C</a> that creates a single cell atlas of peripheral blood immune cells in COVID-19 patients.</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">blood_atlas</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/readRDS.html">readRDS</a></span><span class="op">(</span><span class="st">"covid_blood_atlas.rds"</span><span class="op">)</span>
-<span class="fu"><a href="https://mojaveazure.github.io/seurat-object/reference/Idents.html">Idents</a></span><span class="op">(</span><span class="va">blood_atlas</span><span class="op">)</span> <span class="op">&lt;-</span> <span class="va">blood_atlas</span><span class="op">$</span><span class="va">cell.type</span></code></pre></div>
+<code class="sourceCode R"><span class="va">blood_atlas</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/readRDS.html" class="external-link">readRDS</a></span><span class="op">(</span><span class="st">"covid_blood_atlas.rds"</span><span class="op">)</span>
+<span class="fu"><a href="https://mojaveazure.github.io/seurat-object/reference/Idents.html" class="external-link">Idents</a></span><span class="op">(</span><span class="va">blood_atlas</span><span class="op">)</span> <span class="op">&lt;-</span> <span class="va">blood_atlas</span><span class="op">$</span><span class="va">cell.type</span></code></pre></div>
 <p>Let’s have a quick look at the data, and get rid of any cell populations that aren’t represented in both healthy and disease datasets.</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="https://satijalab.org/seurat/reference/DimPlot.html">DimPlot</a></span><span class="op">(</span><span class="va">blood_atlas</span>, label <span class="op">=</span> <span class="cn">T</span>, group.by <span class="op">=</span> <span class="st">"cell.type.fine"</span>, split.by <span class="op">=</span> <span class="st">"Status"</span><span class="op">)</span> <span class="op">+</span>
-  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/theme.html">theme</a></span><span class="op">(</span>aspect.ratio <span class="op">=</span> <span class="fl">1</span><span class="op">)</span></code></pre></div>
-<p><img src="../man/figures/covid_atlas.png" style="width:100.0%"></p>
+<code class="sourceCode R"><span class="fu"><a href="https://satijalab.org/seurat/reference/DimPlot.html" class="external-link">DimPlot</a></span><span class="op">(</span><span class="va">blood_atlas</span>, label <span class="op">=</span> <span class="cn">T</span>, group.by <span class="op">=</span> <span class="st">"cell.type.fine"</span>, split.by <span class="op">=</span> <span class="st">"Status"</span><span class="op">)</span> <span class="op">+</span>
+  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/theme.html" class="external-link">theme</a></span><span class="op">(</span>aspect.ratio <span class="op">=</span> <span class="fl">1</span><span class="op">)</span></code></pre></div>
+<p><img src="../reference/figures/covid_atlas.png" style="width:100.0%"></p>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">idents</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"Class-switched B"</span>, <span class="st">"IgG PB"</span>, <span class="st">"IgA PB"</span>, <span class="st">"CD14 Monocyte"</span>, <span class="st">"CD8m T"</span>,
+<code class="sourceCode R"><span class="va">idents</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"Class-switched B"</span>, <span class="st">"IgG PB"</span>, <span class="st">"IgA PB"</span>, <span class="st">"CD14 Monocyte"</span>, <span class="st">"CD8m T"</span>,
             <span class="st">"CD4m T"</span>, <span class="st">"CD4n T"</span>, <span class="st">"B"</span>, <span class="st">"NK"</span>, <span class="st">"Neutrophil"</span>, <span class="st">"CD16 Monocyte"</span>, <span class="st">"gd T"</span>,
             <span class="st">"pDC"</span>, <span class="st">"SC &amp; Eosinophil"</span>, <span class="st">"DC"</span><span class="op">)</span>
-<span class="va">blish_sub</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/subset.html">subset</a></span><span class="op">(</span><span class="va">blish</span>, idents <span class="op">=</span> <span class="va">idents</span><span class="op">)</span></code></pre></div>
+<span class="va">blish_sub</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/subset.html" class="external-link">subset</a></span><span class="op">(</span><span class="va">blish</span>, idents <span class="op">=</span> <span class="va">idents</span><span class="op">)</span></code></pre></div>
 </div>
-<div id="preparing-data-for-comparison" class="section level2">
-<h2 class="hasAnchor">
-<a href="#preparing-data-for-comparison" class="anchor"></a>Preparing data for comparison</h2>
+<div class="section level2">
+<h2 id="preparing-data-for-comparison">Preparing data for comparison<a class="anchor" aria-label="anchor" href="#preparing-data-for-comparison"></a>
+</h2>
 <p>Now we can pull all of the pathways that we want to compare. For this, we’re using a csv file that contains a combination of canonical pathways, gene ontology pathways, and regulatory pathways from [MSigDB], and you can find this file <a href="">here</a>.</p>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">pathways</span> <span class="op">&lt;-</span> <span class="st">"h_k_r_go_pid_reg_wik"</span></code></pre></div>
 <p>And let’s create an object with our cell types that we want to compare, and split the object by disease status.</p>
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">cell_types</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/unique.html">unique</a></span><span class="op">(</span><span class="va">blood_atlas</span><span class="op">$</span><span class="va">cell.type.fine</span><span class="op">)</span>
-<span class="va">blood_atlas</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://satijalab.org/seurat/reference/SplitObject.html">SplitObject</a></span><span class="op">(</span><span class="va">blood_atlas</span>, split.by <span class="op">=</span> <span class="st">"Status"</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span class="va">cell_types</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/unique.html" class="external-link">unique</a></span><span class="op">(</span><span class="va">blood_atlas</span><span class="op">$</span><span class="va">cell.type.fine</span><span class="op">)</span>
+<span class="va">blood_atlas</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://satijalab.org/seurat/reference/SplitObject.html" class="external-link">SplitObject</a></span><span class="op">(</span><span class="va">blood_atlas</span>, split.by <span class="op">=</span> <span class="st">"Status"</span><span class="op">)</span></code></pre></div>
 </div>
-<div id="scpa-comparison" class="section level2">
-<h2 class="hasAnchor">
-<a href="#scpa-comparison" class="anchor"></a>SCPA comparison</h2>
+<div class="section level2">
+<h2 id="scpa-comparison">SCPA comparison<a class="anchor" aria-label="anchor" href="#scpa-comparison"></a>
+</h2>
 <p>Now we’ve formatted everything properly, we just need to loop SCPA over all the cell types in the dataset. Here we’re using <code>seurat_extract</code> to pull expression matrices from each cell type, and then using these as the input to <code>compare_pathways</code>. We’re using a load of pathways and cell types here, so this may take a while. We’re also just going to keep the Pathway and qval variables from each comparison, and add the cell type to the column names, so we can keep track of the qvals for each cell type.</p>
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">scpa_out</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span><span class="op">)</span>
+<code class="sourceCode R"><span class="va">scpa_out</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="op">)</span>
 <span class="kw">for</span> <span class="op">(</span><span class="va">i</span> <span class="kw">in</span> <span class="va">cell_types</span><span class="op">)</span> <span class="op">{</span>
   
   <span class="va">healthy</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/seurat_extract.html">seurat_extract</a></span><span class="op">(</span><span class="va">blood_atlas</span><span class="op">$</span><span class="va">Healthy</span>, 
@@ -171,57 +167,57 @@
   <span class="va">covid</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/seurat_extract.html">seurat_extract</a></span><span class="op">(</span><span class="va">blood_atlas</span><span class="op">$</span><span class="va">COVID</span>, 
                           meta1 <span class="op">=</span> <span class="st">"cell.type.fine"</span>, value_meta1 <span class="op">=</span> <span class="va">i</span><span class="op">)</span>
   
-  <span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste</a></span><span class="op">(</span><span class="st">"comparing"</span>, <span class="va">i</span><span class="op">)</span><span class="op">)</span>
-  <span class="va">scpa_out</span><span class="op">[[</span><span class="va">i</span><span class="op">]</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/compare_pathways.html">compare_pathways</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span><span class="va">healthy</span>, <span class="va">covid</span><span class="op">)</span>, <span class="va">pathways</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span>
-    <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span><span class="op">(</span><span class="va">Pathway</span>, <span class="va">qval</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span>
-    <span class="fu">set_colnames</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"Pathway"</span>, <span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste</a></span><span class="op">(</span><span class="va">i</span>, <span class="st">"qval"</span>, sep <span class="op">=</span> <span class="st">"_"</span><span class="op">)</span><span class="op">)</span><span class="op">)</span>
+  <span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste</a></span><span class="op">(</span><span class="st">"comparing"</span>, <span class="va">i</span><span class="op">)</span><span class="op">)</span>
+  <span class="va">scpa_out</span><span class="op">[[</span><span class="va">i</span><span class="op">]</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/compare_pathways.html">compare_pathways</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="va">healthy</span>, <span class="va">covid</span><span class="op">)</span>, <span class="va">pathways</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span>
+    <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span><span class="op">(</span><span class="va">Pathway</span>, <span class="va">qval</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span>
+    <span class="fu">set_colnames</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"Pathway"</span>, <span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste</a></span><span class="op">(</span><span class="va">i</span>, <span class="st">"qval"</span>, sep <span class="op">=</span> <span class="st">"_"</span><span class="op">)</span><span class="op">)</span><span class="op">)</span>
   
 <span class="op">}</span></code></pre></div>
 </div>
-<div id="plotting-the-output" class="section level2">
-<h2 class="hasAnchor">
-<a href="#plotting-the-output" class="anchor"></a>Plotting the output</h2>
+<div class="section level2">
+<h2 id="plotting-the-output">Plotting the output<a class="anchor" aria-label="anchor" href="#plotting-the-output"></a>
+</h2>
 <details><summary><strong>Click here for the data wrangling for plotting</strong>
 </summary><p>Let’s combine the results from all cell types, and just take pathways with a qval of &gt; 2 in any comparison</p>
 <div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">scpa_out</span> <span class="op">&lt;-</span> <span class="va">scpa_out</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> 
-  <span class="fu"><a href="https://purrr.tidyverse.org/reference/reduce.html">reduce</a></span><span class="op">(</span><span class="va">full_join</span>, by <span class="op">=</span> <span class="st">"Pathway"</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> 
-  <span class="fu">set_colnames</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/grep.html">gsub</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/colnames.html">colnames</a></span><span class="op">(</span><span class="va">.</span><span class="op">)</span>, pattern <span class="op">=</span> <span class="st">" "</span>, replacement <span class="op">=</span> <span class="st">"_"</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span>
-  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"Pathway"</span>, <span class="fu"><a href="https://rdrr.io/r/base/grep.html">grep</a></span><span class="op">(</span><span class="st">"_qval"</span>, <span class="fu"><a href="https://rdrr.io/r/base/colnames.html">colnames</a></span><span class="op">(</span><span class="va">.</span><span class="op">)</span><span class="op">)</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span>
-  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter_all.html">filter_all</a></span><span class="op">(</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/all_vars.html">any_vars</a></span><span class="op">(</span><span class="va">.</span> <span class="op">&gt;</span> <span class="fl">2</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span>
-  <span class="fu"><a href="https://tibble.tidyverse.org/reference/rownames.html">column_to_rownames</a></span><span class="op">(</span><span class="st">"Pathway"</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span class="va">scpa_out</span> <span class="op">&lt;-</span> <span class="va">scpa_out</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> 
+  <span class="fu"><a href="https://purrr.tidyverse.org/reference/reduce.html" class="external-link">reduce</a></span><span class="op">(</span><span class="va">full_join</span>, by <span class="op">=</span> <span class="st">"Pathway"</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> 
+  <span class="fu">set_colnames</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/grep.html" class="external-link">gsub</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/colnames.html" class="external-link">colnames</a></span><span class="op">(</span><span class="va">.</span><span class="op">)</span>, pattern <span class="op">=</span> <span class="st">" "</span>, replacement <span class="op">=</span> <span class="st">"_"</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span>
+  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"Pathway"</span>, <span class="fu"><a href="https://rdrr.io/r/base/grep.html" class="external-link">grep</a></span><span class="op">(</span><span class="st">"_qval"</span>, <span class="fu"><a href="https://rdrr.io/r/base/colnames.html" class="external-link">colnames</a></span><span class="op">(</span><span class="va">.</span><span class="op">)</span><span class="op">)</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span>
+  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter_all.html" class="external-link">filter_all</a></span><span class="op">(</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/all_vars.html" class="external-link">any_vars</a></span><span class="op">(</span><span class="va">.</span> <span class="op">&gt;</span> <span class="fl">2</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span>
+  <span class="fu"><a href="https://tibble.tidyverse.org/reference/rownames.html" class="external-link">column_to_rownames</a></span><span class="op">(</span><span class="st">"Pathway"</span><span class="op">)</span></code></pre></div>
 <p>We can then take pathways that we want to highlight in the final plot</p>
 <div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">blood_paths</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"HALLMARK_TNFA_SIGNALING_VIA_NFKB"</span>, <span class="st">"HALLMARK_INFLAMMATORY_RESPONSE"</span>,
+<code class="sourceCode R"><span class="va">blood_paths</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"HALLMARK_TNFA_SIGNALING_VIA_NFKB"</span>, <span class="st">"HALLMARK_INFLAMMATORY_RESPONSE"</span>,
                  <span class="st">"HALLMARK_COMPLEMENT"</span>, <span class="st">"HALLMARK_IL6_JAK_STAT3_SIGNALING"</span>,
                  <span class="st">"HALLMARK_IL2_STAT5_SIGNALING"</span>, <span class="st">"HALLMARK_INTERFERON_GAMMA_RESPONSE"</span>,
                  <span class="st">"HALLMARK_MTORC1_SIGNALING"</span>, <span class="st">"HALLMARK_INTERFERON_ALPHA_RESPONSE"</span>,
                  <span class="st">"HALLMARK_MYC_TARGETS_V1"</span>, <span class="st">"HALLMARK_OXIDATIVE_PHOSPHORYLATION"</span><span class="op">)</span></code></pre></div>
 <p>And create row annotations for the heatmap to highlight these pathways, and color scale</p>
 <div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">position</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/which.html">which</a></span><span class="op">(</span><span class="fu"><a href="https://tibble.tidyverse.org/reference/rownames.html">rownames</a></span><span class="op">(</span><span class="va">scpa_out</span><span class="op">)</span> <span class="op"><a href="https://rdrr.io/r/base/match.html">%in%</a></span> <span class="va">blood_paths</span><span class="op">)</span>
-<span class="va">row_an</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/ComplexHeatmap/man/rowAnnotation.html">rowAnnotation</a></span><span class="op">(</span>Genes <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/pkg/ComplexHeatmap/man/anno_mark.html">anno_mark</a></span><span class="op">(</span>at <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/which.html">which</a></span><span class="op">(</span><span class="fu"><a href="https://tibble.tidyverse.org/reference/rownames.html">rownames</a></span><span class="op">(</span><span class="va">scpa_out</span><span class="op">)</span> <span class="op"><a href="https://rdrr.io/r/base/match.html">%in%</a></span> <span class="va">blood_paths</span><span class="op">)</span>,
-                                          labels <span class="op">=</span> <span class="fu"><a href="https://tibble.tidyverse.org/reference/rownames.html">rownames</a></span><span class="op">(</span><span class="va">scpa_out</span><span class="op">)</span><span class="op">[</span><span class="va">position</span><span class="op">]</span>,
-                                          labels_gp <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/grid/gpar.html">gpar</a></span><span class="op">(</span>fontsize <span class="op">=</span> <span class="fl">7</span><span class="op">)</span>,
-                                          link_width <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/grid/unit.html">unit</a></span><span class="op">(</span><span class="fl">2.5</span>, <span class="st">"mm"</span><span class="op">)</span>,
-                                          padding <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/grid/unit.html">unit</a></span><span class="op">(</span><span class="fl">1</span>, <span class="st">"mm"</span><span class="op">)</span>,
-                                          link_gp <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/grid/gpar.html">gpar</a></span><span class="op">(</span>lwd <span class="op">=</span> <span class="fl">0.5</span><span class="op">)</span><span class="op">)</span><span class="op">)</span>
-<span class="va">col_hm</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/circlize/man/colorRamp2.html">colorRamp2</a></span><span class="op">(</span>colors <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"blue"</span>, <span class="st">"white"</span>, <span class="st">"red"</span><span class="op">)</span>, breaks <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">3</span>, <span class="fl">6</span><span class="op">)</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span class="va">position</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/which.html" class="external-link">which</a></span><span class="op">(</span><span class="fu"><a href="https://tibble.tidyverse.org/reference/rownames.html" class="external-link">rownames</a></span><span class="op">(</span><span class="va">scpa_out</span><span class="op">)</span> <span class="op"><a href="https://rdrr.io/r/base/match.html" class="external-link">%in%</a></span> <span class="va">blood_paths</span><span class="op">)</span>
+<span class="va">row_an</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/ComplexHeatmap/man/rowAnnotation.html" class="external-link">rowAnnotation</a></span><span class="op">(</span>Genes <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/pkg/ComplexHeatmap/man/anno_mark.html" class="external-link">anno_mark</a></span><span class="op">(</span>at <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/which.html" class="external-link">which</a></span><span class="op">(</span><span class="fu"><a href="https://tibble.tidyverse.org/reference/rownames.html" class="external-link">rownames</a></span><span class="op">(</span><span class="va">scpa_out</span><span class="op">)</span> <span class="op"><a href="https://rdrr.io/r/base/match.html" class="external-link">%in%</a></span> <span class="va">blood_paths</span><span class="op">)</span>,
+                                          labels <span class="op">=</span> <span class="fu"><a href="https://tibble.tidyverse.org/reference/rownames.html" class="external-link">rownames</a></span><span class="op">(</span><span class="va">scpa_out</span><span class="op">)</span><span class="op">[</span><span class="va">position</span><span class="op">]</span>,
+                                          labels_gp <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/grid/gpar.html" class="external-link">gpar</a></span><span class="op">(</span>fontsize <span class="op">=</span> <span class="fl">7</span><span class="op">)</span>,
+                                          link_width <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/grid/unit.html" class="external-link">unit</a></span><span class="op">(</span><span class="fl">2.5</span>, <span class="st">"mm"</span><span class="op">)</span>,
+                                          padding <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/grid/unit.html" class="external-link">unit</a></span><span class="op">(</span><span class="fl">1</span>, <span class="st">"mm"</span><span class="op">)</span>,
+                                          link_gp <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/grid/gpar.html" class="external-link">gpar</a></span><span class="op">(</span>lwd <span class="op">=</span> <span class="fl">0.5</span><span class="op">)</span><span class="op">)</span><span class="op">)</span>
+<span class="va">col_hm</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/circlize/man/colorRamp2.html" class="external-link">colorRamp2</a></span><span class="op">(</span>colors <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"blue"</span>, <span class="st">"white"</span>, <span class="st">"red"</span><span class="op">)</span>, breaks <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">3</span>, <span class="fl">6</span><span class="op">)</span><span class="op">)</span></code></pre></div>
 </details><p><br></p>
 <p>Now we have all the results, we can plot a heatmap of the qvals to get an idea of any broad patterns. Interestingly, we see a large dysregulation of pathways in CD14<sup>+</sup> monocytes in the peripheral blood of COVID-19 patients, suggesting that these cell show the greatest deviation from CD14<sup>+</sup> monocytes from healthy donors. These pathways include well defined immunologcal signatures in response to viral infection, including interferon response pathways, and complement cascades. We’ve just chosen to highlight a few on the heatmap below.</p>
 <div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/pkg/ComplexHeatmap/man/Heatmap.html">Heatmap</a></span><span class="op">(</span><span class="va">scpa_out</span>,
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/pkg/ComplexHeatmap/man/Heatmap.html" class="external-link">Heatmap</a></span><span class="op">(</span><span class="va">scpa_out</span>,
         col <span class="op">=</span> <span class="va">col_hm</span>,
         name <span class="op">=</span> <span class="st">"Qval"</span>,
         show_row_names <span class="op">=</span> <span class="cn">F</span>,
         <span class="co">#right_annotation = row_an,</span>
-        column_names_gp <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/grid/gpar.html">gpar</a></span><span class="op">(</span>fontsize <span class="op">=</span> <span class="fl">8</span><span class="op">)</span>,
+        column_names_gp <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/grid/gpar.html" class="external-link">gpar</a></span><span class="op">(</span>fontsize <span class="op">=</span> <span class="fl">8</span><span class="op">)</span>,
         border <span class="op">=</span> <span class="cn">T</span>,
         column_km <span class="op">=</span> <span class="fl">3</span>,
         row_km <span class="op">=</span> <span class="fl">3</span>,
-        column_labels <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"CS B"</span>, <span class="st">"IgG B"</span>, <span class="st">"IgA B"</span>, <span class="st">"CD14 Mono"</span>, <span class="st">"mCD8 T"</span>, <span class="st">"mCD4 T"</span>,
+        column_labels <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"CS B"</span>, <span class="st">"IgG B"</span>, <span class="st">"IgA B"</span>, <span class="st">"CD14 Mono"</span>, <span class="st">"mCD8 T"</span>, <span class="st">"mCD4 T"</span>,
                           <span class="st">"nCD4 T"</span>, <span class="st">"B"</span>, <span class="st">"NK"</span>, <span class="st">"Neut"</span>, <span class="st">"CD16 Mono"</span>, <span class="st">"gdT"</span>, <span class="st">"pDC"</span>, <span class="st">"Eosin"</span>, <span class="st">"DC"</span><span class="op">)</span><span class="op">)</span></code></pre></div>
-<p><img src="../man/figures/covid_heatmap.png" style="width:75.0%"></p>
+<p><img src="../reference/figures/covid_heatmap.png" style="width:75.0%"></p>
 </div>
   </div>
 
@@ -236,11 +232,13 @@
 
 
       <footer><div class="copyright">
-  <p>Developed by Jack Bibby.</p>
+  <p></p>
+<p>Developed by Jack Bibby.</p>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
+  <p></p>
+<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.1.</p>
 </div>
 
       </footer>
@@ -248,6 +246,8 @@
 
   
 
+
+  
 
   </body>
 </html>

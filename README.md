@@ -52,5 +52,5 @@ link](jackbibby1.github.io/SCPA)
 
 ## 3. Issues
 
-To report any issues or submit comments:
+To report any issues or submit comments please use:
 <https://github.com/jackbibby1/SCPA/issues>

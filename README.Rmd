@@ -13,7 +13,7 @@ knitr::opts_chunk$set(
 )
 ```
 
-# Single Cell Pathway Analysis (SCPA) 
+# Single Cell Pathway Analysis (SCPA)
 
 <!-- badges: start -->
 <!-- badges: end -->
@@ -45,7 +45,7 @@ For tutorials on how to use SCPA, [click this link](jackbibby1.github.io/SCPA)
 
 ## 3. Issues
 
-To report any issues or submit comments: https://github.com/jackbibby1/SCPA/issues
+To report any issues or submit comments please use: https://github.com/jackbibby1/SCPA/issues
 
 
 

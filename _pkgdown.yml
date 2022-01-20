@@ -19,7 +19,7 @@ template:
 
 navbar:
   structure:
-    left: [home, articles, reference]
+    left: [articles, reference]
     right: [github]
   components:
     articles:

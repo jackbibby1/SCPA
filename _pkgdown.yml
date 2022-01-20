@@ -25,10 +25,15 @@ navbar:
     articles:
       text: Tutorials
       menu:
+      - text: Generic example
       - text: Quick start
         href: articles/quick_start.html
+      - text: ------------
+      - text: Interacting with gene sets
       - text: Using gene sets
         href: articles/using_gene_sets.html
+      - text: ------------
+      - text: Specific examples
       - text: Comparing two populations
         href: articles/comparing_two_populations.html
       - text: Seurat comparison

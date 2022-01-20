@@ -3,8 +3,8 @@ url: jackbibby1.github.io/SCPA
 title: Single Cell Pathway Analysis (SCPA)
 
 template:
-  params:
-    bootswatch: flatly
+  bootstrap: 5
+  bootswatch: sandstone
 
 navbar:
   structure:

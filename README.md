@@ -3,7 +3,7 @@
 <!-- badges: start -->
 <!-- badges: end -->
 
-# Single Cell Pathway Analysis (SCPA)
+# Single Cell Pathway Analysis
 
 ![](man/figures/scpa_outline.png)
 

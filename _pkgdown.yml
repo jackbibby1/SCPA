@@ -5,6 +5,17 @@ title: Single Cell Pathway Analysis (SCPA)
 template:
   bootstrap: 5
   bootswatch: sandstone
+  includes:
+    in_header: |
+      <!-- Global site tag (gtag.js) - Google Analytics -->
+      <script async src="https://www.googletagmanager.com/gtag/js?id=G-W1XR84YEPZ"></script>
+      <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+
+        gtag('config', 'G-W1XR84YEPZ');
+      </script>
 
 navbar:
   structure:

@@ -136,7 +136,8 @@ for (i in 1:4) {
 ```
 
 Now all the hard work is done, we just need to give this information to SCPA to analyse
-pathways over pseudotime, after defining the pathways
+pathways over pseudotime, after defining the pathways. Here we're using a curated list of metabolic
+pathways taken from Hallmark, KEGG, and Reactome databases that you can find [here](https://github.com/jackbibby1/SCPA/blob/main/gene_sets/.csv)
 
 ```{r compare_pathways, eval=F}
 pathways <- "combined_metabolic_pathways.csv"

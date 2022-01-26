@@ -136,9 +136,9 @@
 <div class="section level2">
 <h2 id="preparing-data-for-comparison">Preparing data for comparison<a class="anchor" aria-label="anchor" href="#preparing-data-for-comparison"></a>
 </h2>
-<p>Now we can pull all of the pathways that we want to compare. For this, we’re using a csv file that contains a combination of canonical pathways, gene ontology pathways, and regulatory pathways from [MSigDB], and you can find this file <a href="">here</a>.</p>
+<p>Now we can pull all of the pathways that we want to compare. For this, we’re using a csv file that contains a combination of canonical pathways, gene ontology pathways, and regulatory pathways from <a href="https://www.gsea-msigdb.org/gsea/msigdb" class="external-link">MSigDB</a>, and you can find this file <a href="https://github.com/jackbibby1/SCPA/blob/main/gene_sets/" class="external-link">here</a>.</p>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">pathways</span> <span class="op">&lt;-</span> <span class="st">"h_k_r_go_pid_reg_wik"</span></code></pre></div>
+<code class="sourceCode R"><span class="va">pathways</span> <span class="op">&lt;-</span> <span class="st">"h_k_r_go_pid_reg_wik.csv"</span></code></pre></div>
 <p>And let’s create an object with our cell types that we want to compare, and split the object by disease status.</p>
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">cell_types</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/unique.html" class="external-link">unique</a></span><span class="op">(</span><span class="va">blood_atlas</span><span class="op">$</span><span class="va">cell.type.fine</span><span class="op">)</span>

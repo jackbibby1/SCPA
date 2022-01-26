@@ -166,7 +166,7 @@
 <span class="kw">for</span> <span class="op">(</span><span class="va">i</span> <span class="kw">in</span> <span class="fl">1</span><span class="op">:</span><span class="fl">4</span><span class="op">)</span> <span class="op">{</span>
   <span class="va">cd4_pseudo</span><span class="op">[[</span><span class="va">i</span><span class="op">]</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/seurat_extract.html">seurat_extract</a></span><span class="op">(</span><span class="va">naive_cd4</span>, meta1 <span class="op">=</span> <span class="st">"milestone"</span>, value_meta1 <span class="op">=</span> <span class="va">i</span><span class="op">)</span>
 <span class="op">}</span></code></pre></div>
-<p>Now all the hard work is done, we just need to give this information to SCPA to analyse pathways over pseudotime, after defining the pathways</p>
+<p>Now all the hard work is done, we just need to give this information to SCPA to analyse pathways over pseudotime, after defining the pathways. Here we’re using a curated list of metabolic pathways taken from Hallmark, KEGG, and Reactome databases that you can find <a href="https://github.com/jackbibby1/SCPA/blob/main/gene_sets/.csv" class="external-link">here</a></p>
 <div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">pathways</span> <span class="op">&lt;-</span> <span class="st">"combined_metabolic_pathways.csv"</span>
 

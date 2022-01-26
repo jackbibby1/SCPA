@@ -61,7 +61,7 @@ blish_sub <- subset(blish, idents = idents)
 Now we can pull all of the pathways that we want to compare. For this, we're using a csv file that contains a combination of canonical pathways, gene ontology pathways, and regulatory pathways from [MSigDB], and you can find this file [here](). 
 
 ```{r, eval=F}
-pathways <- "h_k_r_go_pid_reg_wik"
+pathways <- "h_k_r_go_pid_reg_wik.csv"
 ```
 
 And let's create an object with our cell types that we want to compare, and split the object by disease status.

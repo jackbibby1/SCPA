@@ -10,11 +10,11 @@
 ### About SCPA
 
 SCPA is a method for pathway analysis in single cell RNA-seq data. It’s
-based on a novel approach to pathway analysis that defines pathway
-activity as a change in multivariate distribution of a given pathway
-across conditions, rather than enrichment or over representation of
-genes. This approach allows for a number of benefits over current
-methods, including:
+a novel approach to pathway analysis that defines pathway activity as a
+change in multivariate distribution of a given pathway across
+conditions, rather than enrichment or over representation of genes. This
+approach allows for a number of benefits over current methods,
+including:
 
 1.  You will identify pathways that show enrichment in a given
     population AND also identify pathways with no overall enrichment but

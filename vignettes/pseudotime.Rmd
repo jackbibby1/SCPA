@@ -107,7 +107,7 @@ plot_dimred(model_n4,
 ![](../man/figures/naive_cd4_milestone.png){width=50%}
 
 
-### Extract groups based on milestones and add information to Seurat object
+
 And extract the cells based on this grouping
 
 ```{r get_milestones, eval=F}

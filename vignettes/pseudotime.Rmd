@@ -16,55 +16,50 @@ knitr::opts_chunk$set(
 
 ## Comparing pathways across pseudotime with SCPA
 
-Here we're going to look at tracking gene set changes across a pseudotime trajectory.
-To do this, we'll replicate some data from our [recent paper](link) where we characterised
-the transcriptional reprogramming of metabolic pathways after activation.
+Here we're going to look at tracking gene set changes across a pseudotime trajectory, using the multisample capability of SCPA. To do this, we'll use a dataset that we generated where naive CD4 T cells were left unstimulated, or stimuated for 12 or 24 hours with anti-CD3 and anti-CD28. You can find this dataset [here](). We'll do a systematic analysis of how metabolic pathways are transcriptionally regulated throughout naive CD4^+^ T cell activation.
 
 Let's load in a few packages to start
 
 ```{r setup, results='hide', warning=FALSE, message=FALSE, eval=F}
 library(SCPA)
 library(Seurat)
-library(dyno)
 library(tidyverse)
 library(magrittr)
+library(dyno)
 library(ComplexHeatmap)
 library(circlize)
 ```
 
-And load in our data. This is taken from our naive CD4^+^ T cell dataset that you can access [here]()
 
-```{r load_data, eval=F, echo=F}
-load("~/Google Drive/scRNA_metabolism_paper/Processing scRNAseq data/Naive CD4/int_data_N4.RData")
-naive_cd4 <- int_data_N4
-rm(int_data_N4)
-```
-
+### Load in data
 ```{r, eval=F}
-load("naive_cd4.RData")
+naive_cd4 <- load("naive_cd4.rds")
 ```
 
+
+### Quick look at the data
 We can see that the populations include both naive/effector T cells, and Tregs
 ```{r plot_umap, eval=F}
 DimPlot(naive_cd4, split.by = "Hour")
 ```
 ![](../man/figures/naive_cd4_umap.png){width=100%}
 
+### Filter out cells we don't want
 We'll get rid of the Tregs because we're just interested in naive T cell activation in the non Treg populations
 
 ```{r remove_treg, eval=F}
 naive_cd4 <- subset(naive_cd4, idents = "Treg", invert = T)
 ```
 
-We'll then take the top 1000 most variable genes to model a trajectory
 
+### Model trajectory using the dyno workflow
+We'll then take the top 1000 most variable genes to model a trajectory
 ```{r var_genes, eval=F}
 df <- as.matrix(naive_cd4[["RNA"]]@data)
 var_genes <- names(sort(apply(df, 1, var), decreasing = TRUE))[1:1000]
 ```
 
-And then these steps are broadly taken from the [dyno vignettes](https://dynverse.org/users/3-user-guide/). We're just taking expression
-data and adding it to the object so it's able to be used in the `infer_trajectory`
+And then these steps are broadly taken from the [dyno vignettes](https://dynverse.org/users/3-user-guide/). We're just taking expression data and adding it to the object so it's able to be used in the `infer_trajectory`
 function.
 
 ```{r make_matrix, eval=F}
@@ -80,10 +75,6 @@ And finally running the `infer_trajectory` function using slingshot as the model
 model_n4 <- infer_trajectory(dataset_n4, method = ti_slingshot(), verbose = T)
 ```
 
-```{r load_n4_model, echo=F}
-load("~/Google Drive/scRNA_metabolism_paper/Paper/Fig2/NaiveCD4_ti_slingshot_model_1000var_feat.RData")
-```
-
 We can visualise the trajectory
 
 ```{r plot_dimred, eval=F}
@@ -93,6 +84,7 @@ plot_dimred(model_n4, "pseudotime", pseudotime = calculate_pseudotime(model_n4),
 ```
 
 ![](../man/figures/naive_cd4_pseudo.png){width=50%}
+
 
 Once we have our trajectory calculated, we can generate distinct nodes of cells across the trajectory
 to use as an input for SCPA. To generate the nodes, we can use the `group_onto_nearest_milestones` function, which assigns each cell to a node based on it's pseudotime value.
@@ -107,6 +99,8 @@ plot_dimred(model_n4, grouping = group_onto_nearest_milestones(model_n4), hex_ce
 
 ![](../man/figures/naive_cd4_milestone.png){width=50%}
 
+
+### Extract groups based on milestones and add information to Seurat object
 And extract the cells based on this grouping
 
 ```{r get_milestones, eval=F}
@@ -122,6 +116,8 @@ object.
 naive_cd4$milestone <- mile_group$milestone
 ```
 
+
+### Extract expression data for the populations we're comparing
 We then need to extract expression matrices for all the cells across the distinct nodes,
 so we effectively have 4 populations across the trajectory. We can use these expression
 matrices to assess pathways across the 4 nodes.
@@ -135,6 +131,7 @@ for (i in 1:4) {
 }
 ```
 
+### Define pathways and run comparison
 Now all the hard work is done, we just need to give this information to SCPA to analyse
 pathways over pseudotime, after defining the pathways. Here we're using a curated list of metabolic
 pathways taken from Hallmark, KEGG, and Reactome databases that you can find [here](https://github.com/jackbibby1/SCPA/blob/main/gene_sets/.csv)
@@ -142,15 +139,13 @@ pathways taken from Hallmark, KEGG, and Reactome databases that you can find [he
 ```{r compare_pathways, eval=F}
 pathways <- "combined_metabolic_pathways.csv"
 
-cd4_metabolism <- compare_pathways(cd4_pseudo, pathways)
+cd4_metabolism <- compare_pathways(samples = cd4_pseudo, 
+                                   pathways = pathways)
 ```
 
-```{r load_scpa_result, echo=F}
-load("~/Google Drive/scRNA_metabolism_paper/Paper/mstone_out.RData")
-cd4_metabolism <- mstone_out
-```
 
-All done. Let's plot the data (some annotations have been added later to highlight pathways, but we can see the final heatmap from Fig4B in [our paper]())
+### Plot a global summary of the data
+All done. Let's plot the data (some annotations have been added later to highlight pathways)
 
 ```{r plot_heatmap, eval=F}
 cd4_metabolism <- cd4_metabolism %>%
@@ -173,17 +168,18 @@ Heatmap(t(cd4_metabolism),
 
 ![](../man/figures/metabolic_heatmap.png){width=70%}
 
+
+### Highlight pathway by rank
 We can also extract a single pathway to highlight its rank in the analysis using the
 `plot_rank` function:
 
 ```{r plot_rank, eval=F}
-cd4_metabolism <- rownames_to_column(cd4_metabolism, "Pathway")
 plot_rank(cd4_metabolism, 
           "reactome_arachidonic", 
           label_size = 2)
 ```
 
-![](../man/figures/aa_metab_rank.png){width=70%}
+![](../man/figures/pseudotime_rank.png){width=70%}
 
 
 

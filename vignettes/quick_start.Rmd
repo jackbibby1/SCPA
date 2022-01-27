@@ -29,7 +29,7 @@ scpa_out <- compare_pathways(samples = list(population1, population2),
 
 ## 2. Full workflow on an example dataset
 
-Here we're just going to show some general principles of what you need to get started in a basic pathway analysis. It acts as a quick reference to all the main points of the workflow, but more detailed examples can be found in our other tutorials
+Here we're just going to show some general principles of what you need to get started in a basic pathway analysis. It acts as a quick reference to all the main points of the workflow, but more detailed examples can be found in our other tutorials.
 
 ### Basic information needed for pathway analysis
 The two main bits of information we need are:
@@ -85,7 +85,7 @@ th1 <- seurat_extract(t_cells,
 We then need to generate our gene sets. msigdbr is a handy package
 that allows you to get this information. Here we're pulling all the Hallmark pathways, and
 using the `format_pathways` function within SPCA to get them properly formatted. A detailed explanation of
-generating gene sets for SCPA can be found [here]()
+generating gene sets for SCPA can be found [here](https://jackbibby1.github.io/SCPA/articles/using_gene_sets.html)
 
 ```{r get_pathways, eval=F}
 pathways <- msigdbr::msigdbr("Homo sapiens", "H") %>%

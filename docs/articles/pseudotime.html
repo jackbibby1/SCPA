@@ -123,7 +123,7 @@
 <div class="section level3">
 <h3 id="quick-look-at-the-data">Quick look at the data<a class="anchor" aria-label="anchor" href="#quick-look-at-the-data"></a>
 </h3>
-<p>We can see that the populations include both naive/effector T cells, and Tregs</p>
+<p>We can see that the populations include both naive/activated T cells, and Tregs</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://satijalab.org/seurat/reference/DimPlot.html" class="external-link">DimPlot</a></span><span class="op">(</span><span class="va">naive_cd4</span>, split.by <span class="op">=</span> <span class="st">"Hour"</span><span class="op">)</span></code></pre></div>
 <p><img src="../reference/figures/naive_cd4_umap.png" style="width:100.0%"></p>
@@ -154,15 +154,22 @@
 <code class="sourceCode R"><span class="va">model_n4</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/dynwrap/man/infer_trajectories.html" class="external-link">infer_trajectory</a></span><span class="op">(</span><span class="va">dataset_n4</span>, method <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/pkg/dynmethods/man/ti_slingshot.html" class="external-link">ti_slingshot</a></span><span class="op">(</span><span class="op">)</span>, verbose <span class="op">=</span> <span class="cn">T</span><span class="op">)</span></code></pre></div>
 <p>We can visualise the trajectory</p>
 <div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/pkg/dynplot/man/plot_dimred.html" class="external-link">plot_dimred</a></span><span class="op">(</span><span class="va">model_n4</span>, <span class="st">"pseudotime"</span>, pseudotime <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/pkg/dynwrap/man/add_pseudotime.html" class="external-link">calculate_pseudotime</a></span><span class="op">(</span><span class="va">model_n4</span><span class="op">)</span>, hex_cells <span class="op">=</span> <span class="cn">F</span>,
-            plot_trajectory <span class="op">=</span> <span class="cn">T</span>, size_cells <span class="op">=</span> <span class="fl">1</span>, alpha_cells <span class="op">=</span> <span class="fl">0.8</span><span class="op">)</span> <span class="op">+</span> 
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/pkg/dynplot/man/plot_dimred.html" class="external-link">plot_dimred</a></span><span class="op">(</span><span class="va">model_n4</span>, 
+            <span class="st">"pseudotime"</span>, 
+            pseudotime <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/pkg/dynwrap/man/add_pseudotime.html" class="external-link">calculate_pseudotime</a></span><span class="op">(</span><span class="va">model_n4</span><span class="op">)</span>, 
+            hex_cells <span class="op">=</span> <span class="cn">F</span>,
+            plot_trajectory <span class="op">=</span> <span class="cn">T</span>, 
+            size_cells <span class="op">=</span> <span class="fl">1</span>, alpha_cells <span class="op">=</span> <span class="fl">0.8</span><span class="op">)</span> <span class="op">+</span> 
   <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/theme.html" class="external-link">theme</a></span><span class="op">(</span>aspect.ratio <span class="op">=</span> <span class="fl">1</span><span class="op">)</span></code></pre></div>
 <p><img src="../reference/figures/naive_cd4_pseudo.png" style="width:50.0%"></p>
 <p>Once we have our trajectory calculated, we can generate distinct nodes of cells across the trajectory to use as an input for SCPA. To generate the nodes, we can use the <code>group_onto_nearest_milestones</code> function, which assigns each cell to a node based on it’s pseudotime value.</p>
-<p>We can then visualize the nodes that are calculated across the trajectory.</p>
+<p>We can then visualize the nodes that are calculated across the trajectory to see what we’re extracting</p>
 <div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/pkg/dynplot/man/plot_dimred.html" class="external-link">plot_dimred</a></span><span class="op">(</span><span class="va">model_n4</span>, grouping <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/pkg/dynwrap/man/group_from_trajectory.html" class="external-link">group_onto_nearest_milestones</a></span><span class="op">(</span><span class="va">model_n4</span><span class="op">)</span>, hex_cells <span class="op">=</span> <span class="cn">F</span>,
-            plot_trajectory <span class="op">=</span> <span class="cn">T</span>, size_cells <span class="op">=</span> <span class="fl">1</span>, alpha_cells <span class="op">=</span> <span class="fl">0.8</span><span class="op">)</span> <span class="op">+</span> 
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/pkg/dynplot/man/plot_dimred.html" class="external-link">plot_dimred</a></span><span class="op">(</span><span class="va">model_n4</span>, 
+            grouping <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/pkg/dynwrap/man/group_from_trajectory.html" class="external-link">group_onto_nearest_milestones</a></span><span class="op">(</span><span class="va">model_n4</span><span class="op">)</span>, 
+            hex_cells <span class="op">=</span> <span class="cn">F</span>,
+            plot_trajectory <span class="op">=</span> <span class="cn">T</span>, 
+            size_cells <span class="op">=</span> <span class="fl">1</span>, alpha_cells <span class="op">=</span> <span class="fl">0.8</span><span class="op">)</span> <span class="op">+</span> 
   <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/theme.html" class="external-link">theme</a></span><span class="op">(</span>aspect.ratio <span class="op">=</span> <span class="fl">1</span><span class="op">)</span></code></pre></div>
 <p><img src="../reference/figures/naive_cd4_milestone.png" style="width:50.0%"></p>
 </div>
@@ -185,7 +192,7 @@
 <p>We can loop the <code>seurat_extract</code> function to get expression matrices for all cells in each population.</p>
 <div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">cd4_pseudo</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="op">)</span>
-<span class="kw">for</span> <span class="op">(</span><span class="va">i</span> <span class="kw">in</span> <span class="fl">1</span><span class="op">:</span><span class="fl">4</span><span class="op">)</span> <span class="op">{</span>
+<span class="kw">for</span> <span class="op">(</span><span class="va">i</span> <span class="kw">in</span> <span class="fl">1</span><span class="op">:</span><span class="fu"><a href="https://rdrr.io/r/base/Extremes.html" class="external-link">max</a></span><span class="op">(</span><span class="va">mile_group</span><span class="op">$</span><span class="va">milestone</span><span class="op">)</span><span class="op">)</span> <span class="op">{</span>
   <span class="va">cd4_pseudo</span><span class="op">[[</span><span class="va">i</span><span class="op">]</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/seurat_extract.html">seurat_extract</a></span><span class="op">(</span><span class="va">naive_cd4</span>, meta1 <span class="op">=</span> <span class="st">"milestone"</span>, value_meta1 <span class="op">=</span> <span class="va">i</span><span class="op">)</span>
 <span class="op">}</span></code></pre></div>
 </div>
@@ -225,11 +232,12 @@
 <div class="section level3">
 <h3 id="highlight-pathway-by-rank">Highlight pathway by rank<a class="anchor" aria-label="anchor" href="#highlight-pathway-by-rank"></a>
 </h3>
-<p>We can also extract a single pathway to highlight its rank in the analysis using the <code>plot_rank</code> function:</p>
+<p>We can also extract a single pathway to highlight its rank in the analysis using the <code>plot_rank</code> function. There are lots of glycolysis pathways near the top of the list, but we’ll just highlight one.</p>
 <div class="sourceCode" id="cb15"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="../reference/plot_rank.html">plot_rank</a></span><span class="op">(</span><span class="va">cd4_metabolism</span>, 
-          <span class="st">"reactome_arachidonic"</span>, 
-          label_size <span class="op">=</span> <span class="fl">2</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span class="fu"><a href="../reference/plot_rank.html">plot_rank</a></span><span class="op">(</span>scpa_out <span class="op">=</span> <span class="va">cd4_metabolism</span>, 
+          pathway <span class="op">=</span> <span class="st">"hallmark_gly"</span>,
+          base_point_size <span class="op">=</span> <span class="fl">2.5</span>,
+          highlight_point_size <span class="op">=</span> <span class="fl">3</span><span class="op">)</span></code></pre></div>
 <p><img src="../reference/figures/pseudotime_rank.png" style="width:70.0%"></p>
 </div>
 </div>

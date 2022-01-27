@@ -20,7 +20,7 @@ Here we're going to look at tracking gene set changes across a pseudotime trajec
 
 Let's load in a few packages to start
 
-```{r setup, results='hide', warning=FALSE, message=FALSE, eval=F}
+```{r setup, eval=F}
 library(SCPA)
 library(Seurat)
 library(tidyverse)

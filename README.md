@@ -36,8 +36,7 @@ bioRxiv [here]()
 
 ## 1. Installation
 
-You can install the development version of SCPA from
-[GitHub](https://github.com/) with:
+You can install SCPA by running:
 
 ``` r
 # install.packages("devtools")

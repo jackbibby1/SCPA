@@ -33,7 +33,7 @@ To see SCPA applied to a scRNA-seq dataset, you can see our paper on bioRxiv [he
 
 ## 1. Installation
 
-You can install the development version of SCPA from [GitHub](https://github.com/) with:
+You can install SCPA by running:
 
 ``` r
 # install.packages("devtools")

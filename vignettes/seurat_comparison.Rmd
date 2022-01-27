@@ -14,7 +14,7 @@ knitr::opts_chunk$set(
 )
 ```
 
-We've shown that you can compare pathways if you have expression matrices, but you can also compare populations within a given Seurat object in one function within SCPA. To do this, you just need the Seurat object that should be annotated with the groups you want to compare.
+As well as importing expression matrices into `compare_pathways`, you can also compare populations directly within a Seurat object in one function within SCPA. To do this, you just need the Seurat object that is annotated with the groups you want to compare.
 
 Let's load in a few packages.
 ```{r setup, eval=F}
@@ -24,12 +24,23 @@ library(msigdbr)
 library(Seurat)
 ```
 
+
+### Getting the dataset
 We're going to do the same comparison of Th1 and Tcm cells that we did in the [quick start tutorial](../docs/articles/quick_start.html), again using all Hallmark gene sets. We'll use the [Szabo, P... Sims, P](https://www.nature.com/articles/s41467-019-12464-3) T cell dataset that you can download [here](https://drive.google.com/file/d/1WSv7MLfcV_94c-C6bCUiUm_XwesCiy3N/view?usp=sharing).
 
 ```{r, eval=F}
 t_cells <- readRDS("~/Google Drive/example_datasets/szabo_t_cell.rds")
 ```
 
+### Quick Look at the data
+```{r plot_umap, eval=F}
+DimPlot(t_cells) +
+  theme(aspect.ratio = 1)
+```
+
+![](../man/figures/cd4_cell_types.png){width=50%}
+
+### Getting the gene sets
 We need to define our gene sets, and we can do this through the msigdbr package that contains a bunch of biological gene sets that can be found [here](https://www.gsea-msigdb.org/gsea/msigdb/genesets.jsp). Here we just take the Hallmark gene sets (using the "H" call to msigdbr), and use the format_pathways function to get them in a readable format for SCPA.
 
 ```{r get_pathways, eval=F}
@@ -37,11 +48,13 @@ pathways <- msigdbr("Homo sapiens", "H") %>%
   format_pathways()
 ```
 
-Now to compare the Th1 and Treg populations, we can use the compare_seurat function within SCPA.
 
-```{r compare_pathways, results='hide', eval=F}
+### SCPA comparison
+Now to compare the Th1 and Treg populations, we can use the compare_seurat function within SCPA. Here, `group1` defines the column name for your metadata, and `group1_population` defines two values within that column
+
+```{r compare_pathways, eval=F}
 scpa_out <- compare_seurat(t_cells,
-                           group1 = "Cell", group1_population = c("Th1", "Tcm"),
+                           group1 = "Cell", group1_population = c("cd4 th1", "cd4 tcm"),
                            pathways = pathways)
 ```
 

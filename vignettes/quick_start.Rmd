@@ -49,8 +49,7 @@ library(ggplot2)
 ```
 
 ### Loading in data
-We can use the dataset from a paper we [recently published](paper_link), which is looking
-at naive CD8^+^ T cell activation.
+We can use a naive CD8^+^ T cell dataset from a paper we [recently published](paper_link) .
 
 ```{r load_data, echo=F, eval=F}
 load("~/Google Drive/scRNA_metabolism_paper/Processing scRNAseq data/Naive CD8/int_data_N8.RData")

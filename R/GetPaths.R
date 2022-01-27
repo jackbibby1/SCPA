@@ -19,21 +19,25 @@
 #' @return list of pathways with corresponding genes
 #' @export
 
-get_paths <- function(pathway_filepath,
-                      min_genes = 15,
-                      max_genes = 500) {
 
-  if (class(pathway_filepath)[1] == "character") {
+get_paths <- function(pathway_filepath) {
+
+  if (str_ends(pathway_filepath, "gmt")) {
+    pathways <- utils::read.delim(pathway_filepath, row.names = 1, header = F)
+    pathways <- as.data.frame(t(pathways))
+    pathways <- tidyr::pivot_longer(pathways, cols = 1:length(pathways), names_to = "Pathway", values_to = "Genes")
+    pathways <- dplyr::group_split(pathways, Pathway)
+    pathways <- lapply(pathways, function(x) x[x$Genes != "",])
+    return(pathways)
+  }
+
+  if (str_ends(pathway_filepath, "csv")) {
     pathways <- utils::read.csv(pathway_filepath, row.names = 1, header = F)
     pathways <- as.data.frame(t(pathways))
     pathways <- tidyr::pivot_longer(pathways, cols = 1:length(pathways), names_to = "Pathway", values_to = "Genes")
     pathways <- dplyr::group_split(pathways, Pathway)
     pathways <- lapply(pathways, function(x) x[x$Genes != "",])
-    pathways <- pathways[sapply(pathways, function(x) nrow(x) > min_genes & nrow(x) < max_genes)]
     return(pathways)
-
-  } else {
-    pathways <- pathway_filepath
-    pathways <- pathways[sapply(pathways, function(x) nrow(x) > min_genes & nrow(x) < max_genes)]
   }
 }
+

@@ -31,19 +31,21 @@ get_paths <- function(pathway_filepath) {
     pathways <- lapply(pathways, function(x) x[x$Genes != "",])
     return(pathways)
 
-    } else if (str_ends(pathway_filepath, "csv")) {
+  } else if (str_ends(pathway_filepath, "csv")) {
 
-      pathways <- utils::read.csv(pathway_filepath, row.names = 1, header = F)
-      pathways <- as.data.frame(t(pathways))
-      pathways <- tidyr::pivot_longer(pathways, cols = 1:length(pathways), names_to = "Pathway", values_to = "Genes")
-      pathways <- dplyr::group_split(pathways, Pathway)
-      pathways <- lapply(pathways, function(x) x[x$Genes != "",])
-      return(pathways)
+    pathways <- utils::read.csv(pathway_filepath, row.names = 1, header = F)
+    pathways <- as.data.frame(t(pathways))
+    pathways <- tidyr::pivot_longer(pathways, cols = 1:length(pathways), names_to = "Pathway", values_to = "Genes")
+    pathways <- dplyr::group_split(pathways, Pathway)
+    pathways <- lapply(pathways, function(x) x[x$Genes != "",])
+    return(pathways)
 
-    } else {
-      pathways <- pathway_filepath
-      return(pathways)
-    }
+  } else {
+
+    pathways <- pathway_filepath
+    return(pathways)
+
+  }
 }
 
 

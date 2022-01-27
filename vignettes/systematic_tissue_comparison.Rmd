@@ -72,16 +72,14 @@ split_tissue <- SplitObject(tissue_data, split.by = "tissue")
 ### Pathway analysis across tissues
 Now we just need to create a loop that will cycle over all the cell types for each tissue and extract their expression values, before doing the pathway analysis. Just to break this down a bit:
 
-- We first create empty lists to store results from the for loop
-- We extract expression data using `seurat_extract` based on tissue, cell_type ("fine"), and stimulation ("none")
-- We then compare all tissues to the blood using `compare_pathways`
-
 Given the number of cells, pathways, and samples we're comparing, this may take a while. Here we're showing how to run a comparison sequentially, but you can significantly reduce the time taken for the analysis if you split the three comparisons across e.g. different scripts.
 
 ```{r compare_pathways, eval=F}
+# We first create empty lists to store results from the for loop
 bl_bm <- list(); bl_ln <- list(); bl_lung <- list()
 for (i in cell_types) {
   
+  # We extract expression data using `seurat_extract` based on tissue, cell_type ("fine"), and stimulation ("none")
   blood <- seurat_extract(split_tissue$bl, 
                           meta1 = "fine", value_meta1 = i,
                           meta2 = "stimulation", value_meta2 = "none")
@@ -98,6 +96,7 @@ for (i in cell_types) {
                          meta1 = "fine", value_meta1 = i,
                          meta2 = "stimulation", value_meta2 = "none")
   
+  # We then compare all tissues to the blood using `compare_pathways`
   print(paste("comparing", i))
   bl_bm[[i]] <- compare_pathways(list(blood, bm), pathways)
   bl_ln[[i]] <- compare_pathways(list(blood, ln), pathways)

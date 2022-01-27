@@ -25,7 +25,7 @@ SCPA is a method for pathway analysis in single cell RNA-seq data. It's based on
 
 1. You will identify pathways that show enrichment in a given population AND also identify pathways with no overall enrichment but alterations in the multivariate distribution of that pathway. You essentially get the best of both worlds, as pathways with changes in multivariate distribution but no overall enrichment are still interestingly different pathways.
 
-1. SCPA allows for multisample testing, so you can compare multiple conditions simultaneously e.g. compare across 3 time points, or across multiple phases of a [pseuodotime trajectory](). This means you can assess pathway activity through multiple stimulation phases, or across cell differentiation
+1. SCPA allows for multisample testing, so you can compare multiple conditions simultaneously e.g. compare across 3 time points, or across multiple phases of a [pseuodotime trajectory](https://jackbibby1.github.io/SCPA/articles/pseudotime.html). This means you can assess pathway activity through multiple stimulation phases, or across cell differentiation
 
 To see the stats behind SCPA, you can see our paper in JASA [here](https://www.tandfonline.com/doi/full/10.1080/01621459.2020.1791131)
 

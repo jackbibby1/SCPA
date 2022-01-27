@@ -25,9 +25,10 @@ methods, including:
 
 2.  SCPA allows for multisample testing, so you can compare multiple
     conditions simultaneously e.g. compare across 3 time points, or
-    across multiple phases of a [pseuodotime trajectory](). This means
-    you can assess pathway activity through multiple stimulation phases,
-    or across cell differentiation
+    across multiple phases of a [pseuodotime
+    trajectory](https://jackbibby1.github.io/SCPA/articles/pseudotime.html).
+    This means you can assess pathway activity through multiple
+    stimulation phases, or across cell differentiation
 
 To see the stats behind SCPA, you can see our paper in JASA
 [here](https://www.tandfonline.com/doi/full/10.1080/01621459.2020.1791131)

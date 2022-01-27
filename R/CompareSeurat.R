@@ -36,7 +36,9 @@ compare_seurat <- function(seurat_object,
                            downsample = 500) {
 
   ## Pathways
-  pathways <- get_paths(pathways)
+  if (class(pathways)[1] == "character") {
+    pathways <- get_paths(pathways)
+  }
   path_names <- sapply(pathways, function(x) unique(x$Pathway))
 
   ## Seurat extract

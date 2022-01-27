@@ -32,8 +32,9 @@ methods, including:
 To see the stats behind SCPA, you can see our paper in JASA
 [here](https://www.tandfonline.com/doi/full/10.1080/01621459.2020.1791131)
 
-To see SCPA applied to a scRNA-seq dataset, you can see our paper on
-bioRxiv [here]()
+We are currently putting a paper together to show the power of SCPA
+applied in a systematic way over a T cell scRNAseq dataset, which will
+be available on bioRxiv soon.
 
 ## 1. Installation
 

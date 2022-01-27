@@ -35,12 +35,12 @@ Here we're just going to show some general principles of what you need to get st
 The two main bits of information we need are:
 
 - Expression matrix for each condition (this can be formatted as separate data frames/matrices, or stored within a typical Seurat object)
-- Pathway gene lists
+- Gene sets
 
 ### Loading in packages 
 For this simple example, we're going to load in a few packages. msigdbr allows access to a large number of gene sets that are collated [here](https://www.gsea-msigdb.org/gsea/msigdb/genesets.jsp)
 
-```{r setup, results='hide', warning=F, message=F}
+```{r setup, results='hide', warning=F, message=F, eval=F}
 library(SCPA)
 library(msigdbr)
 library(Seurat)
@@ -49,55 +49,46 @@ library(ggplot2)
 ```
 
 ### Loading in data
-We can use a naive CD8^+^ T cell dataset from a paper we [recently published](paper_link) .
+Here we're going to use a subset of data taken from the [Szabo, P... Sims, P](https://www.nature.com/articles/s41467-019-12464-3) paper. You can find this data in an R object [here](https://drive.google.com/file/d/1WSv7MLfcV_94c-C6bCUiUm_XwesCiy3N/view?usp=sharing)
 
 ```{r load_data, echo=F, eval=F}
-load("~/Google Drive/scRNA_metabolism_paper/Processing scRNAseq data/Naive CD8/int_data_N8.RData")
+load("~/Google Drive/example_datasets/")
 naive_cd8 <- int_data_N8
 rm(int_data_N8)
 ```
 
 ```{r, eval=F}
-load("naive_cd8.RData")
+t_cells <- readRDS("szabo_t_cell.rds")
 ```
 
 
 ### Quick Look at the data
-In this experiment we isolated CD45RA^+^ CD8^+^ T cells and either left them unstimulated, or stimulated them for 12 or 24 hours
 ```{r plot_umap, eval=F}
-DimPlot(naive_cd8, split.by = "Hour") +
+DimPlot(t_cells) +
   theme(aspect.ratio = 1)
 ```
 
-![](../man/figures/naive_cd8_umap.png){width=80%}
+![](../man/figures/cd4_cell_types.png){width=50%}
+
 
 ### Generating samples from a Seurat object
-Let's now generate two populations to compare. To do this we'll use the `seurat_extract` function 
-to extract expression matrices from our Seurat object. This function takes a Seurat object as an input,
-subsets data based on the Seurat column metadata, and returns an expression file for that given subset.
+For this basic comparison, we're going to look at T helper 1 (Th1) and T central memory (Tcm) cells. To generate expression matrices that SCPA can use, we can run the `seurat_extract` function. This takes a Seurat object as an input, subsets data based on the Seurat column metadata, and returns an expression file for that given subset.
 
 ```{r extract_data, eval=F}
-resting <- seurat_extract(naive_cd8,
-                          meta1 = "Hour",
-                          value_meta1 = 0,
-                          meta2 = "Cell_Type",
-                          value_meta2 = "Resting")
-activated <- seurat_extract(naive_cd8,
-                            meta1 = "Hour",
-                            value_meta1 = 24,
-                            meta2 = "Cell_Type",
-                            value_meta2 = "Activated")
+tcm <- seurat_extract(t_cells,
+                      meta1 = "Cell", value_meta1 = "cd4 tcm")
+th1 <- seurat_extract(t_cells,
+                      meta1 = "Cell", value_meta1 = "cd4 th1")
 ```
 
 ### Generate some gene sets using msigdbr
 We then need to generate our gene sets. msigdbr is a handy package
-that allows you to get this information. Here we're pulling all the KEGG pathways, and
+that allows you to get this information. Here we're pulling all the Hallmark pathways, and
 using the `format_pathways` function within SPCA to get them properly formatted. A detailed explanation of
-generating gene sets for SCPA can be found [here](https://github.com/jackbibby1/SCPA/blob/main/using_gene_sets.md)
+generating gene sets for SCPA can be found [here]()
 
 ```{r get_pathways, eval=F}
-pathways <- msigdbr("Homo sapiens") %>%
-  filter(grepl(pattern = "KEGG", x = gs_name)) %>%
+pathways <- msigdbr::msigdbr("Homo sapiens", "H") %>%
   format_pathways()
 ```
 
@@ -106,30 +97,32 @@ We're all set. We now have everything that we need to compare the two population
 `compare_pathways` and use the objects we created above.
 
 ```{r compare_pathways, eval=F}
-scpa_out <- compare_pathways(samples = list(resting, activated),
+scpa_out <- compare_pathways(samples = list(tcm, th1), 
                              pathways = pathways)
 ```
 
 ```{r, echo=F}
-scpa_out <- readRDS("~/Google Drive/scRNA_metabolism_paper/Paper/Fig4/metab_rest_act.rds")
+scpa_out <- readRDS("~/Google Drive/r_packages/SCPA/rds_files/tcm_th1.rds")
 ```
 
 
 And in `scpa_out`, we have all our results.
 
 ```{r lood_at_output}
-head(scpa_out, 10)
+head(scpa_out, 5)
 ```
 
 ### Plotting some basic output
-You can use SCPA to plot some basic output. For example, we can highlight the "KEGG_GLYCOLYSIS_GLUCONEOGENESIS" pathway using the `plot_rank` function.
+You can use SCPA to generate a pathway rank plot. For example, we can highlight the topmost MTORC1 pathway using the `plot_rank` function.
 
-```{r plot_rank, fig.width=4.5, fig.height=3, dpi=600, out.width="50%"}
-plot_rank(scpa_out = scpa_out,
-          pathway = "glycolysis")
+```{r plot_rank, eval=F, dpi=600, out.width="50%"}
+plot_rank(scpa_out = scpa_out, 
+          pathway = "MTORC1", 
+          base_point_size = 2, 
+          highlight_point_size = 3)
 ```
 
-
+![](../man/figures/mtorc1_rank.png){width=50%}
 
 
 

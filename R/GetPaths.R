@@ -25,8 +25,6 @@ get_paths <- function(pathway_filepath) {
 
   filepath_test <- as.character(pathway_filepath)
 
-  if (class(pathway_filepath) == "character") {
-
     if (str_ends(filepath_test, "gmt")) {
       pathways <- utils::read.delim(pathway_filepath, row.names = 1, header = F)
       pathways <- as.data.frame(t(pathways))
@@ -46,15 +44,10 @@ get_paths <- function(pathway_filepath) {
       pathways <- lapply(pathways, function(x) x[x$Genes != "",])
       return(pathways)
 
-  }
+    }
 
-    } else {
-
-    pathways <- pathway_filepath
-    return(pathways)
-
-  }
 }
+
 
 
 

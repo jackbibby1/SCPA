@@ -33,9 +33,7 @@ get_paths <- function(pathway_filepath) {
       pathways <- lapply(pathways, function(x) x[x$Genes != "",])
       return(pathways)
 
-    }
-
-    if (str_ends(filepath_test, "csv")) {
+    } else if (str_ends(filepath_test, "csv")) {
 
       pathways <- utils::read.csv(pathway_filepath, row.names = 1, header = F)
       pathways <- as.data.frame(t(pathways))
@@ -44,9 +42,15 @@ get_paths <- function(pathway_filepath) {
       pathways <- lapply(pathways, function(x) x[x$Genes != "",])
       return(pathways)
 
+    } else {
+
+      stop("Gene set file extension needs to be .csv or .gmt")
+
     }
 
 }
+
+
 
 
 

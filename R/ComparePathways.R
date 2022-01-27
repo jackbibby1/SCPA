@@ -28,10 +28,8 @@ compare_pathways <- function(samples,
                              max_genes = 500) {
 
   ## Pathways
-  if (class(pathways == "character")) {
+  if (class(pathways)[1] == "character") {
     pathways <- get_paths(pathways)
-  } else {
-    pathways <- pathways
   }
   path_names <- sapply(pathways, function(x) unique(x$Pathway))
 

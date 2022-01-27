@@ -112,7 +112,7 @@
 </h3>
 <p>And let’s load in the data we’re going to use. In this dataset, CD4<sup>+</sup> T cells were left unstimulated, or stimuated for 12 or 24 hours with anti-CD3 and anti-CD28</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">naive_cd4</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/load.html" class="external-link">load</a></span><span class="op">(</span><span class="st">"naive_cd4.rds"</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span class="va">naive_cd4</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/readRDS.html" class="external-link">readRDS</a></span><span class="op">(</span><span class="st">"naive_cd4.rds"</span><span class="op">)</span></code></pre></div>
 <p>In the <code>naive_cd4</code> object, we have all our naive CD4<sup>+</sup> T cells with metadata specifying the identified cell types and the hour specifying time point of cell harvesting.</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://satijalab.org/seurat/reference/DimPlot.html" class="external-link">DimPlot</a></span><span class="op">(</span><span class="va">naive_cd4</span>, split.by <span class="op">=</span> <span class="st">"Hour"</span><span class="op">)</span> <span class="op">+</span>

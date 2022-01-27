@@ -150,17 +150,13 @@
 <h3 id="pathway-analysis-across-tissues">Pathway analysis across tissues<a class="anchor" aria-label="anchor" href="#pathway-analysis-across-tissues"></a>
 </h3>
 <p>Now we just need to create a loop that will cycle over all the cell types for each tissue and extract their expression values, before doing the pathway analysis. Just to break this down a bit:</p>
-<ul>
-<li>We first create empty lists to store results from the for loop</li>
-<li>We extract expression data using <code>seurat_extract</code> based on tissue, cell_type (“fine”), and stimulation (“none”)</li>
-<li>We then compare all tissues to the blood using <code>compare_pathways</code>
-</li>
-</ul>
 <p>Given the number of cells, pathways, and samples we’re comparing, this may take a while. Here we’re showing how to run a comparison sequentially, but you can significantly reduce the time taken for the analysis if you split the three comparisons across e.g. different scripts.</p>
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">bl_bm</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="op">)</span>; <span class="va">bl_ln</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="op">)</span>; <span class="va">bl_lung</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="op">)</span>
+<code class="sourceCode R"><span class="co"># We first create empty lists to store results from the for loop</span>
+<span class="va">bl_bm</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="op">)</span>; <span class="va">bl_ln</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="op">)</span>; <span class="va">bl_lung</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="op">)</span>
 <span class="kw">for</span> <span class="op">(</span><span class="va">i</span> <span class="kw">in</span> <span class="va">cell_types</span><span class="op">)</span> <span class="op">{</span>
   
+  <span class="co"># We extract expression data using `seurat_extract` based on tissue, cell_type ("fine"), and stimulation ("none")</span>
   <span class="va">blood</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/seurat_extract.html">seurat_extract</a></span><span class="op">(</span><span class="va">split_tissue</span><span class="op">$</span><span class="va">bl</span>, 
                           meta1 <span class="op">=</span> <span class="st">"fine"</span>, value_meta1 <span class="op">=</span> <span class="va">i</span>,
                           meta2 <span class="op">=</span> <span class="st">"stimulation"</span>, value_meta2 <span class="op">=</span> <span class="st">"none"</span><span class="op">)</span>
@@ -177,6 +173,7 @@
                          meta1 <span class="op">=</span> <span class="st">"fine"</span>, value_meta1 <span class="op">=</span> <span class="va">i</span>,
                          meta2 <span class="op">=</span> <span class="st">"stimulation"</span>, value_meta2 <span class="op">=</span> <span class="st">"none"</span><span class="op">)</span>
   
+  <span class="co"># We then compare all tissues to the blood using `compare_pathways`</span>
   <span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste</a></span><span class="op">(</span><span class="st">"comparing"</span>, <span class="va">i</span><span class="op">)</span><span class="op">)</span>
   <span class="va">bl_bm</span><span class="op">[[</span><span class="va">i</span><span class="op">]</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/compare_pathways.html">compare_pathways</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="va">blood</span>, <span class="va">bm</span><span class="op">)</span>, <span class="va">pathways</span><span class="op">)</span>
   <span class="va">bl_ln</span><span class="op">[[</span><span class="va">i</span><span class="op">]</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/compare_pathways.html">compare_pathways</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="va">blood</span>, <span class="va">ln</span><span class="op">)</span>, <span class="va">pathways</span><span class="op">)</span>

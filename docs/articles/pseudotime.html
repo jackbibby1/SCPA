@@ -172,10 +172,6 @@
             size_cells <span class="op">=</span> <span class="fl">1</span>, alpha_cells <span class="op">=</span> <span class="fl">0.8</span><span class="op">)</span> <span class="op">+</span> 
   <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/theme.html" class="external-link">theme</a></span><span class="op">(</span>aspect.ratio <span class="op">=</span> <span class="fl">1</span><span class="op">)</span></code></pre></div>
 <p><img src="../reference/figures/naive_cd4_milestone.png" style="width:50.0%"></p>
-</div>
-<div class="section level3">
-<h3 id="extract-groups-based-on-milestones-and-add-information-to-seurat-object">Extract groups based on milestones and add information to Seurat object<a class="anchor" aria-label="anchor" href="#extract-groups-based-on-milestones-and-add-information-to-seurat-object"></a>
-</h3>
 <p>And extract the cells based on this grouping</p>
 <div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">mile_group</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html" class="external-link">data.frame</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/pkg/dynwrap/man/group_from_trajectory.html" class="external-link">group_onto_nearest_milestones</a></span><span class="op">(</span><span class="va">model_n4</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span>
@@ -199,7 +195,7 @@
 <div class="section level3">
 <h3 id="define-pathways-and-run-comparison">Define pathways and run comparison<a class="anchor" aria-label="anchor" href="#define-pathways-and-run-comparison"></a>
 </h3>
-<p>Now all the hard work is done, we just need to give this information to SCPA to analyse pathways over pseudotime, after defining the pathways. Here we’re using a curated list of metabolic pathways taken from Hallmark, KEGG, and Reactome databases that you can find <a href="https://github.com/jackbibby1/SCPA/blob/main/gene_sets/.csv" class="external-link">here</a></p>
+<p>Now all the hard work is done, we just need to give this information to SCPA to analyse pathways over pseudotime, after defining the pathways. Here we’re using a curated list of metabolic pathways taken from Hallmark, KEGG, and Reactome databases that you can find <a href="https://github.com/jackbibby1/SCPA/blob/main/gene_sets/" class="external-link">here</a></p>
 <div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">pathways</span> <span class="op">&lt;-</span> <span class="st">"combined_metabolic_pathways.csv"</span>
 

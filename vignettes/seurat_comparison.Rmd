@@ -24,16 +24,10 @@ library(msigdbr)
 library(Seurat)
 ```
 
-We're going to compare Th1 cells to Treg cells at 24 hours post activation, using all Hallmark gene sets to see if they differ in any broad sense. So first we can load in our memory CD4 data that can be found here
-
-```{r load_data, echo=F, eval=FALSE}
-load("~/Google Drive/scRNA_metabolism_paper/Processing scRNAseq data/Memory CD4/int_data_M4.RData")
-memory_cd4 <- int_data_M4
-rm(int_data_M4)
-```
+We're going to do the same comparison of Th1 and Tcm cells that we did in the [quick start tutorial](../docs/articles/quick_start.html), again using all Hallmark gene sets. We'll use the [Szabo, P... Sims, P](https://www.nature.com/articles/s41467-019-12464-3) T cell dataset that you can download [here](https://drive.google.com/file/d/1WSv7MLfcV_94c-C6bCUiUm_XwesCiy3N/view?usp=sharing).
 
 ```{r, eval=F}
-load("memory_cd4.RData")
+t_cells <- readRDS("~/Google Drive/example_datasets/szabo_t_cell.rds")
 ```
 
 We need to define our gene sets, and we can do this through the msigdbr package that contains a bunch of biological gene sets that can be found [here](https://www.gsea-msigdb.org/gsea/msigdb/genesets.jsp). Here we just take the Hallmark gene sets (using the "H" call to msigdbr), and use the format_pathways function to get them in a readable format for SCPA.
@@ -46,23 +40,12 @@ pathways <- msigdbr("Homo sapiens", "H") %>%
 Now to compare the Th1 and Treg populations, we can use the compare_seurat function within SCPA.
 
 ```{r compare_pathways, results='hide', eval=F}
-th1_treg <- compare_seurat(memory_cd4,
-                           group1 = "Cell_Type", group1_population = c("Th1", "Treg"),
-                           group2 = "Hour", group2_population = 24,
+scpa_out <- compare_seurat(t_cells,
+                           group1 = "Cell", group1_population = c("Th1", "Tcm"),
                            pathways = pathways)
 ```
 
-```{r, echo=F}
-th1_treg <- readRDS("~/Google Drive/scRNA_metabolism_paper/Paper/th1_treg.rds")
-```
-
-
-And we can see some of the topmost diferentially regulated pathways
-
-```{r}
-head(th1_treg, 10)
-```
-
+And that's it. Your results will be stored in your `scpa_out` object.
 
 
 

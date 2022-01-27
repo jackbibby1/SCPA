@@ -28,7 +28,9 @@ compare_pathways <- function(samples,
                              max_genes = 500) {
 
   ## Pathways
-  pathways <- get_paths(pathways)
+  if (class(pathways == "character")) {
+    pathways <- get_paths(pathways)
+  }
   path_names <- sapply(pathways, function(x) unique(x$Pathway))
 
   ## Get cells in each sample

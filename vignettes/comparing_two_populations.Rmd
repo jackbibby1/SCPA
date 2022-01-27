@@ -28,7 +28,7 @@ library(tidyverse)
 And let's load in the data we're going to use. In this dataset, CD4^+^ T cells were left unstimulated, or stimuated for 12 or 24 hours with anti-CD3 and anti-CD28
 
 ```{r, eval=F}
-naive_cd4 <- load("naive_cd4.rds")
+naive_cd4 <- readRDS("naive_cd4.rds")
 ```
 
 In the `naive_cd4` object, we have all our naive CD4^+^ T cells with metadata specifying the identified cell types and the hour specifying time point of cell harvesting.

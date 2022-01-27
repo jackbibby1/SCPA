@@ -84,7 +84,7 @@ compare_pathways <- function(samples,
 
   ## Test samples
   if (length(samples) > 2) {
-    message("Conducting multivariate analysis")
+    message("Conducting multisample analysis")
     pb <- utils::txtProgressBar(min = 0, max = length(pop_paths[[1]]),
                                 style = 3, width = 50)
     mcm_result <- list()

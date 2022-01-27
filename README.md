@@ -48,8 +48,8 @@ devtools::install_github("jackbibby1/SCPA")
 
 ## 2. Tutorials
 
-For tutorials on how to use SCPA, [click this
-link](https://jackbibby1.github.io/SCPA/)
+For tutorials on how to use SCPA, see
+<https://jackbibby1.github.io/SCPA/>
 
 ## 3. Issues
 

@@ -23,31 +23,38 @@
 
 get_paths <- function(pathway_filepath) {
 
-  if (str_ends(pathway_filepath, "gmt")) {
-    pathways <- utils::read.delim(pathway_filepath, row.names = 1, header = F)
-    pathways <- as.data.frame(t(pathways))
-    pathways <- tidyr::pivot_longer(pathways, cols = 1:length(pathways), names_to = "Pathway", values_to = "Genes")
-    pathways <- dplyr::group_split(pathways, Pathway)
-    pathways <- lapply(pathways, function(x) x[x$Genes != "",])
-    return(pathways)
+  filepath_test <- as.character(pathway_filepath)
 
-  } else if (str_ends(pathway_filepath, "csv")) {
+  if (class(pathway_filepath) == "character") {
 
-    pathways <- utils::read.csv(pathway_filepath, row.names = 1, header = F)
-    pathways <- as.data.frame(t(pathways))
-    pathways <- tidyr::pivot_longer(pathways, cols = 1:length(pathways), names_to = "Pathway", values_to = "Genes")
-    pathways <- dplyr::group_split(pathways, Pathway)
-    pathways <- lapply(pathways, function(x) x[x$Genes != "",])
-    return(pathways)
+    if (str_ends(filepath_test, "gmt")) {
+      pathways <- utils::read.delim(pathway_filepath, row.names = 1, header = F)
+      pathways <- as.data.frame(t(pathways))
+      pathways <- tidyr::pivot_longer(pathways, cols = 1:length(pathways), names_to = "Pathway", values_to = "Genes")
+      pathways <- dplyr::group_split(pathways, Pathway)
+      pathways <- lapply(pathways, function(x) x[x$Genes != "",])
+      return(pathways)
 
-  } else {
+    }
+
+    if (str_ends(filepath_test, "csv")) {
+
+      pathways <- utils::read.csv(pathway_filepath, row.names = 1, header = F)
+      pathways <- as.data.frame(t(pathways))
+      pathways <- tidyr::pivot_longer(pathways, cols = 1:length(pathways), names_to = "Pathway", values_to = "Genes")
+      pathways <- dplyr::group_split(pathways, Pathway)
+      pathways <- lapply(pathways, function(x) x[x$Genes != "",])
+      return(pathways)
+
+  }
+
+    } else {
 
     pathways <- pathway_filepath
     return(pathways)
 
   }
 }
-
 
 
 

@@ -14,25 +14,21 @@ knitr::opts_chunk$set(
 )
 ```
 
-Here we're going to do a basic comparison of pathways between two populations. We'll look at replicating some data in our [recent paper](). In the paper, we took resting naive CD4^+^ T cells at 0hr, and compared metabolic pathways to activated naive CD4^+^ T cells at 24hr.
+Here we're going to do a basic comparison of pathways between two populations using our naive CD4^+^ T cell dataset that you can find [here](https://drive.google.com/file/d/1XstWBD4lOY0QNd-8Wzeh1f3-uYKuUU5Q/view?usp=sharing).
 
 Let's load in a few packages we'll need
-```{r setup, warning=F, message=F, results='hide', eval=F}
+```{r setup, eval=F}
 library(SCPA)
 library(Seurat)
 library(tidyverse)
 ```
 
-And let's load in the data we're going to use
 
-```{r load_data, echo=F, eval=F}
-load("~/Google Drive/scRNA_metabolism_paper/Processing scRNAseq data/Naive CD4/int_data_N4.RData")
-naive_cd4 <- int_data_N4
-rm(int_data_N4)
-```
+### Loading in data and visualizing
+And let's load in the data we're going to use. In this dataset, CD4^+^ T cells were left unstimulated, or stimuated for 12 or 24 hours with anti-CD3 and anti-CD28
 
 ```{r, eval=F}
-load("naive_cd4.RData")
+naive_cd4 <- load("naive_cd4.rds")
 ```
 
 In the `naive_cd4` object, we have all our naive CD4^+^ T cells with metadata specifying the identified cell types and the hour specifying time point of cell harvesting.
@@ -44,6 +40,8 @@ DimPlot(naive_cd4, split.by = "Hour") +
 
 ![](../man/figures/naive_cd4_umap.png){width=100%}
 
+
+### Extracting the expression matrices
 We then need the expression matrices for the populations we want to compare. For this, we can use the `seurat_extract` function from the SCPA package, which takes a Seurat object and subsets the data based on the metadata specified in the Seurat columns e.g. here we want to take 'Resting' cells at 0hr, and 'Activated' cells at 24hr.
 
 ```{r seurat_extract, eval=F}
@@ -58,32 +56,27 @@ activated <- seurat_extract(naive_cd4,
 ```
 
 
-After we have our data, we can define the pathways to compare. For the Fig 4 analysis, we curated a list of metabolic pathways from a few different sources, which can be found [here](). The file is in standard gmt file format with the pathway name in column 1 and genes of that pathway in subsequent columns. Here we just converted a gmt file to csv, and manually curated a single file with all metabolic gene sets. SCPA just needs the filepath to these gene sets, so we can add this as an object to simplify our final chunk of code
-
-```{r get_pathways, echo=F, eval=F}
-pathways <- "~/Google Drive/scRNA_metabolism_paper/Pathways_and_gene_sets/combined_metab/Combined_metab_paths_noGO.csv"
-```
+### Defining metabolic pathways
+After we have our data, we can define the pathways to compare. We curated a list of metabolic pathways from a few different sources (Hallmark, KEGG, and Reactome), which can be found [here](https://github.com/jackbibby1/SCPA/blob/main/gene_sets/.csv). The file is in standard gmt file format with the pathway name in column 1 and genes of that pathway in subsequent columns. Here we just converted a gmt file to csv, and manually curated a single file with all metabolic gene sets. SCPA just needs the filepath to these gene sets, so we can add this as an object to simplify our final chunk of code
 
 
 ```{r, eval=F}
 pathways <- "combined_metabolic_pathways.csv"
 ```
 
-So now we have our samples and metabolic gene sets. To compare these pathways, we can just run the compare_pathways function. NB, the samples need to be supplied as a list
+
+### Running SCPA
+So now we have our samples and metabolic gene sets. To compare these pathways, we can just run the compare_pathways function.
 
 ```{r compare_pathways, eval=F}
 rest_act <- compare_pathways(samples = list(resting, activated), 
                              pathways = pathways)
 ```
 
-```{r, echo=F, eval=F}
-rest_act <- readRDS("~/Google Drive/scRNA_metabolism_paper/Paper/Fig4/rest_act.rds")
-```
-
-Now we have the results stored in the rest_act object, which we can then visualize. In the paper, we present the data as a classical volcano plot where the q value (SCPA statistic) is plotted against fold change of each pathway. So just need to do some formatting before plotting the data.
+### Visualizing results
+Now we have the results stored in the rest_act object, which we can then visualize.
 
 ```{r plot_volcano, eval=F}
-rest_act$FC <- -rest_act$FC
 rest_act <- rest_act %>%
   mutate(color = case_when(FC > 5 & adjPval < 0.01 ~ '#6dbf88',
                            FC < 5 & FC > -5 & adjPval < 0.01 ~ '#84b0f0',
@@ -108,7 +101,7 @@ ggplot(rest_act, aes(FC, qval)) +
 
 ![](../man/figures/v_plot_rest_act.png){width=45%}
 
-An important aspect of SCPA is highlighted here, in that pathways showing large changes in multivariate distribution (i.e. pathway 'activity') do not always show mean changes. So looking at the plot, we see a large number of pathways that have high qvals, but no enrichment in any given population. In the plot above we highlight arachidonic acid as one particular pathway that shows this pattern, and in [our paper] we show that these pathways are also very relevant when understanding pathway importance. So here we suggest that the qval should be used as the primary statistic when judging biological relevance, and the pathway fold change/enirchment should only be a secondary informative value.
+An important aspect of SCPA is highlighted here, in that pathways showing large changes in multivariate distribution (i.e. pathway 'activity') do not always show mean changes. So looking at the plot, we see a large number of pathways that have high qvals, but no enrichment in any given population. In the plot above we highlight arachidonic acid as one particular pathway that shows this pattern, and in our wet lab work, we have shown that these pathways are also very relevant when understanding pathway importance. So here we suggest that the qval should be used as the primary statistic when judging biological relevance, and the pathway fold change/enirchment should only be a secondary informative value.
 
 
 

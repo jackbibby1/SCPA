@@ -14,7 +14,7 @@ knitr::opts_chunk$set(
 )
 ```
 
-Here we're going to use SCPA to do a more systems level analysis of T cell gene set perturbations across many cell types and multiple tissues (this will basically replicate Figure 5 from [our paper]()). For the analysis, we're using data from [this paper](https://www.nature.com/articles/s41467-019-12464-3) by Szabo, P... Sims, P. In their protocol they sorted CD3^+^ T cells from the blood, bone marrow, lymph node, and lung, and either left them unstimulated, or stimulated the cells for 16 hours.
+Here we're going to use SCPA to do a more systems level analysis of T cell gene set perturbations across many cell types and multiple tissues. For the analysis, we're using data from [this paper](https://www.nature.com/articles/s41467-019-12464-3) by Szabo, P... Sims, P. In their protocol they sorted CD3^+^ T cells from the blood, bone marrow, lymph node, and lung, and either left them unstimulated, or stimulated the cells for 16 hours.
 
 ### Loading in packages and data
 So first let's load in a few packages
@@ -26,11 +26,7 @@ library(magrittr)
 library(ComplexHeatmap)
 ```
 
-And load in the dataset. To see how we processed and integrated the datasets to generate this file, you can see the script [here]().
-
-```{r, eval=F, echo=F}
-df <- readRDS("~/Google Drive/scRNA_metabolism_paper/Paper/Fig6/Disease_data/CD4_healthy_tissues_Sims_GSE126030/biowulf_comparisons/tissue_final_doublets.rds")
-```
+And load in the dataset. To see how we processed and integrated the datasets to generate this file, you can see the script [here](https://github.com/jackbibby1/scpa_paper/blob/main/figure_5.R).
 
 ```{r, eval=F}
 tissue_data <- readRDS("t_cell_tissue_data.rds")
@@ -192,7 +188,7 @@ col_an <- HeatmapAnnotation(Stimulation = stim,
 \
 
 ### Plotting a global summary of the data
-We can now plot a broad summary using the qvals from each comparison. For this, we're just going to represent the data in a heatmap, using the great [ComplexHeatmap] (https://jokergoo.github.io/ComplexHeatmap-reference/book/) package.
+We can now plot a broad summary using the qvals from each comparison. For this, we're just going to represent the data in a heatmap, using the great [ComplexHeatmap](https://jokergoo.github.io/ComplexHeatmap-reference/book/) package.
 ```{r, eval=F}
 hm <- all_data %>%
   Heatmap(name = "Qval",
@@ -209,7 +205,7 @@ ht <- draw(hm)
 ![](../man/figures/tissue_heatmap.png){width=60%}
 
 ### Finding something a bit more specific
-You obviously now want to use this data to find something a bit more biologically relevant. So in our paper, we had a look to see if any pathway was tissue specific. To do this, we calculated the most variable pathways across comparisons, and plotting the variance against the pathway (pathway names added later).
+You obviously now want to use this data to find something a bit more biologically relevant. One way to do this would be to see if any pathways were tissue specific. To do this, we calculated the most variable pathways across comparisons, and then plotted the variance against the pathway (pathway names added later). Here we can see signatures for antimicrobial peptide production and prostaglandin synthesis at highly variable across conditions.
 
 ```{r, eval=F}
 apply(all_data, 1, var) %>%
@@ -231,7 +227,7 @@ apply(all_data, 1, var) %>%
 
 
 ### Highlighting genes from the antimicrobial pathway
-And after going back to the pathway gene expression, we can see that a large effect of this pathway signature was driven by expression of alpha defensin proteins, exclusively in T cells from the bone marrow. In [our paper]() we followed this up and showed it was true at the protein level, highlighting the utility of doing a systems level pathway analysis, and the relative ease of doing it with SCPA.
+And after going back to the pathway gene expression, we can see that a large effect of this pathway signature was driven by expression of alpha defensin proteins, exclusively in T cells from the bone marrow.
 
 ```{r, eval=F}
 tissue_data$neat <- case_when(tissue_data$tissue == "bl" ~ "Blood",

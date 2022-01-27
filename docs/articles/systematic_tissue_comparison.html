@@ -61,7 +61,7 @@
     <a class="dropdown-item" href="../articles/comparing_two_populations.html">Comparing two populations</a>
     <a class="dropdown-item" href="../articles/seurat_comparison.html">Seurat comparison</a>
     <a class="dropdown-item" href="../articles/pseudotime.html">Comparing across pseudotime</a>
-    <a class="dropdown-item" href="../articles/systematic_tissue_comparison.html">Systematic comparisons of many cell types</a>
+    <a class="dropdown-item" href="../articles/systematic_tissue_comparison.html">Systematic comparisons of T cells across tissue</a>
     <a class="dropdown-item" href="../articles/disease_comparison.html">Systems level pathway analysis in disease</a>
   </div>
 </li>
@@ -101,7 +101,7 @@
 
     
     
-<p>Here we’re going to use SCPA to do a more systems level analysis of T cell gene set perturbations across many cell types and multiple tissues (this will basically replicate Figure 5 from <a href="">our paper</a>). For the analysis, we’re using data from <a href="https://www.nature.com/articles/s41467-019-12464-3" class="external-link">this paper</a> by Szabo, P… Sims, P. In their protocol they sorted CD3<sup>+</sup> T cells from the blood, bone marrow, lymph node, and lung, and either left them unstimulated, or stimulated the cells for 16 hours.</p>
+<p>Here we’re going to use SCPA to do a more systems level analysis of T cell gene set perturbations across many cell types and multiple tissues. For the analysis, we’re using data from <a href="https://www.nature.com/articles/s41467-019-12464-3" class="external-link">this paper</a> by Szabo, P… Sims, P. In their protocol they sorted CD3<sup>+</sup> T cells from the blood, bone marrow, lymph node, and lung, and either left them unstimulated, or stimulated the cells for 16 hours.</p>
 <div class="section level3">
 <h3 id="loading-in-packages-and-data">Loading in packages and data<a class="anchor" aria-label="anchor" href="#loading-in-packages-and-data"></a>
 </h3>
@@ -112,7 +112,7 @@
 <span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://igordot.github.io/msigdbr/" class="external-link">msigdbr</a></span><span class="op">)</span>
 <span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://magrittr.tidyverse.org" class="external-link">magrittr</a></span><span class="op">)</span>
 <span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/jokergoo/ComplexHeatmap" class="external-link">ComplexHeatmap</a></span><span class="op">)</span></code></pre></div>
-<p>And load in the dataset. To see how we processed and integrated the datasets to generate this file, you can see the script <a href="">here</a>.</p>
+<p>And load in the dataset. To see how we processed and integrated the datasets to generate this file, you can see the script <a href="https://github.com/jackbibby1/scpa_paper/blob/main/figure_5.R" class="external-link">here</a>.</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">tissue_data</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/readRDS.html" class="external-link">readRDS</a></span><span class="op">(</span><span class="st">"t_cell_tissue_data.rds"</span><span class="op">)</span></code></pre></div>
 </div>
@@ -258,7 +258,7 @@
 <div class="section level3">
 <h3 id="plotting-a-global-summary-of-the-data">Plotting a global summary of the data<a class="anchor" aria-label="anchor" href="#plotting-a-global-summary-of-the-data"></a>
 </h3>
-<p>We can now plot a broad summary using the qvals from each comparison. For this, we’re just going to represent the data in a heatmap, using the great [ComplexHeatmap] (<a href="https://jokergoo.github.io/ComplexHeatmap-reference/book/" class="external-link uri">https://jokergoo.github.io/ComplexHeatmap-reference/book/</a>) package.</p>
+<p>We can now plot a broad summary using the qvals from each comparison. For this, we’re just going to represent the data in a heatmap, using the great <a href="https://jokergoo.github.io/ComplexHeatmap-reference/book/" class="external-link">ComplexHeatmap</a> package.</p>
 <div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">hm</span> <span class="op">&lt;-</span> <span class="va">all_data</span> <span class="op"><a href="https://igordot.github.io/msigdbr/reference/pipe.html" class="external-link">%&gt;%</a></span>
   <span class="fu"><a href="https://rdrr.io/pkg/ComplexHeatmap/man/Heatmap.html" class="external-link">Heatmap</a></span><span class="op">(</span>name <span class="op">=</span> <span class="st">"Qval"</span>,
@@ -275,7 +275,7 @@
 <div class="section level3">
 <h3 id="finding-something-a-bit-more-specific">Finding something a bit more specific<a class="anchor" aria-label="anchor" href="#finding-something-a-bit-more-specific"></a>
 </h3>
-<p>You obviously now want to use this data to find something a bit more biologically relevant. So in our paper, we had a look to see if any pathway was tissue specific. To do this, we calculated the most variable pathways across comparisons, and plotting the variance against the pathway (pathway names added later).</p>
+<p>You obviously now want to use this data to find something a bit more biologically relevant. One way to do this would be to see if any pathways were tissue specific. To do this, we calculated the most variable pathways across comparisons, and then plotted the variance against the pathway (pathway names added later). Here we can see signatures for antimicrobial peptide production and prostaglandin synthesis at highly variable across conditions.</p>
 <div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/base/apply.html" class="external-link">apply</a></span><span class="op">(</span><span class="va">all_data</span>, <span class="fl">1</span>, <span class="va">var</span><span class="op">)</span> <span class="op"><a href="https://igordot.github.io/msigdbr/reference/pipe.html" class="external-link">%&gt;%</a></span>
   <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html" class="external-link">data.frame</a></span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="https://igordot.github.io/msigdbr/reference/pipe.html" class="external-link">%&gt;%</a></span> 
@@ -295,7 +295,7 @@
 <div class="section level3">
 <h3 id="highlighting-genes-from-the-antimicrobial-pathway">Highlighting genes from the antimicrobial pathway<a class="anchor" aria-label="anchor" href="#highlighting-genes-from-the-antimicrobial-pathway"></a>
 </h3>
-<p>And after going back to the pathway gene expression, we can see that a large effect of this pathway signature was driven by expression of alpha defensin proteins, exclusively in T cells from the bone marrow. In <a href="">our paper</a> we followed this up and showed it was true at the protein level, highlighting the utility of doing a systems level pathway analysis, and the relative ease of doing it with SCPA.</p>
+<p>And after going back to the pathway gene expression, we can see that a large effect of this pathway signature was driven by expression of alpha defensin proteins, exclusively in T cells from the bone marrow.</p>
 <div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">tissue_data</span><span class="op">$</span><span class="va">neat</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/case_when.html" class="external-link">case_when</a></span><span class="op">(</span><span class="va">tissue_data</span><span class="op">$</span><span class="va">tissue</span> <span class="op">==</span> <span class="st">"bl"</span> <span class="op">~</span> <span class="st">"Blood"</span>,
                               <span class="va">tissue_data</span><span class="op">$</span><span class="va">tissue</span> <span class="op">==</span> <span class="st">"bm"</span> <span class="op">~</span> <span class="st">"BM"</span>,

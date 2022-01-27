@@ -50,11 +50,12 @@ pathways <- msigdbr("Homo sapiens", "H") %>%
 
 
 ### SCPA comparison
-Now to compare the Th1 and Treg populations, we can use the compare_seurat function within SCPA. Here, `group1` defines the column name for your metadata, and `group1_population` defines two values within that column
+Now to compare the Th1 and Tcm populations, we can use the compare_seurat function within SCPA. Here, `group1` defines the column name for your metadata, and `group1_population` defines two values within that column
 
 ```{r compare_pathways, eval=F}
 scpa_out <- compare_seurat(t_cells,
-                           group1 = "Cell", group1_population = c("cd4 th1", "cd4 tcm"),
+                           group1 = "Cell", 
+                           group1_population = c("cd4 th1", "cd4 tcm"),
                            pathways = pathways)
 ```
 

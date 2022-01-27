@@ -101,51 +101,47 @@
 
     
     
-<p>We’ve shown that you can compare pathways if you have expression matrices, but you can also compare populations within a given Seurat object in one function within SCPA. To do this, you just need the Seurat object that should be annotated with the groups you want to compare.</p>
+<p>As well as importing expression matrices into <code>compare_pathways</code>, you can also compare populations directly within a Seurat object in one function within SCPA. To do this, you just need the Seurat object that is annotated with the groups you want to compare.</p>
 <p>Let’s load in a few packages.</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/jackbibby1/SCPA/" class="external-link">SCPA</a></span><span class="op">)</span>
 <span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://tidyverse.tidyverse.org" class="external-link">tidyverse</a></span><span class="op">)</span>
 <span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://igordot.github.io/msigdbr/" class="external-link">msigdbr</a></span><span class="op">)</span>
 <span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://satijalab.org/seurat" class="external-link">Seurat</a></span><span class="op">)</span></code></pre></div>
-<p>We’re going to compare Th1 cells to Treg cells at 24 hours post activation, using all Hallmark gene sets to see if they differ in any broad sense. So first we can load in our memory CD4 data that can be found here</p>
+<div class="section level3">
+<h3 id="getting-the-dataset">Getting the dataset<a class="anchor" aria-label="anchor" href="#getting-the-dataset"></a>
+</h3>
+<p>We’re going to do the same comparison of Th1 and Tcm cells that we did in the <a href="../docs/articles/quick_start.html">quick start tutorial</a>, again using all Hallmark gene sets. We’ll use the <a href="https://www.nature.com/articles/s41467-019-12464-3" class="external-link">Szabo, P… Sims, P</a> T cell dataset that you can download <a href="https://drive.google.com/file/d/1WSv7MLfcV_94c-C6bCUiUm_XwesCiy3N/view?usp=sharing" class="external-link">here</a>.</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/base/load.html" class="external-link">load</a></span><span class="op">(</span><span class="st">"memory_cd4.RData"</span><span class="op">)</span></code></pre></div>
-<p>We need to define our gene sets, and we can do this through the msigdbr package that contains a bunch of biological gene sets that can be found <a href="https://www.gsea-msigdb.org/gsea/msigdb/genesets.jsp" class="external-link">here</a>. Here we just take the Hallmark gene sets (using the “H” call to msigdbr), and use the format_pathways function to get them in a readable format for SCPA.</p>
+<code class="sourceCode R"><span class="va">t_cells</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/readRDS.html" class="external-link">readRDS</a></span><span class="op">(</span><span class="st">"~/Google Drive/example_datasets/szabo_t_cell.rds"</span><span class="op">)</span></code></pre></div>
+</div>
+<div class="section level3">
+<h3 id="quick-look-at-the-data">Quick Look at the data<a class="anchor" aria-label="anchor" href="#quick-look-at-the-data"></a>
+</h3>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="https://satijalab.org/seurat/reference/DimPlot.html" class="external-link">DimPlot</a></span><span class="op">(</span><span class="va">t_cells</span><span class="op">)</span> <span class="op">+</span>
+  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/theme.html" class="external-link">theme</a></span><span class="op">(</span>aspect.ratio <span class="op">=</span> <span class="fl">1</span><span class="op">)</span></code></pre></div>
+<p><img src="../reference/figures/cd4_cell_types.png" style="width:50.0%"></p>
+</div>
+<div class="section level3">
+<h3 id="getting-the-gene-sets">Getting the gene sets<a class="anchor" aria-label="anchor" href="#getting-the-gene-sets"></a>
+</h3>
+<p>We need to define our gene sets, and we can do this through the msigdbr package that contains a bunch of biological gene sets that can be found <a href="https://www.gsea-msigdb.org/gsea/msigdb/genesets.jsp" class="external-link">here</a>. Here we just take the Hallmark gene sets (using the “H” call to msigdbr), and use the format_pathways function to get them in a readable format for SCPA.</p>
+<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">pathways</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://igordot.github.io/msigdbr/reference/msigdbr.html" class="external-link">msigdbr</a></span><span class="op">(</span><span class="st">"Homo sapiens"</span>, <span class="st">"H"</span><span class="op">)</span> <span class="op"><a href="https://igordot.github.io/msigdbr/reference/pipe.html" class="external-link">%&gt;%</a></span>
   <span class="fu"><a href="../reference/format_pathways.html">format_pathways</a></span><span class="op">(</span><span class="op">)</span></code></pre></div>
-<p>Now to compare the Th1 and Treg populations, we can use the compare_seurat function within SCPA.</p>
-<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">th1_treg</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/compare_seurat.html">compare_seurat</a></span><span class="op">(</span><span class="va">memory_cd4</span>,
-                           group1 <span class="op">=</span> <span class="st">"Cell_Type"</span>, group1_population <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"Th1"</span>, <span class="st">"Treg"</span><span class="op">)</span>,
-                           group2 <span class="op">=</span> <span class="st">"Hour"</span>, group2_population <span class="op">=</span> <span class="fl">24</span>,
-                           pathways <span class="op">=</span> <span class="va">pathways</span><span class="op">)</span></code></pre></div>
-<p>And we can see some of the topmost diferentially regulated pathways</p>
+</div>
+<div class="section level3">
+<h3 id="scpa-comparison">SCPA comparison<a class="anchor" aria-label="anchor" href="#scpa-comparison"></a>
+</h3>
+<p>Now to compare the Th1 and Tcm populations, we can use the compare_seurat function within SCPA. Here, <code>group1</code> defines the column name for your metadata, and <code>group1_population</code> defines two values within that column</p>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="va">th1_treg</span>, <span class="fl">10</span><span class="op">)</span>
-<span class="co">#&gt;                               Pathway         Pval      adjPval     qval</span>
-<span class="co">#&gt; 2        HALLMARK_ALLOGRAFT_REJECTION 4.522036e-82 2.261018e-80 8.924444</span>
-<span class="co">#&gt; 23       HALLMARK_IL2_STAT5_SIGNALING 2.259219e-73 1.129609e-71 8.423008</span>
-<span class="co">#&gt; 45   HALLMARK_TNFA_SIGNALING_VIA_NFKB 3.283945e-69 1.641972e-67 8.172187</span>
-<span class="co">#&gt; 27 HALLMARK_INTERFERON_GAMMA_RESPONSE 7.519610e-68 3.759805e-66 8.088562</span>
-<span class="co">#&gt; 25     HALLMARK_INFLAMMATORY_RESPONSE 1.667848e-66 8.339240e-65 8.004928</span>
-<span class="co">#&gt; 26 HALLMARK_INTERFERON_ALPHA_RESPONSE 1.667848e-66 8.339240e-65 8.004928</span>
-<span class="co">#&gt; 22                   HALLMARK_HYPOXIA 7.457055e-64 3.728528e-62 7.837631</span>
-<span class="co">#&gt; 11                HALLMARK_COMPLEMENT 1.503208e-62 7.516040e-61 7.753967</span>
-<span class="co">#&gt; 7                  HALLMARK_APOPTOSIS 2.935191e-61 1.467595e-59 7.670293</span>
-<span class="co">#&gt; 24   HALLMARK_IL6_JAK_STAT3_SIGNALING 5.551625e-60 2.775812e-58 7.586607</span>
-<span class="co">#&gt;            FC</span>
-<span class="co">#&gt; 2    4.381427</span>
-<span class="co">#&gt; 23   1.666641</span>
-<span class="co">#&gt; 45  -4.030307</span>
-<span class="co">#&gt; 27 -24.211431</span>
-<span class="co">#&gt; 25  -1.225515</span>
-<span class="co">#&gt; 26 -18.926415</span>
-<span class="co">#&gt; 22   2.857727</span>
-<span class="co">#&gt; 11   2.570715</span>
-<span class="co">#&gt; 7   -3.048027</span>
-<span class="co">#&gt; 24  -6.544138</span></code></pre></div>
+<code class="sourceCode R"><span class="va">scpa_out</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/compare_seurat.html">compare_seurat</a></span><span class="op">(</span><span class="va">t_cells</span>,
+                           group1 <span class="op">=</span> <span class="st">"Cell"</span>, 
+                           group1_population <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"cd4 th1"</span>, <span class="st">"cd4 tcm"</span><span class="op">)</span>,
+                           pathways <span class="op">=</span> <span class="va">pathways</span><span class="op">)</span></code></pre></div>
+<p>And that’s it. Your results will be stored in your <code>scpa_out</code> object.</p>
+</div>
   </main>
 </div>
 

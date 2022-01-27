@@ -104,26 +104,40 @@
 <div class="section level2">
 <h2 id="comparing-pathways-across-pseudotime-with-scpa">Comparing pathways across pseudotime with SCPA<a class="anchor" aria-label="anchor" href="#comparing-pathways-across-pseudotime-with-scpa"></a>
 </h2>
-<p>Here we’re going to look at tracking gene set changes across a pseudotime trajectory. To do this, we’ll replicate some data from our <a href="link">recent paper</a> where we characterised the transcriptional reprogramming of metabolic pathways after activation.</p>
+<p>Here we’re going to look at tracking gene set changes across a pseudotime trajectory, using the multisample capability of SCPA. To do this, we’ll use a dataset that we generated where naive CD4 T cells were left unstimulated, or stimuated for 12 or 24 hours with anti-CD3 and anti-CD28. You can find this dataset <a href="">here</a>. We’ll do a systematic analysis of how metabolic pathways are transcriptionally regulated throughout naive CD4<sup>+</sup> T cell activation.</p>
 <p>Let’s load in a few packages to start</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/jackbibby1/SCPA/" class="external-link">SCPA</a></span><span class="op">)</span>
 <span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://satijalab.org/seurat" class="external-link">Seurat</a></span><span class="op">)</span>
-<span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/dynverse/dyno" class="external-link">dyno</a></span><span class="op">)</span>
 <span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://tidyverse.tidyverse.org" class="external-link">tidyverse</a></span><span class="op">)</span>
 <span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://magrittr.tidyverse.org" class="external-link">magrittr</a></span><span class="op">)</span>
+<span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/dynverse/dyno" class="external-link">dyno</a></span><span class="op">)</span>
 <span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/jokergoo/ComplexHeatmap" class="external-link">ComplexHeatmap</a></span><span class="op">)</span>
 <span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/jokergoo/circlize" class="external-link">circlize</a></span><span class="op">)</span></code></pre></div>
-<p>And load in our data. This is taken from our naive CD4<sup>+</sup> T cell dataset that you can access <a href="">here</a></p>
+<div class="section level3">
+<h3 id="load-in-data">Load in data<a class="anchor" aria-label="anchor" href="#load-in-data"></a>
+</h3>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/base/load.html" class="external-link">load</a></span><span class="op">(</span><span class="st">"naive_cd4.RData"</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span class="va">naive_cd4</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/load.html" class="external-link">load</a></span><span class="op">(</span><span class="st">"naive_cd4.rds"</span><span class="op">)</span></code></pre></div>
+</div>
+<div class="section level3">
+<h3 id="quick-look-at-the-data">Quick look at the data<a class="anchor" aria-label="anchor" href="#quick-look-at-the-data"></a>
+</h3>
 <p>We can see that the populations include both naive/effector T cells, and Tregs</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://satijalab.org/seurat/reference/DimPlot.html" class="external-link">DimPlot</a></span><span class="op">(</span><span class="va">naive_cd4</span>, split.by <span class="op">=</span> <span class="st">"Hour"</span><span class="op">)</span></code></pre></div>
 <p><img src="../reference/figures/naive_cd4_umap.png" style="width:100.0%"></p>
+</div>
+<div class="section level3">
+<h3 id="filter-out-cells-we-dont-want">Filter out cells we don’t want<a class="anchor" aria-label="anchor" href="#filter-out-cells-we-dont-want"></a>
+</h3>
 <p>We’ll get rid of the Tregs because we’re just interested in naive T cell activation in the non Treg populations</p>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">naive_cd4</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/subset.html" class="external-link">subset</a></span><span class="op">(</span><span class="va">naive_cd4</span>, idents <span class="op">=</span> <span class="st">"Treg"</span>, invert <span class="op">=</span> <span class="cn">T</span><span class="op">)</span></code></pre></div>
+</div>
+<div class="section level3">
+<h3 id="model-trajectory-using-the-dyno-workflow">Model trajectory using the dyno workflow<a class="anchor" aria-label="anchor" href="#model-trajectory-using-the-dyno-workflow"></a>
+</h3>
 <p>We’ll then take the top 1000 most variable genes to model a trajectory</p>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">df</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/matrix.html" class="external-link">as.matrix</a></span><span class="op">(</span><span class="va">naive_cd4</span><span class="op">[[</span><span class="st">"RNA"</span><span class="op">]</span><span class="op">]</span><span class="op">@</span><span class="va">data</span><span class="op">)</span>
@@ -151,6 +165,10 @@
             plot_trajectory <span class="op">=</span> <span class="cn">T</span>, size_cells <span class="op">=</span> <span class="fl">1</span>, alpha_cells <span class="op">=</span> <span class="fl">0.8</span><span class="op">)</span> <span class="op">+</span> 
   <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/theme.html" class="external-link">theme</a></span><span class="op">(</span>aspect.ratio <span class="op">=</span> <span class="fl">1</span><span class="op">)</span></code></pre></div>
 <p><img src="../reference/figures/naive_cd4_milestone.png" style="width:50.0%"></p>
+</div>
+<div class="section level3">
+<h3 id="extract-groups-based-on-milestones-and-add-information-to-seurat-object">Extract groups based on milestones and add information to Seurat object<a class="anchor" aria-label="anchor" href="#extract-groups-based-on-milestones-and-add-information-to-seurat-object"></a>
+</h3>
 <p>And extract the cells based on this grouping</p>
 <div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">mile_group</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html" class="external-link">data.frame</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/pkg/dynwrap/man/group_from_trajectory.html" class="external-link">group_onto_nearest_milestones</a></span><span class="op">(</span><span class="va">model_n4</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span>
@@ -159,6 +177,10 @@
 <p>Once we have the pseudotime groupings, we can add this information to the Seurat object.</p>
 <div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">naive_cd4</span><span class="op">$</span><span class="va">milestone</span> <span class="op">&lt;-</span> <span class="va">mile_group</span><span class="op">$</span><span class="va">milestone</span></code></pre></div>
+</div>
+<div class="section level3">
+<h3 id="extract-expression-data-for-the-populations-were-comparing">Extract expression data for the populations we’re comparing<a class="anchor" aria-label="anchor" href="#extract-expression-data-for-the-populations-were-comparing"></a>
+</h3>
 <p>We then need to extract expression matrices for all the cells across the distinct nodes, so we effectively have 4 populations across the trajectory. We can use these expression matrices to assess pathways across the 4 nodes.</p>
 <p>We can loop the <code>seurat_extract</code> function to get expression matrices for all cells in each population.</p>
 <div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
@@ -166,12 +188,21 @@
 <span class="kw">for</span> <span class="op">(</span><span class="va">i</span> <span class="kw">in</span> <span class="fl">1</span><span class="op">:</span><span class="fl">4</span><span class="op">)</span> <span class="op">{</span>
   <span class="va">cd4_pseudo</span><span class="op">[[</span><span class="va">i</span><span class="op">]</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/seurat_extract.html">seurat_extract</a></span><span class="op">(</span><span class="va">naive_cd4</span>, meta1 <span class="op">=</span> <span class="st">"milestone"</span>, value_meta1 <span class="op">=</span> <span class="va">i</span><span class="op">)</span>
 <span class="op">}</span></code></pre></div>
+</div>
+<div class="section level3">
+<h3 id="define-pathways-and-run-comparison">Define pathways and run comparison<a class="anchor" aria-label="anchor" href="#define-pathways-and-run-comparison"></a>
+</h3>
 <p>Now all the hard work is done, we just need to give this information to SCPA to analyse pathways over pseudotime, after defining the pathways. Here we’re using a curated list of metabolic pathways taken from Hallmark, KEGG, and Reactome databases that you can find <a href="https://github.com/jackbibby1/SCPA/blob/main/gene_sets/.csv" class="external-link">here</a></p>
 <div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">pathways</span> <span class="op">&lt;-</span> <span class="st">"combined_metabolic_pathways.csv"</span>
 
-<span class="va">cd4_metabolism</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/compare_pathways.html">compare_pathways</a></span><span class="op">(</span><span class="va">cd4_pseudo</span>, <span class="va">pathways</span><span class="op">)</span></code></pre></div>
-<p>All done. Let’s plot the data (some annotations have been added later to highlight pathways, but we can see the final heatmap from Fig4B in <a href="">our paper</a>)</p>
+<span class="va">cd4_metabolism</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/compare_pathways.html">compare_pathways</a></span><span class="op">(</span>samples <span class="op">=</span> <span class="va">cd4_pseudo</span>, 
+                                   pathways <span class="op">=</span> <span class="va">pathways</span><span class="op">)</span></code></pre></div>
+</div>
+<div class="section level3">
+<h3 id="plot-a-global-summary-of-the-data">Plot a global summary of the data<a class="anchor" aria-label="anchor" href="#plot-a-global-summary-of-the-data"></a>
+</h3>
+<p>All done. Let’s plot the data (some annotations have been added later to highlight pathways)</p>
 <div class="sourceCode" id="cb14"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">cd4_metabolism</span> <span class="op">&lt;-</span> <span class="va">cd4_metabolism</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span>
   <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html" class="external-link">data.frame</a></span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span>
@@ -190,15 +221,20 @@
         show_row_names <span class="op">=</span> <span class="cn">F</span>,
         show_column_names <span class="op">=</span> <span class="cn">F</span><span class="op">)</span></code></pre></div>
 <p><img src="../reference/figures/metabolic_heatmap.png" style="width:70.0%"></p>
+</div>
+<div class="section level3">
+<h3 id="highlight-pathway-by-rank">Highlight pathway by rank<a class="anchor" aria-label="anchor" href="#highlight-pathway-by-rank"></a>
+</h3>
 <p>We can also extract a single pathway to highlight its rank in the analysis using the <code>plot_rank</code> function:</p>
 <div class="sourceCode" id="cb15"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">cd4_metabolism</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://tibble.tidyverse.org/reference/rownames.html" class="external-link">rownames_to_column</a></span><span class="op">(</span><span class="va">cd4_metabolism</span>, <span class="st">"Pathway"</span><span class="op">)</span>
-<span class="fu"><a href="../reference/plot_rank.html">plot_rank</a></span><span class="op">(</span><span class="va">cd4_metabolism</span>, 
+<code class="sourceCode R"><span class="fu"><a href="../reference/plot_rank.html">plot_rank</a></span><span class="op">(</span><span class="va">cd4_metabolism</span>, 
           <span class="st">"reactome_arachidonic"</span>, 
           label_size <span class="op">=</span> <span class="fl">2</span><span class="op">)</span></code></pre></div>
-<p><img src="../reference/figures/aa_metab_rank.png" style="width:70.0%"></p>
+<p><img src="../reference/figures/pseudotime_rank.png" style="width:70.0%"></p>
 </div>
-  </main>
+</div>
+  </main><aside class="col-md-3"><nav id="toc"><h2>On this page</h2>
+    </nav></aside>
 </div>
 
 

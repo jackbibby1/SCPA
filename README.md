@@ -48,23 +48,23 @@ devtools::install_github("jackbibby1/SCPA")
 
 ## 2. Tutorials
 
-We have tutorials on:
+There are various examples and walkthroughs:
 
--   A generic [quick
-    start](https://jackbibby1.github.io/SCPA/articles/quick_start.html)
-    tutorial
+-   A generic quick start
+    [tutorial](https://jackbibby1.github.io/SCPA/articles/quick_start.html)
 -   A
     [tutorial](https://jackbibby1.github.io/SCPA/articles/using_gene_sets.html)
-    on how to get gene sets for use with SCPA
--   A more detailed
+    on how to get and use gene sets with SCPA
+-   A
     [tutorial](https://jackbibby1.github.io/SCPA/articles/comparing_two_populations.html)
-    with a specific dataset
+    for more detailed two group comparison with a specific data set
 -   A
     [tutorial](https://jackbibby1.github.io/SCPA/articles/seurat_comparison.html)
     on how to use SCPA directly within a Seurat object
 -   A
     [tutorial](https://jackbibby1.github.io/SCPA/articles/pseudotime.html)
-    comparing pathways across a pseudotime trajectory
+    for multisample SCPA, comparing pathways across a pseudotime
+    trajectory
 -   A
     [tutorial](https://jackbibby1.github.io/SCPA/articles/systematic_tissue_comparison.html)
     of a systematic analysis of many cell types across multiple tissues

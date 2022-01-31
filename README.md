@@ -48,7 +48,11 @@ devtools::install_github("jackbibby1/SCPA")
 
 ## 2. Tutorials
 
-There are various examples and walkthroughs:
+If you’re viewing this page on GitHub, the SCPA webpage with all the
+documentation and tutorials is
+[here](https://jackbibby1.github.io/SCPA/)
+
+We have various examples and walkthroughs, including:
 
 -   A generic quick start
     [tutorial](https://jackbibby1.github.io/SCPA/articles/quick_start.html)

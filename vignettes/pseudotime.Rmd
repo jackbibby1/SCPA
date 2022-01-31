@@ -18,7 +18,6 @@ knitr::opts_chunk$set(
 Multisample analysis can be performed with SCPA, meaning you can test pathway activity over multiple populations. This may be useful if you have multiple time points, or a pseudotime trajectory. The principle is the same as a two group comparison, but you just need to supply more populations. For example, if you have three time points, you would run:
 
 ```{r, eval=F}
-
 scpa_out <- compare_pathways(samples = list(pop1, pop2, pop3),
                              pathways = pathways)
 

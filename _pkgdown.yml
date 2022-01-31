@@ -4,7 +4,7 @@ title: Single Cell Pathway Analysis (SCPA)
 
 template:
   bootstrap: 5
-  bootswatch: sandstone
+  bootswatch: flatly
   includes:
     in_header: |
       <!-- Global site tag (gtag.js) - Google Analytics -->

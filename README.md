@@ -48,8 +48,30 @@ devtools::install_github("jackbibby1/SCPA")
 
 ## 2. Tutorials
 
-For tutorials on how to use SCPA, see
-<https://jackbibby1.github.io/SCPA/>
+We have tutorials on:
+
+-   A generic [quick
+    start](https://jackbibby1.github.io/SCPA/articles/quick_start.html)
+    tutorial
+-   A
+    [tutorial](https://jackbibby1.github.io/SCPA/articles/using_gene_sets.html)
+    on how to get gene sets for use with SCPA
+-   A more detailed
+    [tutorial](https://jackbibby1.github.io/SCPA/articles/comparing_two_populations.html)
+    with a specific dataset
+-   A
+    [tutorial](https://jackbibby1.github.io/SCPA/articles/seurat_comparison.html)
+    on how to use SCPA directly within a Seurat object
+-   A
+    [tutorial](https://jackbibby1.github.io/SCPA/articles/pseudotime.html)
+    comparing pathways across a pseudotime trajectory
+-   A
+    [tutorial](https://jackbibby1.github.io/SCPA/articles/systematic_tissue_comparison.html)
+    of a systematic analysis of many cell types across multiple tissues
+-   A
+    [tutorial](https://jackbibby1.github.io/SCPA/articles/disease_comparison.html)
+    for a systems level analysis of many cells types in disease
+    (COVID-19)
 
 ## 3. Issues
 

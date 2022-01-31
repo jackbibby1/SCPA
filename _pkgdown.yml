@@ -19,9 +19,10 @@ template:
 
 navbar:
   structure:
-    left: [articles, reference]
+    left: [home, articles, reference]
     right: [github]
   components:
+    home: ~
     articles:
       text: Tutorials
       menu:
@@ -40,7 +41,7 @@ navbar:
         href: articles/seurat_comparison.html
       - text: Comparing across pseudotime
         href: articles/pseudotime.html
-      - text: Systematic comparisons of T cells across tissue
+      - text: Systematic comparisons of cells across tissue
         href: articles/systematic_tissue_comparison.html
       - text: Systems level pathway analysis in disease
         href: articles/disease_comparison.html

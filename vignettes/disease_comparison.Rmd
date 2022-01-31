@@ -33,7 +33,7 @@ library(ComplexHeatmap)
 library(circlize)
 ```
 
-And load in a dataset from [Wilk, A...Blish, C](https://www.nature.com/articles/s41591-020-0944-y) that creates a single cell atlas of peripheral blood immune cells in COVID-19 patients.
+And load in a dataset from [Wilk, A...Blish, C](https://www.nature.com/articles/s41591-020-0944-y) that creates a single cell atlas of peripheral blood immune cells in COVID-19 patients. You can download this dataset [here](https://drive.google.com/file/d/1eYGW0psWFsxaRRtKTZCK6ESfPSQX0zeq/view?usp=sharing)
 
 ```{r, eval=F}
 blood_atlas <- readRDS("covid_blood_atlas.rds")

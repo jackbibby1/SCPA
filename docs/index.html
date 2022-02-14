@@ -122,27 +122,39 @@
 </h1></div>
 <p><img src="reference/figures/scpa_outline.png"></p>
 <div class="section level3">
+<h3 id="on-this-page">On this page<a class="anchor" aria-label="anchor" href="#on-this-page"></a>
+</h3>
+<ol style="list-style-type: decimal">
+<li>A brief overview of SCPA</li>
+<li>Package installation</li>
+<li>Links to tutorials</li>
+<li>Submitting issues/comments</li>
+</ol>
+</div>
+<div class="section level3">
 <h3 id="about-scpa">About SCPA<a class="anchor" aria-label="anchor" href="#about-scpa"></a>
 </h3>
-<p>SCPA is a method for pathway analysis in single cell RNA-seq data. It’s a novel approach to pathway analysis that defines pathway activity as a change in multivariate distribution of a given pathway across conditions, rather than enrichment or over representation of genes. This approach allows for a number of benefits over current methods, including:</p>
+<p>SCPA is a method for pathway analysis in single cell RNA-seq data. It’s a novel approach to pathway analysis that defines pathway activity as a change in multivariate distribution of a given pathway across conditions, rather than enrichment or over representation of genes.</p>
+<p>Overall the workflow looks like this: generate the populations and pathways to compare &gt; SCPA generates pathway specific expression matrices for all comparisons &gt; SCPA performs graph based multivariate distribution analysis across all pathways and populations &gt; SCPA generates a Qval for plotting and ranking of pathway.</p>
+<p>This approach allows for a number of benefits over current methods, including:</p>
 <ol style="list-style-type: decimal">
-<li><p>You will identify pathways that show enrichment in a given population AND also identify pathways with no overall enrichment but alterations in the multivariate distribution of that pathway. You essentially get the best of both worlds, as pathways with changes in multivariate distribution but no overall enrichment are still interestingly different pathways.</p></li>
+<li><p>You will identify pathways that show enrichment in a given population AND also identify pathways with no overall enrichment but alterations in the multivariate distribution of that pathway. You essentially get the best of both worlds, as pathways with changes in multivariate distribution but no overall enrichment are still interestingly different pathways, as we show in <a href="https://www.biorxiv.org/content/10.1101/2022.02.07.478807v1" class="external-link">our paper</a></p></li>
 <li><p>SCPA allows for multisample testing, so you can compare multiple conditions simultaneously e.g. compare across 3 time points, or across multiple phases of a <a href="https://jackbibby1.github.io/SCPA/articles/pseudotime.html">pseuodotime trajectory</a>. This means you can assess pathway activity through multiple stimulation phases, or across cell differentiation</p></li>
 </ol>
 <p>To see the stats behind SCPA, you can see our paper in JASA <a href="https://www.tandfonline.com/doi/full/10.1080/01621459.2020.1791131" class="external-link">here</a></p>
 <p>Our paper introducing SCPA and demonstrating its use on a T cell scRNA-seq dataset is currently on bioRxiv <a href="https://www.biorxiv.org/content/10.1101/2022.02.07.478807v1" class="external-link">here</a></p>
 </div>
-<div class="section level2">
-<h2 id="1-installation">1. Installation<a class="anchor" aria-label="anchor" href="#1-installation"></a>
-</h2>
+<div class="section level3">
+<h3 id="installation">Installation<a class="anchor" aria-label="anchor" href="#installation"></a>
+</h3>
 <p>You can install SCPA by running:</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># install.packages("devtools")</span>
 <span class="fu">devtools</span><span class="fu">::</span><span class="fu"><a href="https://devtools.r-lib.org/reference/remote-reexports.html" class="external-link">install_github</a></span><span class="op">(</span><span class="st">"jackbibby1/SCPA"</span><span class="op">)</span></code></pre></div>
 </div>
-<div class="section level2">
-<h2 id="2-tutorials">2. Tutorials<a class="anchor" aria-label="anchor" href="#2-tutorials"></a>
-</h2>
+<div class="section level3">
+<h3 id="tutorials">Tutorials<a class="anchor" aria-label="anchor" href="#tutorials"></a>
+</h3>
 <p>If you’re viewing this page on GitHub, the SCPA webpage with all the documentation and tutorials is <a href="https://jackbibby1.github.io/SCPA/">here</a></p>
 <p>We have various examples and walkthroughs, including:</p>
 <ul>
@@ -156,9 +168,9 @@
 <li>A <a href="https://jackbibby1.github.io/SCPA/articles/disease_comparison.html">tutorial</a> for a systems level analysis of many cells types in disease (COVID-19)</li>
 </ul>
 </div>
-<div class="section level2">
-<h2 id="3-issues">3. Issues<a class="anchor" aria-label="anchor" href="#3-issues"></a>
-</h2>
+<div class="section level3">
+<h3 id="issues">Issues<a class="anchor" aria-label="anchor" href="#issues"></a>
+</h3>
 <p>To report any issues or submit comments please use: <a href="https://github.com/jackbibby1/SCPA/issues" class="external-link uri">https://github.com/jackbibby1/SCPA/issues</a></p>
 </div>
 </div>

@@ -9,10 +9,13 @@
 
 ### On this page
 
-1.  A brief overview of SCPA
-2.  Package installation
-3.  Links to tutorials
-4.  Submitting issues/comments
+1.  A brief [overview](https://jackbibby1.github.io/SCPA/#about-scpa) of
+    SCPA
+2.  Package
+    [installation](https://jackbibby1.github.io/SCPA/#installation)
+3.  Links to [tutorials](https://jackbibby1.github.io/SCPA/#tutorials)
+4.  Submitting
+    [issues/comments](https://jackbibby1.github.io/SCPA/#issues)
 
 ### About SCPA
 

@@ -7,13 +7,27 @@
 
 ![](man/figures/scpa_outline.png)
 
+### On this page
+
+1.  A brief overview of SCPA
+2.  Package installation
+3.  Links to tutorials
+4.  Submitting issues/comments
+
 ### About SCPA
 
 SCPA is a method for pathway analysis in single cell RNA-seq data. It’s
 a novel approach to pathway analysis that defines pathway activity as a
 change in multivariate distribution of a given pathway across
-conditions, rather than enrichment or over representation of genes. This
-approach allows for a number of benefits over current methods,
+conditions, rather than enrichment or over representation of genes.
+
+Overall the workflow looks like this: generate the populations and
+pathways to compare &gt; SCPA generates pathway specific expression
+matrices for all comparisons &gt; SCPA performs graph based multivariate
+distribution analysis across all pathways and populations &gt; SCPA
+generates a Qval for plotting and ranking of pathway.
+
+This approach allows for a number of benefits over current methods,
 including:
 
 1.  You will identify pathways that show enrichment in a given
@@ -21,7 +35,8 @@ including:
     alterations in the multivariate distribution of that pathway. You
     essentially get the best of both worlds, as pathways with changes in
     multivariate distribution but no overall enrichment are still
-    interestingly different pathways.
+    interestingly different pathways, as we show in [our
+    paper](https://www.biorxiv.org/content/10.1101/2022.02.07.478807v1)
 
 2.  SCPA allows for multisample testing, so you can compare multiple
     conditions simultaneously e.g. compare across 3 time points, or
@@ -37,7 +52,7 @@ Our paper introducing SCPA and demonstrating its use on a T cell
 scRNA-seq dataset is currently on bioRxiv
 [here](https://www.biorxiv.org/content/10.1101/2022.02.07.478807v1)
 
-## 1. Installation
+### Installation
 
 You can install SCPA by running:
 
@@ -46,7 +61,7 @@ You can install SCPA by running:
 devtools::install_github("jackbibby1/SCPA")
 ```
 
-## 2. Tutorials
+### Tutorials
 
 If you’re viewing this page on GitHub, the SCPA webpage with all the
 documentation and tutorials is
@@ -77,7 +92,7 @@ We have various examples and walkthroughs, including:
     for a systems level analysis of many cells types in disease
     (COVID-19)
 
-## 3. Issues
+### Issues
 
 To report any issues or submit comments please use:
 <https://github.com/jackbibby1/SCPA/issues>

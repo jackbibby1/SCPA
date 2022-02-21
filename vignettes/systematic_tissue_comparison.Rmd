@@ -23,6 +23,7 @@ library(SCPA)
 library(Seurat)
 library(msigdbr)
 library(magrittr)
+library(tidyverse)
 library(ComplexHeatmap)
 ```
 

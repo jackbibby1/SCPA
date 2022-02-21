@@ -162,7 +162,7 @@
 <div class="section level3">
 <h3 id="loading-in-data">Loading in data<a class="anchor" aria-label="anchor" href="#loading-in-data"></a>
 </h3>
-<p>Here we’re going to use a subset of data taken from the <a href="https://www.nature.com/articles/s41467-019-12464-3" class="external-link">Szabo, P… Sims, P</a> paper. You can find this data in an R object <a href="https://drive.google.com/file/d/1WSv7MLfcV_94c-C6bCUiUm_XwesCiy3N/view?usp=sharing" class="external-link">here</a></p>
+<p>Here we’re going to use a subset of data taken from the <a href="https://www.nature.com/articles/s41467-019-12464-3" class="external-link">Szabo, P… Sims, P</a> paper. You can find this data in an R object <a href="https://drive.google.com/file/d/1-HJHfSMw5EBP02ZjTrbX7Pd_5eYGe1Zz/view?usp=sharing" class="external-link">here</a></p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">t_cells</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/readRDS.html" class="external-link">readRDS</a></span><span class="op">(</span><span class="st">"szabo_t_cell.rds"</span><span class="op">)</span></code></pre></div>
 </div>
@@ -189,7 +189,7 @@
 </h3>
 <p>We then need to generate our gene sets. msigdbr is a handy package that allows you to get this information. Here we’re pulling all the Hallmark pathways, and using the <code>format_pathways</code> function within SPCA to get them properly formatted. A detailed explanation of generating gene sets for SCPA can be found <a href="https://jackbibby1.github.io/SCPA/articles/using_gene_sets.html">here</a></p>
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">pathways</span> <span class="op">&lt;-</span> <span class="fu">msigdbr</span><span class="fu">::</span><span class="fu"><a href="https://igordot.github.io/msigdbr/reference/msigdbr.html" class="external-link">msigdbr</a></span><span class="op">(</span><span class="st">"Homo sapiens"</span>, <span class="st">"H"</span><span class="op">)</span> <span class="op"><a href="https://igordot.github.io/msigdbr/reference/pipe.html" class="external-link">%&gt;%</a></span>
+<code class="sourceCode R"><span class="va">pathways</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://igordot.github.io/msigdbr/reference/msigdbr.html" class="external-link">msigdbr</a></span><span class="op">(</span><span class="st">"Homo sapiens"</span>, <span class="st">"H"</span><span class="op">)</span> <span class="op"><a href="https://igordot.github.io/msigdbr/reference/pipe.html" class="external-link">%&gt;%</a></span>
   <span class="fu"><a href="../reference/format_pathways.html">format_pathways</a></span><span class="op">(</span><span class="op">)</span></code></pre></div>
 </div>
 <div class="section level3">

@@ -88,7 +88,7 @@ using the `format_pathways` function within SPCA to get them properly formatted.
 generating gene sets for SCPA can be found [here](https://jackbibby1.github.io/SCPA/articles/using_gene_sets.html)
 
 ```{r get_pathways, eval=F}
-pathways <- msigdbr::msigdbr("Homo sapiens", "H") %>%
+pathways <- msigdbr("Homo sapiens", "H") %>%
   format_pathways()
 ```
 

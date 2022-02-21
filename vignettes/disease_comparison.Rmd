@@ -93,7 +93,7 @@ for (i in cell_types) {
 ```
 
 ## Plotting the output
-```{r, echo=F}
+```{r, echo=F, eval=F}
 load("~/Google Drive/scRNA_metabolism_paper/Paper/Fig6/Disease_data/Tilo_COVID/mcross_bloodatlas_10k_gene_sets.RData")
 scpa_out <- mcross_blood_atlas
 ```

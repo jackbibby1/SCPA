@@ -4,4 +4,4 @@
 .httr-oauth
 .DS_Store
 inst/doc
-rds_files
+rds_files/

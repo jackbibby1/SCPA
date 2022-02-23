@@ -53,7 +53,7 @@ DimPlot(blood_atlas, label = T, group.by = "cell.type.fine", split.by = "Status"
 idents <- c("Class-switched B", "IgG PB", "IgA PB", "CD14 Monocyte", "CD8m T",
             "CD4m T", "CD4n T", "B", "NK", "Neutrophil", "CD16 Monocyte", "gd T",
             "pDC", "SC & Eosinophil", "DC")
-blish_sub <- subset(blish, idents = idents)
+blood_atlas <- subset(blood_atlas, idents = idents)
 ```
 
 

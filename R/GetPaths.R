@@ -8,8 +8,6 @@
 #' and the genes of that pathway are in the second column
 #'
 #' @param pathway_filepath filepath to csv or gmt file
-#' @param min_genes Minimum number of genes required in a pathway for inclusion
-#' @param max_genes Maximum number of genes required in a pathway for inclusion
 #'
 #' @examples \dontrun{
 #' pathways <- get_paths(

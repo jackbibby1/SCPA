@@ -1,5 +1,5 @@
 .onAttach <- function(libname, pkgname) {
-  version <- packageDescription(pkgname, fields = "Version")
+  version <- utils::packageDescription(pkgname, fields = "Version")
   msg <- paste0("====================
 ", "This is ", "version ", version, " of ", pkgname, "
 SCPA GitHub page: https://github.com/jackbibby1/SCPA

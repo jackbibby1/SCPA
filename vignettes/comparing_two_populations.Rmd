@@ -80,13 +80,13 @@ Now we have the results stored in the rest_act object, which we can then visuali
 rest_act <- rest_act %>%
   mutate(color = case_when(FC > 5 & adjPval < 0.01 ~ '#6dbf88',
                            FC < 5 & FC > -5 & adjPval < 0.01 ~ '#84b0f0',
-                           FC < -5 & adjPval < 0.01 ~ 'seagreen2',
+                           FC < -5 & adjPval < 0.01 ~ 'mediumseagreen',
                            FC < 5 & FC > -5 & adjPval > 0.01 ~ 'black'))
 
 aa_path <- rest_act %>% 
-  filter(grepl(pattern = "reactomeome_arachi", ignore.case = T, x = Pathway))
+  filter(grepl(pattern = "reactome_arachi", ignore.case = T, x = Pathway))
 
-ggplot(rest_act, aes(FC, qval)) +
+ggplot(rest_act, aes(-FC, qval)) +
   geom_vline(xintercept = c(-5, 5), linetype = "dashed", col = 'black', lwd = 0.3) +
   geom_point(cex = 2.6, shape = 21, fill = rest_act$color, stroke = 0.3) +
   geom_point(data = aa_path, shape = 21, cex = 2.8, fill = "orangered2", color = "black", stroke = 0.3) +

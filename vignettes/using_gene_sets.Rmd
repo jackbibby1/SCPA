@@ -23,7 +23,7 @@ There are a few different formats for gene sets that you can use in SCPA
 
 Here we'll outline a basic workflow to get gene sets using either of the methods. First let's load in a couple of packages we'll need
 
-```{r setup, echo=FALSE}
+```{r setup, eval=FALSE}
 library(SCPA)
 library(msigdbr)
 ```

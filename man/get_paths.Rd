@@ -4,24 +4,21 @@
 \alias{get_paths}
 \title{Convert gene sets to filtered pathway list}
 \usage{
-get_paths(pathway_filepath, min_genes = 15, max_genes = 500)
+get_paths(pathway_filepath)
 }
 \arguments{
-\item{pathway_filepath}{filepath to csv file, or list object}
-
-\item{min_genes}{Minimum number of genes required in a pathway for inclusion}
-
-\item{max_genes}{Maximum number of genes required in a pathway for inclusion}
+\item{pathway_filepath}{filepath to csv or gmt file}
 }
 \value{
 list of pathways with corresponding genes
 }
 \description{
-This function takes one of two inputs:
+This function takes one of three inputs:
 \enumerate{
 \item csv file where pathway title is in the first column
 and subsequent columns contain genes of that pathway
-\item list where pathway name is contained in the first column
+\item A gmt file
+\item A tidy formatted list where pathway name is contained in the first column
 and the genes of that pathway are in the second column
 }
 }

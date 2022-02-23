@@ -26,6 +26,8 @@ Here we'll outline a basic workflow to get gene sets using either of the methods
 ```{r setup, message=FALSE}
 library(SCPA)
 library(msigdbr)
+library(magrittr)
+library(dplyr)
 ```
 
 

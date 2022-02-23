@@ -37,7 +37,7 @@ tissue_data <- readRDS("szabo_t_cell.rds")
 Let's have a quick look at the data
 
 ```{r, eval=F}
-DimPlot(tissue_data, split.by = "tis_stim", ncol = 4)
+DimPlot(tissue_data, split.by = "tis_stim", group.by = "fine", ncol = 4)
 ```
 
 ![](../man/figures/tissue_umap.png){width=100%}

@@ -27,7 +27,7 @@ library(tidyverse)
 library(ComplexHeatmap)
 ```
 
-And load in the dataset. To see how we processed and integrated the datasets to generate this file, you can see the script [here](https://github.com/jackbibby1/scpa_paper/blob/main/figure_5.R).
+And load in the dataset
 
 ```{r, eval=F}
 tissue_data <- readRDS("t_cell_tissue_data.rds")
@@ -37,7 +37,7 @@ tissue_data <- readRDS("t_cell_tissue_data.rds")
 Let's have a quick look at the data
 
 ```{r, eval=F}
-DimPlot(tissue_data, split.by = "tis_stim", ncol = 4, group.by = "fine")
+DimPlot(tissue_data, split.by = "tis_stim", ncol = 4)
 ```
 
 ![](../man/figures/tissue_umap.png){width=100%}

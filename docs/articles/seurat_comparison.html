@@ -159,7 +159,7 @@
 <p>Now to compare the Th1 and Tcm populations, we can use the compare_seurat function within SCPA. Here, <code>group1</code> defines the column name for your metadata, and <code>group1_population</code> defines two values within that column</p>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">scpa_out</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/compare_seurat.html">compare_seurat</a></span><span class="op">(</span><span class="va">t_cells</span>,
-                           group1 <span class="op">=</span> <span class="st">"Cell"</span>, 
+                           group1 <span class="op">=</span> <span class="st">"cell"</span>, 
                            group1_population <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"cd4 th1"</span>, <span class="st">"cd4 tcm"</span><span class="op">)</span>,
                            pathways <span class="op">=</span> <span class="va">pathways</span><span class="op">)</span></code></pre></div>
 <p>And that’s it. Your results will be stored in your <code>scpa_out</code> object.</p>

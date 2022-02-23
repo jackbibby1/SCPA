@@ -107,7 +107,7 @@ head(scpa_out, 5)
 ```
 
 ### Plotting some basic output
-You can use SCPA to generate a pathway rank plot. For example, we can highlight the topmost MTORC1 pathway using the `plot_rank` function.
+You can use SCPA to generate a pathway rank plot. For example, we can highlight one of the topmost pathways -- MTORC1 -- using the `plot_rank` function.
 
 ```{r plot_rank, eval=F, dpi=600, out.width="50%"}
 plot_rank(scpa_out = scpa_out, 

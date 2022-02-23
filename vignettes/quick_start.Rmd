@@ -49,13 +49,7 @@ library(ggplot2)
 ```
 
 ### Loading in data
-Here we're going to use a subset of data taken from the [Szabo, P... Sims, P](https://www.nature.com/articles/s41467-019-12464-3) paper. You can find this data in an R object [here](https://drive.google.com/file/d/1-HJHfSMw5EBP02ZjTrbX7Pd_5eYGe1Zz/view?usp=sharing)
-
-```{r load_data, echo=F, eval=F}
-load("~/Google Drive/example_datasets/")
-naive_cd8 <- int_data_N8
-rm(int_data_N8)
-```
+Here we're going to use data taken from the [Szabo, P... Sims, P](https://www.nature.com/articles/s41467-019-12464-3) paper. You can find this data in an R object [here](https://drive.google.com/file/d/1-HJHfSMw5EBP02ZjTrbX7Pd_5eYGe1Zz/view?usp=sharing)
 
 ```{r, eval=F}
 t_cells <- readRDS("szabo_t_cell.rds")
@@ -68,7 +62,7 @@ DimPlot(t_cells) +
   theme(aspect.ratio = 1)
 ```
 
-![](../man/figures/cd4_cell_types.png){width=50%}
+![](../man/figures/fine_tissue.png){width=50%}
 
 
 ### Generating samples from a Seurat object
@@ -76,9 +70,9 @@ For this basic comparison, we're going to look at T helper 1 (Th1) and T central
 
 ```{r extract_data, eval=F}
 tcm <- seurat_extract(t_cells,
-                      meta1 = "Cell", value_meta1 = "cd4 tcm")
+                      meta1 = "fine", value_meta1 = "cd4_tcm")
 th1 <- seurat_extract(t_cells,
-                      meta1 = "Cell", value_meta1 = "cd4 th1")
+                      meta1 = "fine", value_meta1 = "cd4_th1")
 ```
 
 ### Generate some gene sets using msigdbr
@@ -102,7 +96,7 @@ scpa_out <- compare_pathways(samples = list(tcm, th1),
 ```
 
 ```{r, echo=F}
-scpa_out <- readRDS("/Volumes/GoogleDrive/My Drive/r_packages/SCPA/rds_files/tcm_th1.rds")
+scpa_out <- readRDS("/Volumes/GoogleDrive/My Drive/r_packages/SCPA/rds_files/th1_tcm.rds")
 ```
 
 

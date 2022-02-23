@@ -54,7 +54,7 @@ Now to compare the Th1 and Tcm populations, we can use the compare_seurat functi
 
 ```{r compare_pathways, eval=F}
 scpa_out <- compare_seurat(t_cells,
-                           group1 = "Cell", 
+                           group1 = "cell", 
                            group1_population = c("cd4 th1", "cd4 tcm"),
                            pathways = pathways)
 ```

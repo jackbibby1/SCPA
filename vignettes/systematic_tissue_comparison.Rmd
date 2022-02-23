@@ -30,7 +30,7 @@ library(ComplexHeatmap)
 And load in the dataset
 
 ```{r, eval=F}
-tissue_data <- readRDS("t_cell_tissue_data.rds")
+tissue_data <- readRDS("szabo_t_cell.rds")
 ```
 
 ### Quick look at the data

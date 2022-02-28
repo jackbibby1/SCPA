@@ -9,8 +9,6 @@ template:
     docsearch: a15c32f19e10345bf7bb679938b9ab33
     index_name: single-cell-pathway-analysis
 
-url: https://jackbibby1.github.io/SCPA/
-
 navbar:
   structure:
     left: [home, articles, reference]

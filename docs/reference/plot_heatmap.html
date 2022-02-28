@@ -112,10 +112,9 @@ heatmap of the qvals</p>
     <div id="arguments">
     <h2>Arguments</h2>
     <dl><dt>scpa_out</dt>
-<dd><p>Data frame containing Pathways and qvals generated from
-compare_pathways</p></dd>
+<dd><p>Direct output from either <code>compare_pathways</code>, or <code>compare_seurat</code></p></dd>
 <dt>highlight_pathways</dt>
-<dd><p>Chosen pathway or pathways to highlight on the heatmap,
+<dd><p>Pathway or pathways to annotate on the heatmap,
 supplied as character vector. If no argument is given, all pathways are
 shown</p></dd>
 <dt>row_fontsize</dt>
@@ -125,12 +124,14 @@ shown</p></dd>
 <dt>column_names</dt>
 <dd><p>Option to supply names of the heatmap
 columns if more than one populations is present</p></dd>
+<dt>show_row_names</dt>
+<dd><p>Should row names be shown in the heatmap?</p></dd>
 <dt>cluster_columns</dt>
 <dd><p>Should columns in the heatmap be clustered?</p></dd>
 <dt>hm_colors</dt>
 <dd><p>Colors to be used in the heatmap</p></dd>
 <dt>scale_breaks</dt>
-<dd><p>Breaks to use in the colors of the heatmap.
+<dd><p>Breaks to be used in the colors of the heatmap.
 Length must be equal to the number of colors.</p></dd>
 </dl></div>
     <div id="value">

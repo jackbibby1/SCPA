@@ -38,3 +38,6 @@ navbar:
         href: articles/systematic_tissue_comparison.html
       - text: Systems level pathway analysis in disease
         href: articles/disease_comparison.html
+    news:
+      text: News
+      href: docs/news/index.html

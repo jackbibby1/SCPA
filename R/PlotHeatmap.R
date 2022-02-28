@@ -12,6 +12,12 @@
 #' @param column_fontsize Font size of the sample names
 #' @param column_names Option to supply names of the heatmap
 #'     columns if more than one populations is present
+#' @param cluster_columns Should columns in the heatmap be clustered?
+#' @param hm_colors Colors to be used in the heatmap
+#' @param scale_breaks Breaks to use in the colors of the heatmap.
+#'     Length must be equal to the number of colors.
+#'
+#' @importFrom magrittr "%>%"
 #'
 #' @examples \dontrun{
 #' plot_heatmap(
@@ -35,42 +41,42 @@ plot_heatmap <- function(scpa_out,
 
   hm_colors <- c("cornflowerblue", "white", "red")
   scale <- scpa_out %>%
-    select(grep(pattern = "qval", x = colnames(.), ignore.case = T, value = T)) %>%
+    dplyr::select(grep(pattern = "qval", x = colnames(.), ignore.case = T, value = T)) %>%
     as.matrix()
   scale_breaks <- c(min(scale), mean(scale), max(scale))
-  hm_col <- colorRamp2(colors = hm_colors, breaks = scale_breaks)
+  hm_col <- circlize::colorRamp2(colors = hm_colors, breaks = scale_breaks)
 
   if (is.null(highlight_pathways) == F) {
 
     pathways <- scpa_out %>%
-      filter(grepl(paste(highlight_pathways, collapse = "|"), Pathway, ignore.case = T)) %>%
-      pull(Pathway)
+      dplyr::filter(grepl(paste(highlight_pathways, collapse = "|"), Pathway, ignore.case = T)) %>%
+      dplyr::pull(Pathway)
 
     pathways <- gsub(pattern = "_", replacement = " ", x = pathways)
 
     scpa_out <- scpa_out %>%
-      mutate(Pathway = gsub(pattern = "_", replacement =  " ", x = Pathway))
+      dplyr::mutate(Pathway = gsub(pattern = "_", replacement =  " ", x = Pathway))
 
     position <- scpa_out %>%
-      mutate(position = 1:nrow(.)) %>%
-      filter(grepl(paste(pathways, collapse = "|"), Pathway, ignore.case = T)) %>%
-      pull(position)
+      dplyr::mutate(position = 1:nrow(.)) %>%
+      dplyr::filter(grepl(paste(pathways, collapse = "|"), Pathway, ignore.case = T)) %>%
+      dplyr::pull(position)
 
     scpa_out <- scpa_out %>%
-      remove_rownames() %>%
-      column_to_rownames("Pathway") %>%
-      select(grep(pattern = "qval", x = colnames(.), ignore.case = T, value = T))
+      tibble::remove_rownames() %>%
+      tibble::column_to_rownames("Pathway") %>%
+      dplyr::select(grep(pattern = "qval", x = colnames(.), ignore.case = T, value = T))
 
-    row_an <- rowAnnotation(Genes = anno_mark(at =  which(rownames(scpa_out) %in% pathways),
+    row_an <- ComplexHeatmap::rowAnnotation(Genes = anno_mark(at =  which(rownames(scpa_out) %in% pathways),
                                               labels = rownames(scpa_out)[position],
                                               labels_gp = gpar(fontsize = 7),
                                               link_width = unit(2.5, "mm"),
                                               padding = unit(1, "mm"),
                                               link_gp = gpar(lwd = 0.5)))
 
-    ht_opt$message = FALSE
+    ComplexHeatmap::ht_opt$message = FALSE
 
-    Heatmap(scpa_out,
+    ComplexHeatmap::Heatmap(scpa_out,
             name = "Qval",
             border = T,
             rect_gp = gpar(col = "white", lwd = 0.1),
@@ -83,18 +89,17 @@ plot_heatmap <- function(scpa_out,
             row_dend_width = unit(6, "mm"),
             cluster_columns = cluster_columns)
 
-
   } else {
 
     scpa_out <- scpa_out %>%
-      mutate(Pathway = gsub(pattern = "_", replacement = " ", x = Pathway)) %>%
-      remove_rownames() %>%
-      column_to_rownames("Pathway") %>%
-      select(grep(pattern = "qval", x = colnames(.), ignore.case = T, value = T))
+      dplyr::mutate(Pathway = gsub(pattern = "_", replacement = " ", x = Pathway)) %>%
+      tibble::remove_rownames() %>%
+      tibble::column_to_rownames("Pathway") %>%
+      dplyr::select(grep(pattern = "qval", x = colnames(.), ignore.case = T, value = T))
 
-    ht_opt$message = FALSE
+    ComplexHeatmap::ht_opt$message = FALSE
 
-    Heatmap(scpa_out,
+    ComplexHeatmap::Heatmap(scpa_out,
             name = "Qval",
             border = T,
             rect_gp = gpar(col = "white", lwd = 0.1),
@@ -109,11 +114,6 @@ plot_heatmap <- function(scpa_out,
   }
 
 }
-
-plot_heatmap(df,
-             highlight_pathways = c("myc", "mtorc"),
-             cluster_columns = F,
-             column_names = c("t cell", "b cell"))
 
 
 

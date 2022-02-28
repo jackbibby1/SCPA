@@ -5,11 +5,9 @@
 #' pathway. The resulting output is a list of expression
 #' matrices for each pathway
 #'
-#' @param samples List containing expression file of samples
-#' @param pathways List of pathways to create pathway specific
-#'   matrices. You can use the get_paths function to create
-#'   this list if you are using a csv file generated from a gmt
-#'   file.
+#' @param samples Expression file for each population, with each population
+#'   as a separate list
+#' @param pathways List of pathways to create pathway specific matrices.
 #' @param sample_names Names of the samples to be used in output
 #' @param pathway_names Names of pathways to be used in output
 #'

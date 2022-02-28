@@ -15,7 +15,7 @@ seurat_extract(
 }
 \arguments{
 \item{seu_obj}{Seurat object containing normalised counts
-stored in seu_obj@assays$RNA@data}
+stored in \code{seu_obj@assays$RNA@data}}
 
 \item{meta1}{Metadata name to subset}
 

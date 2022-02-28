@@ -13,11 +13,14 @@ compare_pathways(
 )
 }
 \arguments{
-\item{samples}{List of samples, each supplied as an expression matrix}
+\item{samples}{List of samples, each supplied as an expression matrix with cells in columns
+and genes in rows}
 
-\item{pathways}{List of pathways and their genes}
+\item{pathways}{Pathway gene sets with each pathway in a separate list. For formatting of
+gene lists, see documentation at https://jackbibby1.github.io/SCPA/articles/using_gene_sets.html}
 
-\item{downsample}{Option to downsample cell numbers. Default is 500}
+\item{downsample}{Option to downsample cell numbers. Defaults to 500 cells per condition. If a population
+has < 500 cells, all cells from that condition are used.}
 
 \item{min_genes}{Gene sets with fewer than this number of genes will be excluded}
 
@@ -30,7 +33,7 @@ calculated.
 }
 \description{
 This function takes an input of samples and pathways
-to compare gene sets over different conditions.
+to compare gene set perturbations over different conditions.
 }
 \examples{
 \dontrun{

@@ -15,9 +15,9 @@ compare_seurat(
 )
 }
 \arguments{
-\item{seurat_object}{Seurat object with defined clusters}
+\item{seurat_object}{Seurat object with populations defined in the meta data}
 
-\item{group1}{First comparison group as defined by column names in
+\item{group1}{First comparison group as defined by meta data in
 Seurat object e.g. cell_type}
 
 \item{group1_population}{Population within group1 to compare
@@ -29,9 +29,11 @@ Seurat object e.g. hour}
 \item{group2_population}{Population within group2 to compare
 e.g. 24}
 
-\item{pathways}{List of pathways and their genes}
+\item{pathways}{Pathway gene sets with each pathway in a separate list. For formatting of
+gene lists, see documentation at https://jackbibby1.github.io/SCPA/articles/using_gene_sets.html}
 
-\item{downsample}{Option to downsample cell numbers. Default is 500}
+\item{downsample}{Option to downsample cell numbers. Defaults to 500 cells per condition. If a population
+has < 500 cells, all cells from that condition are used.}
 }
 \value{
 Statistical results from the multicross tool.
@@ -40,7 +42,7 @@ calculated.
 }
 \description{
 This function takes a Seurat object as an input, and
-compares gene sets over specified conditions or populations.
+compares gene sets over specified conditions/populations.
 }
 \examples{
 \dontrun{

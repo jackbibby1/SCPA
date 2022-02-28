@@ -1,10 +1,10 @@
 #' Use SCPA to compare pathways within a Seurat object
 #'
 #' This function takes a Seurat object as an input, and
-#' compares gene sets over specified conditions or populations.
+#' compares gene sets over specified conditions/populations.
 #'
-#' @param seurat_object Seurat object with defined clusters
-#' @param group1 First comparison group as defined by column names in
+#' @param seurat_object Seurat object with populations defined in the meta data
+#' @param group1 First comparison group as defined by meta data in
 #'   Seurat object e.g. cell_type
 #' @param group1_population Population within group1 to compare
 #'   e.g. t_cell
@@ -12,8 +12,10 @@
 #'   Seurat object e.g. hour
 #' @param group2_population Population within group2 to compare
 #'   e.g. 24
-#' @param pathways List of pathways and their genes
-#' @param downsample Option to downsample cell numbers. Default is 500
+#' @param pathways Pathway gene sets with each pathway in a separate list. For formatting of
+#'   gene lists, see documentation at https://jackbibby1.github.io/SCPA/articles/using_gene_sets.html
+#' @param downsample Option to downsample cell numbers. Defaults to 500 cells per condition. If a population
+#'   has < 500 cells, all cells from that condition are used.
 #'
 #' @examples \dontrun{
 #' scpa_out <- compare_seurat(

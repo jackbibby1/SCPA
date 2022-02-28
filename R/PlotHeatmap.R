@@ -3,18 +3,18 @@
 #' This function takes the output from SCPA and plots a
 #' heatmap of the qvals
 #'
-#' @param scpa_out Data frame containing Pathways and qvals generated from
-#'     compare_pathways
-#' @param highlight_pathways Chosen pathway or pathways to highlight on the heatmap,
+#' @param scpa_out Direct output from either `compare_pathways`, or `compare_seurat`
+#' @param highlight_pathways Pathway or pathways to annotate on the heatmap,
 #'     supplied as character vector. If no argument is given, all pathways are
 #'     shown
 #' @param row_fontsize Font size of pathway names
 #' @param column_fontsize Font size of the sample names
 #' @param column_names Option to supply names of the heatmap
 #'     columns if more than one populations is present
+#' @param show_row_names Should row names be shown in the heatmap?
 #' @param cluster_columns Should columns in the heatmap be clustered?
 #' @param hm_colors Colors to be used in the heatmap
-#' @param scale_breaks Breaks to use in the colors of the heatmap.
+#' @param scale_breaks Breaks to be used in the colors of the heatmap.
 #'     Length must be equal to the number of colors.
 #'
 #' @importFrom magrittr "%>%"
@@ -41,7 +41,7 @@ plot_heatmap <- function(scpa_out,
 
   hm_colors <- c("cornflowerblue", "white", "red")
   scale <- scpa_out %>%
-    dplyr::select(grep(pattern = "qval", x = colnames(.), ignore.case = T, value = T)) %>%
+    dplyr::select(grep(pattern = "qval", x = colnames(scpa_out), ignore.case = T, value = T)) %>%
     as.matrix()
   scale_breaks <- c(min(scale), mean(scale), max(scale))
   hm_col <- circlize::colorRamp2(colors = hm_colors, breaks = scale_breaks)
@@ -65,7 +65,7 @@ plot_heatmap <- function(scpa_out,
     scpa_out <- scpa_out %>%
       tibble::remove_rownames() %>%
       tibble::column_to_rownames("Pathway") %>%
-      dplyr::select(grep(pattern = "qval", x = colnames(.), ignore.case = T, value = T))
+      dplyr::select(grep(pattern = "qval", x = colnames(scpa_out), ignore.case = T, value = T))
 
     row_an <- ComplexHeatmap::rowAnnotation(Genes = ComplexHeatmap::anno_mark(at =  which(rownames(scpa_out) %in% pathways),
                                               labels = rownames(scpa_out)[position],
@@ -93,7 +93,7 @@ plot_heatmap <- function(scpa_out,
       dplyr::mutate(Pathway = gsub(pattern = "_", replacement = " ", x = Pathway)) %>%
       tibble::remove_rownames() %>%
       tibble::column_to_rownames("Pathway") %>%
-      dplyr::select(grep(pattern = "qval", x = colnames(.), ignore.case = T, value = T))
+      dplyr::select(grep(pattern = "qval", x = colnames(scpa_out), ignore.case = T, value = T))
 
     ComplexHeatmap::Heatmap(scpa_out,
             name = "Qval",

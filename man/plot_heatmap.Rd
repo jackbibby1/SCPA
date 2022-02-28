@@ -17,10 +17,9 @@ plot_heatmap(
 )
 }
 \arguments{
-\item{scpa_out}{Data frame containing Pathways and qvals generated from
-compare_pathways}
+\item{scpa_out}{Direct output from either \code{compare_pathways}, or \code{compare_seurat}}
 
-\item{highlight_pathways}{Chosen pathway or pathways to highlight on the heatmap,
+\item{highlight_pathways}{Pathway or pathways to annotate on the heatmap,
 supplied as character vector. If no argument is given, all pathways are
 shown}
 
@@ -31,11 +30,13 @@ shown}
 \item{column_names}{Option to supply names of the heatmap
 columns if more than one populations is present}
 
+\item{show_row_names}{Should row names be shown in the heatmap?}
+
 \item{cluster_columns}{Should columns in the heatmap be clustered?}
 
 \item{hm_colors}{Colors to be used in the heatmap}
 
-\item{scale_breaks}{Breaks to use in the colors of the heatmap.
+\item{scale_breaks}{Breaks to be used in the colors of the heatmap.
 Length must be equal to the number of colors.}
 }
 \value{

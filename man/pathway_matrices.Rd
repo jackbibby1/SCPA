@@ -7,12 +7,10 @@
 pathway_matrices(samples, pathways, sample_names = NULL, pathway_names = NULL)
 }
 \arguments{
-\item{samples}{List containing expression file of samples}
+\item{samples}{Expression file for each population, with each population
+as a separate list}
 
-\item{pathways}{List of pathways to create pathway specific
-matrices. You can use the get_paths function to create
-this list if you are using a csv file generated from a gmt
-file.}
+\item{pathways}{List of pathways to create pathway specific matrices.}
 
 \item{sample_names}{Names of the samples to be used in output}
 

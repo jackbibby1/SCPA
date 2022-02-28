@@ -17,6 +17,7 @@ RoxygenNote: 7.1.2
 URL: jackbibby1.github.io/SCPA, https://github.com/jackbibby1/SCPA/
 BugReports: https://github.com/jackbibby1/SCPA/issues/
 Imports: 
+    circlize,
     ComplexHeatmap,
     dplyr,
     ggplot2,
@@ -28,6 +29,7 @@ Imports:
     Seurat,
     stats,
     stringr,
+    tibble,
     tidyr,
     utils
 Suggests: 

@@ -5,7 +5,7 @@
 #' two metadata features can be selected for a given input.
 #'
 #' @param seu_obj Seurat object containing normalised counts
-#'   stored in seu_obj@assays$RNA@data
+#'   stored in `seu_obj@assays$RNA@data`
 #' @param meta1 Metadata name to subset
 #' @param meta2 Metadata name to subset
 #' @param value_meta1 Value to select within `meta1` function

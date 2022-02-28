@@ -72,7 +72,7 @@ plot_heatmap <- function(scpa_out,
                                               labels_gp = gpar(fontsize = 7),
                                               link_width = grid::unit(2.5, "mm"),
                                               padding = grid::unit(1, "mm"),
-                                              link_gp = gpar(lwd = 0.5)))
+                                              link_gp = grid::gpar(lwd = 0.5)))
 
     ComplexHeatmap::ht_opt$message = FALSE
 
@@ -108,7 +108,7 @@ plot_heatmap <- function(scpa_out,
             show_row_names = show_row_names,
             column_labels = column_names,
             col = hm_col,
-            row_dend_width = unit(6, "mm"),
+            row_dend_width = grid::unit(6, "mm"),
             cluster_columns = cluster_columns)
 
   }

@@ -12,7 +12,7 @@ template:
 
 navbar:
   structure:
-    left: [home, articles, reference, news]
+    left: [home, articles, reference]
     right: [github]
   components:
     home: ~
@@ -38,6 +38,3 @@ navbar:
         href: articles/systematic_tissue_comparison.html
       - text: Systems level pathway analysis in disease
         href: articles/disease_comparison.html
-    news:
-      - text: News
-        href: news/index.html

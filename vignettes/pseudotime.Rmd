@@ -197,7 +197,7 @@ plot_rank(scpa_out = cd4_metabolism,
           highlight_point_size = 3)
 ```
 
-![](../man/figures/pseudotime_rank.png){width=70%}
+![](../man/figures/pseudotime_rank.png){width=40%}
 
 
 

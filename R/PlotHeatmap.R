@@ -67,11 +67,11 @@ plot_heatmap <- function(scpa_out,
       tibble::column_to_rownames("Pathway") %>%
       dplyr::select(grep(pattern = "qval", x = colnames(.), ignore.case = T, value = T))
 
-    row_an <- ComplexHeatmap::rowAnnotation(Genes = anno_mark(at =  which(rownames(scpa_out) %in% pathways),
+    row_an <- ComplexHeatmap::rowAnnotation(Genes = ComplexHeatmap::anno_mark(at =  which(rownames(scpa_out) %in% pathways),
                                               labels = rownames(scpa_out)[position],
                                               labels_gp = gpar(fontsize = 7),
-                                              link_width = unit(2.5, "mm"),
-                                              padding = unit(1, "mm"),
+                                              link_width = grid::unit(2.5, "mm"),
+                                              padding = grid::unit(1, "mm"),
                                               link_gp = gpar(lwd = 0.5)))
 
     ComplexHeatmap::ht_opt$message = FALSE
@@ -79,14 +79,14 @@ plot_heatmap <- function(scpa_out,
     ComplexHeatmap::Heatmap(scpa_out,
             name = "Qval",
             border = T,
-            rect_gp = gpar(col = "white", lwd = 0.1),
-            row_names_gp = gpar(fontsize = row_fontsize),
-            column_names_gp = gpar(fontsize = column_fontsize),
+            rect_gp = grid::gpar(col = "white", lwd = 0.1),
+            row_names_gp = grid::gpar(fontsize = row_fontsize),
+            column_names_gp = grid::gpar(fontsize = column_fontsize),
             right_annotation = row_an,
             column_labels = column_names,
             col = hm_col,
             show_row_names = show_row_names,
-            row_dend_width = unit(6, "mm"),
+            row_dend_width = grid::unit(6, "mm"),
             cluster_columns = cluster_columns)
 
   } else {
@@ -102,9 +102,9 @@ plot_heatmap <- function(scpa_out,
     ComplexHeatmap::Heatmap(scpa_out,
             name = "Qval",
             border = T,
-            rect_gp = gpar(col = "white", lwd = 0.1),
-            row_names_gp = gpar(fontsize = row_fontsize),
-            column_names_gp = gpar(fontsize = column_fontsize),
+            rect_gp = grid::gpar(col = "white", lwd = 0.1),
+            row_names_gp = grid::gpar(fontsize = row_fontsize),
+            column_names_gp = grid::gpar(fontsize = column_fontsize),
             show_row_names = show_row_names,
             column_labels = column_names,
             col = hm_col,

@@ -39,5 +39,5 @@ navbar:
       - text: Systems level pathway analysis in disease
         href: articles/disease_comparison.html
     news:
-      text: News
-      href: news/index.html
+      - text: News
+        href: news/index.html

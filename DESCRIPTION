@@ -17,6 +17,7 @@ RoxygenNote: 7.1.2
 URL: jackbibby1.github.io/SCPA, https://github.com/jackbibby1/SCPA/
 BugReports: https://github.com/jackbibby1/SCPA/issues/
 Imports: 
+    ComplexHeatmap,
     dplyr,
     ggplot2,
     ggrepel,
@@ -35,4 +36,3 @@ Suggests:
 VignetteBuilder: knitr
 Depends: 
     R (>= 2.10)
-

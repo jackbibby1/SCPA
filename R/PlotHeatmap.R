@@ -69,7 +69,7 @@ plot_heatmap <- function(scpa_out,
 
     row_an <- ComplexHeatmap::rowAnnotation(Genes = ComplexHeatmap::anno_mark(at =  which(rownames(scpa_out) %in% pathways),
                                               labels = rownames(scpa_out)[position],
-                                              labels_gp = gpar(fontsize = 7),
+                                              labels_gp = grid::gpar(fontsize = 7),
                                               link_width = grid::unit(2.5, "mm"),
                                               padding = grid::unit(1, "mm"),
                                               link_gp = grid::gpar(lwd = 0.5)))

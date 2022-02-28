@@ -11,8 +11,6 @@ template:
       index_name: single-cell-pathway-analysis
       url: https://jackbibby1.github.io/SCPA/
 
-
-
 navbar:
   structure:
     left: [home, articles, reference]

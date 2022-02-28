@@ -74,8 +74,6 @@ plot_heatmap <- function(scpa_out,
                                               padding = grid::unit(1, "mm"),
                                               link_gp = grid::gpar(lwd = 0.5)))
 
-    ComplexHeatmap::ht_opt$message = FALSE
-
     ComplexHeatmap::Heatmap(scpa_out,
             name = "Qval",
             border = T,
@@ -97,8 +95,6 @@ plot_heatmap <- function(scpa_out,
       tibble::column_to_rownames("Pathway") %>%
       dplyr::select(grep(pattern = "qval", x = colnames(.), ignore.case = T, value = T))
 
-    ComplexHeatmap::ht_opt$message = FALSE
-
     ComplexHeatmap::Heatmap(scpa_out,
             name = "Qval",
             border = T,
@@ -114,9 +110,3 @@ plot_heatmap <- function(scpa_out,
   }
 
 }
-
-
-
-
-
-

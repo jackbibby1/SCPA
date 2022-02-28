@@ -40,4 +40,4 @@ navbar:
         href: articles/disease_comparison.html
     news:
       text: News
-      href: docs/news/index.html
+      href: news/index.html

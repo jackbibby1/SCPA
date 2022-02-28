@@ -7,7 +7,7 @@ template:
     bootswatch: flatly
     ganalytics: G-W1XR84YEPZ
     docsearch:
-      api_key: a15c32f19e10345bf7bb679938b9ab33
+      api_key: 707823119dd85fca87c488f81a2086dd
       index_name: single-cell-pathway-analysis
       url: https://jackbibby1.github.io/SCPA/
 

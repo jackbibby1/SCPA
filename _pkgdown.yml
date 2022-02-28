@@ -6,14 +6,13 @@ template:
   params:
     bootswatch: flatly
     ganalytics: G-W1XR84YEPZ
-    docsearch:
-      api_key: 707823119dd85fca87c488f81a2086dd
-      index_name: single-cell-pathway-analysis
-      url: https://jackbibby1.github.io/SCPA/
+  docsearch:
+    api_key: 707823119dd85fca87c488f81a2086dd
+    index_name: single-cell-pathway-analysis
 
 navbar:
   structure:
-    left: [home, articles, reference]
+    left: [home, articles, reference, news]
     right: [github]
   components:
     home: ~

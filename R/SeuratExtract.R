@@ -31,13 +31,13 @@ seurat_extract <- function(seu_obj,
                            pseudocount = 0.001) {
 
   if (is.null(meta1) && is.null(meta2)) {
-    cat("No metadata selected. Converting whole Seurat object to matrix", "\n")
+    message(cat("\n", "No metadata selected. Converting whole Seurat object to matrix", "\n"))
     seu_obj <- as.matrix(seu_obj@assays$RNA@data) + 0.001
     return(seu_obj)
   }
 
   if (!is.null(meta1) && is.null(meta2)) {
-    cat("Subsetting Seurat object based on metadata 1", "\n")
+    message(cat("\n", "Subsetting Seurat object based on metadata 1", "\n"))
     met_1 <- Seurat::FetchData(object = seu_obj, vars = meta1)
     seu_obj <- seu_obj[, which(met_1 == value_meta1)]
     seu_obj <- as.matrix(seu_obj@assays$RNA@data) + 0.001
@@ -45,7 +45,7 @@ seurat_extract <- function(seu_obj,
   }
 
   if(!is.null(meta1) && !is.null(meta2)) {
-    cat("Subsetting Seurat object based on metadata 1 and 2", "\n")
+    message(cat("\n", "Subsetting Seurat object based on metadata 1 and 2", "\n"))
     met_1 <- Seurat::FetchData(object = seu_obj, vars = meta1)
     met_2 <- Seurat::FetchData(object = seu_obj, vars = meta2)
     seu_obj <- seu_obj[, which(met_1 == value_meta1 & met_2 == value_meta2)]

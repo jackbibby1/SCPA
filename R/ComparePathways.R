@@ -96,6 +96,7 @@ compare_pathways <- function(samples,
       utils::setTxtProgressBar(pb, i)
       mcm_result[[i]] <- multicross::mcm(lapply(pop_paths, function(x) x[[i]]), level = 0.05)
     }
+    close(pb)
 
     mcm_output <- data.frame(t(sapply(mcm_result, c)), stringsAsFactors = F)
     mcm_output$Pathway <- names(pop_paths[[1]])
@@ -120,6 +121,7 @@ compare_pathways <- function(samples,
       utils::setTxtProgressBar(pb, i)
       mcm_result[[i]] <- multicross::mcm(lapply(pop_paths, function(x) x[[i]]), level = 0.05)
     }
+    close(pb)
     mcm_output <- data.frame(t(sapply(mcm_result, c)), stringsAsFactors = F)
     mcm_output$FC <- path_fc
     mcm_output$Pathway <- names(pop_paths[[1]])

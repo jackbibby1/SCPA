@@ -87,7 +87,7 @@ compare_pathways <- function(samples,
 
   ## Test samples
   if (length(samples) > 2) {
-    message("Conducting multisample analysis", "\n")
+    message("Conducting multisample analysis")
     pb <- utils::txtProgressBar(min = 0, max = length(pop_paths[[1]]),
                                 style = 3, width = 50)
     mcm_result <- list()
@@ -112,7 +112,7 @@ compare_pathways <- function(samples,
     return(mcm_output)
 
   } else {
-    message("Conducting 2-sample test", "\n")
+    message("Conducting 2-sample test")
     pb <- utils::txtProgressBar(min = 0, max = length(pop_paths[[1]]),
                                 style = 3, width = 50)
     mcm_result <- list()

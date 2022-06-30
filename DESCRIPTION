@@ -13,24 +13,24 @@ Description: SCPA performs pathway analysis on single cell data.
 License: GPL (>= 3)
 Encoding: UTF-8
 Roxygen: list(markdown = TRUE)
-RoxygenNote: 7.1.2
+RoxygenNote: 7.2.0
 URL: jackbibby1.github.io/SCPA, https://github.com/jackbibby1/SCPA/
 BugReports: https://github.com/jackbibby1/SCPA/issues/
 Imports: 
     circlize,
     ComplexHeatmap,
-    dplyr,
-    ggplot2,
-    ggrepel,
-    magrittr,
-    msigdbr,
-    multicross,
-    purrr,
-    Seurat,
+    dplyr (>= 1.0.9),
+    ggplot2 (>= 3.3.6),
+    ggrepel (>= 0.9.1),
+    magrittr (>= 2.0.3),
+    msigdbr (>= 7.5.1),
+    multicross (>= 2.1.0),
+    purrr (>= 0.3.4),
+    Seurat (>= 4.1.1),
     stats,
-    stringr,
-    tibble,
-    tidyr,
+    stringr (>= 1.4.0),
+    tibble (>= 3.1.7),
+    tidyr (>= 1.2.0),
     utils
 Suggests: 
     rmarkdown,

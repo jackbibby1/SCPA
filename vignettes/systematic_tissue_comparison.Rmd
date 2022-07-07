@@ -227,7 +227,8 @@ apply(all_data, 1, var) %>%
 
 
 ### Highlighting genes from the antimicrobial pathway
-And after going back to the pathway gene expression, we can see that a large effect of this pathway signature was driven by expression of alpha defensin proteins, exclusively in T cells from the bone marrow.
+And after going back to the pathway gene expression, and filtering genes that showed little or no
+expression, we can see that this pathway signature was mainly driven by expression of alpha defensin proteins, exclusively in T cells from the bone marrow. Here are these alpha defensin genes by tissue:
 
 ```{r, eval=F}
 tissue_data$neat <- case_when(tissue_data$tissue == "bl" ~ "Blood",

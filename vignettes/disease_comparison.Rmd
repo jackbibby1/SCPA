@@ -73,7 +73,7 @@ blood_atlas <- SplitObject(blood_atlas, split.by = "Status")
 ```
 
 ## SCPA comparison
-Now we've formatted everything properly, we just need to loop SCPA over all the cell types in the dataset. Here we're using `seurat_extract` to pull expression matrices from each cell type, and then using these as the input to `compare_pathways`. We're using a load of pathways and cell types here, so this may take a while. We're also just going to keep the Pathway and qval variables from each comparison, and add the cell type to the column names, so we can keep track of the qvals for each cell type.
+Now we've formatted everything properly, we just need to loop SCPA over all the cell types in the dataset. Here we're using `seurat_extract` to pull expression matrices from each cell type, and then using these as the input to `compare_pathways`. We're using a load of pathways and cell types here, so this may take a while. To make the downstream analysis easier, we're only going to keep the Pathway and qval columns from the SCPA output, and then add the cell type to the column names, so we can keep track of the qvals for each cell type.
 
 ```{r, eval=F}
 scpa_out <- list()

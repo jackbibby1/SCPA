@@ -138,7 +138,7 @@
 <code class="sourceCode R"><span class="va">naive_cd4</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/readRDS.html" class="external-link">readRDS</a></span><span class="op">(</span><span class="st">"naive_cd4.rds"</span><span class="op">)</span></code></pre></div>
 <p>In the <code>naive_cd4</code> object, we have all our naive CD4<sup>+</sup> T cells with metadata specifying the identified cell types and the hour specifying time point of cell harvesting.</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="https://satijalab.org/seurat/reference/DimPlot.html" class="external-link">DimPlot</a></span><span class="op">(</span><span class="va">naive_cd4</span>, split.by <span class="op">=</span> <span class="st">"Hour"</span><span class="op">)</span> <span class="op">+</span>
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/pkg/Seurat/man/DimPlot.html" class="external-link">DimPlot</a></span><span class="op">(</span><span class="va">naive_cd4</span>, split.by <span class="op">=</span> <span class="st">"Hour"</span><span class="op">)</span> <span class="op">+</span>
   <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/theme.html" class="external-link">theme</a></span><span class="op">(</span>aspect.ratio <span class="op">=</span> <span class="fl">1</span><span class="op">)</span></code></pre></div>
 <p><img src="../reference/figures/naive_cd4_umap.png" style="width:100.0%"></p>
 </div>

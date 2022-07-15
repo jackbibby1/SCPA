@@ -19,7 +19,7 @@
 #' }
 #'
 #' @return Statistical results from the SCPA analysis.
-#' If only two samples are provided, an enrichment score will also be
+#' If only two samples are provided, a fold change (FC) enrichment score will also be
 #' calculated.
 #'
 #' @export

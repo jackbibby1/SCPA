@@ -40,7 +40,13 @@ compare_pathways <- function(samples,
   cell_number <- lapply(samples, function(x) ncol(x))
   cell_number <- sapply(cell_number, function(x) x[1])
 
+  for (i in 1:length(cell_number)) {
+    message(paste("Cell numbers in Population", i, "=", cell_number[i]))}
+  message("- If greater than ", downsample,
+          " cells, these populations will be downsampled", "\n")
+
   ## Sample random cells to 500
+
   for (i in 1:length(samples)) {
     samples[[i]] <- random_cells(samples[[i]], ifelse(cell_number[i] < 500, cell_number[i], downsample))
   }
@@ -65,6 +71,17 @@ compare_pathways <- function(samples,
 
   # filter out pathways with < 15 genes or > 500
   filter_paths <- sapply(pop_paths[[1]], function(x) any(nrow(x) >= min_genes & nrow(x) <= max_genes))
+
+  filtered_pathways <- names(filter_paths[filter_paths == "FALSE"])
+
+  if (length(filtered_pathways) > 0) {
+    message("Excluding ", length(filtered_pathways),
+            " pathways based on min/max genes parameter: ",
+            paste(head(filtered_pathways, 5), collapse=", "), "...", "\n")
+  } else {
+    message("All ", length(pathways), " pathways passed the min/max genes threshold", "\n")
+  }
+
   pop_paths <- lapply(pop_paths, function(x) x[unlist(filter_paths)])
 
   ##### Convert the matrices to get genes as cols and rows as cells #####
@@ -75,6 +92,9 @@ compare_pathways <- function(samples,
 
   ## Calculate fold changes
   if (length(samples) == 2) {
+
+    message("Calculating pathway fold changes...", "\n")
+
     avg_expression <- lapply(pop_paths, function(x) lapply(x, function(c) data.frame(colMeans(c))))
     samp_combined <- c()
     for (i in 1:length(pop_paths[[1]])) {
@@ -87,7 +107,7 @@ compare_pathways <- function(samples,
 
   ## Test samples
   if (length(samples) > 2) {
-    message("Conducting multisample analysis")
+    message("Conducting a multisample analysis...")
     pb <- utils::txtProgressBar(min = 0, max = length(pop_paths[[1]]),
                                 style = 3, width = 50)
     mcm_result <- list()
@@ -112,7 +132,7 @@ compare_pathways <- function(samples,
     return(mcm_output)
 
   } else {
-    message("Conducting 2-sample test")
+    message("Conducting a 2-sample test...")
     pb <- utils::txtProgressBar(min = 0, max = length(pop_paths[[1]]),
                                 style = 3, width = 50)
     mcm_result <- list()

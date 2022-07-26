@@ -136,8 +136,8 @@
 <div class="section level2">
 <h2 id="visualising-the-output-from-scpa">Visualising the output from SCPA<a class="anchor" aria-label="anchor" href="#visualising-the-output-from-scpa"></a>
 </h2>
-<p>Visualizing the output from SCPA is best done by considering the relative ranks of the Qvals. This will give you the best chance to find the most appropriate signal.</p>
-<p>Load in some packages</p>
+<p>Visualising the output from SCPA is best done by considering the relative ranks of the qvals. This will give you the best chance to find the most appropriate signal.</p>
+<p>Lets load in some packages</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/jackbibby1/SCPA/" class="external-link">SCPA</a></span><span class="op">)</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://tidyverse.tidyverse.org" class="external-link">tidyverse</a></span><span class="op">)</span></span>
@@ -145,12 +145,30 @@
 <p>We can use data from the comparison we did in the <a href="https://jackbibby1.github.io/SCPA/articles/quick_start.html">quick start</a> tutorial where we compared Th1 and Tcm cells. You can get this rds file <a href="https://github.com/jackbibby1/SCPA/tree/main/rds_files" class="external-link">here</a>.</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">scpa_out</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/readRDS.html" class="external-link">readRDS</a></span><span class="op">(</span><span class="st">"th1_tcm.rds"</span><span class="op">)</span></span></code></pre></div>
+<p><code>scpa_out</code> is the standard output from a two sample SCPA comparison:</p>
+<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="va">scpa_out</span><span class="op">)</span></span>
+<span><span class="co">#&gt;                               Pathway          Pval      adjPval     qval</span></span>
+<span><span class="co">#&gt; 32            HALLMARK_MYC_TARGETS_V1 5.788383e-101 2.894192e-99 9.926655</span></span>
+<span><span class="co">#&gt; 2        HALLMARK_ALLOGRAFT_REJECTION  7.532277e-93 3.766139e-91 9.509159</span></span>
+<span><span class="co">#&gt; 31          HALLMARK_MTORC1_SIGNALING  7.532277e-93 3.766139e-91 9.509159</span></span>
+<span><span class="co">#&gt; 36 HALLMARK_OXIDATIVE_PHOSPHORYLATION  1.061001e-89 5.305003e-88 9.342126</span></span>
+<span><span class="co">#&gt; 23       HALLMARK_IL2_STAT5_SIGNALING  1.315549e-86 6.577745e-85 9.175071</span></span>
+<span><span class="co">#&gt; 33            HALLMARK_MYC_TARGETS_V2  1.435838e-83 7.179192e-82 9.007992</span></span>
+<span><span class="co">#&gt;           FC</span></span>
+<span><span class="co">#&gt; 32 -87.81108</span></span>
+<span><span class="co">#&gt; 2  -21.07656</span></span>
+<span><span class="co">#&gt; 31 -45.82991</span></span>
+<span><span class="co">#&gt; 36 -47.98635</span></span>
+<span><span class="co">#&gt; 23 -20.23701</span></span>
+<span><span class="co">#&gt; 33 -20.71347</span></span></code></pre></div>
 </div>
 <div class="section level2">
 <h2 id="a-simple-rank-plot">1. A simple rank plot<a class="anchor" aria-label="anchor" href="#a-simple-rank-plot"></a>
 </h2>
-<p>We can use the <code>plot_rank</code> function in SCPA to plot the rank of a specific pathway or pathways that we want to highlight. By default, this looks for a <code>qval</code> and <code>Pathway</code> column, which is standard in the SCPA output. If you have your own data frame with qval columns from multiple cell types, you can specify the column you want on the y axis with the <code>population_name</code> argument; you just have to have a “Pathway” column. See `?plot_rank for graphical parameters.</p>
-<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
+<p>We can use the <code>plot_rank</code> function in SCPA to plot the rank of a specific pathway (or pathways) that we want to highlight. By default, this looks for a <code>qval</code> and <code>Pathway</code> column, which is standard in the SCPA output.</p>
+<p>If you have your own data frame that contains all your qvals and a Pathway column, you can specify the column you want on the y axis with the <code>population_name = [your_qval_column_name]</code> argument. See <code><a href="../reference/plot_rank.html">?plot_rank</a></code> for all the graphical parameters, but this is a ggplot object, so you can modify it using the typical arguments e.g. <code>+ theme(panel.background...)</code>.</p>
+<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># if you want all pathways that contain "MYC"...</span></span>
 <span><span class="va">p1</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/plot_rank.html">plot_rank</a></span><span class="op">(</span><span class="va">scpa_out</span>, <span class="st">"myc"</span>, </span>
 <span>                highlight_point_size <span class="op">=</span> <span class="fl">3.5</span>, highlight_point_color <span class="op">=</span> <span class="st">"#60c5f7"</span><span class="op">)</span></span>
@@ -160,21 +178,21 @@
 <span>                highlight_point_size <span class="op">=</span> <span class="fl">3.5</span>, highlight_point_color <span class="op">=</span> <span class="st">"#fa815c"</span><span class="op">)</span></span>
 <span></span>
 <span><span class="fu">patchwork</span><span class="fu">::</span><span class="fu"><a href="https://patchwork.data-imaginist.com/reference/wrap_plots.html" class="external-link">wrap_plots</a></span><span class="op">(</span><span class="va">p1</span>, <span class="va">p2</span><span class="op">)</span></span></code></pre></div>
-<p><img src="../reference/figures/rank_plot.png" style="width:90.0%"></p>
+<p><img src="../reference/figures/rank_plot.png" style="width:80.0%"></p>
 </div>
 <div class="section level2">
 <h2 id="plotting-a-heatmap-of-results">2. Plotting a heatmap of results<a class="anchor" aria-label="anchor" href="#plotting-a-heatmap-of-results"></a>
 </h2>
-<p>You can use the <code>plot_heatmap</code> option within SCPA to visualise the output, which is using the great <a href="https://github.com/jokergoo/ComplexHeatmap" class="external-link">ComplexHeatmap</a> package. Like the <code>plot_rank</code> function, you can choose to highlight general or specific pathways. By default, this function looks for any column names that contain “qval”, and uses them to plot the heatmap. This means you can combine muliple SCPA results into a single heatmap. See `?plot_heatmap for graphical parameters.</p>
-<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
+<p>You can use the <code>plot_heatmap</code> option within SCPA to visualise the output, which uses the great <a href="https://github.com/jokergoo/ComplexHeatmap" class="external-link">ComplexHeatmap</a> package. Like the <code>plot_rank</code> function, you can choose to highlight general or specific pathways. By default, this function looks for any column names that contain “qval”, and uses them to plot the heatmap. This means you can combine muliple SCPA results into a single heatmap. See <code><a href="../reference/plot_heatmap.html">?plot_heatmap</a></code> for graphical parameters.</p>
+<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/plot_heatmap.html">plot_heatmap</a></span><span class="op">(</span><span class="va">scpa_out</span>, </span>
 <span>             highlight_pathways <span class="op">=</span> <span class="st">"myc"</span>,</span>
 <span>             column_names <span class="op">=</span> <span class="st">"Th1 vs Tcm"</span>,</span>
 <span>             show_row_names <span class="op">=</span> <span class="cn">F</span><span class="op">)</span></span></code></pre></div>
 <p><img src="../reference/figures/heatmap_1.png" style="width:40.0%"></p>
-<p>If you want to combine multiple scpa outputs into a single heatmap, you can just add your qvals into a single data frame. You just need to make sure the column you’re adding contains “qval” in its name e.g.</p>
-<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="co"># here we'll just duplicate the qval column we have for example purposes</span></span>
+<p>If you want to combine multiple scpa outputs into a single heatmap, you can add your qvals into a single data frame. You just need to make sure the column you’re adding contains “qval” in its name e.g.</p>
+<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># here we'll just duplicate the qval column for the purpose of this example</span></span>
 <span><span class="va">scpa_out</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html" class="external-link">mutate</a></span><span class="op">(</span>another_qval <span class="op">=</span> <span class="va">qval</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
 <span>  <span class="fu"><a href="../reference/plot_heatmap.html">plot_heatmap</a></span><span class="op">(</span>highlight_pathways <span class="op">=</span> <span class="st">"myc"</span>,</span>

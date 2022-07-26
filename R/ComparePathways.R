@@ -41,7 +41,7 @@ compare_pathways <- function(samples,
   cell_number <- sapply(cell_number, function(x) x[1])
 
   for (i in 1:length(cell_number)) {
-    message(paste("Cell numbers in Population", i, "=", cell_number[i]))}
+    message(paste("Cell numbers in population", i, "=", cell_number[i]))}
   message("- If greater than ", downsample,
           " cells, these populations will be downsampled", "\n")
 
@@ -106,7 +106,7 @@ compare_pathways <- function(samples,
 
   # run scpa
   if (length(samples) > 2) {
-    message("Conducting a multisample analysis...")
+    message("Performing a multisample analysis with SCPA...")
     pb <- utils::txtProgressBar(min = 0, max = length(pop_paths[[1]]),
                                 style = 3, width = 50)
     mcm_result <- list()
@@ -131,7 +131,7 @@ compare_pathways <- function(samples,
     return(mcm_output)
 
   } else {
-    message("Conducting a 2-sample test...")
+    message("Performing a two-sample analysis with SCPA...")
     pb <- utils::txtProgressBar(min = 0, max = length(pop_paths[[1]]),
                                 style = 3, width = 50)
     mcm_result <- list()

@@ -1,0 +1,89 @@
+---
+title: "Visualisation"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{visualisation}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+## Visualising the output from SCPA
+
+Visualizing the output from SCPA is best done by considering the relative ranks of the Qvals.
+This will give you the best chance to find the most appropriate signal.
+
+```{r setup}
+library(SCPA)
+library(tidyverse)
+library(ComplexHeatmap)
+```
+
+We can use data from the comparison we did in the [quick start](https://jackbibby1.github.io/SCPA/articles/quick_start.html) tutorial where
+we compared Th1 and Tcm cells. You can get this rds file [here](https://github.com/jackbibby1/SCPA/tree/main/rds_files)
+
+```{r}
+scpa_out <- readRDS("th1_tcm.rds")
+```
+
+## 1. A simple rank plot
+We can use the `plot_rank` function in SCPA to plot the rank of a specific
+pathway or pathways that we want to highlight. By default, this looks for a `qval` and `Pathway`
+column, which is standard in the SCPA output. If you have your own data frame with qval columns
+from multiple cell types, you can specify the column you want on the y axis with the
+`population_name` argument; you just have to have a "Pathway" column. See `?plot_rank for
+graphical parameters.
+
+```{r}
+# if you want all pathways that contain "MYC"...
+p1 <- plot_rank(scpa_out, "myc")
+
+# or if you want a specific myc pathway...
+p2 <- plot_rank(scpa_out, "HALLMARK_MYC_TARGETS_V1")
+
+patchwork::wrap_plots(p1, p2)
+
+```
+
+
+## 2. Plotting a heatmap of results
+You can use the `plot_heatmap` option within SCPA to visualise the output, which is using the great
+[ComplexHeatmap](https://github.com/jokergoo/ComplexHeatmap) package. Like the
+`plot_rank` function, you can choose to highlight general or specific pathways. By default, this function
+looks for any column names that contain "qval", and uses them to plot the heatmap. This means you can combine
+muliple SCPA results into a single heatmap. See `?plot_heatmap for graphical parameters.
+
+
+```{r}
+plot_heatmap(scpa_out, 
+             highlight_pathways = "myc",
+             column_names = "Th1 vs Tcm",
+               show_row_names = F)
+```
+
+If you want to combine multiple scpa outputs into a single heatmap, you can just add
+your qvals into a single data frame. You just need to make sure the column you're
+adding contains "qval" in its name e.g.
+
+```{r}
+# here we'll just duplicate the qval column we have for example purposes
+scpa_out %>%
+  mutate(another_qval = qval) %>%
+  plot_heatmap(highlight_pathways = "myc",
+               hm_colors = c("#5ab0f2", "white", "#be67c9"),
+               column_names = c("First qval", "Second qval"),
+               cluster_columns = F,
+               show_row_names = F)
+```
+
+
+
+
+
+

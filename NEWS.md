@@ -13,7 +13,7 @@
 #### Minor changes and big fixes
 
 - Allow usage of multiple file types for pathways e.g. gmt, csv
-- Fix 
+- Fix CRAN archive with multicross and crossmatch
 
 ## SCPA v0.0.0.9000
 

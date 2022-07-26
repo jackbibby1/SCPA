@@ -30,13 +30,13 @@ compare_pathways <- function(samples,
                              min_genes = 15,
                              max_genes = 500) {
 
-  ## Pathways
+  # get pathways for analysis
   if (class(pathways)[1] == "character") {
     pathways <- get_paths(pathways)
   }
   path_names <- sapply(pathways, function(x) unique(x$Pathway))
 
-  ## Get cells in each sample
+  # define the number of cells in each condition
   cell_number <- lapply(samples, function(x) ncol(x))
   cell_number <- sapply(cell_number, function(x) x[1])
 
@@ -45,21 +45,20 @@ compare_pathways <- function(samples,
   message("- If greater than ", downsample,
           " cells, these populations will be downsampled", "\n")
 
-  ## Sample random cells to 500
-
+  # randomly sample cells
   for (i in 1:length(samples)) {
     samples[[i]] <- random_cells(samples[[i]], ifelse(cell_number[i] < 500, cell_number[i], downsample))
   }
 
-  ## Take genes present in all samples
+  # only take shared genes
   genes <- lapply(samples, function(x) rownames(x))
   genes <- table(unlist(genes))
   genes <- genes[genes == length(samples)]
   genes <- names(genes)
   samples <- lapply(samples, function(x) x[rownames(x) %in% genes, ])
 
+  # generate pathway matrices
   pop_paths <- vector(mode = "list", length = length(samples))
-  ## Pathway matrices
   for (i in 1:length(pop_paths)) {
     for (c in 1:length(pathways)) {
       pop_paths[[i]][[c]] <- samples[[i]][rownames(samples[[i]]) %in% pathways[[c]]$Genes, ]
@@ -84,13 +83,13 @@ compare_pathways <- function(samples,
 
   pop_paths <- lapply(pop_paths, function(x) x[unlist(filter_paths)])
 
-  ##### Convert the matrices to get genes as cols and rows as cells #####
+  # transpose matrix
   pop_paths <- lapply(pop_paths, function(x) lapply(x, function(c) t(c)))
 
-  ## Organise columns into same order
+  # order columns
   pop_paths <- lapply(pop_paths, function(x) lapply(x, function(c) c[, sort(colnames(c))]))
 
-  ## Calculate fold changes
+  # fc calculation
   if (length(samples) == 2) {
 
     message("Calculating pathway fold changes...", "\n")
@@ -105,7 +104,7 @@ compare_pathways <- function(samples,
     path_fc <- sapply(samp_combined, function(x) sum(x[, "logFC"]))
   }
 
-  ## Test samples
+  # run scpa
   if (length(samples) > 2) {
     message("Conducting a multisample analysis...")
     pb <- utils::txtProgressBar(min = 0, max = length(pop_paths[[1]]),
@@ -157,3 +156,7 @@ compare_pathways <- function(samples,
     return(mcm_output)
   }
 }
+
+
+
+

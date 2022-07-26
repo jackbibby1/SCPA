@@ -3,14 +3,14 @@
 #### Major changes
 
 - Add functionality to visualise results from SCPA with
-`plot_rank` and `plot_heatmap`
+`plot_rank()` and `plot_heatmap()`
 
 #### Minor changes
-- Improve messaging with `compare_pathways`
+- Improve messaging with `compare_pathways()`
 
 ## SCPA v1.0.0
 
-#### Minor changes and big fixes
+#### Minor changes
 
 - Allow usage of multiple file types for pathways e.g. gmt, csv
 - Fix CRAN archive with multicross and crossmatch

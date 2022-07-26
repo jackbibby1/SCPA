@@ -26,7 +26,7 @@ matrices for each pathway"><meta property="og:image" content="jackbibby1.github.
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">Single Cell Pathway Analysis (SCPA)</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.0.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.1.0</span>
       </span>
     </div>
 
@@ -63,9 +63,17 @@ matrices for each pathway"><meta property="og:image" content="jackbibby1.github.
     <li>
       <a href="../articles/disease_comparison.html">Systems level pathway analysis in disease</a>
     </li>
+    <li class="divider">
+    <li class="dropdown-header">Visualisation</li>
+    <li>
+      <a href="../articles/visualisation.html">Visualising SCPA output</a>
+    </li>
   </ul></li>
 <li>
   <a href="../reference/index.html">Reference</a>
+</li>
+<li>
+  <a href="../news/index.html">Changelog</a>
 </li>
       </ul><ul class="nav navbar-nav navbar-right"><li>
   <a href="https://github.com/jackbibby1/SCPA/" class="external-link">
@@ -95,7 +103,7 @@ matrices for each pathway</p>
     </div>
 
     <div id="ref-usage">
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">pathway_matrices</span><span class="op">(</span><span class="va">samples</span>, <span class="va">pathways</span>, sample_names <span class="op">=</span> <span class="cn">NULL</span>, pathway_names <span class="op">=</span> <span class="cn">NULL</span><span class="op">)</span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">pathway_matrices</span><span class="op">(</span><span class="va">samples</span>, <span class="va">pathways</span>, sample_names <span class="op">=</span> <span class="cn">NULL</span>, pathway_names <span class="op">=</span> <span class="cn">NULL</span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div id="arguments">
@@ -103,12 +111,19 @@ matrices for each pathway</p>
     <dl><dt>samples</dt>
 <dd><p>Expression file for each population, with each population
 as a separate list</p></dd>
+
+
 <dt>pathways</dt>
 <dd><p>List of pathways to create pathway specific matrices.</p></dd>
+
+
 <dt>sample_names</dt>
 <dd><p>Names of the samples to be used in output</p></dd>
+
+
 <dt>pathway_names</dt>
 <dd><p>Names of pathways to be used in output</p></dd>
+
 </dl></div>
 
   </div>
@@ -123,7 +138,7 @@ as a separate list</p></dd>
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.3.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.6.</p>
 </div>
 
       </footer></div>

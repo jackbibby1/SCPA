@@ -19,18 +19,25 @@ knitr::opts_chunk$set(
 Visualizing the output from SCPA is best done by considering the relative ranks of the Qvals.
 This will give you the best chance to find the most appropriate signal.
 
-```{r setup}
+```{r, include=FALSE}
+scpa_out <- readRDS("~/Google Drive/r_packages/SCPA/rds_files/th1_tcm.rds")
+```
+
+Load in some packages
+```{r setup, warning=FALSE, message=FALSE}
 library(SCPA)
 library(tidyverse)
 library(ComplexHeatmap)
 ```
 
-We can use data from the comparison we did in the [quick start](https://jackbibby1.github.io/SCPA/articles/quick_start.html) tutorial where
-we compared Th1 and Tcm cells. You can get this rds file [here](https://github.com/jackbibby1/SCPA/tree/main/rds_files)
+We can use data from the comparison we did in the 
+[quick start](https://jackbibby1.github.io/SCPA/articles/quick_start.html) 
+tutorial where we compared Th1 and Tcm cells. You can get this rds file [here](https://github.com/jackbibby1/SCPA/tree/main/rds_files).
 
-```{r}
+```{r, eval=FALSE}
 scpa_out <- readRDS("th1_tcm.rds")
 ```
+
 
 ## 1. A simple rank plot
 We can use the `plot_rank` function in SCPA to plot the rank of a specific
@@ -40,17 +47,20 @@ from multiple cell types, you can specify the column you want on the y axis with
 `population_name` argument; you just have to have a "Pathway" column. See `?plot_rank for
 graphical parameters.
 
-```{r}
+```{r, eval=FALSE}
 # if you want all pathways that contain "MYC"...
-p1 <- plot_rank(scpa_out, "myc")
+p1 <- plot_rank(scpa_out, "myc", 
+                highlight_point_size = 3.5, highlight_point_color = "#60c5f7")
 
 # or if you want a specific myc pathway...
-p2 <- plot_rank(scpa_out, "HALLMARK_MYC_TARGETS_V1")
+p2 <- plot_rank(scpa_out, "HALLMARK_MYC_TARGETS_V1",
+                highlight_point_size = 3.5, highlight_point_color = "#fa815c")
 
 patchwork::wrap_plots(p1, p2)
 
 ```
 
+![](../man/figures/rank_plot.png){width=90%}
 
 ## 2. Plotting a heatmap of results
 You can use the `plot_heatmap` option within SCPA to visualise the output, which is using the great
@@ -60,18 +70,20 @@ looks for any column names that contain "qval", and uses them to plot the heatma
 muliple SCPA results into a single heatmap. See `?plot_heatmap for graphical parameters.
 
 
-```{r}
+```{r, warning=FALSE, eval=FALSE}
 plot_heatmap(scpa_out, 
              highlight_pathways = "myc",
              column_names = "Th1 vs Tcm",
-               show_row_names = F)
+             show_row_names = F)
 ```
+
+![](../man/figures/heatmap_1.png){width=40%}
 
 If you want to combine multiple scpa outputs into a single heatmap, you can just add
 your qvals into a single data frame. You just need to make sure the column you're
 adding contains "qval" in its name e.g.
 
-```{r}
+```{r, warning=FALSE, eval=FALSE}
 # here we'll just duplicate the qval column we have for example purposes
 scpa_out %>%
   mutate(another_qval = qval) %>%
@@ -82,7 +94,7 @@ scpa_out %>%
                show_row_names = F)
 ```
 
-
+![](../man/figures/heatmap_2.png){width=50%}
 
 
 

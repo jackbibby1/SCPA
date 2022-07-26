@@ -24,7 +24,7 @@ to compare gene set perturbations over different conditions."><meta property="og
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">Single Cell Pathway Analysis (SCPA)</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.0.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.1.0</span>
       </span>
     </div>
 
@@ -61,9 +61,17 @@ to compare gene set perturbations over different conditions."><meta property="og
     <li>
       <a href="../articles/disease_comparison.html">Systems level pathway analysis in disease</a>
     </li>
+    <li class="divider">
+    <li class="dropdown-header">Visualisation</li>
+    <li>
+      <a href="../articles/visualisation.html">Visualising SCPA output</a>
+    </li>
   </ul></li>
 <li>
   <a href="../reference/index.html">Reference</a>
+</li>
+<li>
+  <a href="../news/index.html">Changelog</a>
 </li>
       </ul><ul class="nav navbar-nav navbar-right"><li>
   <a href="https://github.com/jackbibby1/SCPA/" class="external-link">
@@ -91,13 +99,13 @@ to compare gene set perturbations over different conditions.</p>
     </div>
 
     <div id="ref-usage">
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">compare_pathways</span><span class="op">(</span>
-  <span class="va">samples</span>,
-  <span class="va">pathways</span>,
-  downsample <span class="op">=</span> <span class="fl">500</span>,
-  min_genes <span class="op">=</span> <span class="fl">15</span>,
-  max_genes <span class="op">=</span> <span class="fl">500</span>
-<span class="op">)</span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">compare_pathways</span><span class="op">(</span></span>
+<span>  <span class="va">samples</span>,</span>
+<span>  <span class="va">pathways</span>,</span>
+<span>  downsample <span class="op">=</span> <span class="fl">500</span>,</span>
+<span>  min_genes <span class="op">=</span> <span class="fl">15</span>,</span>
+<span>  max_genes <span class="op">=</span> <span class="fl">500</span></span>
+<span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div id="arguments">
@@ -105,32 +113,43 @@ to compare gene set perturbations over different conditions.</p>
     <dl><dt>samples</dt>
 <dd><p>List of samples, each supplied as an expression matrix with cells in columns
 and genes in rows</p></dd>
+
+
 <dt>pathways</dt>
 <dd><p>Pathway gene sets with each pathway in a separate list. For formatting of
 gene lists, see documentation at https://jackbibby1.github.io/SCPA/articles/using_gene_sets.html</p></dd>
+
+
 <dt>downsample</dt>
 <dd><p>Option to downsample cell numbers. Defaults to 500 cells per condition. If a population
 has &lt; 500 cells, all cells from that condition are used.</p></dd>
+
+
 <dt>min_genes</dt>
 <dd><p>Gene sets with fewer than this number of genes will be excluded</p></dd>
+
+
 <dt>max_genes</dt>
 <dd><p>Gene sets with more than this number of genes will be excluded</p></dd>
+
 </dl></div>
     <div id="value">
     <h2>Value</h2>
-    <p>Statistical results from the SCPA analysis.
+    
+
+<p>Statistical results from the SCPA analysis.
 If only two samples are provided, an enrichment score will also be
 calculated.</p>
     </div>
 
     <div id="ref-examples">
     <h2>Examples</h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span class="kw">if</span> <span class="op">(</span><span class="cn">FALSE</span><span class="op">)</span> <span class="op">{</span></span>
-<span class="r-in"><span class="va">scpa_result</span> <span class="op">&lt;-</span> <span class="fu">compare_pathways</span><span class="op">(</span></span>
-<span class="r-in">     <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="va">sample1</span>, <span class="va">sample2</span>, <span class="va">sample3</span><span class="op">)</span>,</span>
-<span class="r-in">     pathways <span class="op">=</span> <span class="va">pathways</span><span class="op">)</span></span>
-<span class="r-in"><span class="op">}</span></span>
-<span class="r-in"></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="kw">if</span> <span class="op">(</span><span class="cn">FALSE</span><span class="op">)</span> <span class="op">{</span></span></span>
+<span class="r-in"><span><span class="va">scpa_result</span> <span class="op">&lt;-</span> <span class="fu">compare_pathways</span><span class="op">(</span></span></span>
+<span class="r-in"><span>     <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="va">sample1</span>, <span class="va">sample2</span>, <span class="va">sample3</span><span class="op">)</span>,</span></span>
+<span class="r-in"><span>     pathways <span class="op">=</span> <span class="va">pathways</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="op">}</span></span></span>
+<span class="r-in"><span></span></span>
 </code></pre></div>
     </div>
   </div>
@@ -145,7 +164,7 @@ calculated.</p>
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.3.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.6.</p>
 </div>
 
       </footer></div>

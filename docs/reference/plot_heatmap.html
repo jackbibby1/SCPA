@@ -24,7 +24,7 @@ heatmap of the qvals"><meta property="og:image" content="jackbibby1.github.io/SC
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">Single Cell Pathway Analysis (SCPA)</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.0.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.1.0</span>
       </span>
     </div>
 
@@ -61,9 +61,17 @@ heatmap of the qvals"><meta property="og:image" content="jackbibby1.github.io/SC
     <li>
       <a href="../articles/disease_comparison.html">Systems level pathway analysis in disease</a>
     </li>
+    <li class="divider">
+    <li class="dropdown-header">Visualisation</li>
+    <li>
+      <a href="../articles/visualisation.html">Visualising SCPA output</a>
+    </li>
   </ul></li>
 <li>
   <a href="../reference/index.html">Reference</a>
+</li>
+<li>
+  <a href="../news/index.html">Changelog</a>
 </li>
       </ul><ul class="nav navbar-nav navbar-right"><li>
   <a href="https://github.com/jackbibby1/SCPA/" class="external-link">
@@ -91,58 +99,77 @@ heatmap of the qvals</p>
     </div>
 
     <div id="ref-usage">
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">plot_heatmap</span><span class="op">(</span>
-  <span class="va">scpa_out</span>,
-  highlight_pathways <span class="op">=</span> <span class="cn">NULL</span>,
-  row_fontsize <span class="op">=</span> <span class="fl">6</span>,
-  column_fontsize <span class="op">=</span> <span class="fl">10</span>,
-  column_names <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/colnames.html" class="external-link">colnames</a></span><span class="op">(</span><span class="va">scpa_out</span><span class="op">)</span>,
-  show_row_names <span class="op">=</span> <span class="cn">FALSE</span>,
-  cluster_columns <span class="op">=</span> <span class="cn">TRUE</span>,
-  hm_colors <span class="op">=</span> <span class="cn">NULL</span>,
-  scale_breaks <span class="op">=</span> <span class="cn">NULL</span>
-<span class="op">)</span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">plot_heatmap</span><span class="op">(</span></span>
+<span>  <span class="va">scpa_out</span>,</span>
+<span>  highlight_pathways <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  row_fontsize <span class="op">=</span> <span class="fl">6</span>,</span>
+<span>  column_fontsize <span class="op">=</span> <span class="fl">10</span>,</span>
+<span>  column_names <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/colnames.html" class="external-link">colnames</a></span><span class="op">(</span><span class="va">scpa_out</span><span class="op">)</span>,</span>
+<span>  show_row_names <span class="op">=</span> <span class="cn">FALSE</span>,</span>
+<span>  cluster_columns <span class="op">=</span> <span class="cn">TRUE</span>,</span>
+<span>  hm_colors <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  scale_breaks <span class="op">=</span> <span class="cn">NULL</span></span>
+<span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div id="arguments">
     <h2>Arguments</h2>
     <dl><dt>scpa_out</dt>
 <dd><p>Direct output from either <code>compare_pathways</code>, or <code>compare_seurat</code></p></dd>
+
+
 <dt>highlight_pathways</dt>
 <dd><p>Pathway or pathways to annotate on the heatmap,
 supplied as character vector. If no argument is given, all pathways are
 shown</p></dd>
+
+
 <dt>row_fontsize</dt>
 <dd><p>Font size of pathway names</p></dd>
+
+
 <dt>column_fontsize</dt>
 <dd><p>Font size of the sample names</p></dd>
+
+
 <dt>column_names</dt>
 <dd><p>Option to supply names of the heatmap
 columns if more than one populations is present</p></dd>
+
+
 <dt>show_row_names</dt>
 <dd><p>Should row names be shown in the heatmap?</p></dd>
+
+
 <dt>cluster_columns</dt>
 <dd><p>Should columns in the heatmap be clustered?</p></dd>
+
+
 <dt>hm_colors</dt>
 <dd><p>Colors to be used in the heatmap</p></dd>
+
+
 <dt>scale_breaks</dt>
 <dd><p>Breaks to be used in the colors of the heatmap.
 Length must be equal to the number of colors.</p></dd>
+
 </dl></div>
     <div id="value">
     <h2>Value</h2>
-    <p>list of pathways with corresponding genes</p>
+    
+
+<p>list of pathways with corresponding genes</p>
     </div>
 
     <div id="ref-examples">
     <h2>Examples</h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span class="kw">if</span> <span class="op">(</span><span class="cn">FALSE</span><span class="op">)</span> <span class="op">{</span></span>
-<span class="r-in"><span class="fu">plot_heatmap</span><span class="op">(</span></span>
-<span class="r-in">     scpa_out <span class="op">=</span> <span class="va">scpa_result</span>,</span>
-<span class="r-in">     pathway <span class="op">=</span> <span class="st">"mtorc"</span></span>
-<span class="r-in"><span class="op">)</span></span>
-<span class="r-in"><span class="op">}</span></span>
-<span class="r-in"></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="kw">if</span> <span class="op">(</span><span class="cn">FALSE</span><span class="op">)</span> <span class="op">{</span></span></span>
+<span class="r-in"><span><span class="fu">plot_heatmap</span><span class="op">(</span></span></span>
+<span class="r-in"><span>     scpa_out <span class="op">=</span> <span class="va">scpa_result</span>,</span></span>
+<span class="r-in"><span>     pathway <span class="op">=</span> <span class="st">"mtorc"</span></span></span>
+<span class="r-in"><span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="op">}</span></span></span>
+<span class="r-in"><span></span></span>
 </code></pre></div>
     </div>
   </div>
@@ -157,7 +184,7 @@ Length must be equal to the number of colors.</p></dd>
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.3.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.6.</p>
 </div>
 
       </footer></div>

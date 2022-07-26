@@ -52,7 +52,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="index.html">Single Cell Pathway Analysis (SCPA)</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.0.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.1.0</span>
       </span>
     </div>
 
@@ -93,10 +93,19 @@
     <li>
       <a href="articles/disease_comparison.html">Systems level pathway analysis in disease</a>
     </li>
+    <li class="divider">
+    </li>
+<li class="dropdown-header">Visualisation</li>
+    <li>
+      <a href="articles/visualisation.html">Visualising SCPA output</a>
+    </li>
   </ul>
 </li>
 <li>
   <a href="reference/index.html">Reference</a>
+</li>
+<li>
+  <a href="news/index.html">Changelog</a>
 </li>
       </ul>
 <ul class="nav navbar-nav navbar-right">
@@ -153,10 +162,10 @@
 </h3>
 <p>You can install SCPA by running:</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="co"># install.packages("devtools")</span>
-<span class="fu">devtools</span><span class="fu">::</span><span class="fu"><a href="https://devtools.r-lib.org/reference/remote-reexports.html" class="external-link">install_version</a></span><span class="op">(</span><span class="st">"crossmatch"</span>, version <span class="op">=</span> <span class="st">"1.3.1"</span>, repos <span class="op">=</span> <span class="st">"http://cran.us.r-project.org"</span><span class="op">)</span>
-<span class="fu">devtools</span><span class="fu">::</span><span class="fu"><a href="https://devtools.r-lib.org/reference/remote-reexports.html" class="external-link">install_version</a></span><span class="op">(</span><span class="st">"multicross"</span>, version <span class="op">=</span> <span class="st">"2.1.0"</span>, repos <span class="op">=</span> <span class="st">"http://cran.us.r-project.org"</span><span class="op">)</span>
-<span class="fu">devtools</span><span class="fu">::</span><span class="fu"><a href="https://devtools.r-lib.org/reference/remote-reexports.html" class="external-link">install_github</a></span><span class="op">(</span><span class="st">"jackbibby1/SCPA"</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="co"># install.packages("devtools")</span></span>
+<span><span class="fu">devtools</span><span class="fu">::</span><span class="fu"><a href="https://remotes.r-lib.org/reference/install_version.html" class="external-link">install_version</a></span><span class="op">(</span><span class="st">"crossmatch"</span>, version <span class="op">=</span> <span class="st">"1.3.1"</span>, repos <span class="op">=</span> <span class="st">"http://cran.us.r-project.org"</span><span class="op">)</span></span>
+<span><span class="fu">devtools</span><span class="fu">::</span><span class="fu"><a href="https://remotes.r-lib.org/reference/install_version.html" class="external-link">install_version</a></span><span class="op">(</span><span class="st">"multicross"</span>, version <span class="op">=</span> <span class="st">"2.1.0"</span>, repos <span class="op">=</span> <span class="st">"http://cran.us.r-project.org"</span><span class="op">)</span></span>
+<span><span class="fu">devtools</span><span class="fu">::</span><span class="fu"><a href="https://remotes.r-lib.org/reference/install_github.html" class="external-link">install_github</a></span><span class="op">(</span><span class="st">"jackbibby1/SCPA"</span><span class="op">)</span></span></code></pre></div>
 </div>
 <div class="section level3">
 <h3 id="tutorials">Tutorials<a class="anchor" aria-label="anchor" href="#tutorials"></a>
@@ -169,6 +178,7 @@
 <li>A <a href="https://jackbibby1.github.io/SCPA/articles/using_gene_sets.html">tutorial</a> on how to get and use gene sets with SCPA</li>
 <li>A <a href="https://jackbibby1.github.io/SCPA/articles/comparing_two_populations.html">tutorial</a> for more detailed two group comparison with a specific data set</li>
 <li>A <a href="https://jackbibby1.github.io/SCPA/articles/seurat_comparison.html">tutorial</a> on how to use SCPA directly within a Seurat object</li>
+<li>A <a href="https://jackbibby1.github.io/SCPA/articles/visualisation.html">tutorial</a> on visualising SCPA output</li>
 <li>A <a href="https://jackbibby1.github.io/SCPA/articles/pseudotime.html">tutorial</a> for multisample SCPA, comparing pathways across a pseudotime trajectory</li>
 <li>A <a href="https://jackbibby1.github.io/SCPA/articles/systematic_tissue_comparison.html">tutorial</a> of a systematic analysis of many cell types across multiple tissues</li>
 <li>A <a href="https://jackbibby1.github.io/SCPA/articles/disease_comparison.html">tutorial</a> for a systems level analysis of many cells types in disease (COVID-19)</li>
@@ -228,7 +238,7 @@
 
 <div class="pkgdown">
   <p></p>
-<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.3.</p>
+<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.6.</p>
 </div>
 
       </footer>

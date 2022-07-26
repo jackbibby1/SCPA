@@ -1,5 +1,5 @@
 pandoc: 2.11.4
-pkgdown: 2.0.3
+pkgdown: 2.0.6
 pkgdown_sha: ~
 articles:
   comparing_two_populations: comparing_two_populations.html
@@ -9,7 +9,8 @@ articles:
   seurat_comparison: seurat_comparison.html
   systematic_tissue_comparison: systematic_tissue_comparison.html
   using_gene_sets: using_gene_sets.html
-last_built: 2022-07-07T16:00Z
+  visualisation: visualisation.html
+last_built: 2022-07-26T19:20Z
 urls:
   reference: jackbibby1.github.io/SCPA/reference
   article: jackbibby1.github.io/SCPA/articles

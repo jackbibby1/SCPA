@@ -24,7 +24,7 @@ rank of a user defined pathway."><meta property="og:image" content="jackbibby1.g
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">Single Cell Pathway Analysis (SCPA)</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.0.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.1.0</span>
       </span>
     </div>
 
@@ -61,9 +61,17 @@ rank of a user defined pathway."><meta property="og:image" content="jackbibby1.g
     <li>
       <a href="../articles/disease_comparison.html">Systems level pathway analysis in disease</a>
     </li>
+    <li class="divider">
+    <li class="dropdown-header">Visualisation</li>
+    <li>
+      <a href="../articles/visualisation.html">Visualising SCPA output</a>
+    </li>
   </ul></li>
 <li>
   <a href="../reference/index.html">Reference</a>
+</li>
+<li>
+  <a href="../news/index.html">Changelog</a>
 </li>
       </ul><ul class="nav navbar-nav navbar-right"><li>
   <a href="https://github.com/jackbibby1/SCPA/" class="external-link">
@@ -91,17 +99,17 @@ rank of a user defined pathway.</p>
     </div>
 
     <div id="ref-usage">
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">plot_rank</span><span class="op">(</span>
-  <span class="va">scpa_out</span>,
-  <span class="va">pathway</span>,
-  population_name <span class="op">=</span> <span class="st">"qval"</span>,
-  base_point_size <span class="op">=</span> <span class="fl">2</span>,
-  base_point_color <span class="op">=</span> <span class="st">"gray70"</span>,
-  highlight_point_size <span class="op">=</span> <span class="fl">3</span>,
-  highlight_point_color <span class="op">=</span> <span class="st">"cornflowerblue"</span>,
-  label_pathway <span class="op">=</span> <span class="cn">T</span>,
-  label_size <span class="op">=</span> <span class="fl">4</span>
-<span class="op">)</span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">plot_rank</span><span class="op">(</span></span>
+<span>  <span class="va">scpa_out</span>,</span>
+<span>  <span class="va">pathway</span>,</span>
+<span>  population_name <span class="op">=</span> <span class="st">"qval"</span>,</span>
+<span>  base_point_size <span class="op">=</span> <span class="fl">2</span>,</span>
+<span>  base_point_color <span class="op">=</span> <span class="st">"gray70"</span>,</span>
+<span>  highlight_point_size <span class="op">=</span> <span class="fl">3</span>,</span>
+<span>  highlight_point_color <span class="op">=</span> <span class="st">"cornflowerblue"</span>,</span>
+<span>  label_pathway <span class="op">=</span> <span class="cn">T</span>,</span>
+<span>  label_size <span class="op">=</span> <span class="fl">4</span></span>
+<span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div id="arguments">
@@ -109,41 +117,60 @@ rank of a user defined pathway.</p>
     <dl><dt>scpa_out</dt>
 <dd><p>Data frame containing Pathways and qvals generated from
 compare_pathways</p></dd>
+
+
 <dt>pathway</dt>
 <dd><p>Chosen pathway or pathways to plot the rank of. This can
 be specific e.g. HALLMARK_GLYCOLYSIS to plot a specific result, or
 generic e.g. glycolysis to plot all glycolysis pathways</p></dd>
+
+
 <dt>population_name</dt>
 <dd><p>Column name of the population to plot, if more
 than one population present in the data frame</p></dd>
+
+
 <dt>base_point_size</dt>
 <dd><p>Size of the base points to plot on the graph</p></dd>
+
+
 <dt>base_point_color</dt>
 <dd><p>Color of the base points to plot on the graph</p></dd>
+
+
 <dt>highlight_point_size</dt>
 <dd><p>Size of the highlighted points to plot on the graph</p></dd>
+
+
 <dt>highlight_point_color</dt>
 <dd><p>Color of the highlighted points to plot on the graph</p></dd>
+
+
 <dt>label_pathway</dt>
 <dd><p>Should the selected pathway be labelled?</p></dd>
+
+
 <dt>label_size</dt>
 <dd><p>Text size of the pathway label</p></dd>
+
 </dl></div>
     <div id="value">
     <h2>Value</h2>
-    <p>list of pathways with corresponding genes</p>
+    
+
+<p>list of pathways with corresponding genes</p>
     </div>
 
     <div id="ref-examples">
     <h2>Examples</h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span class="kw">if</span> <span class="op">(</span><span class="cn">FALSE</span><span class="op">)</span> <span class="op">{</span></span>
-<span class="r-in"><span class="fu">plot_rank</span><span class="op">(</span></span>
-<span class="r-in">     scpa_out <span class="op">=</span> <span class="va">scpa_result</span>,</span>
-<span class="r-in">     pathway <span class="op">=</span> <span class="st">"interferon"</span>,</span>
-<span class="r-in">     population_name <span class="op">=</span> <span class="va">cd4_qval</span>,</span>
-<span class="r-in"><span class="op">)</span></span>
-<span class="r-in"><span class="op">}</span></span>
-<span class="r-in"></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="kw">if</span> <span class="op">(</span><span class="cn">FALSE</span><span class="op">)</span> <span class="op">{</span></span></span>
+<span class="r-in"><span><span class="fu">plot_rank</span><span class="op">(</span></span></span>
+<span class="r-in"><span>     scpa_out <span class="op">=</span> <span class="va">scpa_result</span>,</span></span>
+<span class="r-in"><span>     pathway <span class="op">=</span> <span class="st">"interferon"</span>,</span></span>
+<span class="r-in"><span>     population_name <span class="op">=</span> <span class="va">cd4_qval</span>,</span></span>
+<span class="r-in"><span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="op">}</span></span></span>
+<span class="r-in"><span></span></span>
 </code></pre></div>
     </div>
   </div>
@@ -158,7 +185,7 @@ than one population present in the data frame</p></dd>
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.3.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.6.</p>
 </div>
 
       </footer></div>

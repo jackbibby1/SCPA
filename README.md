@@ -86,6 +86,9 @@ We have various examples and walkthroughs, including:
     [tutorial](https://jackbibby1.github.io/SCPA/articles/seurat_comparison.html)
     on how to use SCPA directly within a Seurat object
 -   A
+    [tutorial](https://jackbibby1.github.io/SCPA/articles/visualisation.html)
+    on visualising SCPA output
+-   A
     [tutorial](https://jackbibby1.github.io/SCPA/articles/pseudotime.html)
     for multisample SCPA, comparing pathways across a pseudotime
     trajectory

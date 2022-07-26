@@ -25,7 +25,7 @@ two metadata features can be selected for a given input."><meta property="og:ima
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">Single Cell Pathway Analysis (SCPA)</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.0.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.1.0</span>
       </span>
     </div>
 
@@ -62,9 +62,17 @@ two metadata features can be selected for a given input."><meta property="og:ima
     <li>
       <a href="../articles/disease_comparison.html">Systems level pathway analysis in disease</a>
     </li>
+    <li class="divider">
+    <li class="dropdown-header">Visualisation</li>
+    <li>
+      <a href="../articles/visualisation.html">Visualising SCPA output</a>
+    </li>
   </ul></li>
 <li>
   <a href="../reference/index.html">Reference</a>
+</li>
+<li>
+  <a href="../news/index.html">Changelog</a>
 </li>
       </ul><ul class="nav navbar-nav navbar-right"><li>
   <a href="https://github.com/jackbibby1/SCPA/" class="external-link">
@@ -93,14 +101,14 @@ two metadata features can be selected for a given input.</p>
     </div>
 
     <div id="ref-usage">
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">seurat_extract</span><span class="op">(</span>
-  <span class="va">seu_obj</span>,
-  meta1 <span class="op">=</span> <span class="cn">NULL</span>,
-  value_meta1 <span class="op">=</span> <span class="cn">NULL</span>,
-  meta2 <span class="op">=</span> <span class="cn">NULL</span>,
-  value_meta2 <span class="op">=</span> <span class="cn">NULL</span>,
-  pseudocount <span class="op">=</span> <span class="fl">0.001</span>
-<span class="op">)</span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">seurat_extract</span><span class="op">(</span></span>
+<span>  <span class="va">seu_obj</span>,</span>
+<span>  meta1 <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  value_meta1 <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  meta2 <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  value_meta2 <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  pseudocount <span class="op">=</span> <span class="fl">0.001</span></span>
+<span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div id="arguments">
@@ -108,34 +116,47 @@ two metadata features can be selected for a given input.</p>
     <dl><dt>seu_obj</dt>
 <dd><p>Seurat object containing normalised counts
 stored in <code>seu_obj@assays$RNA@data</code></p></dd>
+
+
 <dt>meta1</dt>
 <dd><p>Metadata name to subset</p></dd>
+
+
 <dt>value_meta1</dt>
 <dd><p>Value to select within <code>meta1</code> function</p></dd>
+
+
 <dt>meta2</dt>
 <dd><p>Metadata name to subset</p></dd>
+
+
 <dt>value_meta2</dt>
 <dd><p>Value to select within <code>meta2</code> function</p></dd>
+
+
 <dt>pseudocount</dt>
 <dd><p>Pseudocount to add to data. Defaults to 0.001</p></dd>
+
 </dl></div>
     <div id="value">
     <h2>Value</h2>
-    <p>Matrix containing count values of selected populations</p>
+    
+
+<p>Matrix containing count values of selected populations</p>
     </div>
 
     <div id="ref-examples">
     <h2>Examples</h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span class="kw">if</span> <span class="op">(</span><span class="cn">FALSE</span><span class="op">)</span> <span class="op">{</span></span>
-<span class="r-in"><span class="va">cd4</span> <span class="op">&lt;-</span> <span class="fu">seurat_extract</span><span class="op">(</span></span>
-<span class="r-in">   <span class="va">Seurat_Object</span>,</span>
-<span class="r-in">   meta1 <span class="op">=</span> <span class="st">"Hour"</span>,</span>
-<span class="r-in">   value_meta1 <span class="op">=</span> <span class="fl">12</span>,</span>
-<span class="r-in">   meta2 <span class="op">=</span> <span class="st">"Cell_Type"</span>,</span>
-<span class="r-in">   value_meta2 <span class="op">=</span> <span class="st">"CD4"</span></span>
-<span class="r-in"><span class="op">)</span></span>
-<span class="r-in"><span class="op">}</span></span>
-<span class="r-in"></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="kw">if</span> <span class="op">(</span><span class="cn">FALSE</span><span class="op">)</span> <span class="op">{</span></span></span>
+<span class="r-in"><span><span class="va">cd4</span> <span class="op">&lt;-</span> <span class="fu">seurat_extract</span><span class="op">(</span></span></span>
+<span class="r-in"><span>   <span class="va">Seurat_Object</span>,</span></span>
+<span class="r-in"><span>   meta1 <span class="op">=</span> <span class="st">"Hour"</span>,</span></span>
+<span class="r-in"><span>   value_meta1 <span class="op">=</span> <span class="fl">12</span>,</span></span>
+<span class="r-in"><span>   meta2 <span class="op">=</span> <span class="st">"Cell_Type"</span>,</span></span>
+<span class="r-in"><span>   value_meta2 <span class="op">=</span> <span class="st">"CD4"</span></span></span>
+<span class="r-in"><span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="op">}</span></span></span>
+<span class="r-in"><span></span></span>
 </code></pre></div>
     </div>
   </div>
@@ -150,7 +171,7 @@ stored in <code>seu_obj@assays$RNA@data</code></p></dd>
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.3.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.6.</p>
 </div>
 
       </footer></div>

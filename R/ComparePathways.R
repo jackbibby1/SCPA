@@ -30,30 +30,35 @@ compare_pathways <- function(samples,
                              min_genes = 15,
                              max_genes = 500) {
 
-  ## Pathways
+  # get pathways for analysis
   if (class(pathways)[1] == "character") {
     pathways <- get_paths(pathways)
   }
   path_names <- sapply(pathways, function(x) unique(x$Pathway))
 
-  ## Get cells in each sample
+  # define the number of cells in each condition
   cell_number <- lapply(samples, function(x) ncol(x))
   cell_number <- sapply(cell_number, function(x) x[1])
 
-  ## Sample random cells to 500
+  for (i in 1:length(cell_number)) {
+    message(paste("Cell numbers in population", i, "=", cell_number[i]))}
+  message("- If greater than ", downsample,
+          " cells, these populations will be downsampled", "\n")
+
+  # randomly sample cells
   for (i in 1:length(samples)) {
     samples[[i]] <- random_cells(samples[[i]], ifelse(cell_number[i] < 500, cell_number[i], downsample))
   }
 
-  ## Take genes present in all samples
+  # only take shared genes
   genes <- lapply(samples, function(x) rownames(x))
   genes <- table(unlist(genes))
   genes <- genes[genes == length(samples)]
   genes <- names(genes)
   samples <- lapply(samples, function(x) x[rownames(x) %in% genes, ])
 
+  # generate pathway matrices
   pop_paths <- vector(mode = "list", length = length(samples))
-  ## Pathway matrices
   for (i in 1:length(pop_paths)) {
     for (c in 1:length(pathways)) {
       pop_paths[[i]][[c]] <- samples[[i]][rownames(samples[[i]]) %in% pathways[[c]]$Genes, ]
@@ -65,16 +70,30 @@ compare_pathways <- function(samples,
 
   # filter out pathways with < 15 genes or > 500
   filter_paths <- sapply(pop_paths[[1]], function(x) any(nrow(x) >= min_genes & nrow(x) <= max_genes))
+
+  filtered_pathways <- names(filter_paths[filter_paths == "FALSE"])
+
+  if (length(filtered_pathways) > 0) {
+    message("Excluding ", length(filtered_pathways),
+            " pathways based on min/max genes parameter: ",
+            paste(head(filtered_pathways, 5), collapse=", "), "...", "\n")
+  } else {
+    message("All ", length(pathways), " pathways passed the min/max genes threshold", "\n")
+  }
+
   pop_paths <- lapply(pop_paths, function(x) x[unlist(filter_paths)])
 
-  ##### Convert the matrices to get genes as cols and rows as cells #####
+  # transpose matrix
   pop_paths <- lapply(pop_paths, function(x) lapply(x, function(c) t(c)))
 
-  ## Organise columns into same order
+  # order columns
   pop_paths <- lapply(pop_paths, function(x) lapply(x, function(c) c[, sort(colnames(c))]))
 
-  ## Calculate fold changes
+  # fc calculation
   if (length(samples) == 2) {
+
+    message("Calculating pathway fold changes...", "\n")
+
     avg_expression <- lapply(pop_paths, function(x) lapply(x, function(c) data.frame(colMeans(c))))
     samp_combined <- c()
     for (i in 1:length(pop_paths[[1]])) {
@@ -85,9 +104,9 @@ compare_pathways <- function(samples,
     path_fc <- sapply(samp_combined, function(x) sum(x[, "logFC"]))
   }
 
-  ## Test samples
+  # run scpa
   if (length(samples) > 2) {
-    message("Conducting multisample analysis")
+    message("Performing a multisample analysis with SCPA...")
     pb <- utils::txtProgressBar(min = 0, max = length(pop_paths[[1]]),
                                 style = 3, width = 50)
     mcm_result <- list()
@@ -112,7 +131,7 @@ compare_pathways <- function(samples,
     return(mcm_output)
 
   } else {
-    message("Conducting 2-sample test")
+    message("Performing a two-sample analysis with SCPA...")
     pb <- utils::txtProgressBar(min = 0, max = length(pop_paths[[1]]),
                                 style = 3, width = 50)
     mcm_result <- list()
@@ -137,3 +156,7 @@ compare_pathways <- function(samples,
     return(mcm_output)
   }
 }
+
+
+
+

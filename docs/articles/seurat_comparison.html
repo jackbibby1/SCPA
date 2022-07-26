@@ -47,7 +47,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">Single Cell Pathway Analysis (SCPA)</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.0.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.1.0</span>
       </span>
     </div>
 
@@ -88,10 +88,19 @@
     <li>
       <a href="../articles/disease_comparison.html">Systems level pathway analysis in disease</a>
     </li>
+    <li class="divider">
+    </li>
+<li class="dropdown-header">Visualisation</li>
+    <li>
+      <a href="../articles/visualisation.html">Visualising SCPA output</a>
+    </li>
   </ul>
 </li>
 <li>
   <a href="../reference/index.html">Reference</a>
+</li>
+<li>
+  <a href="../news/index.html">Changelog</a>
 </li>
       </ul>
 <ul class="nav navbar-nav navbar-right">
@@ -127,23 +136,23 @@
 <p>As well as importing expression matrices into <code>compare_pathways</code>, you can also compare populations directly within a Seurat object in one function within SCPA. To do this, you just need the Seurat object that is annotated with the groups you want to compare.</p>
 <p>Let’s load in a few packages.</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/jackbibby1/SCPA/" class="external-link">SCPA</a></span><span class="op">)</span>
-<span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://tidyverse.tidyverse.org" class="external-link">tidyverse</a></span><span class="op">)</span>
-<span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://igordot.github.io/msigdbr/" class="external-link">msigdbr</a></span><span class="op">)</span>
-<span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://satijalab.org/seurat" class="external-link">Seurat</a></span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/jackbibby1/SCPA/" class="external-link">SCPA</a></span><span class="op">)</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://tidyverse.tidyverse.org" class="external-link">tidyverse</a></span><span class="op">)</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://igordot.github.io/msigdbr/" class="external-link">msigdbr</a></span><span class="op">)</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://satijalab.org/seurat" class="external-link">Seurat</a></span><span class="op">)</span></span></code></pre></div>
 <div class="section level3">
 <h3 id="getting-the-dataset">Getting the dataset<a class="anchor" aria-label="anchor" href="#getting-the-dataset"></a>
 </h3>
 <p>We’re going to do the same comparison of Th1 and Tcm cells that we did in the <a href="https://jackbibby1.github.io/SCPA/articles/quick_start.html">quick start tutorial</a>, again using all Hallmark gene sets. We’ll use the <a href="https://www.nature.com/articles/s41467-019-12464-3" class="external-link">Szabo, P… Sims, P</a> T cell dataset that you can download <a href="https://drive.google.com/file/d/1-HJHfSMw5EBP02ZjTrbX7Pd_5eYGe1Zz/view?usp=sharing" class="external-link">here</a>.</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">t_cells</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/readRDS.html" class="external-link">readRDS</a></span><span class="op">(</span><span class="st">"szabo_t_cell.rds"</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="va">t_cells</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/readRDS.html" class="external-link">readRDS</a></span><span class="op">(</span><span class="st">"szabo_t_cell.rds"</span><span class="op">)</span></span></code></pre></div>
 </div>
 <div class="section level3">
 <h3 id="quick-look-at-the-data">Quick Look at the data<a class="anchor" aria-label="anchor" href="#quick-look-at-the-data"></a>
 </h3>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/pkg/Seurat/man/DimPlot.html" class="external-link">DimPlot</a></span><span class="op">(</span><span class="va">t_cells</span><span class="op">)</span> <span class="op">+</span>
-  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/theme.html" class="external-link">theme</a></span><span class="op">(</span>aspect.ratio <span class="op">=</span> <span class="fl">1</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="fu"><a href="https://satijalab.org/seurat/reference/DimPlot.html" class="external-link">DimPlot</a></span><span class="op">(</span><span class="va">t_cells</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/theme.html" class="external-link">theme</a></span><span class="op">(</span>aspect.ratio <span class="op">=</span> <span class="fl">1</span><span class="op">)</span></span></code></pre></div>
 <p><img src="../reference/figures/cd4_cell_types.png" style="width:50.0%"></p>
 </div>
 <div class="section level3">
@@ -151,18 +160,18 @@
 </h3>
 <p>We need to define our gene sets, and we can do this through the msigdbr package that contains a bunch of biological gene sets that can be found <a href="https://www.gsea-msigdb.org/gsea/msigdb/genesets.jsp" class="external-link">here</a>. Here we just take the Hallmark gene sets (using the “H” call to msigdbr), and use the format_pathways function to get them in a readable format for SCPA.</p>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">pathways</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://igordot.github.io/msigdbr/reference/msigdbr.html" class="external-link">msigdbr</a></span><span class="op">(</span><span class="st">"Homo sapiens"</span>, <span class="st">"H"</span><span class="op">)</span> <span class="op"><a href="https://igordot.github.io/msigdbr/reference/pipe.html" class="external-link">%&gt;%</a></span>
-  <span class="fu"><a href="../reference/format_pathways.html">format_pathways</a></span><span class="op">(</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="va">pathways</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://igordot.github.io/msigdbr/reference/msigdbr.html" class="external-link">msigdbr</a></span><span class="op">(</span><span class="st">"Homo sapiens"</span>, <span class="st">"H"</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="../reference/format_pathways.html">format_pathways</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
 </div>
 <div class="section level3">
 <h3 id="scpa-comparison">SCPA comparison<a class="anchor" aria-label="anchor" href="#scpa-comparison"></a>
 </h3>
 <p>Now to compare the Th1 and Tcm populations, we can use the compare_seurat function within SCPA. Here, <code>group1</code> defines the column name for your metadata, and <code>group1_population</code> defines two values within that column</p>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">scpa_out</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/compare_seurat.html">compare_seurat</a></span><span class="op">(</span><span class="va">t_cells</span>,
-                           group1 <span class="op">=</span> <span class="st">"cell"</span>, 
-                           group1_population <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"cd4 th1"</span>, <span class="st">"cd4 tcm"</span><span class="op">)</span>,
-                           pathways <span class="op">=</span> <span class="va">pathways</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="va">scpa_out</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/compare_seurat.html">compare_seurat</a></span><span class="op">(</span><span class="va">t_cells</span>,</span>
+<span>                           group1 <span class="op">=</span> <span class="st">"cell"</span>, </span>
+<span>                           group1_population <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"cd4 th1"</span>, <span class="st">"cd4 tcm"</span><span class="op">)</span>,</span>
+<span>                           pathways <span class="op">=</span> <span class="va">pathways</span><span class="op">)</span></span></code></pre></div>
 <p>And that’s it. Your results will be stored in your <code>scpa_out</code> object.</p>
 </div>
   </div>
@@ -182,7 +191,7 @@
 
 <div class="pkgdown">
   <p></p>
-<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.3.</p>
+<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.6.</p>
 </div>
 
       </footer>

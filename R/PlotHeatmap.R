@@ -34,17 +34,23 @@ plot_heatmap <- function(scpa_out,
                          row_fontsize = 6,
                          column_fontsize = 10,
                          column_names = colnames(scpa_out),
-                         show_row_names = FALSE,
+                         show_row_names = TRUE,
                          cluster_columns = TRUE,
                          hm_colors = NULL,
                          scale_breaks = NULL) {
 
-  hm_colors <- c("cornflowerblue", "white", "red")
+  if (!is.null(hm_colors)) {
+    heatmap_colors <- hm_colors
+  } else {
+    heatmap_colors <- c("cornflowerblue", "white", "red")
+  }
+
   scale <- scpa_out %>%
     dplyr::select(grep(pattern = "qval", x = colnames(scpa_out), ignore.case = T, value = T)) %>%
     as.matrix()
   scale_breaks <- c(min(scale), mean(scale), max(scale))
-  hm_col <- circlize::colorRamp2(colors = hm_colors, breaks = scale_breaks)
+
+  hm_col <- circlize::colorRamp2(colors = heatmap_colors, breaks = scale_breaks)
 
   if (is.null(highlight_pathways) == F) {
 

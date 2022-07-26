@@ -12,11 +12,10 @@ template:
 
 navbar:
   structure:
-    left: [home, articles, reference]
+    left: [home, tutorials, reference, news]
     right: [github]
   components:
-    home: ~
-    articles:
+    tutorials:
       text: Tutorials
       menu:
       - text: Generic example
@@ -38,3 +37,11 @@ navbar:
         href: articles/systematic_tissue_comparison.html
       - text: Systems level pathway analysis in disease
         href: articles/disease_comparison.html
+      - text: ------------
+      - text: Visualisation
+      - text: Visualising SCPA output
+        href: articles/visualisation.html
+
+
+
+

@@ -47,7 +47,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">Single Cell Pathway Analysis (SCPA)</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.0.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.1.0</span>
       </span>
     </div>
 
@@ -88,10 +88,19 @@
     <li>
       <a href="../articles/disease_comparison.html">Systems level pathway analysis in disease</a>
     </li>
+    <li class="divider">
+    </li>
+<li class="dropdown-header">Visualisation</li>
+    <li>
+      <a href="../articles/visualisation.html">Visualising SCPA output</a>
+    </li>
   </ul>
 </li>
 <li>
   <a href="../reference/index.html">Reference</a>
+</li>
+<li>
+  <a href="../news/index.html">Changelog</a>
 </li>
       </ul>
 <ul class="nav navbar-nav navbar-right">
@@ -127,19 +136,19 @@
 <p>Here we’re going to do a basic comparison of pathways between two populations using our naive CD4<sup>+</sup> T cell dataset that you can find <a href="https://drive.google.com/file/d/1XstWBD4lOY0QNd-8Wzeh1f3-uYKuUU5Q/view?usp=sharing" class="external-link">here</a>.</p>
 <p>Let’s load in a few packages we’ll need</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/jackbibby1/SCPA/" class="external-link">SCPA</a></span><span class="op">)</span>
-<span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://satijalab.org/seurat" class="external-link">Seurat</a></span><span class="op">)</span>
-<span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://tidyverse.tidyverse.org" class="external-link">tidyverse</a></span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/jackbibby1/SCPA/" class="external-link">SCPA</a></span><span class="op">)</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://satijalab.org/seurat" class="external-link">Seurat</a></span><span class="op">)</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://tidyverse.tidyverse.org" class="external-link">tidyverse</a></span><span class="op">)</span></span></code></pre></div>
 <div class="section level3">
 <h3 id="loading-in-data-and-visualizing">Loading in data and visualizing<a class="anchor" aria-label="anchor" href="#loading-in-data-and-visualizing"></a>
 </h3>
 <p>And let’s load in the data we’re going to use. In this dataset, CD4<sup>+</sup> T cells were left unstimulated, or stimuated for 12 or 24 hours with anti-CD3 and anti-CD28</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">naive_cd4</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/readRDS.html" class="external-link">readRDS</a></span><span class="op">(</span><span class="st">"naive_cd4.rds"</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="va">naive_cd4</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/readRDS.html" class="external-link">readRDS</a></span><span class="op">(</span><span class="st">"naive_cd4.rds"</span><span class="op">)</span></span></code></pre></div>
 <p>In the <code>naive_cd4</code> object, we have all our naive CD4<sup>+</sup> T cells with metadata specifying the identified cell types and the hour specifying time point of cell harvesting.</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/pkg/Seurat/man/DimPlot.html" class="external-link">DimPlot</a></span><span class="op">(</span><span class="va">naive_cd4</span>, split.by <span class="op">=</span> <span class="st">"Hour"</span><span class="op">)</span> <span class="op">+</span>
-  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/theme.html" class="external-link">theme</a></span><span class="op">(</span>aspect.ratio <span class="op">=</span> <span class="fl">1</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="fu"><a href="https://satijalab.org/seurat/reference/DimPlot.html" class="external-link">DimPlot</a></span><span class="op">(</span><span class="va">naive_cd4</span>, split.by <span class="op">=</span> <span class="st">"Hour"</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/theme.html" class="external-link">theme</a></span><span class="op">(</span>aspect.ratio <span class="op">=</span> <span class="fl">1</span><span class="op">)</span></span></code></pre></div>
 <p><img src="../reference/figures/naive_cd4_umap.png" style="width:100.0%"></p>
 </div>
 <div class="section level3">
@@ -147,54 +156,54 @@
 </h3>
 <p>We then need the expression matrices for the populations we want to compare. For this, we can use the <code>seurat_extract</code> function from the SCPA package, which takes a Seurat object and subsets the data based on the metadata specified in the Seurat columns e.g. here we want to take ‘Resting’ cells at 0hr, and ‘Activated’ cells at 24hr.</p>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">resting</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/seurat_extract.html">seurat_extract</a></span><span class="op">(</span><span class="va">naive_cd4</span>,
-                          meta1 <span class="op">=</span> <span class="st">"Cell_Type"</span>, value_meta1 <span class="op">=</span> <span class="st">"Resting"</span>,
-                          meta2 <span class="op">=</span> <span class="st">"Hour"</span>, value_meta2 <span class="op">=</span> <span class="fl">0</span><span class="op">)</span>
-
-<span class="va">activated</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/seurat_extract.html">seurat_extract</a></span><span class="op">(</span><span class="va">naive_cd4</span>,
-                            meta1 <span class="op">=</span> <span class="st">"Cell_Type"</span>, value_meta1 <span class="op">=</span> <span class="st">"Activated"</span>,
-                            meta2 <span class="op">=</span> <span class="st">"Hour"</span>, value_meta2 <span class="op">=</span> <span class="fl">24</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="va">resting</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/seurat_extract.html">seurat_extract</a></span><span class="op">(</span><span class="va">naive_cd4</span>,</span>
+<span>                          meta1 <span class="op">=</span> <span class="st">"Cell_Type"</span>, value_meta1 <span class="op">=</span> <span class="st">"Resting"</span>,</span>
+<span>                          meta2 <span class="op">=</span> <span class="st">"Hour"</span>, value_meta2 <span class="op">=</span> <span class="fl">0</span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">activated</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/seurat_extract.html">seurat_extract</a></span><span class="op">(</span><span class="va">naive_cd4</span>,</span>
+<span>                            meta1 <span class="op">=</span> <span class="st">"Cell_Type"</span>, value_meta1 <span class="op">=</span> <span class="st">"Activated"</span>,</span>
+<span>                            meta2 <span class="op">=</span> <span class="st">"Hour"</span>, value_meta2 <span class="op">=</span> <span class="fl">24</span><span class="op">)</span></span></code></pre></div>
 </div>
 <div class="section level3">
 <h3 id="defining-metabolic-pathways">Defining metabolic pathways<a class="anchor" aria-label="anchor" href="#defining-metabolic-pathways"></a>
 </h3>
 <p>After we have our data, we can define the pathways to compare. We curated a list of metabolic pathways from a few different sources (Hallmark, KEGG, and Reactome), which can be found <a href="https://github.com/jackbibby1/SCPA/blob/main/gene_sets/.csv" class="external-link">here</a>. The file is in standard gmt file format with the pathway name in column 1 and genes of that pathway in subsequent columns. Here we just converted a gmt file to csv, and manually curated a single file with all metabolic gene sets. SCPA just needs the filepath to these gene sets, so we can add this as an object to simplify our final chunk of code</p>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">pathways</span> <span class="op">&lt;-</span> <span class="st">"combined_metabolic_pathways.csv"</span></code></pre></div>
+<code class="sourceCode R"><span><span class="va">pathways</span> <span class="op">&lt;-</span> <span class="st">"combined_metabolic_pathways.csv"</span></span></code></pre></div>
 </div>
 <div class="section level3">
 <h3 id="running-scpa">Running SCPA<a class="anchor" aria-label="anchor" href="#running-scpa"></a>
 </h3>
 <p>So now we have our samples and metabolic gene sets. To compare these pathways, we can just run the compare_pathways function.</p>
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">rest_act</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/compare_pathways.html">compare_pathways</a></span><span class="op">(</span>samples <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="va">resting</span>, <span class="va">activated</span><span class="op">)</span>, 
-                             pathways <span class="op">=</span> <span class="va">pathways</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="va">rest_act</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/compare_pathways.html">compare_pathways</a></span><span class="op">(</span>samples <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="va">resting</span>, <span class="va">activated</span><span class="op">)</span>, </span>
+<span>                             pathways <span class="op">=</span> <span class="va">pathways</span><span class="op">)</span></span></code></pre></div>
 </div>
 <div class="section level3">
 <h3 id="visualizing-results">Visualizing results<a class="anchor" aria-label="anchor" href="#visualizing-results"></a>
 </h3>
 <p>Now we have the results stored in the rest_act object, which we can then visualize.</p>
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">rest_act</span> <span class="op">&lt;-</span> <span class="va">rest_act</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span>
-  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html" class="external-link">mutate</a></span><span class="op">(</span>color <span class="op">=</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/case_when.html" class="external-link">case_when</a></span><span class="op">(</span><span class="va">FC</span> <span class="op">&gt;</span> <span class="fl">5</span> <span class="op">&amp;</span> <span class="va">adjPval</span> <span class="op">&lt;</span> <span class="fl">0.01</span> <span class="op">~</span> <span class="st">'#6dbf88'</span>,
-                           <span class="va">FC</span> <span class="op">&lt;</span> <span class="fl">5</span> <span class="op">&amp;</span> <span class="va">FC</span> <span class="op">&gt;</span> <span class="op">-</span><span class="fl">5</span> <span class="op">&amp;</span> <span class="va">adjPval</span> <span class="op">&lt;</span> <span class="fl">0.01</span> <span class="op">~</span> <span class="st">'#84b0f0'</span>,
-                           <span class="va">FC</span> <span class="op">&lt;</span> <span class="op">-</span><span class="fl">5</span> <span class="op">&amp;</span> <span class="va">adjPval</span> <span class="op">&lt;</span> <span class="fl">0.01</span> <span class="op">~</span> <span class="st">'mediumseagreen'</span>,
-                           <span class="va">FC</span> <span class="op">&lt;</span> <span class="fl">5</span> <span class="op">&amp;</span> <span class="va">FC</span> <span class="op">&gt;</span> <span class="op">-</span><span class="fl">5</span> <span class="op">&amp;</span> <span class="va">adjPval</span> <span class="op">&gt;</span> <span class="fl">0.01</span> <span class="op">~</span> <span class="st">'black'</span><span class="op">)</span><span class="op">)</span>
-
-<span class="va">aa_path</span> <span class="op">&lt;-</span> <span class="va">rest_act</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> 
-  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html" class="external-link">filter</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/grep.html" class="external-link">grepl</a></span><span class="op">(</span>pattern <span class="op">=</span> <span class="st">"reactome_arachi"</span>, ignore.case <span class="op">=</span> <span class="cn">T</span>, x <span class="op">=</span> <span class="va">Pathway</span><span class="op">)</span><span class="op">)</span>
-
-<span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html" class="external-link">ggplot</a></span><span class="op">(</span><span class="va">rest_act</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html" class="external-link">aes</a></span><span class="op">(</span><span class="op">-</span><span class="va">FC</span>, <span class="va">qval</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span>
-  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_abline.html" class="external-link">geom_vline</a></span><span class="op">(</span>xintercept <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="op">-</span><span class="fl">5</span>, <span class="fl">5</span><span class="op">)</span>, linetype <span class="op">=</span> <span class="st">"dashed"</span>, col <span class="op">=</span> <span class="st">'black'</span>, lwd <span class="op">=</span> <span class="fl">0.3</span><span class="op">)</span> <span class="op">+</span>
-  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_point.html" class="external-link">geom_point</a></span><span class="op">(</span>cex <span class="op">=</span> <span class="fl">2.6</span>, shape <span class="op">=</span> <span class="fl">21</span>, fill <span class="op">=</span> <span class="va">rest_act</span><span class="op">$</span><span class="va">color</span>, stroke <span class="op">=</span> <span class="fl">0.3</span><span class="op">)</span> <span class="op">+</span>
-  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_point.html" class="external-link">geom_point</a></span><span class="op">(</span>data <span class="op">=</span> <span class="va">aa_path</span>, shape <span class="op">=</span> <span class="fl">21</span>, cex <span class="op">=</span> <span class="fl">2.8</span>, fill <span class="op">=</span> <span class="st">"orangered2"</span>, color <span class="op">=</span> <span class="st">"black"</span>, stroke <span class="op">=</span> <span class="fl">0.3</span><span class="op">)</span> <span class="op">+</span>
-  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/lims.html" class="external-link">xlim</a></span><span class="op">(</span><span class="op">-</span><span class="fl">20</span>, <span class="fl">80</span><span class="op">)</span> <span class="op">+</span>
-  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/lims.html" class="external-link">ylim</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">11</span><span class="op">)</span> <span class="op">+</span>
-  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html" class="external-link">xlab</a></span><span class="op">(</span><span class="st">"Enrichment"</span><span class="op">)</span> <span class="op">+</span>
-  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html" class="external-link">ylab</a></span><span class="op">(</span><span class="st">"Qval"</span><span class="op">)</span> <span class="op">+</span>
-  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/theme.html" class="external-link">theme</a></span><span class="op">(</span>panel.background <span class="op">=</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/element.html" class="external-link">element_blank</a></span><span class="op">(</span><span class="op">)</span>,
-        panel.border <span class="op">=</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/element.html" class="external-link">element_rect</a></span><span class="op">(</span>fill <span class="op">=</span> <span class="cn">NA</span><span class="op">)</span>,
-        aspect.ratio <span class="op">=</span> <span class="fl">1</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="va">rest_act</span> <span class="op">&lt;-</span> <span class="va">rest_act</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html" class="external-link">mutate</a></span><span class="op">(</span>color <span class="op">=</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/case_when.html" class="external-link">case_when</a></span><span class="op">(</span><span class="va">FC</span> <span class="op">&gt;</span> <span class="fl">5</span> <span class="op">&amp;</span> <span class="va">adjPval</span> <span class="op">&lt;</span> <span class="fl">0.01</span> <span class="op">~</span> <span class="st">'#6dbf88'</span>,</span>
+<span>                           <span class="va">FC</span> <span class="op">&lt;</span> <span class="fl">5</span> <span class="op">&amp;</span> <span class="va">FC</span> <span class="op">&gt;</span> <span class="op">-</span><span class="fl">5</span> <span class="op">&amp;</span> <span class="va">adjPval</span> <span class="op">&lt;</span> <span class="fl">0.01</span> <span class="op">~</span> <span class="st">'#84b0f0'</span>,</span>
+<span>                           <span class="va">FC</span> <span class="op">&lt;</span> <span class="op">-</span><span class="fl">5</span> <span class="op">&amp;</span> <span class="va">adjPval</span> <span class="op">&lt;</span> <span class="fl">0.01</span> <span class="op">~</span> <span class="st">'mediumseagreen'</span>,</span>
+<span>                           <span class="va">FC</span> <span class="op">&lt;</span> <span class="fl">5</span> <span class="op">&amp;</span> <span class="va">FC</span> <span class="op">&gt;</span> <span class="op">-</span><span class="fl">5</span> <span class="op">&amp;</span> <span class="va">adjPval</span> <span class="op">&gt;</span> <span class="fl">0.01</span> <span class="op">~</span> <span class="st">'black'</span><span class="op">)</span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">aa_path</span> <span class="op">&lt;-</span> <span class="va">rest_act</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> </span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html" class="external-link">filter</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/grep.html" class="external-link">grepl</a></span><span class="op">(</span>pattern <span class="op">=</span> <span class="st">"reactome_arachi"</span>, ignore.case <span class="op">=</span> <span class="cn">T</span>, x <span class="op">=</span> <span class="va">Pathway</span><span class="op">)</span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html" class="external-link">ggplot</a></span><span class="op">(</span><span class="va">rest_act</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html" class="external-link">aes</a></span><span class="op">(</span><span class="op">-</span><span class="va">FC</span>, <span class="va">qval</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_abline.html" class="external-link">geom_vline</a></span><span class="op">(</span>xintercept <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="op">-</span><span class="fl">5</span>, <span class="fl">5</span><span class="op">)</span>, linetype <span class="op">=</span> <span class="st">"dashed"</span>, col <span class="op">=</span> <span class="st">'black'</span>, lwd <span class="op">=</span> <span class="fl">0.3</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_point.html" class="external-link">geom_point</a></span><span class="op">(</span>cex <span class="op">=</span> <span class="fl">2.6</span>, shape <span class="op">=</span> <span class="fl">21</span>, fill <span class="op">=</span> <span class="va">rest_act</span><span class="op">$</span><span class="va">color</span>, stroke <span class="op">=</span> <span class="fl">0.3</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_point.html" class="external-link">geom_point</a></span><span class="op">(</span>data <span class="op">=</span> <span class="va">aa_path</span>, shape <span class="op">=</span> <span class="fl">21</span>, cex <span class="op">=</span> <span class="fl">2.8</span>, fill <span class="op">=</span> <span class="st">"orangered2"</span>, color <span class="op">=</span> <span class="st">"black"</span>, stroke <span class="op">=</span> <span class="fl">0.3</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/lims.html" class="external-link">xlim</a></span><span class="op">(</span><span class="op">-</span><span class="fl">20</span>, <span class="fl">80</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/lims.html" class="external-link">ylim</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">11</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html" class="external-link">xlab</a></span><span class="op">(</span><span class="st">"Enrichment"</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html" class="external-link">ylab</a></span><span class="op">(</span><span class="st">"Qval"</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/theme.html" class="external-link">theme</a></span><span class="op">(</span>panel.background <span class="op">=</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/element.html" class="external-link">element_blank</a></span><span class="op">(</span><span class="op">)</span>,</span>
+<span>        panel.border <span class="op">=</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/element.html" class="external-link">element_rect</a></span><span class="op">(</span>fill <span class="op">=</span> <span class="cn">NA</span><span class="op">)</span>,</span>
+<span>        aspect.ratio <span class="op">=</span> <span class="fl">1</span><span class="op">)</span></span></code></pre></div>
 <p><img src="../reference/figures/v_plot_rest_act.png" style="width:45.0%"></p>
 </div>
 <div class="section level3">
@@ -219,7 +228,7 @@
 
 <div class="pkgdown">
   <p></p>
-<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.3.</p>
+<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.6.</p>
 </div>
 
       </footer>

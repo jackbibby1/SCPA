@@ -3,7 +3,9 @@
 #' This function takes the output from SCPA and plots a
 #' heatmap of the qvals
 #'
-#' @param scpa_out Direct output from either `compare_pathways`, or `compare_seurat`
+#' @param scpa_out Data frame that contains a "Pathway" column, and a column or columns
+#'     containing qvals. This can be the direct output from `compare_pathways()`,
+#'     or a custom data frame.
 #' @param highlight_pathways Pathway or pathways to annotate on the heatmap,
 #'     supplied as character vector. If no argument is given, all pathways are
 #'     shown

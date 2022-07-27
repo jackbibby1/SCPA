@@ -76,7 +76,7 @@ compare_pathways <- function(samples,
   if (length(filtered_pathways) > 0) {
     message("Excluding ", length(filtered_pathways),
             " pathways based on min/max genes parameter: ",
-            paste(head(filtered_pathways, 5), collapse=", "), "...", "\n")
+            paste(utils::head(filtered_pathways, 5), collapse=", "), "...", "\n")
   } else {
     message("All ", length(pathways), " pathways passed the min/max genes threshold", "\n")
   }

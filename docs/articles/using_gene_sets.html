@@ -136,13 +136,18 @@
 <div class="section level2">
 <h2 id="using-gene-sets-in-scpa">Using gene sets in SCPA<a class="anchor" aria-label="anchor" href="#using-gene-sets-in-scpa"></a>
 </h2>
-<p>There are a few different formats for gene sets that you can use in SCPA. However you decide to generate them though, the gene names need to be formatted in the same way across your expression file and gene sets i.e. if you have human gene symbols in your expression data, you need human gene symbols in your gene set.</p>
+<p>There are a few different formats for gene sets that you can use in
+SCPA. However you decide to generate them though, the gene names need to
+be formatted in the same way across your expression file and gene sets
+i.e. if you have human gene symbols in your expression data, you need
+human gene symbols in your gene set.</p>
 <ul>
 <li>Generate gene set lists in R (possibly the best option)</li>
 <li>Use a classical gene set gmt file</li>
 <li>Use a csv file</li>
 </ul>
-<p>Here we’ll outline a basic workflow to get gene sets using either of the methods. First let’s load in a couple of packages we’ll need</p>
+<p>Here we’ll outline a basic workflow to get gene sets using either of
+the methods. First let’s load in a couple of packages we’ll need</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/jackbibby1/SCPA/" class="external-link">SCPA</a></span><span class="op">)</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://igordot.github.io/msigdbr/" class="external-link">msigdbr</a></span><span class="op">)</span></span>
@@ -156,7 +161,9 @@
 <div class="section level3">
 <h3 id="generic-example">Generic example<a class="anchor" aria-label="anchor" href="#generic-example"></a>
 </h3>
-<p>In a simple example, you can generate formatted gene sets using two simple lines of code. We’ll just extract all the Hallmark pathways from msigdbr</p>
+<p>In a simple example, you can generate formatted gene sets using two
+simple lines of code. We’ll just extract all the Hallmark pathways from
+msigdbr</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">pathways</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://igordot.github.io/msigdbr/reference/msigdbr.html" class="external-link">msigdbr</a></span><span class="op">(</span>species <span class="op">=</span> <span class="st">"Homo sapiens"</span>, category <span class="op">=</span> <span class="st">"H"</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
 <span>      <span class="fu"><a href="../reference/format_pathways.html">format_pathways</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
@@ -164,8 +171,16 @@
 <div class="section level3">
 <h3 id="more-detailed-example">More detailed example<a class="anchor" aria-label="anchor" href="#more-detailed-example"></a>
 </h3>
-<p>msigdbr is a handy R package that contains a large number of pathways. You can see a detailed explanation of how to use different aspects of the package in the <a href="https://cran.r-project.org/web/packages/msigdbr/vignettes/msigdbr-intro.html" class="external-link">msigdbr vignette</a>. We’re going to use it to generate lists of gene sets that we want to analyse in our data using SCPA.</p>
-<p>For example, we can generate a data frame containing all of the Homo sapiens Hallmark gene sets using the “H” call within <code>msigdbr</code>. This data is in tidy format with all the pathway names in the gs_name category, and gene names in the gene_symbol category</p>
+<p>msigdbr is a handy R package that contains a large number of
+pathways. You can see a detailed explanation of how to use different
+aspects of the package in the <a href="https://cran.r-project.org/web/packages/msigdbr/vignettes/msigdbr-intro.html" class="external-link">msigdbr
+vignette</a>. We’re going to use it to generate lists of gene sets that
+we want to analyse in our data using SCPA.</p>
+<p>For example, we can generate a data frame containing all of the Homo
+sapiens Hallmark gene sets using the “H” call within
+<code>msigdbr</code>. This data is in tidy format with all the pathway
+names in the gs_name category, and gene names in the gene_symbol
+category</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">hallmark</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://igordot.github.io/msigdbr/reference/msigdbr.html" class="external-link">msigdbr</a></span><span class="op">(</span><span class="st">"Homo sapiens"</span>, <span class="st">"H"</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="va">hallmark</span><span class="op">)</span></span>
@@ -181,8 +196,7 @@
 <span><span class="co">#&gt; <span style="color: #949494;"># … with 5 more variables: gs_pmid &lt;chr&gt;, gs_geoid &lt;chr&gt;,</span></span></span>
 <span><span class="co">#&gt; <span style="color: #949494;">#   gs_exact_source &lt;chr&gt;, gs_url &lt;chr&gt;, gs_description &lt;chr&gt;, and abbreviated</span></span></span>
 <span><span class="co">#&gt; <span style="color: #949494;">#   variable names ¹​gene_symbol, ²​entrez_gene, ³​ensembl_gene,</span></span></span>
-<span><span class="co">#&gt; <span style="color: #949494;">#   ⁴​human_gene_symbol, ⁵​human_entrez_gene, ⁶​human_ensembl_gene</span></span></span>
-<span><span class="co">#&gt; <span style="color: #949494;"># ℹ Use `colnames()` to see all variable names</span></span></span></code></pre></div>
+<span><span class="co">#&gt; <span style="color: #949494;">#   ⁴​human_gene_symbol, ⁵​human_entrez_gene, ⁶​human_ensembl_gene</span></span></span></code></pre></div>
 <p>We can have a look at a few of these pathways</p>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">hallmark</span><span class="op">$</span><span class="va">gs_name</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> </span>
@@ -193,10 +207,15 @@
 <span><span class="co">#&gt;  [5] "HALLMARK_APICAL_JUNCTION"         "HALLMARK_APICAL_SURFACE"         </span></span>
 <span><span class="co">#&gt;  [7] "HALLMARK_APOPTOSIS"               "HALLMARK_BILE_ACID_METABOLISM"   </span></span>
 <span><span class="co">#&gt;  [9] "HALLMARK_CHOLESTEROL_HOMEOSTASIS" "HALLMARK_COAGULATION"</span></span></code></pre></div>
-<p>We only really need the pathway name and gene symbol though. For SCPA, we also need it to be formatted into separate lists for each pathway. We can do this easily using the <code>format_pathways</code> function within SCPA</p>
+<p>We only really need the pathway name and gene symbol though. For
+SCPA, we also need it to be formatted into separate lists for each
+pathway. We can do this easily using the <code>format_pathways</code>
+function within SCPA</p>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">hallmark</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/format_pathways.html">format_pathways</a></span><span class="op">(</span><span class="va">hallmark</span><span class="op">)</span></span></code></pre></div>
-<p>This will result in a list of pathways and all the genes of that pathway. We can see this if we just look at the first element of the pathway list</p>
+<p>This will result in a list of pathways and all the genes of that
+pathway. We can see this if we just look at the first element of the
+pathway list</p>
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="va">hallmark</span><span class="op">[[</span><span class="fl">1</span><span class="op">]</span><span class="op">]</span><span class="op">)</span></span>
 <span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 6 × 2</span></span></span>
@@ -208,38 +227,49 @@
 <span><span class="co">#&gt; <span style="color: #BCBCBC;">4</span> HALLMARK_ADIPOGENESIS ACADL</span></span>
 <span><span class="co">#&gt; <span style="color: #BCBCBC;">5</span> HALLMARK_ADIPOGENESIS ACADM</span></span>
 <span><span class="co">#&gt; <span style="color: #BCBCBC;">6</span> HALLMARK_ADIPOGENESIS ACADS</span></span></code></pre></div>
-<p>Now we’ve generated pathways that can be analysed directly in the <code>compare_pathways</code> function of SCPA</p>
+<p>Now we’ve generated pathways that can be analysed directly in the
+<code>compare_pathways</code> function of SCPA</p>
 </div>
 <div class="section level3">
 <h3 id="versatility-in-using-msigdbr">Versatility in using msigdbr<a class="anchor" aria-label="anchor" href="#versatility-in-using-msigdbr"></a>
 </h3>
-<p>An advantage of using something like msigdbr is its versatility in subsetting specific pathways, or collection of gene sets. For example, if we wanted all pathways related to interferon, we could use grepl to filter the gs_names column:</p>
+<p>An advantage of using something like msigdbr is its versatility in
+subsetting specific pathways, or collection of gene sets. For example,
+if we wanted all pathways related to interferon, we could use grepl to
+filter the gs_names column:</p>
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">ifn_pathways</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://igordot.github.io/msigdbr/reference/msigdbr.html" class="external-link">msigdbr</a></span><span class="op">(</span><span class="st">"Homo sapiens"</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html" class="external-link">filter</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/grep.html" class="external-link">grepl</a></span><span class="op">(</span><span class="st">"interferon"</span>, <span class="va">gs_name</span>, ignore.case <span class="op">=</span> <span class="cn">T</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
 <span>  <span class="fu"><a href="../reference/format_pathways.html">format_pathways</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
-<p>Or we could specify a combination of collections so we get all of the Hallmark, KEGG, and Reactome gene sets:</p>
+<p>Or we could specify a combination of collections so we get all of the
+Hallmark, KEGG, and Reactome gene sets:</p>
 <div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">pathways</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"hallmark"</span>, <span class="st">"kegg"</span>, <span class="st">"reactome"</span><span class="op">)</span></span>
 <span><span class="va">hkr_sets</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://igordot.github.io/msigdbr/reference/msigdbr.html" class="external-link">msigdbr</a></span><span class="op">(</span><span class="st">"Homo sapiens"</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html" class="external-link">filter</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/grep.html" class="external-link">grepl</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste</a></span><span class="op">(</span><span class="va">pathways</span>, collapse <span class="op">=</span> <span class="st">"|"</span><span class="op">)</span>, <span class="va">gs_name</span>, ignore.case <span class="op">=</span> <span class="cn">T</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
 <span>  <span class="fu"><a href="../reference/format_pathways.html">format_pathways</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
-<p>Using something like this makes it easy to pull large and/or relevant gene set lists for direct use within SCPA.</p>
+<p>Using something like this makes it easy to pull large and/or relevant
+gene set lists for direct use within SCPA.</p>
 </div>
 <div class="section level3">
 <h3 id="using-a-gmt-file">2. Using a gmt file<a class="anchor" aria-label="anchor" href="#using-a-gmt-file"></a>
 </h3>
-<p>SCPA has a built in function to read gmt files and format them properly. All you need to do is specify the filepath.</p>
+<p>SCPA has a built in function to read gmt files and format them
+properly. All you need to do is specify the filepath.</p>
 <div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">pathways</span> <span class="op">&lt;-</span> <span class="st">"path/to/geneset/file.gmt"</span></span></code></pre></div>
-<p>And then you can just use this in the <code>compare_pathways</code> function</p>
+<p>And then you can just use this in the <code>compare_pathways</code>
+function</p>
 <div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">scpa_out</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/compare_pathways.html">compare_pathways</a></span><span class="op">(</span>samples <span class="op">=</span> <span class="va">samples</span>, pathways <span class="op">=</span> <span class="va">pathways</span><span class="op">)</span></span></code></pre></div>
 </div>
 <div class="section level3">
 <h3 id="using-a-csv-file">3. Using a csv file<a class="anchor" aria-label="anchor" href="#using-a-csv-file"></a>
 </h3>
-<p>In this example, we need to create the csv file, but once that’s done, it’s a simple line of code. As with gmt files, SCPA can directly read properly formatted csv gene set files – you just need to supply the filepath</p>
+<p>In this example, we need to create the csv file, but once that’s
+done, it’s a simple line of code. As with gmt files, SCPA can directly
+read properly formatted csv gene set files – you just need to supply the
+filepath</p>
 <div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">pathways</span> <span class="op">&lt;-</span> <span class="st">"path/to/geneset/file.csv"</span></span>
 <span><span class="va">scpa_out</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/compare_pathways.html">compare_pathways</a></span><span class="op">(</span>samples <span class="op">=</span> <span class="va">samples</span>, pathways <span class="op">=</span> <span class="va">pathways</span><span class="op">)</span></span></code></pre></div>
@@ -247,7 +277,14 @@
 <div class="section level3">
 <h3 id="how-to-create-the-csv-file">How to create the csv file<a class="anchor" aria-label="anchor" href="#how-to-create-the-csv-file"></a>
 </h3>
-<p>The csv file needs to be formatted in the style of a classical gene set gmt file. This being the pathway name in column 1, and genes of that pathway in subsequent columns. To generate something like this, all you need to do is download a gmt file, open it in something like excel, delete the second column containing a url, and save it as a csv file. Using this method means you can manually create a list of gene sets you’re interested in, where you’re not limited to existing databases. The file should look something like this:</p>
+<p>The csv file needs to be formatted in the style of a classical gene
+set gmt file. This being the pathway name in column 1, and genes of that
+pathway in subsequent columns. To generate something like this, all you
+need to do is download a gmt file, open it in something like excel,
+delete the second column containing a url, and save it as a csv file.
+Using this method means you can manually create a list of gene sets
+you’re interested in, where you’re not limited to existing databases.
+The file should look something like this:</p>
 <p><img src="../reference/figures/pathway_screenshot.png" style="width:100.0%"></p>
 </div>
 </div>

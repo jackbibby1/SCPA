@@ -17,7 +17,7 @@ knitr::opts_chunk$set(
 ## 1. Broad overview of the workflow
 
 ```{r, eval=F}
-pathways <- msigdbr("Homo sapiens") %>%
+pathways <- msigdbr("Homo sapiens", "H") %>%
   format_pathways()
 
 # The populations here just need to be your normalized expression matrices

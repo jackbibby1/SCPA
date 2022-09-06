@@ -137,7 +137,7 @@
 <h2 id="broad-overview-of-the-workflow">1. Broad overview of the workflow<a class="anchor" aria-label="anchor" href="#broad-overview-of-the-workflow"></a>
 </h2>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">pathways</span> <span class="op">&lt;-</span> <span class="fu">msigdbr</span><span class="op">(</span><span class="st">"Homo sapiens"</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
+<code class="sourceCode R"><span><span class="va">pathways</span> <span class="op">&lt;-</span> <span class="fu">msigdbr</span><span class="op">(</span><span class="st">"Homo sapiens"</span>, <span class="st">"H"</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
 <span>  <span class="fu"><a href="../reference/format_pathways.html">format_pathways</a></span><span class="op">(</span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># The populations here just need to be your normalized expression matrices</span></span>
@@ -148,20 +148,27 @@
 <div class="section level2">
 <h2 id="full-workflow-on-an-example-dataset">2. Full workflow on an example dataset<a class="anchor" aria-label="anchor" href="#full-workflow-on-an-example-dataset"></a>
 </h2>
-<p>Here we’re just going to show some general principles of what you need to get started in a basic pathway analysis. It acts as a quick reference to all the main points of the workflow, but more detailed examples can be found in our other tutorials.</p>
+<p>Here we’re just going to show some general principles of what you
+need to get started in a basic pathway analysis. It acts as a quick
+reference to all the main points of the workflow, but more detailed
+examples can be found in our other tutorials.</p>
 <div class="section level3">
 <h3 id="basic-information-needed-for-pathway-analysis">Basic information needed for pathway analysis<a class="anchor" aria-label="anchor" href="#basic-information-needed-for-pathway-analysis"></a>
 </h3>
 <p>The two main bits of information we need are:</p>
 <ul>
-<li>Expression matrix for each condition (this can be formatted as separate data frames/matrices, or stored within a typical Seurat object)</li>
+<li>Expression matrix for each condition (this can be formatted as
+separate data frames/matrices, or stored within a typical Seurat
+object)</li>
 <li>Gene sets</li>
 </ul>
 </div>
 <div class="section level3">
 <h3 id="loading-in-packages">Loading in packages<a class="anchor" aria-label="anchor" href="#loading-in-packages"></a>
 </h3>
-<p>For this simple example, we’re going to load in a few packages. msigdbr allows access to a large number of gene sets that are collated <a href="https://www.gsea-msigdb.org/gsea/msigdb/genesets.jsp" class="external-link">here</a></p>
+<p>For this simple example, we’re going to load in a few packages.
+msigdbr allows access to a large number of gene sets that are collated
+<a href="https://www.gsea-msigdb.org/gsea/msigdb/genesets.jsp" class="external-link">here</a></p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/jackbibby1/SCPA/" class="external-link">SCPA</a></span><span class="op">)</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://igordot.github.io/msigdbr/" class="external-link">msigdbr</a></span><span class="op">)</span></span>
@@ -172,7 +179,8 @@
 <div class="section level3">
 <h3 id="loading-in-data">Loading in data<a class="anchor" aria-label="anchor" href="#loading-in-data"></a>
 </h3>
-<p>Here we’re going to use data taken from the <a href="https://www.nature.com/articles/s41467-019-12464-3" class="external-link">Szabo, P… Sims, P</a> paper. You can find this data in an R object <a href="https://drive.google.com/file/d/1-HJHfSMw5EBP02ZjTrbX7Pd_5eYGe1Zz/view?usp=sharing" class="external-link">here</a></p>
+<p>Here we’re going to use data taken from the <a href="https://www.nature.com/articles/s41467-019-12464-3" class="external-link">Szabo, P…
+Sims, P</a> paper. You can find this data in an R object <a href="https://drive.google.com/file/d/1-HJHfSMw5EBP02ZjTrbX7Pd_5eYGe1Zz/view?usp=sharing" class="external-link">here</a></p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">t_cells</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/readRDS.html" class="external-link">readRDS</a></span><span class="op">(</span><span class="st">"szabo_t_cell.rds"</span><span class="op">)</span></span></code></pre></div>
 </div>
@@ -187,7 +195,12 @@
 <div class="section level3">
 <h3 id="generating-samples-from-a-seurat-object">Generating samples from a Seurat object<a class="anchor" aria-label="anchor" href="#generating-samples-from-a-seurat-object"></a>
 </h3>
-<p>For this basic comparison, we’re going to look at T helper 1 (Th1) and T central memory (Tcm) cells. To generate expression matrices that SCPA can use, we can run the <code>seurat_extract</code> function. This takes a Seurat object as an input, subsets data based on the Seurat column metadata, and returns an expression file for that given subset.</p>
+<p>For this basic comparison, we’re going to look at T helper 1 (Th1)
+and T central memory (Tcm) cells. To generate expression matrices that
+SCPA can use, we can run the <code>seurat_extract</code> function. This
+takes a Seurat object as an input, subsets data based on the Seurat
+column metadata, and returns an expression file for that given
+subset.</p>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">tcm</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/seurat_extract.html">seurat_extract</a></span><span class="op">(</span><span class="va">t_cells</span>,</span>
 <span>                      meta1 <span class="op">=</span> <span class="st">"cell"</span>, value_meta1 <span class="op">=</span> <span class="st">"cd4 tcm"</span><span class="op">)</span></span>
@@ -197,7 +210,11 @@
 <div class="section level3">
 <h3 id="generate-some-gene-sets-using-msigdbr">Generate some gene sets using msigdbr<a class="anchor" aria-label="anchor" href="#generate-some-gene-sets-using-msigdbr"></a>
 </h3>
-<p>We then need to generate our gene sets. msigdbr is a handy package that allows you to get this information. Here we’re pulling all the Hallmark pathways, and using the <code>format_pathways</code> function within SPCA to get them properly formatted. A detailed explanation of generating gene sets for SCPA can be found <a href="https://jackbibby1.github.io/SCPA/articles/using_gene_sets.html">here</a></p>
+<p>We then need to generate our gene sets. msigdbr is a handy package
+that allows you to get this information. Here we’re pulling all the
+Hallmark pathways, and using the <code>format_pathways</code> function
+within SPCA to get them properly formatted. A detailed explanation of
+generating gene sets for SCPA can be found <a href="https://jackbibby1.github.io/SCPA/articles/using_gene_sets.html">here</a></p>
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">pathways</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://igordot.github.io/msigdbr/reference/msigdbr.html" class="external-link">msigdbr</a></span><span class="op">(</span><span class="st">"Homo sapiens"</span>, <span class="st">"H"</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
 <span>  <span class="fu"><a href="../reference/format_pathways.html">format_pathways</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
@@ -205,7 +222,9 @@
 <div class="section level3">
 <h3 id="comparing-samples">Comparing samples<a class="anchor" aria-label="anchor" href="#comparing-samples"></a>
 </h3>
-<p>We’re all set. We now have everything that we need to compare the two populations. So just run <code>compare_pathways</code> and use the objects we created above.</p>
+<p>We’re all set. We now have everything that we need to compare the two
+populations. So just run <code>compare_pathways</code> and use the
+objects we created above.</p>
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">scpa_out</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/compare_pathways.html">compare_pathways</a></span><span class="op">(</span>samples <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="va">tcm</span>, <span class="va">th1</span><span class="op">)</span>, </span>
 <span>                             pathways <span class="op">=</span> <span class="va">pathways</span><span class="op">)</span></span></code></pre></div>
@@ -228,7 +247,9 @@
 <div class="section level3">
 <h3 id="plotting-some-basic-output">Plotting some basic output<a class="anchor" aria-label="anchor" href="#plotting-some-basic-output"></a>
 </h3>
-<p>You can use SCPA to generate a pathway rank plot. For example, we can highlight one of the topmost pathways – MTORC1 – using the <code>plot_rank</code> function.</p>
+<p>You can use SCPA to generate a pathway rank plot. For example, we can
+highlight one of the topmost pathways – MTORC1 – using the
+<code>plot_rank</code> function.</p>
 <div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/plot_rank.html">plot_rank</a></span><span class="op">(</span>scpa_out <span class="op">=</span> <span class="va">scpa_out</span>, </span>
 <span>          pathway <span class="op">=</span> <span class="st">"MTORC1"</span>, </span>

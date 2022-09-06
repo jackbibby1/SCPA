@@ -1,4 +1,4 @@
-pandoc: 2.11.4
+pandoc: '2.18'
 pkgdown: 2.0.6
 pkgdown_sha: ~
 articles:
@@ -10,7 +10,7 @@ articles:
   systematic_tissue_comparison: systematic_tissue_comparison.html
   using_gene_sets: using_gene_sets.html
   visualisation: visualisation.html
-last_built: 2022-07-26T19:20Z
+last_built: 2022-09-06T16:46Z
 urls:
   reference: jackbibby1.github.io/SCPA/reference
   article: jackbibby1.github.io/SCPA/articles

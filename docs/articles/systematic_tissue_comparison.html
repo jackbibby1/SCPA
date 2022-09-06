@@ -133,7 +133,13 @@
 
     
     
-<p>Here we’re going to use SCPA to do a more systems level analysis of T cell gene set perturbations across many cell types and multiple tissues. For the analysis, we’re using data from <a href="https://www.nature.com/articles/s41467-019-12464-3" class="external-link">this paper</a> by Szabo, P… Sims, P. In their protocol they sorted CD3<sup>+</sup> T cells from the blood, bone marrow, lymph node, and lung, and either left them unstimulated, or stimulated the cells for 16 hours. You can download the dataset <a href="https://drive.google.com/file/d/1-HJHfSMw5EBP02ZjTrbX7Pd_5eYGe1Zz/view?usp=sharing" class="external-link">here</a></p>
+<p>Here we’re going to use SCPA to do a more systems level analysis of T
+cell gene set perturbations across many cell types and multiple tissues.
+For the analysis, we’re using data from <a href="https://www.nature.com/articles/s41467-019-12464-3" class="external-link">this paper</a>
+by Szabo, P… Sims, P. In their protocol they sorted CD3<sup>+</sup> T
+cells from the blood, bone marrow, lymph node, and lung, and either left
+them unstimulated, or stimulated the cells for 16 hours. You can
+download the dataset <a href="https://drive.google.com/file/d/1-HJHfSMw5EBP02ZjTrbX7Pd_5eYGe1Zz/view?usp=sharing" class="external-link">here</a></p>
 <div class="section level3">
 <h3 id="loading-in-packages-and-data">Loading in packages and data<a class="anchor" aria-label="anchor" href="#loading-in-packages-and-data"></a>
 </h3>
@@ -160,7 +166,10 @@
 <div class="section level3">
 <h3 id="defining-gene-sets-to-analyze">Defining gene sets to analyze<a class="anchor" aria-label="anchor" href="#defining-gene-sets-to-analyze"></a>
 </h3>
-<p>Now we’re going to define all the pathways that we want to use. For this analysis we’re going to use a bunch of different gene sets that include many of the canonical pathways listed on the <a href="https://www.gsea-msigdb.org/gsea/msigdb/genesets.jsp" class="external-link">MSigDB website</a>. In total, this list contains around 3000 pathways.</p>
+<p>Now we’re going to define all the pathways that we want to use. For
+this analysis we’re going to use a bunch of different gene sets that
+include many of the canonical pathways listed on the <a href="https://www.gsea-msigdb.org/gsea/msigdb/genesets.jsp" class="external-link">MSigDB
+website</a>. In total, this list contains around 3000 pathways.</p>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">pws</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"kegg"</span>, <span class="st">"reactome"</span>, <span class="st">"biocarta"</span>, <span class="st">"wiki"</span>, <span class="st">"pid"</span><span class="op">)</span></span>
 <span><span class="va">pathways</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://igordot.github.io/msigdbr/reference/msigdbr.html" class="external-link">msigdbr</a></span><span class="op">(</span><span class="st">"Homo sapiens"</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
@@ -171,19 +180,31 @@
 <div class="section level3">
 <h3 id="small-bit-of-data-prep">Small bit of data prep<a class="anchor" aria-label="anchor" href="#small-bit-of-data-prep"></a>
 </h3>
-<p>For this analysis we want to keep blood T cells as a reference, and understand what happens to T cells when they migrate into the respective tissues; either the bone marrow, lymph node, or lung.</p>
-<p>First we need to define our cell types that we want to analyse. We’re going to compare every cell type across the tissues, so we can just pull this from the metadata of the Seurat object.</p>
+<p>For this analysis we want to keep blood T cells as a reference, and
+understand what happens to T cells when they migrate into the respective
+tissues; either the bone marrow, lymph node, or lung.</p>
+<p>First we need to define our cell types that we want to analyse. We’re
+going to compare every cell type across the tissues, so we can just pull
+this from the metadata of the Seurat object.</p>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">cell_types</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/unique.html" class="external-link">unique</a></span><span class="op">(</span><span class="va">tissue_data</span><span class="op">$</span><span class="va">fine</span><span class="op">)</span></span></code></pre></div>
-<p>We’re also going to split the Seurat object by tissue to make the comparisons easier. This will make a list of Seurat objects that are split by tissue site</p>
+<p>We’re also going to split the Seurat object by tissue to make the
+comparisons easier. This will make a list of Seurat objects that are
+split by tissue site</p>
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">split_tissue</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://satijalab.org/seurat/reference/SplitObject.html" class="external-link">SplitObject</a></span><span class="op">(</span><span class="va">tissue_data</span>, split.by <span class="op">=</span> <span class="st">"tissue"</span><span class="op">)</span></span></code></pre></div>
 </div>
 <div class="section level3">
 <h3 id="pathway-analysis-across-tissues">Pathway analysis across tissues<a class="anchor" aria-label="anchor" href="#pathway-analysis-across-tissues"></a>
 </h3>
-<p>Now we just need to create a loop that will cycle over all the cell types for each tissue and extract their expression values, before doing the pathway analysis. Just to break this down a bit:</p>
-<p>Given the number of cells, pathways, and samples we’re comparing, this may take a while. Here we’re showing how to run a comparison sequentially, but you can significantly reduce the time taken for the analysis if you split the three comparisons across e.g. different scripts.</p>
+<p>Now we just need to create a loop that will cycle over all the cell
+types for each tissue and extract their expression values, before doing
+the pathway analysis. Just to break this down a bit:</p>
+<p>Given the number of cells, pathways, and samples we’re comparing,
+this may take a while. Here we’re showing how to run a comparison
+sequentially, but you can significantly reduce the time taken for the
+analysis if you split the three comparisons across e.g. different
+scripts.</p>
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># We first create empty lists to store results from the for loop</span></span>
 <span><span class="va">bl_bm</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="op">)</span>; <span class="va">bl_ln</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="op">)</span>; <span class="va">bl_lung</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="op">)</span></span>
@@ -217,9 +238,17 @@
 <div class="section level3">
 <h3 id="extracting-all-the-useful-information-for-plotting">Extracting all the useful information for plotting<a class="anchor" aria-label="anchor" href="#extracting-all-the-useful-information-for-plotting"></a>
 </h3>
-<p>That’s it – we have the results. Above we only showed the unstimulated analysis, but we did the same comparison, only changing the <code>meta2 = "stimulation", value_meta2 = "none"</code> to <code>meta2 = "stimulation", value_meta2 = "stim"</code> to get the pathway analysis done on the stimulated cells. Now we just need to extract the results in a sensible way to plot the data.</p>
+<p>That’s it – we have the results. Above we only showed the
+unstimulated analysis, but we did the same comparison, only changing the
+<code>meta2 = "stimulation", value_meta2 = "none"</code> to
+<code>meta2 = "stimulation", value_meta2 = "stim"</code> to get the
+pathway analysis done on the stimulated cells. Now we just need to
+extract the results in a sensible way to plot the data.</p>
 <details><summary><strong>Click here for the data wrangling for plotting</strong>
-</summary><p>For the extraction, we can do something like the below, which extracts the pathway name and qval for each comparison, and assigns a column name that adds the tissue of each cell type comparison to the column name</p>
+</summary><p>For the extraction, we can do something like the below, which
+extracts the pathway name and qval for each comparison, and assigns a
+column name that adds the tissue of each cell type comparison to the
+column name</p>
 <div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">get_qvals</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">scpa_out</span>, <span class="va">name</span><span class="op">)</span> <span class="op">{</span></span>
 <span>  </span>
@@ -237,12 +266,16 @@
 <span>  <span class="kw"><a href="https://rdrr.io/r/base/function.html" class="external-link">return</a></span><span class="op">(</span><span class="va">df</span><span class="op">)</span></span>
 <span>  </span>
 <span><span class="op">}</span></span></code></pre></div>
-<p>And now we can use this function to format all the comparisons into a single data frame</p>
+<p>And now we can use this function to format all the comparisons into a
+single data frame</p>
 <div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">scpa_results</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/funprog.html" class="external-link">Reduce</a></span><span class="op">(</span><span class="va">full_join</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fu">get_qvals</span><span class="op">(</span><span class="va">bl_bm</span>, <span class="st">"bm"</span><span class="op">)</span>,</span>
 <span>                                    <span class="fu">get_qvals</span><span class="op">(</span><span class="va">bl_ln</span>, <span class="st">"ln"</span><span class="op">)</span>,</span>
 <span>                                    <span class="fu">get_qvals</span><span class="op">(</span><span class="va">bl_lung</span>, <span class="st">"lung"</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
-<p>Here we’re just combining the unstimulated and stimulated conditions, and then extracting information from the column names to be used in the heatmap. We’re also defining a heatmap annotation that will add tiles above the heatmap.</p>
+<p>Here we’re just combining the unstimulated and stimulated conditions,
+and then extracting information from the column names to be used in the
+heatmap. We’re also defining a heatmap annotation that will add tiles
+above the heatmap.</p>
 <div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">pway_rest</span> <span class="op">&lt;-</span> <span class="va">pway_rest</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
 <span>   <span class="fu"><a href="https://tibble.tidyverse.org/reference/rownames.html" class="external-link">column_to_rownames</a></span><span class="op">(</span><span class="st">"pathway"</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
@@ -288,7 +321,10 @@
 <div class="section level3">
 <h3 id="plotting-a-global-summary-of-the-data">Plotting a global summary of the data<a class="anchor" aria-label="anchor" href="#plotting-a-global-summary-of-the-data"></a>
 </h3>
-<p>We can now plot a broad summary using the qvals from each comparison. For this, we’re just going to represent the data in a heatmap, using the great <a href="https://jokergoo.github.io/ComplexHeatmap-reference/book/" class="external-link">ComplexHeatmap</a> package.</p>
+<p>We can now plot a broad summary using the qvals from each comparison.
+For this, we’re just going to represent the data in a heatmap, using the
+great <a href="https://jokergoo.github.io/ComplexHeatmap-reference/book/" class="external-link">ComplexHeatmap</a>
+package.</p>
 <div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">hm</span> <span class="op">&lt;-</span> <span class="va">all_data</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
 <span>  <span class="fu"><a href="https://rdrr.io/pkg/ComplexHeatmap/man/Heatmap.html" class="external-link">Heatmap</a></span><span class="op">(</span>name <span class="op">=</span> <span class="st">"Qval"</span>,</span>
@@ -305,7 +341,13 @@
 <div class="section level3">
 <h3 id="finding-something-a-bit-more-specific">Finding something a bit more specific<a class="anchor" aria-label="anchor" href="#finding-something-a-bit-more-specific"></a>
 </h3>
-<p>You obviously now want to use this data to find something a bit more biologically relevant. One way to do this would be to see if any pathways were tissue specific. To do this, we calculated the most variable pathways across comparisons, and then plotted the variance against the pathway (pathway names added later). Here we can see signatures for antimicrobial peptide production and prostaglandin synthesis at highly variable across conditions.</p>
+<p>You obviously now want to use this data to find something a bit more
+biologically relevant. One way to do this would be to see if any
+pathways were tissue specific. To do this, we calculated the most
+variable pathways across comparisons, and then plotted the variance
+against the pathway (pathway names added later). Here we can see
+signatures for antimicrobial peptide production and prostaglandin
+synthesis at highly variable across conditions.</p>
 <div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/apply.html" class="external-link">apply</a></span><span class="op">(</span><span class="va">all_data</span>, <span class="fl">1</span>, <span class="va">var</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
 <span>  <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html" class="external-link">data.frame</a></span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> </span>
@@ -325,7 +367,11 @@
 <div class="section level3">
 <h3 id="highlighting-genes-from-the-antimicrobial-pathway">Highlighting genes from the antimicrobial pathway<a class="anchor" aria-label="anchor" href="#highlighting-genes-from-the-antimicrobial-pathway"></a>
 </h3>
-<p>And after going back to the pathway gene expression, and filtering genes that showed little or no expression, we can see that this pathway signature was mainly driven by expression of alpha defensin proteins, exclusively in T cells from the bone marrow. Here are these alpha defensin genes by tissue:</p>
+<p>And after going back to the pathway gene expression, and filtering
+genes that showed little or no expression, we can see that this pathway
+signature was mainly driven by expression of alpha defensin proteins,
+exclusively in T cells from the bone marrow. Here are these alpha
+defensin genes by tissue:</p>
 <div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">tissue_data</span><span class="op">$</span><span class="va">neat</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/case_when.html" class="external-link">case_when</a></span><span class="op">(</span><span class="va">tissue_data</span><span class="op">$</span><span class="va">tissue</span> <span class="op">==</span> <span class="st">"bl"</span> <span class="op">~</span> <span class="st">"Blood"</span>,</span>
 <span>                              <span class="va">tissue_data</span><span class="op">$</span><span class="va">tissue</span> <span class="op">==</span> <span class="st">"bm"</span> <span class="op">~</span> <span class="st">"BM"</span>,</span>

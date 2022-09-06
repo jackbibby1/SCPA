@@ -136,16 +136,21 @@
 <div class="section level2">
 <h2 id="visualising-the-output-from-scpa">Visualising the output from SCPA<a class="anchor" aria-label="anchor" href="#visualising-the-output-from-scpa"></a>
 </h2>
-<p>Visualising the output from SCPA is best done by considering the relative ranks of the qvals. This will give you the best chance to find the most appropriate signal.</p>
+<p>Visualising the output from SCPA is best done by considering the
+relative ranks of the qvals. This will give you the best chance to find
+the most appropriate signal.</p>
 <p>Lets load in some packages</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/jackbibby1/SCPA/" class="external-link">SCPA</a></span><span class="op">)</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://tidyverse.tidyverse.org" class="external-link">tidyverse</a></span><span class="op">)</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/jokergoo/ComplexHeatmap" class="external-link">ComplexHeatmap</a></span><span class="op">)</span></span></code></pre></div>
-<p>We can use data from the comparison we did in the <a href="https://jackbibby1.github.io/SCPA/articles/quick_start.html">quick start</a> tutorial where we compared Th1 and Tcm cells. You can get this rds file <a href="https://github.com/jackbibby1/SCPA/tree/main/rds_files" class="external-link">here</a>.</p>
+<p>We can use data from the comparison we did in the <a href="https://jackbibby1.github.io/SCPA/articles/quick_start.html">quick
+start</a> tutorial where we compared Th1 and Tcm cells. You can get this
+rds file <a href="https://github.com/jackbibby1/SCPA/tree/main/rds_files" class="external-link">here</a>.</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">scpa_out</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/readRDS.html" class="external-link">readRDS</a></span><span class="op">(</span><span class="st">"th1_tcm.rds"</span><span class="op">)</span></span></code></pre></div>
-<p><code>scpa_out</code> is the standard output from a two sample SCPA comparison:</p>
+<p><code>scpa_out</code> is the standard output from a two sample SCPA
+comparison:</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="va">scpa_out</span><span class="op">)</span></span>
 <span><span class="co">#&gt;                               Pathway          Pval      adjPval     qval</span></span>
@@ -166,8 +171,16 @@
 <div class="section level2">
 <h2 id="a-simple-rank-plot">1. A simple rank plot<a class="anchor" aria-label="anchor" href="#a-simple-rank-plot"></a>
 </h2>
-<p>We can use the <code>plot_rank</code> function in SCPA to plot the rank of a specific pathway (or pathways) that we want to highlight. By default, this looks for a <code>qval</code> and <code>Pathway</code> column, which is standard in the SCPA output.</p>
-<p>If you have your own data frame that contains all your qvals and a Pathway column, you can specify the column you want on the y axis with the <code>population_name = [your_qval_column_name]</code> argument. See <code><a href="../reference/plot_rank.html">?plot_rank</a></code> for all the graphical parameters, but this is a ggplot object, so you can modify it using the typical arguments e.g. <code>+ theme(panel.background...)</code>.</p>
+<p>We can use the <code>plot_rank</code> function in SCPA to plot the
+rank of a specific pathway (or pathways) that we want to highlight. By
+default, this looks for a <code>qval</code> and <code>Pathway</code>
+column, which is standard in the SCPA output.</p>
+<p>If you have your own data frame that contains all your qvals and a
+Pathway column, you can specify the column you want on the y axis with
+the <code>population_name = [your_qval_column_name]</code> argument. See
+<code><a href="../reference/plot_rank.html">?plot_rank</a></code> for all the graphical parameters, but this is a
+ggplot object, so you can modify it using the typical arguments
+e.g. <code>+ theme(panel.background...)</code>.</p>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># if you want all pathways that contain "MYC"...</span></span>
 <span><span class="va">p1</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/plot_rank.html">plot_rank</a></span><span class="op">(</span><span class="va">scpa_out</span>, <span class="st">"myc"</span>, </span>
@@ -183,14 +196,22 @@
 <div class="section level2">
 <h2 id="plotting-a-heatmap-of-results">2. Plotting a heatmap of results<a class="anchor" aria-label="anchor" href="#plotting-a-heatmap-of-results"></a>
 </h2>
-<p>You can use the <code>plot_heatmap</code> option within SCPA to visualise the output, which uses the great <a href="https://github.com/jokergoo/ComplexHeatmap" class="external-link">ComplexHeatmap</a> package. Like the <code>plot_rank</code> function, you can choose to highlight general or specific pathways. By default, this function looks for any column names that contain “qval”, and uses them to plot the heatmap. This means you can combine muliple SCPA results into a single heatmap. See <code><a href="../reference/plot_heatmap.html">?plot_heatmap</a></code> for graphical parameters.</p>
+<p>You can use the <code>plot_heatmap</code> option within SCPA to
+visualise the output, which uses the great <a href="https://github.com/jokergoo/ComplexHeatmap" class="external-link">ComplexHeatmap</a>
+package. Like the <code>plot_rank</code> function, you can choose to
+highlight general or specific pathways. By default, this function looks
+for any column names that contain “qval”, and uses them to plot the
+heatmap. This means you can combine muliple SCPA results into a single
+heatmap. See <code><a href="../reference/plot_heatmap.html">?plot_heatmap</a></code> for graphical parameters.</p>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/plot_heatmap.html">plot_heatmap</a></span><span class="op">(</span><span class="va">scpa_out</span>, </span>
 <span>             highlight_pathways <span class="op">=</span> <span class="st">"myc"</span>,</span>
 <span>             column_names <span class="op">=</span> <span class="st">"Th1 vs Tcm"</span>,</span>
 <span>             show_row_names <span class="op">=</span> <span class="cn">F</span><span class="op">)</span></span></code></pre></div>
 <p><img src="../reference/figures/heatmap_1.png" style="width:40.0%"></p>
-<p>If you want to combine multiple scpa outputs into a single heatmap, you can add your qvals into a single data frame. You just need to make sure the column you’re adding contains “qval” in its name e.g.</p>
+<p>If you want to combine multiple scpa outputs into a single heatmap,
+you can add your qvals into a single data frame. You just need to make
+sure the column you’re adding contains “qval” in its name e.g.</p>
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># here we'll just duplicate the qval column for the purpose of this example</span></span>
 <span><span class="va">scpa_out</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>

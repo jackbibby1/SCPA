@@ -144,6 +144,16 @@
 <span></span>
 <span><span class="va">scpa_out</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/compare_pathways.html">compare_pathways</a></span><span class="op">(</span>samples <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="va">population1</span>, <span class="va">population2</span><span class="op">)</span>,</span>
 <span>                             pathways <span class="op">=</span> <span class="va">pathways</span><span class="op">)</span></span></code></pre></div>
+<p>In this output, the qval should be the primary metric that is used to
+interpret pathway differences i.e. a higher qval translates to larger
+pathway differences between conditions. If only two samples are
+provided, a fold change (FC) enrichment score will also be calculated. A
+large advantage in assessing the multivariate distribution of a pathway
+in SCPA is that there will be pathways that show large qvals, but
+relatively small fold changes. These pathways therefore show large
+differences that are independent of mean changes in gene expression.
+These are still highly relevant pathways, which we show in <a href="">our paper</a>, and is why we suggest solely using the qval for
+your statistical interpretation.</p>
 </div>
 <div class="section level2">
 <h2 id="full-workflow-on-an-example-dataset">2. Full workflow on an example dataset<a class="anchor" aria-label="anchor" href="#full-workflow-on-an-example-dataset"></a>

@@ -27,6 +27,13 @@ scpa_out <- compare_pathways(samples = list(population1, population2),
 
 ```
 
+In this output, the qval should be the primary metric that is used to interpret pathway differences i.e. a higher
+qval translates to larger pathway differences between conditions.
+If only two samples are provided, a fold change (FC) enrichment score will also be
+calculated. A large advantage in assessing the multivariate distribution of a pathway in SCPA is that there will be pathways that show large qvals, but relatively small fold changes. These pathways
+therefore show large differences that are independent of mean changes in gene expression. These are still highly relevant pathways, which we show in [our paper](), and is why we suggest solely using the qval for
+your statistical interpretation.
+
 ## 2. Full workflow on an example dataset
 
 Here we're just going to show some general principles of what you need to get started in a basic pathway analysis. It acts as a quick reference to all the main points of the workflow, but more detailed examples can be found in our other tutorials.

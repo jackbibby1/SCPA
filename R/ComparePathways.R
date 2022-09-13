@@ -4,7 +4,7 @@
 #' to compare gene set perturbations over different conditions.
 #'
 #' @param samples List of samples, each supplied as an expression matrix with cells in columns
-#'     and genes in rows
+#'     and genes in rows.
 #' @param pathways Pathway gene sets with each pathway in a separate list. For formatting of
 #'     gene lists, see documentation at https://jackbibby1.github.io/SCPA/articles/using_gene_sets.html
 #' @param downsample Option to downsample cell numbers. Defaults to 500 cells per condition. If a population

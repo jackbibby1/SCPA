@@ -20,14 +20,14 @@
 ### About SCPA
 
 SCPA is a method for pathway analysis in single cell RNA-seq data. It’s
-a novel approach to pathway analysis that defines pathway activity as a
-change in multivariate distribution of a given pathway across
+a different approach to pathway analysis that defines pathway activity
+as a change in multivariate distribution of a given pathway across
 conditions, rather than enrichment or over representation of genes.
 
 Overall the workflow looks like this: generate the populations and
-pathways to compare &gt; SCPA generates pathway specific expression
-matrices for all comparisons &gt; SCPA performs graph based multivariate
-distribution analysis across all pathways and populations &gt; SCPA
+pathways to compare \> SCPA generates pathway specific expression
+matrices for all comparisons \> SCPA performs graph based multivariate
+distribution analysis across all pathways and populations \> SCPA
 generates a Qval for plotting and ranking of pathway.
 
 This approach allows for a number of benefits over current methods,
@@ -37,8 +37,9 @@ including:
     population AND also identify pathways with no overall enrichment but
     alterations in the multivariate distribution of that pathway. You
     essentially get the best of both worlds, as pathways with changes in
-    multivariate distribution but no overall enrichment are still
-    interestingly different pathways, as we show in [our
+    multivariate distribution (high qval) but no overall enrichment (low
+    fold change) are still interestingly different pathways, as we show
+    in [our
     paper](https://www.biorxiv.org/content/10.1101/2022.02.07.478807v1)
 
 2.  SCPA allows for multisample testing, so you can compare multiple

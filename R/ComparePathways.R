@@ -1,11 +1,11 @@
 #' Use SCPA to compare gene sets
 #'
 #' This function takes an input of samples and pathways
-#' to compare gene set perturbations over different conditions.
+#' to compare gene set perturbations over different conditions with SCPA.
 #'
 #' @param samples List of samples, each supplied as an expression matrix with cells in columns
 #'     and genes in rows.
-#' @param pathways Pathway gene sets with each pathway in a separate list. For formatting of
+#' @param pathways Pathways and their genes with each pathway in a separate list. For formatting of
 #'     gene lists, see documentation at https://jackbibby1.github.io/SCPA/articles/using_gene_sets.html
 #' @param downsample Option to downsample cell numbers. Defaults to 500 cells per condition. If a population
 #'     has < 500 cells, all cells from that condition are used.
@@ -22,7 +22,7 @@
 #' primary metric that is used to interpret pathway differences i.e. a higher
 #' qval translates to larger pathway differences between conditions.
 #' If only two samples are provided, a fold change (FC) enrichment score will also be
-#' calculated. The FC output is generated from a running sum of mean changes in gene
+#' calculated. The FC statistic is generated from a running sum of mean changes in gene
 #' expression from all genes of the pathway. It's calculated from average pathway
 #' expression in population1 - population2, so a negative FC means the pathway is
 #' higher in population2.

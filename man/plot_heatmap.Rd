@@ -17,7 +17,7 @@ plot_heatmap(
 )
 }
 \arguments{
-\item{scpa_out}{Data frame that contains a "Pathway" column, and a column or columns
+\item{scpa_out}{Data frame that contains a "Pathway" column, and a column or multiple columns
 containing qvals. This can be the direct output from \code{compare_pathways()},
 or a custom data frame.}
 

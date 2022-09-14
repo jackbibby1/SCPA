@@ -14,7 +14,7 @@ compare_pathways(
 }
 \arguments{
 \item{samples}{List of samples, each supplied as an expression matrix with cells in columns
-and genes in rows}
+and genes in rows.}
 
 \item{pathways}{Pathway gene sets with each pathway in a separate list. For formatting of
 gene lists, see documentation at https://jackbibby1.github.io/SCPA/articles/using_gene_sets.html}
@@ -27,9 +27,14 @@ has < 500 cells, all cells from that condition are used.}
 \item{max_genes}{Gene sets with more than this number of genes will be excluded}
 }
 \value{
-Statistical results from the SCPA analysis.
-If only two samples are provided, an enrichment score will also be
-calculated.
+Statistical results from the SCPA analysis. The qval should be the
+primary metric that is used to interpret pathway differences i.e. a higher
+qval translates to larger pathway differences between conditions.
+If only two samples are provided, a fold change (FC) enrichment score will also be
+calculated. The FC output is generated from a running sum of mean changes in gene
+expression from all genes of the pathway. It's calculated from average pathway
+expression in population1 - population2, so a negative FC means the pathway is
+higher in population2.
 }
 \description{
 This function takes an input of samples and pathways

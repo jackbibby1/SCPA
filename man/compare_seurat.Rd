@@ -36,9 +36,14 @@ gene lists, see documentation at https://jackbibby1.github.io/SCPA/articles/usin
 has < 500 cells, all cells from that condition are used.}
 }
 \value{
-Statistical results from the multicross tool.
-If only two samples are provided, an enrichment score will also be
-calculated.
+Statistical results from the SCPA analysis. The qval should be the
+primary metric that is used to interpret pathway differences i.e. a higher
+qval translates to larger pathway differences between conditions.
+If only two samples are provided, a fold change (FC) enrichment score will also be
+calculated. The FC output is generated from a running sum of mean changes in gene
+expression from all genes of the pathway. It's calculated from average pathway
+expression in population1 - population2, so a negative FC means the pathway is
+higher in population2.
 }
 \description{
 This function takes a Seurat object as an input, and

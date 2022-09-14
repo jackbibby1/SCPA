@@ -10,14 +10,16 @@ plot_heatmap(
   row_fontsize = 6,
   column_fontsize = 10,
   column_names = colnames(scpa_out),
-  show_row_names = FALSE,
+  show_row_names = TRUE,
   cluster_columns = TRUE,
   hm_colors = NULL,
   scale_breaks = NULL
 )
 }
 \arguments{
-\item{scpa_out}{Direct output from either \code{compare_pathways}, or \code{compare_seurat}}
+\item{scpa_out}{Data frame that contains a "Pathway" column, and a column or columns
+containing qvals. This can be the direct output from \code{compare_pathways()},
+or a custom data frame.}
 
 \item{highlight_pathways}{Pathway or pathways to annotate on the heatmap,
 supplied as character vector. If no argument is given, all pathways are

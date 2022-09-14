@@ -105,7 +105,7 @@ heatmap of the qvals</p>
 <span>  row_fontsize <span class="op">=</span> <span class="fl">6</span>,</span>
 <span>  column_fontsize <span class="op">=</span> <span class="fl">10</span>,</span>
 <span>  column_names <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/colnames.html" class="external-link">colnames</a></span><span class="op">(</span><span class="va">scpa_out</span><span class="op">)</span>,</span>
-<span>  show_row_names <span class="op">=</span> <span class="cn">FALSE</span>,</span>
+<span>  show_row_names <span class="op">=</span> <span class="cn">TRUE</span>,</span>
 <span>  cluster_columns <span class="op">=</span> <span class="cn">TRUE</span>,</span>
 <span>  hm_colors <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  scale_breaks <span class="op">=</span> <span class="cn">NULL</span></span>
@@ -115,7 +115,9 @@ heatmap of the qvals</p>
     <div id="arguments">
     <h2>Arguments</h2>
     <dl><dt>scpa_out</dt>
-<dd><p>Direct output from either <code>compare_pathways</code>, or <code>compare_seurat</code></p></dd>
+<dd><p>Data frame that contains a "Pathway" column, and a column or multiple columns
+containing qvals. This can be the direct output from <code><a href="compare_pathways.html">compare_pathways()</a></code>,
+or a custom data frame.</p></dd>
 
 
 <dt>highlight_pathways</dt>

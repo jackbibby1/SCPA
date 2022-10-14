@@ -85,7 +85,8 @@ We have various examples and walkthroughs, including:
     for more detailed two group comparison with a specific data set
 -   A
     [tutorial](https://jackbibby1.github.io/SCPA/articles/seurat_comparison.html)
-    on how to use SCPA directly within a Seurat object
+    on how to use SCPA directly within a Seurat or SingleCellExperiment
+    object
 -   A
     [tutorial](https://jackbibby1.github.io/SCPA/articles/visualisation.html)
     on visualising SCPA output

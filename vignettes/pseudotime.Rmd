@@ -138,7 +138,7 @@ We then need to extract expression matrices for all the cells across the distinc
 so we effectively have 4 populations across the trajectory. We can use these expression
 matrices to assess pathways across the 4 nodes.
 
-We can loop the `seurat_extract` function to get expression matrices for all cells in each population.
+We can loop the `seurat_extract` function to get expression matrices for all cells in each population. If you have a SingleCellExperiment object, you can use the `sce_extract` function.
 
 ```{r seurat_extract, eval=F}
 cd4_pseudo <- list()

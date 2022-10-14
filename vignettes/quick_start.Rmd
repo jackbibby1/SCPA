@@ -41,7 +41,7 @@ Here we're just going to show some general principles of what you need to get st
 ### Basic information needed for pathway analysis
 The two main bits of information we need are:
 
-- Expression matrix for each condition (this can be formatted as separate data frames/matrices, or stored within a typical Seurat object)
+- Expression matrix for each condition (this can be formatted as separate data frames/matrices, or stored within a typical Seurat/SingleCellExperiment object)
 - Gene sets
 
 ### Loading in packages 
@@ -73,7 +73,7 @@ DimPlot(t_cells) +
 
 
 ### Generating samples from a Seurat object
-For this basic comparison, we're going to look at T helper 1 (Th1) and T central memory (Tcm) cells. To generate expression matrices that SCPA can use, we can run the `seurat_extract` function. This takes a Seurat object as an input, subsets data based on the Seurat column metadata, and returns an expression file for that given subset.
+For this basic comparison, we're going to look at T helper 1 (Th1) and T central memory (Tcm) cells. To generate expression matrices that SCPA can use, we can run the `seurat_extract` function. This takes a Seurat object as an input, subsets data based on the Seurat column metadata, and returns an expression file for that given subset. If you have a SingleCellExperiment object, you can use the `sce_extract` function.
 
 ```{r extract_data, eval=F}
 tcm <- seurat_extract(t_cells,

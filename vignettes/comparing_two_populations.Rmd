@@ -42,7 +42,7 @@ DimPlot(naive_cd4, split.by = "Hour") +
 
 
 ### Extracting the expression matrices
-We then need the expression matrices for the populations we want to compare. For this, we can use the `seurat_extract` function from the SCPA package, which takes a Seurat object and subsets the data based on the metadata specified in the Seurat columns e.g. here we want to take 'Resting' cells at 0hr, and 'Activated' cells at 24hr.
+We then need the expression matrices for the populations we want to compare. For this, we can use the `seurat_extract` function from the SCPA package, which takes a Seurat object and subsets the data based on the metadata specified in the Seurat columns e.g. here we want to take 'Resting' cells at 0hr, and 'Activated' cells at 24hr. If you have a SingleCellExperiment object, you can use the `sce_extract` function.
 
 ```{r seurat_extract, eval=F}
 resting <- seurat_extract(naive_cd4,

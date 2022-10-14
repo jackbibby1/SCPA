@@ -29,7 +29,7 @@ navbar:
       - text: Specific examples
       - text: Comparing two populations
         href: articles/comparing_two_populations.html
-      - text: Seurat comparison
+      - text: Seurat/SingleCellExperiment comparison
         href: articles/seurat_comparison.html
       - text: Comparing across pseudotime
         href: articles/pseudotime.html

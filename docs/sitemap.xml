@@ -49,6 +49,9 @@
     <loc>jackbibby1.github.io/SCPA/reference/compare_pathways.html</loc>
   </url>
   <url>
+    <loc>jackbibby1.github.io/SCPA/reference/compare_sce.html</loc>
+  </url>
+  <url>
     <loc>jackbibby1.github.io/SCPA/reference/compare_seurat.html</loc>
   </url>
   <url>
@@ -71,6 +74,9 @@
   </url>
   <url>
     <loc>jackbibby1.github.io/SCPA/reference/random_cells.html</loc>
+  </url>
+  <url>
+    <loc>jackbibby1.github.io/SCPA/reference/sce_extract.html</loc>
   </url>
   <url>
     <loc>jackbibby1.github.io/SCPA/reference/seurat_extract.html</loc>

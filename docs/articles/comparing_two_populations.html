@@ -47,7 +47,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">Single Cell Pathway Analysis (SCPA)</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.1.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.2.0</span>
       </span>
     </div>
 
@@ -77,7 +77,7 @@
       <a href="../articles/comparing_two_populations.html">Comparing two populations</a>
     </li>
     <li>
-      <a href="../articles/seurat_comparison.html">Seurat comparison</a>
+      <a href="../articles/seurat_comparison.html">Seurat/SingleCellExperiment comparison</a>
     </li>
     <li>
       <a href="../articles/pseudotime.html">Comparing across pseudotime</a>
@@ -164,7 +164,9 @@ types and the hour specifying time point of cell harvesting.</p>
 compare. For this, we can use the <code>seurat_extract</code> function
 from the SCPA package, which takes a Seurat object and subsets the data
 based on the metadata specified in the Seurat columns e.g. here we want
-to take ‘Resting’ cells at 0hr, and ‘Activated’ cells at 24hr.</p>
+to take ‘Resting’ cells at 0hr, and ‘Activated’ cells at 24hr. If you
+have a SingleCellExperiment object, you can use the
+<code>sce_extract</code> function.</p>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">resting</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/seurat_extract.html">seurat_extract</a></span><span class="op">(</span><span class="va">naive_cd4</span>,</span>
 <span>                          meta1 <span class="op">=</span> <span class="st">"Cell_Type"</span>, value_meta1 <span class="op">=</span> <span class="st">"Resting"</span>,</span>

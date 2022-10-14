@@ -47,7 +47,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">Single Cell Pathway Analysis (SCPA)</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.1.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.2.0</span>
       </span>
     </div>
 
@@ -77,7 +77,7 @@
       <a href="../articles/comparing_two_populations.html">Comparing two populations</a>
     </li>
     <li>
-      <a href="../articles/seurat_comparison.html">Seurat comparison</a>
+      <a href="../articles/seurat_comparison.html">Seurat/SingleCellExperiment comparison</a>
     </li>
     <li>
       <a href="../articles/pseudotime.html">Comparing across pseudotime</a>
@@ -135,9 +135,9 @@
     
 <p>As well as importing expression matrices into
 <code>compare_pathways</code>, you can also compare populations directly
-within a Seurat object in one function within SCPA. To do this, you just
-need the Seurat object that is annotated with the groups you want to
-compare.</p>
+within a Seurat or SingleCellExperiment object in one function within
+SCPA. To do this, you just need the Seurat/SCE object that is annotated
+with the groups you want to compare.</p>
 <p>Let’s load in a few packages.</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/jackbibby1/SCPA/" class="external-link">SCPA</a></span><span class="op">)</span></span>
@@ -181,7 +181,9 @@ format for SCPA.</p>
 <p>Now to compare the Th1 and Tcm populations, we can use the
 compare_seurat function within SCPA. Here, <code>group1</code> defines
 the column name for your metadata, and <code>group1_population</code>
-defines two values within that column</p>
+defines two values within that column. N.B. We’re going to compare
+populations within a Seurat object here, but it’s the same set up for a
+SCE object using the <code>compare_sce</code> function.</p>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">scpa_out</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/compare_seurat.html">compare_seurat</a></span><span class="op">(</span><span class="va">t_cells</span>,</span>
 <span>                           group1 <span class="op">=</span> <span class="st">"cell"</span>, </span>
@@ -189,6 +191,20 @@ defines two values within that column</p>
 <span>                           pathways <span class="op">=</span> <span class="va">pathways</span><span class="op">)</span></span></code></pre></div>
 <p>And that’s it. Your results will be stored in your
 <code>scpa_out</code> object.</p>
+</div>
+<div class="section level3">
+<h3 id="comparing-across-more-than-2-populations">Comparing across more than 2 populations<a class="anchor" aria-label="anchor" href="#comparing-across-more-than-2-populations"></a>
+</h3>
+<p>If you wanted to compare more than 2 populations in a Seurat object
+e.g. multiple time points, you just need to supply more arguments to the
+<code>group1_population</code> call. For example, on a hypothetical
+dataset:</p>
+<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>scpa_out <span class="ot">&lt;-</span> <span class="fu">compare_seurat</span>(different_dataset,</span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>                           <span class="at">group1 =</span> <span class="st">"hour"</span>, </span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>                           <span class="at">group1_population =</span> <span class="fu">c</span>(<span class="st">"0"</span>, <span class="st">"12"</span>, <span class="st">"24"</span>),</span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>                           <span class="at">group2 =</span> <span class="st">"cell"</span>,</span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>                           <span class="at">group2_population =</span> <span class="st">"t_cells"</span></span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>                           <span class="at">pathways =</span> pathways)</span></code></pre></div>
 </div>
   </div>
 

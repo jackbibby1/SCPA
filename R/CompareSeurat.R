@@ -18,8 +18,11 @@
 #'   has < 500 cells, all cells from that condition are used.
 #'
 #' @examples \dontrun{
-#' scpa_out <- compare_seurat(
-#'      list(sample1, sample2, sample3),
+#' scpa_out <- compare_sce(
+#'      group1 = "cell",
+#'      group1_population = c("t_cell", "b_cell"),
+#'      group2 = "hour",
+#'      group2_population = c("24"),
 #'      pathways = pathways)
 #' }
 #'

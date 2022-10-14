@@ -20,7 +20,10 @@
 #'
 #' @examples \dontrun{
 #' scpa_out <- compare_sce(
-#'      list(sample1, sample2, sample3),
+#'      group1 = "cell",
+#'      group1_population = c("t_cell", "b_cell"),
+#'      group2 = "hour",
+#'      group2_population = c("24"),
 #'      pathways = pathways)
 #' }
 #'

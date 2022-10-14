@@ -6,8 +6,8 @@
 #' @param seurat_object Seurat object with populations defined in the meta data
 #' @param group1 First comparison group as defined by meta data in
 #'   Seurat object e.g. cell_type
-#' @param group1_population Population within group1 to compare
-#'   e.g. t_cell
+#' @param group1_population Populations within group1 to compare
+#'   e.g. c(t_cell, b_cell)
 #' @param group2 Second comparison group as defined by column names in
 #'   Seurat object e.g. hour
 #' @param group2_population Population within group2 to compare

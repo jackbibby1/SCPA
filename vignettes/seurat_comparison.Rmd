@@ -14,7 +14,7 @@ knitr::opts_chunk$set(
 )
 ```
 
-As well as importing expression matrices into `compare_pathways`, you can also compare populations directly within a Seurat object in one function within SCPA. To do this, you just need the Seurat object that is annotated with the groups you want to compare.
+As well as importing expression matrices into `compare_pathways`, you can also compare populations directly within a Seurat or SingleCellExperiment object in one function within SCPA. To do this, you just need the Seurat/SCE object that is annotated with the groups you want to compare.
 
 Let's load in a few packages.
 ```{r setup, eval=F}
@@ -50,7 +50,7 @@ pathways <- msigdbr("Homo sapiens", "H") %>%
 
 
 ### SCPA comparison
-Now to compare the Th1 and Tcm populations, we can use the compare_seurat function within SCPA. Here, `group1` defines the column name for your metadata, and `group1_population` defines two values within that column
+Now to compare the Th1 and Tcm populations, we can use the compare_seurat function within SCPA. Here, `group1` defines the column name for your metadata, and `group1_population` defines two values within that column. N.B. We're going to compare populations within a Seurat object here, but it's the same set up for a SCE object using the `compare_sce` function.
 
 ```{r compare_pathways, eval=F}
 scpa_out <- compare_seurat(t_cells,
@@ -61,6 +61,17 @@ scpa_out <- compare_seurat(t_cells,
 
 And that's it. Your results will be stored in your `scpa_out` object.
 
+### Comparing across more than 2 populations
+If you wanted to compare more than 2 populations in a Seurat object e.g. multiple time points, you just need to supply more arguments to the `group1_population` call. For example, on a hypothetical dataset:
+
+```{r multiple_comparisons, eval=F}
+scpa_out <- compare_seurat(different_dataset,
+                           group1 = "hour", 
+                           group1_population = c("0", "12", "24"),
+                           group2 = "cell",
+                           group2_population = "t_cells"
+                           pathways = pathways)
+```
 
 
 

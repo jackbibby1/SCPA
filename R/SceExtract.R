@@ -60,6 +60,3 @@ sce_extract <- function(sce_object,
 
 
 
-
-
-

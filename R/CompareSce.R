@@ -1,15 +1,16 @@
-#' Use SCPA to compare pathways within a Seurat object
+#' Use SCPA to compare pathways within a SingleCellExperiment object
 #'
-#' This function takes a Seurat object as an input, and
+#' This function takes a SingleCellExperiment object as an input, and
 #' compares gene sets over specified conditions/populations.
 #'
-#' @param seurat_object Seurat object with populations defined in the meta data
-#' @param group1 First comparison group as defined by meta data in
-#'   Seurat object e.g. cell_type
+#' @param sce_object SingleCellExperiment object with populations defined in the column data
+#' @param assay_name Assay name to extract expression values from. Defaults to logcounts
+#' @param group1 First comparison group as defined by `colData()` columns
+#'   of SingleCellExperiment object e.g. cell_type
 #' @param group1_population Populations within group1 to compare
 #'   e.g. c(t_cell, b_cell)
-#' @param group2 Second comparison group as defined by column names in
-#'   Seurat object e.g. hour
+#' @param group2 Second comparison group as defined by `colData()` columns
+#'   of SingleCellExperiment object e.g. hour
 #' @param group2_population Population within group2 to compare
 #'   e.g. 24
 #' @param pathways Pathway gene sets with each pathway in a separate list. For formatting of
@@ -37,13 +38,14 @@
 #'
 #' @export
 
-compare_seurat <- function(seurat_object,
-                           group1 = NULL,
-                           group1_population = NULL,
-                           group2 = NULL,
-                           group2_population = NULL,
-                           pathways,
-                           downsample = 500) {
+compare_sce <- function(sce_object,
+                        assay_name = "logcounts",
+                        group1 = NULL,
+                        group1_population = NULL,
+                        group2 = NULL,
+                        group2_population = NULL,
+                        pathways,
+                        downsample = 500) {
 
   ## Pathways
   if (class(pathways)[1] == "character") {
@@ -55,20 +57,22 @@ compare_seurat <- function(seurat_object,
   if (is.null(group2)) {
     samples <- list()
     for (i in group1_population) {
-      samples[[i]] <- seurat_extract(seurat_object,
-                                     meta1 = group1,
-                                     value_meta1 = i)
+      samples[[i]] <- sce_extract(sce_object,
+                                  assay_name = assay_name,
+                                  meta1 = group1,
+                                  value_meta1 = i)
     }
   }
 
   if (!is.null(group2)) {
     samples <- list()
     for (i in group1_population) {
-      samples[[i]] <- seurat_extract(seurat_object,
-                                     meta1 = group1,
-                                     value_meta1 = i,
-                                     meta2 = group2,
-                                     value_meta2 = group2_population)
+      samples[[i]] <- sce_extract(sce_object,
+                                  assay_name = assay_name,
+                                  meta1 = group1,
+                                  value_meta1 = i,
+                                  meta2 = group2,
+                                  value_meta2 = group2_population)
     }
   }
 
@@ -76,7 +80,6 @@ compare_seurat <- function(seurat_object,
   return(mcm_output)
 
 }
-
 
 
 

@@ -1,3 +1,11 @@
+## SCPA v1.2
+
+#### Major changes
+
+- Add functionality to deal with SingleCellExperiment objects
+- `sce_extract` can now extract data from SCE objects based on colData
+- `compare_sce` can now compare pathways directly within an SCE object
+
 ## SCPA v1.1
 
 #### Major changes

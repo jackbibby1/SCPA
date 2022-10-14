@@ -1,15 +1,15 @@
 #' Extract data from a SingleCellExperiment object
 #'
 #' This function takes a SingleCellExperiment object as an input, and returns
-#' a matrix based on subsetting parameters. Either none, one, or
+#' an expression matrix based on subsetting parameters. Either none, one, or
 #' two metadata features can be selected for a given input.
 #'
 #' @param sce_object SingleCellExperiment object containing expression data
 #' @param assay_name Name of assay to pull from. Defaults to "logcounts"
-#' @param meta1 Metadata name to subset
-#' @param meta2 Metadata name to subset
-#' @param value_meta1 Value to select within `meta1` function
-#' @param value_meta2 Value to select within `meta2` function
+#' @param meta1 Metadata column to subset
+#' @param value_meta1 Value to select within `meta1` column
+#' @param meta2 Metadata column to subset
+#' @param value_meta2 Value to select within `meta2` column
 #' @param pseudocount Pseudocount to add to data. Defaults to 0.001
 #'
 #' @examples \dontrun{

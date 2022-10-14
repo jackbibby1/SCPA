@@ -1,15 +1,15 @@
 #' Extract Normalised Data From Seurat
 #'
 #' This function takes a Seurat object as an input, and returns
-#' a matrix based on subsetting parameters. Either none, one, or
+#' an expression matrix based on subsetting parameters. Either none, one, or
 #' two metadata features can be selected for a given input.
 #'
 #' @param seu_obj Seurat object containing normalised counts
 #'   stored in `seu_obj@assays$RNA@data`
-#' @param meta1 Metadata name to subset
-#' @param meta2 Metadata name to subset
-#' @param value_meta1 Value to select within `meta1` function
-#' @param value_meta2 Value to select within `meta2` function
+#' @param meta1 Metadata column to subset
+#' @param meta2 Metadata column to subset
+#' @param value_meta1 Value to select within `meta1` column
+#' @param value_meta2 Value to select within `meta2` column
 #' @param pseudocount Pseudocount to add to data. Defaults to 0.001
 #'
 #' @examples \dontrun{

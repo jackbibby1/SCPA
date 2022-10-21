@@ -210,10 +210,10 @@ You obviously now want to use this data to find something a bit more biologicall
 ```{r, eval=F}
 apply(all_data, 1, var) %>%
   data.frame() %>% 
-  set_colnames("variation") %>%
-  arrange(desc(variation)) %>% 
+  set_colnames("variance") %>%
+  arrange(desc(variance)) %>% 
   rownames_to_column("pathway") %>%
-  ggplot(aes(reorder(pathway, variation), variation)) +
+  ggplot(aes(reorder(pathway, variance), variance)) +
   geom_point(shape = 21, cex = 3, fill = "royalblue2", color = 'black', stroke = 0.2) +
   scale_x_discrete(expand = c(0.04, 0.04)) +
   labs(x = "Pathway", y = "Variance") +

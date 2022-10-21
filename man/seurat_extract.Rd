@@ -17,13 +17,13 @@ seurat_extract(
 \item{seu_obj}{Seurat object containing normalised counts
 stored in \code{seu_obj@assays$RNA@data}}
 
-\item{meta1}{Metadata name to subset}
+\item{meta1}{Metadata column to subset}
 
-\item{value_meta1}{Value to select within \code{meta1} function}
+\item{value_meta1}{Value to select within \code{meta1} column}
 
-\item{meta2}{Metadata name to subset}
+\item{meta2}{Metadata column to subset}
 
-\item{value_meta2}{Value to select within \code{meta2} function}
+\item{value_meta2}{Value to select within \code{meta2} column}
 
 \item{pseudocount}{Pseudocount to add to data. Defaults to 0.001}
 }
@@ -32,7 +32,7 @@ Matrix containing count values of selected populations
 }
 \description{
 This function takes a Seurat object as an input, and returns
-a matrix based on subsetting parameters. Either none, one, or
+an expression matrix based on subsetting parameters. Either none, one, or
 two metadata features can be selected for a given input.
 }
 \examples{

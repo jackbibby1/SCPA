@@ -21,7 +21,7 @@ compare_seurat(
 Seurat object e.g. cell_type}
 
 \item{group1_population}{Populations within group1 to compare
-e.g. c(t_cell, b_cell)}
+e.g. c("t_cell", "b_cell")}
 
 \item{group2}{Second comparison group as defined by column names in
 Seurat object e.g. hour}

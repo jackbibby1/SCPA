@@ -53,8 +53,8 @@ To see the stats behind SCPA, you can see our paper in JASA
 [here](https://www.tandfonline.com/doi/full/10.1080/01621459.2020.1791131)
 
 Our paper introducing SCPA and demonstrating its use on a T cell
-scRNA-seq dataset is currently on bioRxiv
-[here](https://www.biorxiv.org/content/10.1101/2022.02.07.478807v1)
+scRNA-seq dataset is published in Cell Reports
+[here](https://www.cell.com/cell-reports/fulltext/S2211-1247(22)01571-6)
 
 ### Installation
 

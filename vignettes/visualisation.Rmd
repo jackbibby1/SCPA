@@ -20,7 +20,7 @@ Visualising the output from SCPA is best done by considering the relative ranks 
 This will give you the best chance to find the most appropriate signal.
 
 ```{r, include=FALSE}
-scpa_out <- readRDS("~/Google Drive/r_packages/SCPA/rds_files/th1_tcm.rds")
+scpa_out <- readRDS("~/My Drive/r_packages/SCPA/rds_files/th1_tcm.rds")
 ```
 
 Lets load in some packages

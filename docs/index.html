@@ -154,12 +154,12 @@
 <h3 id="about-scpa">About SCPA<a class="anchor" aria-label="anchor" href="#about-scpa"></a>
 </h3>
 <p>SCPA is a method for pathway analysis in single cell RNA-seq data. It’s a different approach to pathway analysis that defines pathway activity as a change in multivariate distribution of a given pathway across conditions, rather than enrichment or over representation of genes.</p>
-<p>Overall the workflow looks like this: generate the populations and pathways to compare &gt; SCPA generates pathway specific expression matrices for all comparisons &gt; SCPA performs graph based multivariate distribution analysis across all pathways and populations &gt; SCPA generates a Qval for plotting and ranking of pathway.</p>
-<p>This approach allows for a number of benefits over current methods, including:</p>
+<p>This approach allows for a number of benefits over current methods:</p>
 <ol style="list-style-type: decimal">
-<li><p>You will identify pathways that show enrichment in a given population AND also identify pathways with no overall enrichment but alterations in the multivariate distribution of that pathway. You essentially get the best of both worlds, as pathways with changes in multivariate distribution (high qval) but no overall enrichment (low fold change) are still interestingly different pathways, as we show in <a href="https://www.cell.com/cell-reports/fulltext/S2211-1247(22)01571-6" class="external-link">our paper</a></p></li>
+<li><p>Multivariate distributuion testing allows for the identification of pathways that show enrichment in a given population AND also pathways that show transcriptional change independent of enrichment. You essentially get the best of both worlds, as pathways with changes in multivariate distribution (high qval) but no overall enrichment (low fold change) are still interestingly different pathways, as we show in <a href="https://www.cell.com/cell-reports/fulltext/S2211-1247(22)01571-6" class="external-link">our paper</a>. For more on this, see our <a href="https://jackbibby1.github.io/SCPA/articles/interpreting_scpa_output.html">SCPA interpretation page</a></p></li>
 <li><p>SCPA allows for multisample testing, so you can compare multiple conditions simultaneously e.g. compare across 3 time points, or across multiple phases of a <a href="https://jackbibby1.github.io/SCPA/articles/pseudotime.html">pseuodotime trajectory</a>. This means you can assess pathway activity through multiple stimulation phases, or across cell differentiation</p></li>
 </ol>
+<p>Overall the workflow looks like this: generate the populations and pathways to compare &gt; SCPA generates pathway specific expression matrices for all comparisons &gt; SCPA performs graph based multivariate distribution analysis across all pathways and populations &gt; SCPA generates a Qval for plotting and ranking of pathway.</p>
 <p>To see the stats behind SCPA, you can see our paper in JASA <a href="https://www.tandfonline.com/doi/full/10.1080/01621459.2020.1791131" class="external-link">here</a></p>
 <p>Our paper introducing SCPA and demonstrating its use on a T cell scRNA-seq dataset is published in Cell Reports <a href="https://www.cell.com/cell-reports/fulltext/S2211-1247(22)01571-6" class="external-link">here</a></p>
 </div>
@@ -179,13 +179,12 @@
 <p>If you’re viewing this page on GitHub, the SCPA webpage with all the documentation and tutorials is <a href="https://jackbibby1.github.io/SCPA/">here</a></p>
 <p>We have various examples and walkthroughs, including:</p>
 <ul>
-<li>A generic quick start <a href="https://jackbibby1.github.io/SCPA/articles/quick_start.html">tutorial</a>
-</li>
+<li>A generic quick start <a href="https://jackbibby1.github.io/SCPA/articles/quick_start.html">tutorial</a> on a basic scRNA-seq dataset</li>
 <li>A <a href="https://jackbibby1.github.io/SCPA/articles/using_gene_sets.html">tutorial</a> on how to get and use gene sets with SCPA</li>
-<li>A <a href="https://jackbibby1.github.io/SCPA/articles/comparing_two_populations.html">tutorial</a> for more detailed two group comparison with a specific data set</li>
+<li>A <a href="https://jackbibby1.github.io/SCPA/articles/comparing_two_populations.html">tutorial</a> for more detailed two group comparison with a specific scRNA-seq data set</li>
 <li>A <a href="https://jackbibby1.github.io/SCPA/articles/seurat_comparison.html">tutorial</a> on how to use SCPA directly within a Seurat or SingleCellExperiment object</li>
 <li>A <a href="https://jackbibby1.github.io/SCPA/articles/visualisation.html">tutorial</a> on visualising SCPA output</li>
-<li>A <a href="https://jackbibby1.github.io/SCPA/articles/pseudotime.html">tutorial</a> for multisample SCPA, comparing pathways across a pseudotime trajectory</li>
+<li>A <a href="https://jackbibby1.github.io/SCPA/articles/pseudotime.html">tutorial</a> for multisample SCPA, comparing pathways across a scRNA-seq T cell pseudotime trajectory</li>
 <li>A <a href="https://jackbibby1.github.io/SCPA/articles/systematic_tissue_comparison.html">tutorial</a> of a systematic analysis of many cell types across multiple tissues</li>
 <li>A <a href="https://jackbibby1.github.io/SCPA/articles/disease_comparison.html">tutorial</a> for a systems level analysis of many cells types in disease (COVID-19)</li>
 </ul>

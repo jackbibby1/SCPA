@@ -40,7 +40,7 @@ including:
     multivariate distribution (high qval) but no overall enrichment (low
     fold change) are still interestingly different pathways, as we show
     in [our
-    paper](https://www.biorxiv.org/content/10.1101/2022.02.07.478807v1)
+    paper](https://www.cell.com/cell-reports/fulltext/S2211-1247(22)01571-6)
 
 2.  SCPA allows for multisample testing, so you can compare multiple
     conditions simultaneously e.g. compare across 3 time points, or

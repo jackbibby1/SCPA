@@ -18,6 +18,10 @@ navbar:
     tutorials:
       text: Tutorials
       menu:
+      - text: General information
+      - text: Interpreting the SCPA output
+        href: articles/interpreting_scpa_output.html
+      - text: ------------
       - text: Generic example
       - text: Quick start
         href: articles/quick_start.html

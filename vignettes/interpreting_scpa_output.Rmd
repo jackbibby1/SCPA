@@ -1,0 +1,63 @@
+---
+title: "Interpreting SCPA output"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{interpreting_scpa_output}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+### Basic output from SCPA
+The output from SCPA provides 4-5 columns, depending on the type of comparison. These will be 1) your pathways 2) raw pval 3) adjusted pval 4) qval, and, if a two-sample comparison is done 5) fold change. Here is an example output:
+
+```{r, echo=FALSE}
+scpa_out <- readRDS("~/My Drive/r_packages/SCPA/rds_files/th1_tcm.rds")
+```
+
+```{r}
+head(scpa_out, 10)
+```
+
+### Which output values should you use?
+Instead of looking at pathway enrichment, SCPA assesses changes in the multivariate distribution of a pathway. However,
+pathways that show enrichment in a given population will also necessarily show large changes in multivariate distribution. This means that with SCPA
+you're able to detect 1) enriched pathways and 2) non-enriched pathways that have transcriptional changes that are independent
+of enrichment. This output is reflected in the qval, and we recommend people to use this as their primary statistic. Here,
+the larger the qval, the larger the change in pathway 'activity'. As SCPA measures multivariate distributions, there will be pathways
+that show significantly large qvals, but no overall fold change/enrichment in a given population. Whilst these pathways are not enriched, 
+we know that these distribution changes identified by SCPA are still important for cellular behavior. We show an example of this in Figure 4 
+[our paper](https://www.cell.com/cell-reports/fulltext/S2211-1247(22)01571-6), where arachidonic acid metabolism is not enriched, but shows
+changes in multivariate distribution, and is shown to be critical for T cell activation. We are therefore proposing that considering changes in
+multivariate distributions of pathways is a better overall reflection of pathway activity, and because of this, you should use the qval as your statistical
+measurement of pathway activity, and fold change only as a secondary informative value.
+
+### Filtering and visualizing the SCPA output
+In general, it's most informative to visualize the whole output of the pathway analysis so you can understand the global pattern of pathway changes
+that are occurring in your populations. So whilst you can use a typical statistical filter e.g. adjusted pval < 0.01, we generally
+propose using something like a ranking plot to visualize thw distribution of qvals, whilst still being able to highlight certain pathways. We provide
+some basic functions including `plot_rank()` that can visualize the SCPA output like this, and also provide the `plot_heatmap()` function that can visualize
+more than one comparison. See the [Visualization tutorial](https://jackbibby1.github.io/SCPA/articles/visualisation.html) for some examples of this.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

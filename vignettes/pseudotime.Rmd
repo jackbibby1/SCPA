@@ -43,7 +43,7 @@ library(circlize)
 
 ### Load in data
 ```{r, eval=F}
-naive_cd4 <- load("naive_cd4.rds")
+naive_cd4 <- readRDS("naive_cd4.rds")
 ```
 
 

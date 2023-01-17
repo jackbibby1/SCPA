@@ -75,7 +75,9 @@ compare_seurat <- function(seurat_object,
     }
   }
 
-  mcm_output <- compare_pathways(samples = samples, pathways = pathways)
+  mcm_output <- compare_pathways(samples = samples,
+                                 pathways = pathways,
+                                 downsample = downsample)
   return(mcm_output)
 
 }

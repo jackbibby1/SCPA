@@ -1,3 +1,9 @@
+## SCPA v1.2.1
+
+#### Minor changes
+
+- Add functionality to choose assay in Seurat object
+
 ## SCPA v1.2
 
 #### Major changes

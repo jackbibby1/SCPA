@@ -2,10 +2,11 @@
 % Please edit documentation in R/SeuratExtract.R
 \name{seurat_extract}
 \alias{seurat_extract}
-\title{Extract Normalised Data From Seurat}
+\title{Extract Data From A Seurat Object}
 \usage{
 seurat_extract(
   seu_obj,
+  assay = "RNA",
   meta1 = NULL,
   value_meta1 = NULL,
   meta2 = NULL,
@@ -14,8 +15,9 @@ seurat_extract(
 )
 }
 \arguments{
-\item{seu_obj}{Seurat object containing normalised counts
-stored in \code{seu_obj@assays$RNA@data}}
+\item{seu_obj}{Seurat object}
+
+\item{assay}{Seurat assay to extract. Defaults to RNA}
 
 \item{meta1}{Metadata column to subset}
 

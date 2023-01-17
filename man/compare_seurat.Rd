@@ -6,6 +6,7 @@
 \usage{
 compare_seurat(
   seurat_object,
+  assay = "RNA",
   group1 = NULL,
   group1_population = NULL,
   group2 = NULL,

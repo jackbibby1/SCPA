@@ -38,6 +38,7 @@
 #' @export
 
 compare_seurat <- function(seurat_object,
+                           assay = "RNA",
                            group1 = NULL,
                            group1_population = NULL,
                            group2 = NULL,
@@ -56,6 +57,7 @@ compare_seurat <- function(seurat_object,
     samples <- list()
     for (i in group1_population) {
       samples[[i]] <- seurat_extract(seurat_object,
+                                     assay = assay,
                                      meta1 = group1,
                                      value_meta1 = i)
     }
@@ -65,6 +67,7 @@ compare_seurat <- function(seurat_object,
     samples <- list()
     for (i in group1_population) {
       samples[[i]] <- seurat_extract(seurat_object,
+                                     assay = assay,
                                      meta1 = group1,
                                      value_meta1 = i,
                                      meta2 = group2,
@@ -76,6 +79,8 @@ compare_seurat <- function(seurat_object,
   return(mcm_output)
 
 }
+
+
 
 
 

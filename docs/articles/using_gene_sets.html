@@ -47,7 +47,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">Single Cell Pathway Analysis (SCPA)</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.2.1</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.3.0</span>
       </span>
     </div>
 
@@ -171,7 +171,7 @@ the methods. First let’s load in a couple of packages we’ll need</p>
 simple lines of code. We’ll just extract all the Hallmark pathways from
 msigdbr</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">pathways</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://igordot.github.io/msigdbr/reference/msigdbr.html" class="external-link">msigdbr</a></span><span class="op">(</span>species <span class="op">=</span> <span class="st">"Homo sapiens"</span>, category <span class="op">=</span> <span class="st">"H"</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
+<code class="sourceCode R"><span><span class="va">pathways</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://igordot.github.io/msigdbr/reference/msigdbr.html" class="external-link">msigdbr</a></span><span class="op">(</span>species <span class="op">=</span> <span class="st">"Homo sapiens"</span>, category <span class="op">=</span> <span class="st">"H"</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span></span>
 <span>      <span class="fu"><a href="../reference/format_pathways.html">format_pathways</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
 </div>
 <div class="section level3">
@@ -205,8 +205,8 @@ category</p>
 <span><span class="co">#&gt; <span style="color: #949494;">#   ⁴​human_gene_symbol, ⁵​human_entrez_gene, ⁶​human_ensembl_gene</span></span></span></code></pre></div>
 <p>We can have a look at a few of these pathways</p>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">hallmark</span><span class="op">$</span><span class="va">gs_name</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> </span>
-<span>  <span class="fu"><a href="https://rdrr.io/r/base/unique.html" class="external-link">unique</a></span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
+<code class="sourceCode R"><span><span class="va">hallmark</span><span class="op">$</span><span class="va">gs_name</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span> </span>
+<span>  <span class="fu"><a href="https://rdrr.io/r/base/unique.html" class="external-link">unique</a></span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span></span>
 <span>  <span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="fl">10</span><span class="op">)</span></span>
 <span><span class="co">#&gt;  [1] "HALLMARK_ADIPOGENESIS"            "HALLMARK_ALLOGRAFT_REJECTION"    </span></span>
 <span><span class="co">#&gt;  [3] "HALLMARK_ANDROGEN_RESPONSE"       "HALLMARK_ANGIOGENESIS"           </span></span>
@@ -244,15 +244,15 @@ subsetting specific pathways, or collection of gene sets. For example,
 if we wanted all pathways related to interferon, we could use grepl to
 filter the gs_names column:</p>
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">ifn_pathways</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://igordot.github.io/msigdbr/reference/msigdbr.html" class="external-link">msigdbr</a></span><span class="op">(</span><span class="st">"Homo sapiens"</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
-<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html" class="external-link">filter</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/grep.html" class="external-link">grepl</a></span><span class="op">(</span><span class="st">"interferon"</span>, <span class="va">gs_name</span>, ignore.case <span class="op">=</span> <span class="cn">T</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
+<code class="sourceCode R"><span><span class="va">ifn_pathways</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://igordot.github.io/msigdbr/reference/msigdbr.html" class="external-link">msigdbr</a></span><span class="op">(</span><span class="st">"Homo sapiens"</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html" class="external-link">filter</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/grep.html" class="external-link">grepl</a></span><span class="op">(</span><span class="st">"interferon"</span>, <span class="va">gs_name</span>, ignore.case <span class="op">=</span> <span class="cn">T</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span></span>
 <span>  <span class="fu"><a href="../reference/format_pathways.html">format_pathways</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
 <p>Or we could specify a combination of collections so we get all of the
 Hallmark, KEGG, and Reactome gene sets:</p>
 <div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">pathways</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"hallmark"</span>, <span class="st">"kegg"</span>, <span class="st">"reactome"</span><span class="op">)</span></span>
-<span><span class="va">hkr_sets</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://igordot.github.io/msigdbr/reference/msigdbr.html" class="external-link">msigdbr</a></span><span class="op">(</span><span class="st">"Homo sapiens"</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
-<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html" class="external-link">filter</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/grep.html" class="external-link">grepl</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste</a></span><span class="op">(</span><span class="va">pathways</span>, collapse <span class="op">=</span> <span class="st">"|"</span><span class="op">)</span>, <span class="va">gs_name</span>, ignore.case <span class="op">=</span> <span class="cn">T</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
+<span><span class="va">hkr_sets</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://igordot.github.io/msigdbr/reference/msigdbr.html" class="external-link">msigdbr</a></span><span class="op">(</span><span class="st">"Homo sapiens"</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html" class="external-link">filter</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/grep.html" class="external-link">grepl</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste</a></span><span class="op">(</span><span class="va">pathways</span>, collapse <span class="op">=</span> <span class="st">"|"</span><span class="op">)</span>, <span class="va">gs_name</span>, ignore.case <span class="op">=</span> <span class="cn">T</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span></span>
 <span>  <span class="fu"><a href="../reference/format_pathways.html">format_pathways</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
 <p>Using something like this makes it easy to pull large and/or relevant
 gene set lists for direct use within SCPA.</p>

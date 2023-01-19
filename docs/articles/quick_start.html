@@ -47,7 +47,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">Single Cell Pathway Analysis (SCPA)</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.2.1</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.3.0</span>
       </span>
     </div>
 
@@ -143,7 +143,7 @@
 <h2 id="broad-overview-of-the-workflow">1. Broad overview of the workflow<a class="anchor" aria-label="anchor" href="#broad-overview-of-the-workflow"></a>
 </h2>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">pathways</span> <span class="op">&lt;-</span> <span class="fu">msigdbr</span><span class="op">(</span><span class="st">"Homo sapiens"</span>, <span class="st">"H"</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
+<code class="sourceCode R"><span><span class="va">pathways</span> <span class="op">&lt;-</span> <span class="fu">msigdbr</span><span class="op">(</span><span class="st">"Homo sapiens"</span>, <span class="st">"H"</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span></span>
 <span>  <span class="fu"><a href="../reference/format_pathways.html">format_pathways</a></span><span class="op">(</span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># The populations here just need to be your normalized expression matrices</span></span>
@@ -234,7 +234,7 @@ Hallmark pathways, and using the <code>format_pathways</code> function
 within SPCA to get them properly formatted. A detailed explanation of
 generating gene sets for SCPA can be found <a href="https://jackbibby1.github.io/SCPA/articles/using_gene_sets.html">here</a></p>
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">pathways</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://igordot.github.io/msigdbr/reference/msigdbr.html" class="external-link">msigdbr</a></span><span class="op">(</span><span class="st">"Homo sapiens"</span>, <span class="st">"H"</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
+<code class="sourceCode R"><span><span class="va">pathways</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://igordot.github.io/msigdbr/reference/msigdbr.html" class="external-link">msigdbr</a></span><span class="op">(</span><span class="st">"Homo sapiens"</span>, <span class="st">"H"</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span></span>
 <span>  <span class="fu"><a href="../reference/format_pathways.html">format_pathways</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
 </div>
 <div class="section level3">

@@ -24,7 +24,7 @@ compares gene sets over specified conditions/populations."><meta property="og:im
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">Single Cell Pathway Analysis (SCPA)</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.2.1</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.3.0</span>
       </span>
     </div>
 
@@ -112,7 +112,9 @@ compares gene sets over specified conditions/populations.</p>
 <span>  group2 <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  group2_population <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  <span class="va">pathways</span>,</span>
-<span>  downsample <span class="op">=</span> <span class="fl">500</span></span>
+<span>  downsample <span class="op">=</span> <span class="fl">500</span>,</span>
+<span>  min_genes <span class="op">=</span> <span class="fl">15</span>,</span>
+<span>  max_genes <span class="op">=</span> <span class="fl">500</span></span>
 <span><span class="op">)</span></span></code></pre></div>
     </div>
 
@@ -120,6 +122,10 @@ compares gene sets over specified conditions/populations.</p>
     <h2>Arguments</h2>
     <dl><dt>seurat_object</dt>
 <dd><p>Seurat object with populations defined in the meta data</p></dd>
+
+
+<dt>assay</dt>
+<dd><p>Assay to pull expression data from</p></dd>
 
 
 <dt>group1</dt>
@@ -150,6 +156,14 @@ gene lists, see documentation at https://jackbibby1.github.io/SCPA/articles/usin
 <dt>downsample</dt>
 <dd><p>Option to downsample cell numbers. Defaults to 500 cells per condition. If a population
 has &lt; 500 cells, all cells from that condition are used.</p></dd>
+
+
+<dt>min_genes</dt>
+<dd><p>Gene sets with fewer than this number of genes will be excluded</p></dd>
+
+
+<dt>max_genes</dt>
+<dd><p>Gene sets with more than this number of genes will be excluded</p></dd>
 
 </dl></div>
     <div id="value">

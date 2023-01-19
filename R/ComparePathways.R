@@ -152,6 +152,8 @@ compare_pathways <- function(samples,
 
   }
 
+  close(pb)
+
   scpa_result <- scpa_result %>%
     bind_rows() %>%
     remove_rownames() %>%

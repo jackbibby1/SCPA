@@ -65,8 +65,8 @@ compare_pathways <- function(samples,
   samples <- lapply(samples, function(x) x[rownames(x) %in% genes, ])
 
   # filter out pathways
-  gene_numbers <- sapply(pathways, function(x) nrow(samples[[1]][rownames(samples[[1]]) %in% x$Genes, ]))
-  keep_pathway <- gene_numbers > min_genes & gene_numbers < max_genes
+  gene_numbers <- lapply(pathways, function(x) nrow(samples[[1]][rownames(samples[[1]]) %in% x$Genes, ]))
+  keep_pathway <- sapply(gene_numbers, function(x) any(x >= min_genes & x <= max_genes))
   excluded_pathways <- sapply(pathways[!keep_pathway], function(x) unique(dplyr::pull(x, Pathway)))
   pathways_filtered <- pathways[keep_pathway]
 

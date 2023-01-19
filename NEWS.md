@@ -1,3 +1,15 @@
+## SCPA v1.3.0
+
+#### Major changes
+
+- The main function of SCPA has been rewritten to be much more efficient with memory usage.
+This means that RAM availability is likely not going to be limiting on a typical computer
+i.e. 8GB RAM, even with a huge number of comparisons.
+- The speed of the pathway comparisons is also slightly improved
+
+#### Minor changes
+- Added the option to filter gene set size in `compare_seurat()`
+
 ## SCPA v1.2.1
 
 #### Minor changes

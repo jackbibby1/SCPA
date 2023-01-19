@@ -12,11 +12,15 @@ compare_seurat(
   group2 = NULL,
   group2_population = NULL,
   pathways,
-  downsample = 500
+  downsample = 500,
+  min_genes = 15,
+  max_genes = 500
 )
 }
 \arguments{
 \item{seurat_object}{Seurat object with populations defined in the meta data}
+
+\item{assay}{Assay to pull expression data from}
 
 \item{group1}{First comparison group as defined by meta data in
 Seurat object e.g. cell_type}
@@ -35,6 +39,10 @@ gene lists, see documentation at https://jackbibby1.github.io/SCPA/articles/usin
 
 \item{downsample}{Option to downsample cell numbers. Defaults to 500 cells per condition. If a population
 has < 500 cells, all cells from that condition are used.}
+
+\item{min_genes}{Gene sets with fewer than this number of genes will be excluded}
+
+\item{max_genes}{Gene sets with more than this number of genes will be excluded}
 }
 \value{
 Statistical results from the SCPA analysis. The qval should be the

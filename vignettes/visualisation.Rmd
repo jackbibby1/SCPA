@@ -26,7 +26,8 @@ scpa_out <- readRDS("~/My Drive/r_packages/SCPA/rds_files/th1_tcm.rds")
 Lets load in some packages
 ```{r setup, warning=FALSE, message=FALSE}
 library(SCPA)
-library(tidyverse)
+library(magrittr)
+library(dplyr)
 library(ComplexHeatmap)
 ```
 

@@ -4,6 +4,7 @@
 #' compares gene sets over specified conditions/populations.
 #'
 #' @param seurat_object Seurat object with populations defined in the meta data
+#' @param assay Assay to pull expression data from
 #' @param group1 First comparison group as defined by meta data in
 #'   Seurat object e.g. cell_type
 #' @param group1_population Populations within group1 to compare
@@ -16,6 +17,8 @@
 #'   gene lists, see documentation at https://jackbibby1.github.io/SCPA/articles/using_gene_sets.html
 #' @param downsample Option to downsample cell numbers. Defaults to 500 cells per condition. If a population
 #'   has < 500 cells, all cells from that condition are used.
+#' @param min_genes Gene sets with fewer than this number of genes will be excluded
+#' @param max_genes Gene sets with more than this number of genes will be excluded
 #'
 #' @examples \dontrun{
 #' scpa_out <- compare_sce(
@@ -44,7 +47,9 @@ compare_seurat <- function(seurat_object,
                            group2 = NULL,
                            group2_population = NULL,
                            pathways,
-                           downsample = 500) {
+                           downsample = 500,
+                           min_genes = 15,
+                           max_genes = 500) {
 
   ## Pathways
   if (class(pathways)[1] == "character") {
@@ -77,7 +82,9 @@ compare_seurat <- function(seurat_object,
 
   mcm_output <- compare_pathways(samples = samples,
                                  pathways = pathways,
-                                 downsample = downsample)
+                                 downsample = downsample,
+                                 min_genes = min_genes,
+                                 max_genes = max_genes)
   return(mcm_output)
 
 }

@@ -16,6 +16,8 @@
 3.  Links to [tutorials](https://jackbibby1.github.io/SCPA/#tutorials)
 4.  Submitting
     [issues/comments](https://jackbibby1.github.io/SCPA/#issues)
+5.  [Improvements/changes/updates](https://jackbibby1.github.io/SCPA/news/index.html)
+    to SCPA
 
 ### About SCPA
 
@@ -108,3 +110,8 @@ We have various examples and walkthroughs, including:
 
 To report any issues or submit comments please use:
 <https://github.com/jackbibby1/SCPA/issues>
+
+### Changelog
+
+Any new features or alterations to SCPA can be found
+[here](https://jackbibby1.github.io/SCPA/news/index.html)

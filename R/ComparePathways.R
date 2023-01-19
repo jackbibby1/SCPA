@@ -39,20 +39,22 @@ compare_pathways <- function(samples,
   if (class(pathways)[1] == "character") {
     pathways <- get_paths(pathways)
   }
-  path_names <- sapply(pathways, function(x) unique(x$Pathway))
 
   # define the number of cells in each condition
-  cell_number <- lapply(samples, function(x) ncol(x))
-  cell_number <- sapply(cell_number, function(x) x[1])
+  cell_number <- sapply(samples, function(x) ncol(x))
 
   for (i in 1:length(cell_number)) {
-    message(paste("Cell numbers in population", i, "=", cell_number[i]))}
+    message(paste("Cell numbers in population", i, "=", cell_number[i]))
+  }
+
   message("- If greater than ", downsample,
           " cells, these populations will be downsampled", "\n")
 
   # randomly sample cells
   for (i in 1:length(samples)) {
+
     samples[[i]] <- random_cells(samples[[i]], ifelse(cell_number[i] < 500, cell_number[i], downsample))
+
   }
 
   # only take shared genes
@@ -62,104 +64,101 @@ compare_pathways <- function(samples,
   genes <- names(genes)
   samples <- lapply(samples, function(x) x[rownames(x) %in% genes, ])
 
-  # generate pathway matrices
-  pop_paths <- vector(mode = "list", length = length(samples))
-  for (i in 1:length(pop_paths)) {
-    for (c in 1:length(pathways)) {
-      pop_paths[[i]][[c]] <- samples[[i]][rownames(samples[[i]]) %in% pathways[[c]]$Genes, ]
-    }
-  }
+  # filter out pathways
+  gene_numbers <- sapply(pathways, function(x) nrow(samples[[1]][rownames(samples[[1]]) %in% x$Genes, ]))
+  keep_pathway <- gene_numbers > min_genes & gene_numbers < max_genes
+  excluded_pathways <- sapply(pathways[!keep_pathway], function(x) unique(pull(x, Pathway)))
+  pathways_filtered <- pathways[keep_pathway]
 
-  # set pathway names
-  pop_paths <- lapply(pop_paths, function(x) purrr::set_names(x, path_names))
+  if (length(pathways_filtered) == 0) {
 
-  # filter out pathways with < 15 genes or > 500
-  filter_paths <- sapply(pop_paths[[1]], function(x) any(nrow(x) >= min_genes & nrow(x) <= max_genes))
+    stop(call. = F, "No pathways passed the min/max genes threshold")
 
-  filtered_pathways <- names(filter_paths[filter_paths == "FALSE"])
+  } else if (length(excluded_pathways) > 0) {
 
-  if (length(filtered_pathways) > 0) {
-    message("Excluding ", length(filtered_pathways),
-            " pathways based on min/max genes parameter: ",
-            paste(utils::head(filtered_pathways, 5), collapse=", "), "...", "\n")
+    message("Excluding ", length(excluded_pathways),
+            " pathway(s) based on min/max genes parameter: ",
+            paste(utils::head(excluded_pathways, 5), collapse = ", "), "...", "\n")
+
   } else {
+
     message("All ", length(pathways), " pathways passed the min/max genes threshold", "\n")
+
   }
 
-  pop_paths <- lapply(pop_paths, function(x) x[unlist(filter_paths)])
 
-  # transpose matrix
-  pop_paths <- lapply(pop_paths, function(x) lapply(x, function(c) t(c)))
+  if (length(samples) > 2) {
 
-  # order columns
-  pop_paths <- lapply(pop_paths, function(x) lapply(x, function(c) c[, sort(colnames(c))]))
+    message("Performing a multisample analysis with SCPA...")
 
-  # fc calculation
-  if (length(samples) == 2) {
+  } else {
 
     message("Calculating pathway fold changes...", "\n")
-
-    avg_expression <- lapply(pop_paths, function(x) lapply(x, function(c) data.frame(colMeans(c))))
-    samp_combined <- c()
-    for (i in 1:length(pop_paths[[1]])) {
-      samp_combined[[i]] <- cbind(avg_expression[[1]][[i]], avg_expression[[2]][[i]])
-    }
-    samp_combined <- lapply(samp_combined, function(x) magrittr::set_colnames(x, c("Pop1", "Pop2")))
-    samp_combined <- lapply(samp_combined, function(x) cbind(x, logFC = x[, "Pop1"]-x[, "Pop2"]))
-    path_fc <- sapply(samp_combined, function(x) sum(x[, "logFC"]))
-  }
-
-  # run scpa
-  if (length(samples) > 2) {
-    message("Performing a multisample analysis with SCPA...")
-    pb <- utils::txtProgressBar(min = 0, max = length(pop_paths[[1]]),
-                                style = 3, width = 50)
-    mcm_result <- list()
-    for (i in 1:length(pop_paths[[1]])) {
-      Sys.sleep(0.1)
-      utils::setTxtProgressBar(pb, i)
-      mcm_result[[i]] <- multicross::mcm(lapply(pop_paths, function(x) x[[i]]), level = 0.05)
-    }
-    close(pb)
-
-    mcm_output <- data.frame(t(sapply(mcm_result, c)), stringsAsFactors = F)
-    mcm_output$Pathway <- names(pop_paths[[1]])
-    mcm_output$X2 <- NULL
-    colnames(mcm_output)[1] <- c("Pval")
-    mcm_output$Pval <- replace(mcm_output$Pval, mcm_output$Pval == 0, 10^-300)
-    mcm_output$Pval <- as.numeric(mcm_output$Pval)
-    mcm_output$adjPval <- stats::p.adjust(mcm_output$Pval, method = "bonferroni",
-                                          n = nrow(mcm_output))
-    mcm_output$qval <- sqrt(-log10(mcm_output$adjPval))
-    mcm_output <- mcm_output[, c(2, 1, 3, 4)]
-    mcm_output <- mcm_output[order(-mcm_output$qval), ]
-    return(mcm_output)
-
-  } else {
     message("Performing a two-sample analysis with SCPA...")
-    pb <- utils::txtProgressBar(min = 0, max = length(pop_paths[[1]]),
-                                style = 3, width = 50)
-    mcm_result <- list()
-    for (i in 1:length(pop_paths[[1]])) {
-      Sys.sleep(0.1)
-      utils::setTxtProgressBar(pb, i)
-      mcm_result[[i]] <- multicross::mcm(lapply(pop_paths, function(x) x[[i]]), level = 0.05)
-    }
-    close(pb)
-    mcm_output <- data.frame(t(sapply(mcm_result, c)), stringsAsFactors = F)
-    mcm_output$FC <- path_fc
-    mcm_output$Pathway <- names(pop_paths[[1]])
-    mcm_output$X2 <- NULL
-    colnames(mcm_output)[1] <- c("Pval")
-    mcm_output[mcm_output$Pval == 0] <- 10^-300
-    mcm_output$Pval <- as.numeric(mcm_output$Pval)
-    mcm_output$adjPval <- stats::p.adjust(mcm_output$Pval, method = "bonferroni",
-                                          n = nrow(mcm_output))
-    mcm_output$qval <- sqrt(-log10(mcm_output$adjPval))
-    mcm_output <- mcm_output[, c(3, 1, 4, 5, 2)]
-    mcm_output <- mcm_output[order(-mcm_output$qval), ]
-    return(mcm_output)
+
   }
+
+  pb <- utils::txtProgressBar(min = 0, max = length(pathways_filtered),
+                              style = 3, width = 50)
+
+  scpa_result <- list()
+  for (i in 1:length(pathways_filtered)) {
+
+    utils::setTxtProgressBar(pb, i)
+
+    # subset data to get one pathway
+    path_subset <- lapply(samples, function(x) x[rownames(x) %in% pathways_filtered[[i]]$Genes, ])
+    path_subset <- lapply(path_subset, function(x) t(x))
+    path_subset <- lapply(path_subset, function(x) x[, sort(colnames(x))])
+
+    if (length(path_subset) == 2) {
+
+      avg_expression <- lapply(path_subset, function(x) data.frame(colMeans(x)))
+      samp_combined <- cbind(avg_expression[[1]], avg_expression[[2]])
+      samp_combined <- magrittr::set_colnames(samp_combined, c("Pop1", "Pop2"))
+      samp_combined <- cbind(samp_combined, logFC = samp_combined[, "Pop1"]-samp_combined[, "Pop2"])
+      path_fc <- sum(samp_combined[, "logFC"])
+
+      scpa_result[[i]] <- multicross::mcm(path_subset, level = 0.05) %>%
+        data.frame() %>%
+        t() %>%
+        data.frame() %>%
+        mutate(FC = path_fc) %>%
+        mutate(Pathway = pathways_filtered[[i]]$Pathway[1]) %>%
+        select(-X2) %>%
+        mutate(Pval = as.numeric(X1)) %>%
+        select(-X1) %>%
+        mutate(adjPval = stats::p.adjust(Pval , method = "bonferroni",
+                                         n = length(pathways_filtered))) %>%
+        mutate(qval = sqrt(-log10(adjPval))) %>%
+        select(Pathway, Pval, adjPval, qval, FC)
+
+    } else {
+
+      scpa_result[[i]] <- multicross::mcm(path_subset, level = 0.05) %>%
+        data.frame() %>%
+        t() %>%
+        data.frame() %>%
+        mutate(Pathway = pathways_filtered[[i]]$Pathway[1]) %>%
+        select(-X2) %>%
+        mutate(Pval = as.numeric(X1)) %>%
+        select(-X1) %>%
+        mutate(adjPval = stats::p.adjust(Pval , method = "bonferroni",
+                                         n = length(pathways_filtered))) %>%
+        mutate(qval = sqrt(-log10(adjPval))) %>%
+        select(Pathway, Pval, adjPval, qval)
+
+    }
+
+  }
+
+  scpa_result <- scpa_result %>%
+    bind_rows() %>%
+    remove_rownames() %>%
+    arrange(desc(qval))
+
+  return(scpa_result)
+
 }
 
 

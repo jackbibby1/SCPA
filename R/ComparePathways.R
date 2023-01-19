@@ -67,7 +67,7 @@ compare_pathways <- function(samples,
   # filter out pathways
   gene_numbers <- sapply(pathways, function(x) nrow(samples[[1]][rownames(samples[[1]]) %in% x$Genes, ]))
   keep_pathway <- gene_numbers > min_genes & gene_numbers < max_genes
-  excluded_pathways <- sapply(pathways[!keep_pathway], function(x) unique(pull(x, Pathway)))
+  excluded_pathways <- sapply(pathways[!keep_pathway], function(x) unique(dplyr::pull(x, Pathway)))
   pathways_filtered <- pathways[keep_pathway]
 
   if (length(pathways_filtered) == 0) {
@@ -123,15 +123,15 @@ compare_pathways <- function(samples,
         data.frame() %>%
         t() %>%
         data.frame() %>%
-        mutate(FC = path_fc) %>%
-        mutate(Pathway = pathways_filtered[[i]]$Pathway[1]) %>%
-        select(-X2) %>%
-        mutate(Pval = as.numeric(X1)) %>%
-        select(-X1) %>%
-        mutate(adjPval = stats::p.adjust(Pval , method = "bonferroni",
+        dplyr::mutate(FC = path_fc) %>%
+        dplyr::mutate(Pathway = pathways_filtered[[i]]$Pathway[1]) %>%
+        dplyr::select(-X2) %>%
+        dplyr::mutate(Pval = as.numeric(X1)) %>%
+        dplyr::select(-X1) %>%
+        dplyr::mutate(adjPval = stats::p.adjust(Pval , method = "bonferroni",
                                          n = length(pathways_filtered))) %>%
-        mutate(qval = sqrt(-log10(adjPval))) %>%
-        select(Pathway, Pval, adjPval, qval, FC)
+        dplyr::mutate(qval = sqrt(-log10(adjPval))) %>%
+        dplyr::select(Pathway, Pval, adjPval, qval, FC)
 
     } else {
 
@@ -139,14 +139,14 @@ compare_pathways <- function(samples,
         data.frame() %>%
         t() %>%
         data.frame() %>%
-        mutate(Pathway = pathways_filtered[[i]]$Pathway[1]) %>%
-        select(-X2) %>%
-        mutate(Pval = as.numeric(X1)) %>%
-        select(-X1) %>%
-        mutate(adjPval = stats::p.adjust(Pval , method = "bonferroni",
+        dplyr::mutate(Pathway = pathways_filtered[[i]]$Pathway[1]) %>%
+        dplyr::select(-X2) %>%
+        dplyr::mutate(Pval = as.numeric(X1)) %>%
+        dplyr::select(-X1) %>%
+        dplyr::mutate(adjPval = stats::p.adjust(Pval , method = "bonferroni",
                                          n = length(pathways_filtered))) %>%
-        mutate(qval = sqrt(-log10(adjPval))) %>%
-        select(Pathway, Pval, adjPval, qval)
+        dplyr::mutate(qval = sqrt(-log10(adjPval))) %>%
+        dplyr::select(Pathway, Pval, adjPval, qval)
 
     }
 
@@ -155,14 +155,13 @@ compare_pathways <- function(samples,
   close(pb)
 
   scpa_result <- scpa_result %>%
-    bind_rows() %>%
-    remove_rownames() %>%
-    arrange(desc(qval))
+    dplyr::bind_rows() %>%
+    tibble::remove_rownames() %>%
+    dplyr::arrange(desc(qval))
 
   return(scpa_result)
 
 }
-
 
 
 

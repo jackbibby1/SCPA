@@ -7,6 +7,9 @@ This means that RAM availability is likely not going to be limiting on a typical
 i.e. 8GB RAM, even with a huge number of comparisons.
 - The speed of the pathway comparisons is also slightly improved
 
+#### Minor changes
+- Added the option to filter gene set size in `compare_seurat()`
+
 ## SCPA v1.2.1
 
 #### Minor changes

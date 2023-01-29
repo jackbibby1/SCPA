@@ -53,7 +53,7 @@ compare_pathways <- function(samples,
   # randomly sample cells
   for (i in 1:length(samples)) {
 
-    samples[[i]] <- random_cells(samples[[i]], ifelse(cell_number[i] < 500, cell_number[i], downsample))
+    samples[[i]] <- random_cells(samples[[i]], ifelse(cell_number[i] < downsample, cell_number[i], downsample))
 
   }
 
@@ -221,7 +221,7 @@ compare_pathways_parallel <- function(samples,
   # randomly sample cells
   for (i in 1:length(samples)) {
 
-    samples[[i]] <- random_cells(samples[[i]], ifelse(cell_number[i] < 500, cell_number[i], downsample))
+    samples[[i]] <- random_cells(samples[[i]], ifelse(cell_number[i] < downsample, cell_number[i], downsample))
 
   }
 

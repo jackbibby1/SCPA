@@ -157,7 +157,7 @@ compare_pathways <- function(samples,
   scpa_result <- scpa_result %>%
     dplyr::bind_rows() %>%
     tibble::remove_rownames() %>%
-    dplyr::arrange(desc(qval))
+    dplyr::arrange(dplyr::desc(qval))
 
   return(scpa_result)
 
@@ -269,10 +269,10 @@ compare_pathways_parallel <- function(samples,
   if (!require(doParallel)) {
         stop('doParallel library not loaded. Please exeucte library("doParallel").')
   } else {
-    cluster <- makeCluster(cores, type = "PSOCK")
-    registerDoParallel(cluster)
+    cluster <- parallel::makeCluster(cores, type = "PSOCK")
+    doParallel::registerDoParallel(cluster)
 
-    scpa_result <- foreach(pathway = pathways_filtered) %dopar% {
+    scpa_result <- foreach::foreach(pathway = pathways_filtered) %dopar% {
       res <- tryCatch(
         expr = {
           # subset data to get one pathway
@@ -322,12 +322,12 @@ compare_pathways_parallel <- function(samples,
         })
     }
 
-    stopCluster(cluster)
+    parallel::stopCluster(cluster)
 
     scpa_result <- scpa_result %>%
       dplyr::bind_rows() %>%
       tibble::remove_rownames() %>%
-      dplyr::arrange(desc(qval))
+      dplyr::arrange(dplyr::desc(qval))
 
     return(scpa_result)
 

@@ -1,0 +1,99 @@
+---
+title: "Parallel processing for faster analysis"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{parallel_implementation}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+Version 1.4.0 added parallel implementation of `compare_pathways()` with the
+`compare_pathways_parallel()` function. You can use the same syntax
+as before, but additionally specifying the number of cores to use with
+`cores = x`, which can significantly reduce the time taken for pathway comparisons (see below).
+
+A general outline:
+
+```{r, eval=F}
+
+scpa_out <- compare_pathways_parallel(samples = list(pop1, pop2),
+                                      pathways = pathways, 
+                                      cores = 2)
+
+```
+
+### Two sample parallel assessment
+A brief assessment of parallel implementation looking at 50 pathways in 500 cells across two populations:
+
+```{r setup, eval=F}
+library(SCPA)
+library(msigdbr)
+library(Seurat)
+library(magrittr)
+library(ggplot2)
+
+df <- readRDS("naive_cd4.rds")
+
+pathways <- msigdbr("Homo sapiens", "H") %>%
+  format_pathways()
+
+p1 <- seurat_extract(df, meta1 = "Hour", value_meta1 = "0")
+p2 <- seurat_extract(df, meta1 = "Hour", value_meta1 = "12")
+
+cores_to_use <- seq(1, 4, 1)
+two_sample_times <- lapply(cores_to_use, function(x) {
+  system.time(compare_pathways_parallel(samples = list(p1, p2), pathways = pathways, cores = x))
+})
+
+data.frame(cores = cores_to_use,
+           time = sapply(two_sample_times, function(x) x[3])) %>%
+  ggplot(aes(cores, time)) +
+  geom_line() +
+  geom_point(shape = 21, size = 3.5, aes(fill = cores)) +
+  scale_y_continuous(limits = c(0, NA)) +
+  labs(x = "Cores", y = "Time (seconds)", title = "2 sample comparison") +
+  theme(panel.background = element_blank(),
+        panel.border = element_rect(fill = NA),
+        legend.position = "none")
+
+
+
+```
+
+![](../man/figures/two_sample_time.png){width=30%}
+
+### Multisample parallel assessment
+And here is an example looking at 50 pathways in 500 cells across three populations:
+
+```{r, eval=F}
+p3 <- seurat_extract(df, meta1 = "Hour", value_meta1 = "24")
+
+cores_to_use <- seq(1, 4, 1)
+multisample_times <- lapply(cores_to_use, function(x) {
+  system.time(compare_pathways_parallel(samples = list(p1, p2, p3), pathways = pathways, cores = x))
+})
+
+data.frame(cores = cores_to_use,
+           time = sapply(multisample_times, function(x) x[3])) %>%
+  ggplot(aes(cores, time)) +
+  geom_line() +
+  geom_point(shape = 21, size = 3.5, aes(fill = cores)) +
+  scale_y_continuous(limits = c(0, NA)) +
+  labs(x = "Cores", y = "Time (seconds)", title = "2 sample comparison") +
+  theme(panel.background = element_blank(),
+        panel.border = element_rect(fill = NA),
+        legend.position = "none")
+
+```
+
+![](../man/figures/multisample_time.png){width=30%}
+
+
+

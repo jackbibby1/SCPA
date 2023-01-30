@@ -22,6 +22,9 @@
     <loc>jackbibby1.github.io/SCPA/articles/interpreting_scpa_output.html</loc>
   </url>
   <url>
+    <loc>jackbibby1.github.io/SCPA/articles/parallel_implementation.html</loc>
+  </url>
+  <url>
     <loc>jackbibby1.github.io/SCPA/articles/pseudotime.html</loc>
   </url>
   <url>
@@ -50,6 +53,9 @@
   </url>
   <url>
     <loc>jackbibby1.github.io/SCPA/reference/compare_pathways.html</loc>
+  </url>
+  <url>
+    <loc>jackbibby1.github.io/SCPA/reference/compare_pathways_parallel.html</loc>
   </url>
   <url>
     <loc>jackbibby1.github.io/SCPA/reference/compare_sce.html</loc>

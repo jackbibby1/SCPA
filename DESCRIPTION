@@ -1,6 +1,6 @@
 Package: SCPA
 Title: Single Cell Pathway Analysis
-Version: 1.3.0
+Version: 1.4.0
 Authors@R: 
     c(person("Jack", "Bibby", , "jack.bibby@nih.gov", role = c("aut", "cre")),
       person("Divyansh", "Agarwal", role = c("aut")))

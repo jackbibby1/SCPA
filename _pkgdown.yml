@@ -26,6 +26,10 @@ navbar:
       - text: Quick start
         href: articles/quick_start.html
       - text: ------------
+      - text: Speeding up SCPA
+      - text: Parallel processing for faster analysis
+        href: articles/parallel_implementation.html
+      - text: ------------
       - text: Interacting with gene sets
       - text: Using gene sets
         href: articles/using_gene_sets.html

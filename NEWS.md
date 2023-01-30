@@ -1,3 +1,10 @@
+## SCPA v1.4.0
+
+#### Major changes
+
+- parallel implementation for `compare_pathways()` via `compare_pathways_parallel()`.
+Users can specify number of cores to run
+
 ## SCPA v1.3.0
 
 #### Major changes

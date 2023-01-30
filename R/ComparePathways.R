@@ -319,7 +319,6 @@ compare_pathways_parallel <- function(samples,
           }
         },
         error = function(e) {
-          return("Error in pathway ", pathway$Pathway[1], ": ", e)
         })
     }
 

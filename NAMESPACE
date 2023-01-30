@@ -2,6 +2,7 @@
 
 export("%>%")
 export(compare_pathways)
+export(compare_pathways_parallel)
 export(compare_sce)
 export(compare_seurat)
 export(format_pathways)

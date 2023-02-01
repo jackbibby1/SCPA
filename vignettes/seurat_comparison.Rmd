@@ -57,6 +57,8 @@ scpa_out <- compare_seurat(t_cells,
                            group1 = "cell", 
                            group1_population = c("cd4 th1", "cd4 tcm"),
                            pathways = pathways)
+
+# For faster analysis with parallel processing, use 'parallel = TRUE' and 'cores = x' arguments
 ```
 
 And that's it. Your results will be stored in your `scpa_out` object.
@@ -71,6 +73,9 @@ scpa_out <- compare_seurat(different_dataset,
                            group2 = "cell",
                            group2_population = "t_cells"
                            pathways = pathways)
+
+# For faster analysis with parallel processing, use 'parallel = TRUE' and 'cores = x' arguments
+
 ```
 
 

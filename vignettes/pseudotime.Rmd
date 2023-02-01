@@ -159,7 +159,7 @@ pathways <- "combined_metabolic_pathways.csv"
 cd4_metabolism <- compare_pathways(samples = cd4_pseudo, 
                                    pathways = pathways)
 
-# you can use `compare_pathways_parallel()` for improved speed of analysis through parallel processing
+# For faster analysis with parallel processing, use 'parallel = TRUE' and 'cores = x' arguments
 ```
 
 

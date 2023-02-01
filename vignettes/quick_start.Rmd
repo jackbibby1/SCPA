@@ -25,7 +25,7 @@ pathways <- msigdbr("Homo sapiens", "H") %>%
 scpa_out <- compare_pathways(samples = list(population1, population2),
                              pathways = pathways)
 
-# you can use `compare_pathways_parallel()` for improved speed of analysis through parallel processing
+# For faster analysis with parallel processing, use 'parallel = TRUE' and 'cores = x' arguments
 
 ```
 

@@ -89,6 +89,8 @@ for (i in cell_types) {
   scpa_out[[i]] <- compare_pathways(list(healthy, covid), pathways) %>%
     select(Pathway, qval) %>%
     set_colnames(c("Pathway", paste(i, "qval", sep = "_")))
+
+# you can use `compare_pathways_parallel()` for improved speed of analysis through parallel processing
   
 }
 ```

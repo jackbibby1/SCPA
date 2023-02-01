@@ -84,6 +84,9 @@ We have various examples and walkthroughs, including:
 - A
   [tutorial](https://jackbibby1.github.io/SCPA/articles/using_gene_sets.html)
   on how to get and use gene sets with SCPA
+- [An
+  outline](https://jackbibby1.github.io/SCPA/articles/parallel_implementation.html)
+  for speeding up SCPA with parallel processing
 - A
   [tutorial](https://jackbibby1.github.io/SCPA/articles/comparing_two_populations.html)
   for more detailed two group comparison with a specific scRNA-seq data

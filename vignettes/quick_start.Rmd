@@ -25,6 +25,8 @@ pathways <- msigdbr("Homo sapiens", "H") %>%
 scpa_out <- compare_pathways(samples = list(population1, population2),
                              pathways = pathways)
 
+# you can use `compare_pathways_parallel()` for improved speed of analysis through parallel processing
+
 ```
 
 In this output, the qval should be the primary metric that is used to interpret pathway differences i.e. a higher
@@ -100,6 +102,8 @@ We're all set. We now have everything that we need to compare the two population
 ```{r compare_pathways, eval=F}
 scpa_out <- compare_pathways(samples = list(tcm, th1), 
                              pathways = pathways)
+
+# you can use `compare_pathways_parallel()` for improved speed of analysis through parallel processing
 ```
 
 ```{r, echo=F}

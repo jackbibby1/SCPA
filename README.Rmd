@@ -62,6 +62,7 @@ We have various examples and walkthroughs, including:
 
 - A generic quick start [tutorial](https://jackbibby1.github.io/SCPA/articles/quick_start.html) on a basic scRNA-seq dataset
 - A [tutorial](https://jackbibby1.github.io/SCPA/articles/using_gene_sets.html) on how to get and use gene sets with SCPA
+- [An outline](https://jackbibby1.github.io/SCPA/articles/parallel_implementation.html) for speeding up SCPA with parallel processing
 - A [tutorial](https://jackbibby1.github.io/SCPA/articles/comparing_two_populations.html) for more detailed two group comparison with a specific scRNA-seq data set
 - A [tutorial](https://jackbibby1.github.io/SCPA/articles/seurat_comparison.html) on how to use SCPA directly within a Seurat or SingleCellExperiment object
 - A [tutorial](https://jackbibby1.github.io/SCPA/articles/visualisation.html) on visualising SCPA output

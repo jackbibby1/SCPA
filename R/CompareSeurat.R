@@ -19,6 +19,8 @@
 #'   has < 500 cells, all cells from that condition are used.
 #' @param min_genes Gene sets with fewer than this number of genes will be excluded
 #' @param max_genes Gene sets with more than this number of genes will be excluded
+#' @param parallel Should parallel processing be used?
+#' @param cores The number of cores used for parallel processing
 #'
 #' @examples \dontrun{
 #' scpa_out <- compare_sce(
@@ -49,7 +51,9 @@ compare_seurat <- function(seurat_object,
                            pathways,
                            downsample = 500,
                            min_genes = 15,
-                           max_genes = 500) {
+                           max_genes = 500,
+                           parallel = FALSE,
+                           cores = NULL) {
 
   ## Pathways
   if (class(pathways)[1] == "character") {
@@ -80,16 +84,30 @@ compare_seurat <- function(seurat_object,
     }
   }
 
-  mcm_output <- compare_pathways(samples = samples,
-                                 pathways = pathways,
-                                 downsample = downsample,
-                                 min_genes = min_genes,
-                                 max_genes = max_genes)
+  if (parallel == FALSE) {
+
+    mcm_output <- compare_pathways(samples = samples,
+                                   pathways = pathways,
+                                   downsample = downsample,
+                                   min_genes = min_genes,
+                                   max_genes = max_genes)
+
+  } else {
+
+    mcm_output <- compare_pathways(samples = samples,
+                                   pathways = pathways,
+                                   downsample = downsample,
+                                   min_genes = min_genes,
+                                   max_genes = max_genes,
+                                   parallel = TRUE,
+                                   cores = cores)
+
+  }
+
+
   return(mcm_output)
 
 }
-
-
 
 
 

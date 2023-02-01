@@ -14,9 +14,8 @@ knitr::opts_chunk$set(
 )
 ```
 
-Version 1.4.0 added parallel implementation of the `compare_pathways()` with the
-`compare_pathways_parallel()` function. Users can specify the number of cores to use with
-`cores = x`, which can significantly reduce the time taken for pathway comparisons.
+Version 1.5 added parallel implementation in the `compare_pathways()` function. 
+Users can specify this with `parallel = TRUE` and `cores = x`, which will significantly reduce the time taken for pathway comparisons.
 Here are some benchmarking figures for varying numbers of cores (1-4) using the default of 500 cells per population and
 50 pathways.
 
@@ -37,7 +36,10 @@ p2 <- seurat_extract(df, meta1 = "Hour", value_meta1 = "12")
 
 cores_to_use <- seq(1, 4, 1)
  two_sample_times <- lapply(cores_to_use, function(x) {
-   system.time(compare_pathways_parallel(samples = list(p1, p2), pathways = pathways, cores = x))
+   system.time(compare_pathways(samples = list(p1, p2), 
+                                pathways = pathways, 
+                                parallel = TRUE,
+                                cores = x))
  })
 
 data.frame(cores = cores_to_use,
@@ -63,7 +65,10 @@ p3 <- seurat_extract(df, meta1 = "Hour", value_meta1 = "24")
 
 cores_to_use <- seq(1, 4, 1)
  multisample_times <- lapply(cores_to_use, function(x) {
-   system.time(compare_pathways_parallel(samples = list(p1, p2, p3), pathways = pathways, cores = x))
+   system.time(compare_pathways(samples = list(p1, p2, p3), 
+                                pathways = pathways, 
+                                parallel = TRUE,
+                                cores = x))
  })
 
 data.frame(cores = cores_to_use,

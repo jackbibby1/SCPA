@@ -29,11 +29,13 @@
 #'
 #' @export
 
-compare_pathways <- function(samples,
+single_comparison <- function(samples,
                              pathways,
                              downsample = 500,
                              min_genes = 15,
                              max_genes = 500) {
+
+  message("Using single core processing. Specify 'parallel = TRUE' and `cores = x` arguments for parallel processing\n")
 
   # get pathways for analysis
   if (class(pathways)[1] == "character") {
@@ -85,7 +87,6 @@ compare_pathways <- function(samples,
     message("All ", length(pathways), " pathways passed the min/max genes threshold", "\n")
 
   }
-
 
   if (length(samples) > 2) {
 
@@ -196,12 +197,14 @@ compare_pathways <- function(samples,
 #'
 #' @export
 
-compare_pathways_parallel <- function(samples,
+parallel_comparison <- function(samples,
                              pathways,
                              downsample = 500,
                              min_genes = 15,
                              max_genes = 500,
                              cores = 2) {
+
+  message("Processing in parallel using ", cores, " cores\n")
 
   # get pathways for analysis
   if (class(pathways)[1] == "character") {
@@ -254,7 +257,6 @@ compare_pathways_parallel <- function(samples,
 
   }
 
-
   if (length(samples) > 2) {
 
     message("Performing a multisample analysis with SCPA...")
@@ -266,7 +268,7 @@ compare_pathways_parallel <- function(samples,
 
   }
 
-  if (!require(doParallel)) {
+  if (!require(doParallel, quietly = T, warn.conflicts = F)) {
         stop('doParallel library not loaded. Please exeucte library("doParallel").')
   } else {
     cluster <- parallel::makeCluster(cores, type = "PSOCK")
@@ -333,3 +335,76 @@ compare_pathways_parallel <- function(samples,
 
   }
 }
+
+#' Use SCPA to compare gene sets
+#'
+#' This function takes an input of samples and pathways
+#' to compare gene set perturbations over different conditions with SCPA.
+#'
+#' @param samples List of samples, each supplied as an expression matrix with cells in columns
+#'     and genes in rows.
+#' @param pathways Pathways and their genes with each pathway in a separate list. For formatting of
+#'     gene lists, see documentation at https://jackbibby1.github.io/SCPA/articles/using_gene_sets.html
+#' @param downsample Option to downsample cell numbers. Defaults to 500 cells per condition. If a population
+#'     has < 500 cells, all cells from that condition are used.
+#' @param min_genes Gene sets with fewer than this number of genes will be excluded
+#' @param max_genes Gene sets with more than this number of genes will be excluded
+#' @param parallel Should parallel processing be used?
+#' @param cores The number of cores used for parallel processing
+#'
+#' @examples \dontrun{
+#' scpa_result <- compare_pathways(
+#'      list(sample1, sample2, sample3),
+#'      pathways = pathways)
+#' }
+#'
+#' @return Statistical results from the SCPA analysis. The qval should be the
+#' primary metric that is used to interpret pathway differences i.e. a higher
+#' qval translates to larger pathway differences between conditions.
+#' If only two samples are provided, a fold change (FC) enrichment score will also be
+#' calculated. The FC statistic is generated from a running sum of mean changes in gene
+#' expression from all genes of the pathway. It's calculated from average pathway
+#' expression in population1 - population2, so a negative FC means the pathway is
+#' higher in population2.
+#'
+#' @export
+
+compare_pathways <- function(samples,
+                             pathways,
+                             downsample = 500,
+                             min_genes = 15,
+                             max_genes = 500,
+                             parallel = FALSE,
+                             cores = NULL) {
+
+  if (parallel == FALSE) {
+
+    mcm_output <- single_comparison(samples,
+                                 pathways,
+                                 downsample = 500,
+                                 min_genes = 15,
+                                 max_genes = 500)
+
+  } else {
+
+    mcm_output <- parallel_comparison(samples,
+                                  pathways,
+                                  downsample = 500,
+                                  min_genes = 15,
+                                  max_genes = 500,
+                                  cores = cores)
+
+  }
+
+  return(mcm_output)
+
+}
+
+
+
+
+
+
+
+
+

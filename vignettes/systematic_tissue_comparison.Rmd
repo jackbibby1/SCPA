@@ -103,7 +103,7 @@ for (i in cell_types) {
   bl_ln[[i]] <- compare_pathways(list(blood, ln), pathways)
   bl_lung[[i]] <- compare_pathways(list(blood, lung), pathways)
   
-# you can use `compare_pathways_parallel()` for improved speed of analysis through parallel processing
+# For faster analysis with parallel processing, use 'parallel = TRUE' and 'cores = x' arguments
   
 }
 ```

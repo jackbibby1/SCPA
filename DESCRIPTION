@@ -1,6 +1,6 @@
 Package: SCPA
 Title: Single Cell Pathway Analysis
-Version: 1.4.0
+Version: 1.5.0
 Authors@R: 
     c(person("Jack", "Bibby", , "jack.bibby@nih.gov", role = c("aut", "cre")),
       person("Divyansh", "Agarwal", role = c("aut")))
@@ -19,7 +19,9 @@ BugReports: https://github.com/jackbibby1/SCPA/issues/
 Imports: 
     circlize,
     ComplexHeatmap (>= 2.13.1),
+    doParallel,
     dplyr (>= 1.0.9),
+    foreach,
     ggplot2 (>= 3.3.6),
     ggrepel (>= 0.9.1),
     magrittr (>= 2.0.3),

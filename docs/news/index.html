@@ -23,7 +23,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">Single Cell Pathway Analysis (SCPA)</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.4.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.5.0</span>
       </span>
     </div>
 
@@ -102,10 +102,18 @@
     </div>
 
     <div class="section level2">
+<h2 class="page-header" data-toc-text="1.5.0" id="scpa-v150">SCPA v1.5.0<a class="anchor" aria-label="anchor" href="#scpa-v150"></a></h2>
+<div class="section level4">
+<h4 id="major-changes-1-5-0">Major changes<a class="anchor" aria-label="anchor" href="#major-changes-1-5-0"></a></h4>
+<ul><li>Parallel processing is now built into into the <code><a href="../reference/compare_pathways.html">compare_pathways()</a></code>, <code><a href="../reference/compare_seurat.html">compare_seurat()</a></code>, and <code><a href="../reference/compare_sce.html">compare_sce()</a></code> functions. Users just need to specify <code>parallel = TRUE</code> and <code>cores = x</code> to use parallel processing instead of calling <code>compare_pathways_parallel()</code>
+</li>
+</ul></div>
+</div>
+    <div class="section level2">
 <h2 class="page-header" data-toc-text="1.4.0" id="scpa-v140">SCPA v1.4.0<a class="anchor" aria-label="anchor" href="#scpa-v140"></a></h2>
 <div class="section level4">
 <h4 id="major-changes-1-4-0">Major changes<a class="anchor" aria-label="anchor" href="#major-changes-1-4-0"></a></h4>
-<ul><li>parallel implementation for <code><a href="../reference/compare_pathways.html">compare_pathways()</a></code> via <code><a href="../reference/compare_pathways_parallel.html">compare_pathways_parallel()</a></code>. Users can specify number of cores to run</li>
+<ul><li>Parallel implementation for <code><a href="../reference/compare_pathways.html">compare_pathways()</a></code> via <code>compare_pathways_parallel()</code>. Users can specify number of cores to run in the pathway comparison</li>
 </ul></div>
 </div>
     <div class="section level2">

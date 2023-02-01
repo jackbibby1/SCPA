@@ -73,6 +73,9 @@
     <loc>jackbibby1.github.io/SCPA/reference/index.html</loc>
   </url>
   <url>
+    <loc>jackbibby1.github.io/SCPA/reference/parallel_comparison.html</loc>
+  </url>
+  <url>
     <loc>jackbibby1.github.io/SCPA/reference/pathway_matrices.html</loc>
   </url>
   <url>
@@ -92,5 +95,8 @@
   </url>
   <url>
     <loc>jackbibby1.github.io/SCPA/reference/seurat_extract.html</loc>
+  </url>
+  <url>
+    <loc>jackbibby1.github.io/SCPA/reference/single_comparison.html</loc>
   </url>
 </urlset>

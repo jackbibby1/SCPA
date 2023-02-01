@@ -47,7 +47,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">Single Cell Pathway Analysis (SCPA)</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.4.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.5.0</span>
       </span>
     </div>
 
@@ -200,7 +200,9 @@ SCE object using the <code>compare_sce</code> function.</p>
 <code class="sourceCode R"><span><span class="va">scpa_out</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/compare_seurat.html">compare_seurat</a></span><span class="op">(</span><span class="va">t_cells</span>,</span>
 <span>                           group1 <span class="op">=</span> <span class="st">"cell"</span>, </span>
 <span>                           group1_population <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"cd4 th1"</span>, <span class="st">"cd4 tcm"</span><span class="op">)</span>,</span>
-<span>                           pathways <span class="op">=</span> <span class="va">pathways</span><span class="op">)</span></span></code></pre></div>
+<span>                           pathways <span class="op">=</span> <span class="va">pathways</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># For faster analysis with parallel processing, use 'parallel = TRUE' and 'cores = x' arguments</span></span></code></pre></div>
 <p>And that’s it. Your results will be stored in your
 <code>scpa_out</code> object.</p>
 </div>
@@ -216,7 +218,9 @@ dataset:</p>
 <span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>                           <span class="at">group1_population =</span> <span class="fu">c</span>(<span class="st">"0"</span>, <span class="st">"12"</span>, <span class="st">"24"</span>),</span>
 <span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>                           <span class="at">group2 =</span> <span class="st">"cell"</span>,</span>
 <span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>                           <span class="at">group2_population =</span> <span class="st">"t_cells"</span></span>
-<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>                           <span class="at">pathways =</span> pathways)</span></code></pre></div>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>                           <span class="at">pathways =</span> pathways)</span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a><span class="co"># For faster analysis with parallel processing, use 'parallel = TRUE' and 'cores = x' arguments</span></span></code></pre></div>
 </div>
   </div>
 

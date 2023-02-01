@@ -47,7 +47,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">Single Cell Pathway Analysis (SCPA)</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.4.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.5.0</span>
       </span>
     </div>
 
@@ -145,10 +145,9 @@
 
     
     
-<p>Version 1.4.0 added parallel implementation of the
-<code><a href="../reference/compare_pathways.html">compare_pathways()</a></code> with the
-<code><a href="../reference/compare_pathways_parallel.html">compare_pathways_parallel()</a></code> function. Users can specify the
-number of cores to use with <code>cores = x</code>, which can
+<p>Version 1.5 added parallel implementation in the
+<code><a href="../reference/compare_pathways.html">compare_pathways()</a></code> function. Users can specify this with
+<code>parallel = TRUE</code> and <code>cores = x</code>, which will
 significantly reduce the time taken for pathway comparisons. Here are
 some benchmarking figures for varying numbers of cores (1-4) using the
 default of 500 cells per population and 50 pathways.</p>
@@ -169,7 +168,10 @@ default of 500 cells per population and 50 pathways.</p>
 <span></span>
 <span><span class="va">cores_to_use</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/seq.html" class="external-link">seq</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">4</span>, <span class="fl">1</span><span class="op">)</span></span>
 <span> <span class="va">two_sample_times</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/lapply.html" class="external-link">lapply</a></span><span class="op">(</span><span class="va">cores_to_use</span>, <span class="kw">function</span><span class="op">(</span><span class="va">x</span><span class="op">)</span> <span class="op">{</span></span>
-<span>   <span class="fu"><a href="https://rdrr.io/r/base/system.time.html" class="external-link">system.time</a></span><span class="op">(</span><span class="fu"><a href="../reference/compare_pathways_parallel.html">compare_pathways_parallel</a></span><span class="op">(</span>samples <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="va">p1</span>, <span class="va">p2</span><span class="op">)</span>, pathways <span class="op">=</span> <span class="va">pathways</span>, cores <span class="op">=</span> <span class="va">x</span><span class="op">)</span><span class="op">)</span></span>
+<span>   <span class="fu"><a href="https://rdrr.io/r/base/system.time.html" class="external-link">system.time</a></span><span class="op">(</span><span class="fu"><a href="../reference/compare_pathways.html">compare_pathways</a></span><span class="op">(</span>samples <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="va">p1</span>, <span class="va">p2</span><span class="op">)</span>, </span>
+<span>                                pathways <span class="op">=</span> <span class="va">pathways</span>, </span>
+<span>                                parallel <span class="op">=</span> <span class="cn">TRUE</span>,</span>
+<span>                                cores <span class="op">=</span> <span class="va">x</span><span class="op">)</span><span class="op">)</span></span>
 <span> <span class="op">}</span><span class="op">)</span></span>
 <span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/data.frame.html" class="external-link">data.frame</a></span><span class="op">(</span>cores <span class="op">=</span> <span class="va">cores_to_use</span>,</span>
@@ -190,7 +192,10 @@ comparison across three populations:</p>
 <span></span>
 <span><span class="va">cores_to_use</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/seq.html" class="external-link">seq</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">4</span>, <span class="fl">1</span><span class="op">)</span></span>
 <span> <span class="va">multisample_times</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/lapply.html" class="external-link">lapply</a></span><span class="op">(</span><span class="va">cores_to_use</span>, <span class="kw">function</span><span class="op">(</span><span class="va">x</span><span class="op">)</span> <span class="op">{</span></span>
-<span>   <span class="fu"><a href="https://rdrr.io/r/base/system.time.html" class="external-link">system.time</a></span><span class="op">(</span><span class="fu"><a href="../reference/compare_pathways_parallel.html">compare_pathways_parallel</a></span><span class="op">(</span>samples <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="va">p1</span>, <span class="va">p2</span>, <span class="va">p3</span><span class="op">)</span>, pathways <span class="op">=</span> <span class="va">pathways</span>, cores <span class="op">=</span> <span class="va">x</span><span class="op">)</span><span class="op">)</span></span>
+<span>   <span class="fu"><a href="https://rdrr.io/r/base/system.time.html" class="external-link">system.time</a></span><span class="op">(</span><span class="fu"><a href="../reference/compare_pathways.html">compare_pathways</a></span><span class="op">(</span>samples <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="va">p1</span>, <span class="va">p2</span>, <span class="va">p3</span><span class="op">)</span>, </span>
+<span>                                pathways <span class="op">=</span> <span class="va">pathways</span>, </span>
+<span>                                parallel <span class="op">=</span> <span class="cn">TRUE</span>,</span>
+<span>                                cores <span class="op">=</span> <span class="va">x</span><span class="op">)</span><span class="op">)</span></span>
 <span> <span class="op">}</span><span class="op">)</span></span>
 <span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/data.frame.html" class="external-link">data.frame</a></span><span class="op">(</span>cores <span class="op">=</span> <span class="va">cores_to_use</span>,</span>

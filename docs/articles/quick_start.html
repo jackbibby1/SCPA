@@ -47,7 +47,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">Single Cell Pathway Analysis (SCPA)</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.4.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.5.0</span>
       </span>
     </div>
 
@@ -157,7 +157,7 @@
 <span><span class="va">scpa_out</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/compare_pathways.html">compare_pathways</a></span><span class="op">(</span>samples <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="va">population1</span>, <span class="va">population2</span><span class="op">)</span>,</span>
 <span>                             pathways <span class="op">=</span> <span class="va">pathways</span><span class="op">)</span></span>
 <span></span>
-<span><span class="co"># you can use `compare_pathways_parallel()` for improved speed of analysis through parallel processing</span></span></code></pre></div>
+<span><span class="co"># For faster analysis with parallel processing, use 'parallel = TRUE' and 'cores = x' arguments</span></span></code></pre></div>
 <p>In this output, the qval should be the primary metric that is used to
 interpret pathway differences i.e. a higher qval translates to larger
 pathway differences between conditions. If only two samples are
@@ -255,7 +255,7 @@ objects we created above.</p>
 <code class="sourceCode R"><span><span class="va">scpa_out</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/compare_pathways.html">compare_pathways</a></span><span class="op">(</span>samples <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="va">tcm</span>, <span class="va">th1</span><span class="op">)</span>, </span>
 <span>                             pathways <span class="op">=</span> <span class="va">pathways</span><span class="op">)</span></span>
 <span></span>
-<span><span class="co"># you can use `compare_pathways_parallel()` for improved speed of analysis through parallel processing</span></span></code></pre></div>
+<span><span class="co"># For faster analysis with parallel processing, use 'parallel = TRUE' and 'cores = x' arguments</span></span></code></pre></div>
 <p>And in <code>scpa_out</code>, we have all our results.</p>
 <div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="va">scpa_out</span>, <span class="fl">5</span><span class="op">)</span></span>

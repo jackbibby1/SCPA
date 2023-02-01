@@ -17,6 +17,8 @@
 #'   gene lists, see documentation at https://jackbibby1.github.io/SCPA/articles/using_gene_sets.html
 #' @param downsample Option to downsample cell numbers. Defaults to 500 cells per condition. If a population
 #'   has < 500 cells, all cells from that condition are used.
+#' @param min_genes Gene sets with fewer than this number of genes will be excluded
+#' @param max_genes Gene sets with more than this number of genes will be excluded
 #' @param parallel Should parallel processing be used?
 #' @param cores The number of cores used for parallel processing
 #'

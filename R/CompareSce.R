@@ -17,6 +17,8 @@
 #'   gene lists, see documentation at https://jackbibby1.github.io/SCPA/articles/using_gene_sets.html
 #' @param downsample Option to downsample cell numbers. Defaults to 500 cells per condition. If a population
 #'   has < 500 cells, all cells from that condition are used.
+#' @param parallel Should parallel processing be used?
+#' @param cores The number of cores used for parallel processing
 #'
 #' @examples \dontrun{
 #' scpa_out <- compare_sce(
@@ -45,7 +47,9 @@ compare_sce <- function(sce_object,
                         group2 = NULL,
                         group2_population = NULL,
                         pathways,
-                        downsample = 500) {
+                        downsample = 500,
+                        parallel = FALSE,
+                        cores = NULL) {
 
   ## Pathways
   if (class(pathways)[1] == "character") {
@@ -76,7 +80,27 @@ compare_sce <- function(sce_object,
     }
   }
 
-  mcm_output <- compare_pathways(samples = samples, pathways = pathways)
+
+  if (parallel == FALSE) {
+
+    mcm_output <- compare_pathways(samples = samples,
+                                   pathways = pathways,
+                                   downsample = downsample,
+                                   min_genes = min_genes,
+                                   max_genes = max_genes)
+
+  } else {
+
+    mcm_output <- compare_pathways_parallel(samples = samples,
+                                            pathways = pathways,
+                                            downsample = downsample,
+                                            min_genes = min_genes,
+                                            max_genes = max_genes,
+                                            cores = cores)
+
+  }
+
+
   return(mcm_output)
 
 }

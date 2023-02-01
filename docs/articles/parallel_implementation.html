@@ -151,7 +151,7 @@
 significantly reduce the time taken for pathway comparisons. Here are
 some benchmarking figures for varying numbers of cores (1-8) and
 pathways (50-5000) using the default 500 cells per population.</p>
-<details><summary><strong>Click here for the benchmakring code</strong>
+<details><summary><strong>Click here for the benchmarking code</strong>
 </summary><div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/jackbibby1/SCPA/" class="external-link">SCPA</a></span><span class="op">)</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://igordot.github.io/msigdbr/" class="external-link">msigdbr</a></span><span class="op">)</span></span>
@@ -196,7 +196,7 @@ pathways (50-5000) using the default 500 cells per population.</p>
 <span>        panel.border <span class="op">=</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/element.html" class="external-link">element_rect</a></span><span class="op">(</span>fill <span class="op">=</span> <span class="cn">NA</span><span class="op">)</span>,</span>
 <span>        legend.position <span class="op">=</span> <span class="st">"none"</span><span class="op">)</span></span></code></pre></div>
 </details><p><br></p>
-<p><img src="../reference/figures/two_sample_time.png" style="width:85.0%"></p>
+<p><img src="../reference/figures/two_sample_time_paths.png" style="width:60.0%"></p>
 <p>And here’s some equivalent benchmarking using the multisample
 comparison across three populations:</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">

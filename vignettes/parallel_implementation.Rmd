@@ -72,7 +72,7 @@ two_sample_times %>%
 </details>
 \
 
-![](../man/figures/two_sample_time_paths.png){width=85%}
+![](../man/figures/two_sample_time_paths.png){width=60%}
 
 And here's some equivalent benchmarking using the multisample comparison across three populations:
 

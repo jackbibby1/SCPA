@@ -14,7 +14,7 @@ knitr::opts_chunk$set(
 )
 ```
 
-Version 1.4.1 added parallel implementation in the `compare_pathways()` function. 
+Version 1.5 added parallel implementation in the `compare_pathways()` function. 
 Users can specify this with `parallel = TRUE` and `cores = x`, which will significantly reduce the time taken for pathway comparisons.
 Here are some benchmarking figures for varying numbers of cores (1-4) using the default of 500 cells per population and
 50 pathways.

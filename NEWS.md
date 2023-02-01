@@ -1,9 +1,11 @@
-## SCPA v1.4.1
+## SCPA v1.5.0
 
 #### Minor changes
 
-- Parallel processing is now inbuilt into the `compare_pathways()` function. Users just
-need to specify `parallel = TRUE` and `cores = x` to use parallel processing
+- Parallel processing is now built into into the `compare_pathways()`, `compare_seurat()`,
+and `compare_sce()` functions. Users just
+need to specify `parallel = TRUE` and `cores = x` to use parallel processing instead of calling
+`compare_pathways_parallel()`
 
 ## SCPA v1.4.0
 

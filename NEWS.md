@@ -1,6 +1,6 @@
 ## SCPA v1.5.0
 
-#### Minor changes
+#### Major changes
 
 - Parallel processing is now built into into the `compare_pathways()`, `compare_seurat()`,
 and `compare_sce()` functions. Users just

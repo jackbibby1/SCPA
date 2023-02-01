@@ -1,9 +1,16 @@
+## SCPA v1.4.1
+
+#### Minor changes
+
+- Parallel processing is now inbuilt into the `compare_pathways()` function. Users just
+need to specify `parallel = TRUE` and `cores = x` to use parallel processing
+
 ## SCPA v1.4.0
 
 #### Major changes
 
-- parallel implementation for `compare_pathways()` via `compare_pathways_parallel()`.
-Users can specify number of cores to run
+- Parallel implementation for `compare_pathways()` via `compare_pathways_parallel()`.
+Users can specify number of cores to run in the pathway comparison
 
 ## SCPA v1.3.0
 

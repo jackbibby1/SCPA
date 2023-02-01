@@ -35,7 +35,7 @@ single_comparison <- function(samples,
                              min_genes = 15,
                              max_genes = 500) {
 
-  message("Using single core processing. Specify parallel and core options for parallel processing\n")
+  message("Using single core processing. Specify 'parallel = TRUE' and `cores = x` arguments for parallel processing\n")
 
   # get pathways for analysis
   if (class(pathways)[1] == "character") {

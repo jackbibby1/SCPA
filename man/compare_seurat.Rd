@@ -14,7 +14,9 @@ compare_seurat(
   pathways,
   downsample = 500,
   min_genes = 15,
-  max_genes = 500
+  max_genes = 500,
+  parallel = FALSE,
+  cores = NULL
 )
 }
 \arguments{
@@ -43,6 +45,10 @@ has < 500 cells, all cells from that condition are used.}
 \item{min_genes}{Gene sets with fewer than this number of genes will be excluded}
 
 \item{max_genes}{Gene sets with more than this number of genes will be excluded}
+
+\item{parallel}{Should parallel processing be used?}
+
+\item{cores}{The number of cores used for parallel processing}
 }
 \value{
 Statistical results from the SCPA analysis. The qval should be the

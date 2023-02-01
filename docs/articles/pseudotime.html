@@ -286,7 +286,9 @@ from Hallmark, KEGG, and Reactome databases that you can find <a href="https://g
 <code class="sourceCode R"><span><span class="va">pathways</span> <span class="op">&lt;-</span> <span class="st">"combined_metabolic_pathways.csv"</span></span>
 <span></span>
 <span><span class="va">cd4_metabolism</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/compare_pathways.html">compare_pathways</a></span><span class="op">(</span>samples <span class="op">=</span> <span class="va">cd4_pseudo</span>, </span>
-<span>                                   pathways <span class="op">=</span> <span class="va">pathways</span><span class="op">)</span></span></code></pre></div>
+<span>                                   pathways <span class="op">=</span> <span class="va">pathways</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># you can use `compare_pathways_parallel()` for improved speed of analysis through parallel processing</span></span></code></pre></div>
 </div>
 <div class="section level3">
 <h3 id="plot-a-global-summary-of-the-data">Plot a global summary of the data<a class="anchor" aria-label="anchor" href="#plot-a-global-summary-of-the-data"></a>

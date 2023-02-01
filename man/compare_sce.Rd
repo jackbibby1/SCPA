@@ -12,7 +12,9 @@ compare_sce(
   group2 = NULL,
   group2_population = NULL,
   pathways,
-  downsample = 500
+  downsample = 500,
+  parallel = FALSE,
+  cores = NULL
 )
 }
 \arguments{
@@ -37,6 +39,10 @@ gene lists, see documentation at https://jackbibby1.github.io/SCPA/articles/usin
 
 \item{downsample}{Option to downsample cell numbers. Defaults to 500 cells per condition. If a population
 has < 500 cells, all cells from that condition are used.}
+
+\item{parallel}{Should parallel processing be used?}
+
+\item{cores}{The number of cores used for parallel processing}
 }
 \value{
 Statistical results from the SCPA analysis. The qval should be the

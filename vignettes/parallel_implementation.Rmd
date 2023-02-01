@@ -14,23 +14,11 @@ knitr::opts_chunk$set(
 )
 ```
 
-Version 1.4.0 added parallel implementation of `compare_pathways()` with the
-`compare_pathways_parallel()` function. You can use the same syntax
-as before, but additionally specifying the number of cores to use with
-`cores = x`, which can significantly reduce the time taken for pathway comparisons (see below).
-
-A general outline:
-
-```{r, eval=F}
-
-scpa_out <- compare_pathways_parallel(samples = list(pop1, pop2),
-                                      pathways = pathways, 
-                                      cores = 2)
-
-```
-
-### Two sample parallel assessment
-A brief assessment of parallel implementation looking at 50 pathways in 500 cells across two populations:
+Version 1.4.0 added parallel implementation of the `compare_pathways()` with the
+`compare_pathways_parallel()` function. Users can specify the number of cores to use with
+`cores = x`, which can significantly reduce the time taken for pathway comparisons.
+Here are some benchmarking figures for varying numbers of cores (1-8) and pathways (50-5000),
+using the default of 500 cells per population.
 
 ```{r setup, eval=F}
 library(SCPA)
@@ -41,16 +29,23 @@ library(ggplot2)
 
 df <- readRDS("naive_cd4.rds")
 
+df <- readRDS("~/My Drive/example_datasets/naive_cd4.rds")
+
 pathways <- msigdbr("Homo sapiens", "H") %>%
   format_pathways()
 
 p1 <- seurat_extract(df, meta1 = "Hour", value_meta1 = "0")
 p2 <- seurat_extract(df, meta1 = "Hour", value_meta1 = "12")
 
-cores_to_use <- seq(1, 4, 1)
-two_sample_times <- lapply(cores_to_use, function(x) {
-  system.time(compare_pathways_parallel(samples = list(p1, p2), pathways = pathways, cores = x))
-})
+cores_to_use <- seq(1, 8, 1)
+gene_set_multiplier <- c(1, 5, 10, 20, 40, 100)
+
+two_sample_times <- list()
+for (i in gene_set_multiplier) {
+  two_sample_times[[as.character(i)]] <- lapply(cores_to_use, function(x) {
+    system.time(compare_pathways_parallel(samples = list(p1, p2), pathways = rep(pathways, i), cores = x))
+    })
+}
 
 data.frame(cores = cores_to_use,
            time = sapply(two_sample_times, function(x) x[3])) %>%
@@ -64,21 +59,24 @@ data.frame(cores = cores_to_use,
         legend.position = "none")
 
 
-
 ```
 
 ![](../man/figures/two_sample_time.png){width=30%}
 
-### Multisample parallel assessment
-And here is an example looking at 50 pathways in 500 cells across three populations:
+And here's some equivalent benchmarking using the multisample comparison across three populations:
 
 ```{r, eval=F}
 p3 <- seurat_extract(df, meta1 = "Hour", value_meta1 = "24")
 
-cores_to_use <- seq(1, 4, 1)
-multisample_times <- lapply(cores_to_use, function(x) {
-  system.time(compare_pathways_parallel(samples = list(p1, p2, p3), pathways = pathways, cores = x))
-})
+cores_to_use <- seq(1, 8, 1)
+gene_set_multiplier <- c(1, 5, 10, 20, 40, 100)
+
+multisample_times <- list()
+for (i in gene_set_multiplier) {
+  multisample_times[[as.character(i)]] <- lapply(cores_to_use, function(x) {
+    system.time(compare_pathways_parallel(samples = list(p1, p2, p3), pathways = rep(pathways, i), cores = x))
+    })
+}
 
 data.frame(cores = cores_to_use,
            time = sapply(multisample_times, function(x) x[3])) %>%

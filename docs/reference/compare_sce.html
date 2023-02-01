@@ -117,7 +117,9 @@ compares gene sets over specified conditions/populations.</p>
 <span>  group2 <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  group2_population <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  <span class="va">pathways</span>,</span>
-<span>  downsample <span class="op">=</span> <span class="fl">500</span></span>
+<span>  downsample <span class="op">=</span> <span class="fl">500</span>,</span>
+<span>  parallel <span class="op">=</span> <span class="cn">FALSE</span>,</span>
+<span>  cores <span class="op">=</span> <span class="cn">NULL</span></span>
 <span><span class="op">)</span></span></code></pre></div>
     </div>
 
@@ -159,6 +161,14 @@ gene lists, see documentation at https://jackbibby1.github.io/SCPA/articles/usin
 <dt>downsample</dt>
 <dd><p>Option to downsample cell numbers. Defaults to 500 cells per condition. If a population
 has &lt; 500 cells, all cells from that condition are used.</p></dd>
+
+
+<dt>parallel</dt>
+<dd><p>Should parallel processing be used?</p></dd>
+
+
+<dt>cores</dt>
+<dd><p>The number of cores used for parallel processing</p></dd>
 
 </dl></div>
     <div id="value">

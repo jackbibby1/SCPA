@@ -29,7 +29,7 @@
 #'
 #' @export
 
-compare_single <- function(samples,
+single_comparison <- function(samples,
                              pathways,
                              downsample = 500,
                              min_genes = 15,
@@ -197,7 +197,7 @@ compare_single <- function(samples,
 #'
 #' @export
 
-compare_parallel <- function(samples,
+parallel_comparison <- function(samples,
                              pathways,
                              downsample = 500,
                              min_genes = 15,
@@ -379,7 +379,7 @@ compare_pathways <- function(samples,
 
   if (parallel == FALSE) {
 
-    mcm_output <- compare_single(samples,
+    mcm_output <- single_comparison(samples,
                                  pathways,
                                  downsample = 500,
                                  min_genes = 15,
@@ -387,7 +387,7 @@ compare_pathways <- function(samples,
 
   } else {
 
-    mcm_output <- compare_parallel(samples,
+    mcm_output <- parallel_comparison(samples,
                                   pathways,
                                   downsample = 500,
                                   min_genes = 15,

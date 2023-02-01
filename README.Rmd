@@ -20,12 +20,16 @@ knitr::opts_chunk$set(
 ![](man/figures/scpa_outline.png)
 
 ### On this page
+1. Recent updates to SCPA
 1. A brief [overview](https://jackbibby1.github.io/SCPA/#about-scpa) of SCPA
-2. Package [installation](https://jackbibby1.github.io/SCPA/#installation)
-3. Links to [tutorials](https://jackbibby1.github.io/SCPA/#tutorials)
-4. Submitting [issues/comments](https://jackbibby1.github.io/SCPA/#issues)
-5. [Improvements/changes/updates](https://jackbibby1.github.io/SCPA/news/index.html) to SCPA
+1. Package [installation](https://jackbibby1.github.io/SCPA/#installation)
+1. Links to [tutorials](https://jackbibby1.github.io/SCPA/#tutorials)
+1. Submitting [issues/comments](https://jackbibby1.github.io/SCPA/#issues)
+1. [Improvements/changes/updates](https://jackbibby1.github.io/SCPA/news/index.html) to SCPA
 
+### Recent updates
+- Parallel processing implemented to speed up analyses (v1.5.0)
+- Much more efficient usage of memory, so this shouldn't be limiting (v1.3.0)
 
 ### About SCPA
 SCPA is a method for pathway analysis in single cell RNA-seq data. It's a different approach to pathway analysis that defines pathway activity as a change in multivariate distribution of a given pathway across conditions, rather than enrichment or over representation of genes.
@@ -36,7 +40,8 @@ This approach allows for a number of benefits over current methods:
 
 1. SCPA allows for multisample testing, so you can compare multiple conditions simultaneously e.g. compare across 3 time points, or across multiple phases of a [pseuodotime trajectory](https://jackbibby1.github.io/SCPA/articles/pseudotime.html). This means you can assess pathway activity through multiple stimulation phases, or across cell differentiation
 
-Overall the workflow looks like this: generate the populations and pathways to compare > SCPA generates pathway specific expression matrices for all comparisons > SCPA performs graph based multivariate distribution analysis across all pathways and populations > SCPA generates a Qval for plotting and ranking of pathway.
+SCPA can be applied directly on Seurat and SCE objects, as well as manually subsetted expression matrices. You just need to 
+supply this along with your pathways that you want to analyse.
 
 To see the stats behind SCPA, you can see our paper in JASA [here](https://www.tandfonline.com/doi/full/10.1080/01621459.2020.1791131)
 

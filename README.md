@@ -9,15 +9,22 @@
 
 ### On this page
 
-1.  A brief [overview](https://jackbibby1.github.io/SCPA/#about-scpa) of
+1.  Recent updates to SCPA
+2.  A brief [overview](https://jackbibby1.github.io/SCPA/#about-scpa) of
     SCPA
-2.  Package
+3.  Package
     [installation](https://jackbibby1.github.io/SCPA/#installation)
-3.  Links to [tutorials](https://jackbibby1.github.io/SCPA/#tutorials)
-4.  Submitting
+4.  Links to [tutorials](https://jackbibby1.github.io/SCPA/#tutorials)
+5.  Submitting
     [issues/comments](https://jackbibby1.github.io/SCPA/#issues)
-5.  [Improvements/changes/updates](https://jackbibby1.github.io/SCPA/news/index.html)
+6.  [Improvements/changes/updates](https://jackbibby1.github.io/SCPA/news/index.html)
     to SCPA
+
+### Recent updates
+
+- Parallel processing implemented to speed up analyses (v1.5.0)
+- Much more efficient usage of memory, so this shouldn’t be limiting
+  (v1.3.0)
 
 ### About SCPA
 
@@ -46,11 +53,9 @@ This approach allows for a number of benefits over current methods:
     This means you can assess pathway activity through multiple
     stimulation phases, or across cell differentiation
 
-Overall the workflow looks like this: generate the populations and
-pathways to compare \> SCPA generates pathway specific expression
-matrices for all comparisons \> SCPA performs graph based multivariate
-distribution analysis across all pathways and populations \> SCPA
-generates a Qval for plotting and ranking of pathway.
+SCPA can be applied directly on Seurat and SCE objects, as well as
+manually subsetted expression matrices. You just need to supply this
+along with your pathways that you want to analyse.
 
 To see the stats behind SCPA, you can see our paper in JASA
 [here](https://www.tandfonline.com/doi/full/10.1080/01621459.2020.1791131)

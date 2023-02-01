@@ -33,7 +33,7 @@ sce_extract <- function(sce_object,
 
   if (is.null(meta1) && is.null(meta2)) {
     message("No metadata selected. Converting whole SCE object to matrix")
-    sub_sce <- assay(sce_object, assay_name)
+    sub_sce <- SummarizedExperiment::assay(sce_object, assay_name)
     sub_sce <- as.matrix(sub_sce) + pseudocount
     return(sub_sce)
   }
@@ -41,7 +41,7 @@ sce_extract <- function(sce_object,
   if (!is.null(meta1) && is.null(meta2)) {
     message(paste0("Extracting cells where ", meta1, " == ", value_meta1))
     sub_sce <- sce_object[, sce_object[[meta1]] == value_meta1]
-    sub_sce <- assay(sub_sce, assay_name)
+    sub_sce <- SummarizedExperiment::assay(sub_sce, assay_name)
     sub_sce <- as.matrix(sub_sce) + pseudocount
     return(sub_sce)
   }
@@ -51,7 +51,7 @@ sce_extract <- function(sce_object,
                    " AND ", meta2, " == ", value_meta2))
     sub_sce <- sce_object[, sce_object[[meta1]] == value_meta1 &
                             sce_object[[meta2]] == value_meta2]
-    sub_sce <- assay(sub_sce, assay_name)
+    sub_sce <- SummarizedExperiment::assay(sub_sce, assay_name)
     sub_sce <- as.matrix(sub_sce) + pseudocount
     return(sub_sce)
   }

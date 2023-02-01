@@ -268,7 +268,7 @@ parallel_comparison <- function(samples,
 
   }
 
-  if (!require(doParallel)) {
+  if (!require(doParallel, quietly = T)) {
         stop('doParallel library not loaded. Please exeucte library("doParallel").')
   } else {
     cluster <- parallel::makeCluster(cores, type = "PSOCK")

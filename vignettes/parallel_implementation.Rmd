@@ -20,7 +20,7 @@ Here are some benchmarking figures for varying numbers of cores (1-8) and pathwa
 per population.
 
 <details>
-  <summary>**Click here for the benchmakring code**</summary>
+  <summary>**Click here for the benchmarking code**</summary>
 
 ```{r setup, eval=F}
 library(SCPA)
@@ -72,7 +72,7 @@ two_sample_times %>%
 </details>
 \
 
-![](../man/figures/two_sample_time.png){width=85%}
+![](../man/figures/two_sample_time_paths.png){width=85%}
 
 And here's some equivalent benchmarking using the multisample comparison across three populations:
 

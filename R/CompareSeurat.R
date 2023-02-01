@@ -94,11 +94,12 @@ compare_seurat <- function(seurat_object,
 
   } else {
 
-    mcm_output <- compare_pathways_parallel(samples = samples,
+    mcm_output <- compare_pathways(samples = samples,
                                    pathways = pathways,
                                    downsample = downsample,
                                    min_genes = min_genes,
                                    max_genes = max_genes,
+                                   parallel = TRUE,
                                    cores = cores)
 
   }

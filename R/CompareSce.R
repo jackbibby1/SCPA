@@ -91,12 +91,13 @@ compare_sce <- function(sce_object,
 
   } else {
 
-    mcm_output <- compare_pathways_parallel(samples = samples,
-                                            pathways = pathways,
-                                            downsample = downsample,
-                                            min_genes = min_genes,
-                                            max_genes = max_genes,
-                                            cores = cores)
+    mcm_output <- compare_pathways(samples = samples,
+                                   pathways = pathways,
+                                   downsample = downsample,
+                                   min_genes = min_genes,
+                                   max_genes = max_genes,
+                                   parallel = TRUE,
+                                   cores = cores)
 
   }
 

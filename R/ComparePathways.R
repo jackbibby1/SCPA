@@ -392,7 +392,7 @@ compare_pathways <- function(samples,
                                   downsample = 500,
                                   min_genes = 15,
                                   max_genes = 500,
-                                  cores = 2)
+                                  cores = cores)
 
   }
 

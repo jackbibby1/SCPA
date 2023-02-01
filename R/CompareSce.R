@@ -47,6 +47,8 @@ compare_sce <- function(sce_object,
                         group2 = NULL,
                         group2_population = NULL,
                         pathways,
+                        min_genes = 15,
+                        max_genes = 500,
                         downsample = 500,
                         parallel = FALSE,
                         cores = NULL) {

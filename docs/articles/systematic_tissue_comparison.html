@@ -47,7 +47,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">Single Cell Pathway Analysis (SCPA)</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.5.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.5.1</span>
       </span>
     </div>
 
@@ -172,7 +172,7 @@ download the dataset <a href="https://drive.google.com/file/d/1-HJHfSMw5EBP02ZjT
 </h3>
 <p>Let’s have a quick look at the data</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/pkg/Seurat/man/DimPlot.html" class="external-link">DimPlot</a></span><span class="op">(</span><span class="va">tissue_data</span>, split.by <span class="op">=</span> <span class="st">"tis_stim"</span>, group.by <span class="op">=</span> <span class="st">"fine"</span>, ncol <span class="op">=</span> <span class="fl">4</span><span class="op">)</span></span></code></pre></div>
+<code class="sourceCode R"><span><span class="fu"><a href="https://satijalab.org/seurat/reference/DimPlot.html" class="external-link">DimPlot</a></span><span class="op">(</span><span class="va">tissue_data</span>, split.by <span class="op">=</span> <span class="st">"tis_stim"</span>, group.by <span class="op">=</span> <span class="st">"fine"</span>, ncol <span class="op">=</span> <span class="fl">4</span><span class="op">)</span></span></code></pre></div>
 <p><img src="../reference/figures/tissue_umap.png" style="width:100.0%"></p>
 </div>
 <div class="section level3">
@@ -204,7 +204,7 @@ this from the metadata of the Seurat object.</p>
 comparisons easier. This will make a list of Seurat objects that are
 split by tissue site</p>
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">split_tissue</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/Seurat/man/SplitObject.html" class="external-link">SplitObject</a></span><span class="op">(</span><span class="va">tissue_data</span>, split.by <span class="op">=</span> <span class="st">"tissue"</span><span class="op">)</span></span></code></pre></div>
+<code class="sourceCode R"><span><span class="va">split_tissue</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://satijalab.org/seurat/reference/SplitObject.html" class="external-link">SplitObject</a></span><span class="op">(</span><span class="va">tissue_data</span>, split.by <span class="op">=</span> <span class="st">"tissue"</span><span class="op">)</span></span></code></pre></div>
 </div>
 <div class="section level3">
 <h3 id="pathway-analysis-across-tissues">Pathway analysis across tissues<a class="anchor" aria-label="anchor" href="#pathway-analysis-across-tissues"></a>
@@ -392,19 +392,19 @@ defensin genes by tissue:</p>
 <span>                              <span class="va">tissue_data</span><span class="op">$</span><span class="va">tissue</span> <span class="op">==</span> <span class="st">"lung"</span> <span class="op">~</span> <span class="st">"Lung"</span>,</span>
 <span>                              <span class="va">tissue_data</span><span class="op">$</span><span class="va">tissue</span> <span class="op">==</span> <span class="st">"ln"</span> <span class="op">~</span> <span class="st">"LN"</span><span class="op">)</span></span>
 <span></span>
-<span><span class="va">plots</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/Seurat/man/VlnPlot.html" class="external-link">VlnPlot</a></span><span class="op">(</span><span class="va">df</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"DEFA1"</span>, <span class="st">"DEFA3"</span><span class="op">)</span>, pt.size <span class="op">=</span> <span class="fl">0</span>, group.by <span class="op">=</span> <span class="st">"neat"</span>, ncol <span class="op">=</span> <span class="fl">1</span>, combine <span class="op">=</span> <span class="cn">F</span><span class="op">)</span></span>
+<span><span class="va">plots</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://satijalab.org/seurat/reference/VlnPlot.html" class="external-link">VlnPlot</a></span><span class="op">(</span><span class="va">df</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"DEFA1"</span>, <span class="st">"DEFA3"</span><span class="op">)</span>, pt.size <span class="op">=</span> <span class="fl">0</span>, group.by <span class="op">=</span> <span class="st">"neat"</span>, ncol <span class="op">=</span> <span class="fl">1</span>, combine <span class="op">=</span> <span class="cn">F</span><span class="op">)</span></span>
 <span></span>
-<span><span class="va">p1</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/Seurat/man/VlnPlot.html" class="external-link">VlnPlot</a></span><span class="op">(</span><span class="va">df</span>, <span class="st">"DEFA1"</span>, pt.size <span class="op">=</span> <span class="fl">0</span>, group.by <span class="op">=</span> <span class="st">"neat"</span>, ncol <span class="op">=</span> <span class="fl">1</span><span class="op">)</span> <span class="op">+</span></span>
+<span><span class="va">p1</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://satijalab.org/seurat/reference/VlnPlot.html" class="external-link">VlnPlot</a></span><span class="op">(</span><span class="va">df</span>, <span class="st">"DEFA1"</span>, pt.size <span class="op">=</span> <span class="fl">0</span>, group.by <span class="op">=</span> <span class="st">"neat"</span>, ncol <span class="op">=</span> <span class="fl">1</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/theme.html" class="external-link">theme</a></span><span class="op">(</span>axis.text.x <span class="op">=</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/element.html" class="external-link">element_blank</a></span><span class="op">(</span><span class="op">)</span>,</span>
 <span>        axis.title.x <span class="op">=</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/element.html" class="external-link">element_blank</a></span><span class="op">(</span><span class="op">)</span>,</span>
 <span>        plot.title <span class="op">=</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/element.html" class="external-link">element_blank</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span> </span>
-<span>  <span class="fu"><a href="https://rdrr.io/pkg/Seurat/man/SeuratTheme.html" class="external-link">NoLegend</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://satijalab.org/seurat/reference/SeuratTheme.html" class="external-link">NoLegend</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html" class="external-link">ylab</a></span><span class="op">(</span><span class="st">"Log1p"</span><span class="op">)</span></span>
 <span></span>
-<span><span class="va">p2</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/Seurat/man/VlnPlot.html" class="external-link">VlnPlot</a></span><span class="op">(</span><span class="va">df</span>, <span class="st">"DEFA3"</span>, pt.size <span class="op">=</span> <span class="fl">0</span>, group.by <span class="op">=</span> <span class="st">"neat"</span>, ncol <span class="op">=</span> <span class="fl">1</span><span class="op">)</span> <span class="op">+</span></span>
+<span><span class="va">p2</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://satijalab.org/seurat/reference/VlnPlot.html" class="external-link">VlnPlot</a></span><span class="op">(</span><span class="va">df</span>, <span class="st">"DEFA3"</span>, pt.size <span class="op">=</span> <span class="fl">0</span>, group.by <span class="op">=</span> <span class="st">"neat"</span>, ncol <span class="op">=</span> <span class="fl">1</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/theme.html" class="external-link">theme</a></span><span class="op">(</span>axis.title.x <span class="op">=</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/element.html" class="external-link">element_blank</a></span><span class="op">(</span><span class="op">)</span>,</span>
 <span>        plot.title <span class="op">=</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/element.html" class="external-link">element_blank</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span> </span>
-<span>  <span class="fu"><a href="https://rdrr.io/pkg/Seurat/man/SeuratTheme.html" class="external-link">NoLegend</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://satijalab.org/seurat/reference/SeuratTheme.html" class="external-link">NoLegend</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html" class="external-link">ylab</a></span><span class="op">(</span><span class="st">"Log1p"</span><span class="op">)</span></span>
 <span></span>
 <span><span class="fu">patchwork</span><span class="fu">::</span><span class="fu"><a href="https://patchwork.data-imaginist.com/reference/wrap_plots.html" class="external-link">wrap_plots</a></span><span class="op">(</span><span class="va">p1</span>, <span class="va">p2</span>, ncol <span class="op">=</span> <span class="fl">1</span><span class="op">)</span></span></code></pre></div>

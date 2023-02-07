@@ -23,7 +23,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">Single Cell Pathway Analysis (SCPA)</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.5.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.5.1</span>
       </span>
     </div>
 
@@ -102,10 +102,22 @@
     </div>
 
     <div class="section level2">
+<h2 class="page-header" data-toc-text="1.5.1" id="scpa-v151">SCPA v1.5.1<a class="anchor" aria-label="anchor" href="#scpa-v151"></a></h2>
+<div class="section level3">
+<h3 id="minor-changes-1-5-1">Minor changes<a class="anchor" aria-label="anchor" href="#minor-changes-1-5-1"></a></h3>
+<p>Fix downsample so it isn’t forcing 500 cells <a href="https://github.com/jackbibby1/SCPA/issues/34" class="external-link">#34</a></p>
+</div>
+</div>
+    <div class="section level2">
 <h2 class="page-header" data-toc-text="1.5.0" id="scpa-v150">SCPA v1.5.0<a class="anchor" aria-label="anchor" href="#scpa-v150"></a></h2>
 <div class="section level4">
 <h4 id="major-changes-1-5-0">Major changes<a class="anchor" aria-label="anchor" href="#major-changes-1-5-0"></a></h4>
 <ul><li>Parallel processing is now built into into the <code><a href="../reference/compare_pathways.html">compare_pathways()</a></code>, <code><a href="../reference/compare_seurat.html">compare_seurat()</a></code>, and <code><a href="../reference/compare_sce.html">compare_sce()</a></code> functions. Users just need to specify <code>parallel = TRUE</code> and <code>cores = x</code> to use parallel processing instead of calling <code>compare_pathways_parallel()</code>
+</li>
+</ul></div>
+<div class="section level4">
+<h4 id="minor-changes-1-5-0">Minor changes<a class="anchor" aria-label="anchor" href="#minor-changes-1-5-0"></a></h4>
+<ul><li>Fix downsample <a href="https://github.com/jackbibby1/SCPA/pull/31/commits/da5b7bf3a11abbf071ca5e2a9c5743a3a9f320fb" class="external-link">#31</a>
 </li>
 </ul></div>
 </div>

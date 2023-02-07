@@ -1,4 +1,4 @@
-#' Use SCPA to compare gene sets
+#' Internal function for compare_pathways()
 #'
 #' This function takes an input of samples and pathways
 #' to compare gene set perturbations over different conditions with SCPA.
@@ -164,7 +164,7 @@ single_comparison <- function(samples,
 
 }
 
-#' Use SCPA to compare gene sets
+#' Internal function for compare_pathways()
 #'
 #' This function takes an input of samples and pathways
 #' to compare gene set perturbations over different conditions with SCPA.
@@ -381,7 +381,7 @@ compare_pathways <- function(samples,
 
     mcm_output <- single_comparison(samples,
                                  pathways,
-                                 downsample = 500,
+                                 downsample = downsample,
                                  min_genes = 15,
                                  max_genes = 500)
 
@@ -389,7 +389,7 @@ compare_pathways <- function(samples,
 
     mcm_output <- parallel_comparison(samples,
                                   pathways,
-                                  downsample = 500,
+                                  downsample = downsample,
                                   min_genes = 15,
                                   max_genes = 500,
                                   cores = cores)

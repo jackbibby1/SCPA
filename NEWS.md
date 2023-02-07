@@ -1,3 +1,9 @@
+## SCPA v1.5.1
+
+### Minor changes
+
+Fix downsample so it isn't forcing 500 cells [#34](https://github.com/jackbibby1/SCPA/issues/34)
+
 ## SCPA v1.5.0
 
 #### Major changes
@@ -6,6 +12,10 @@
 and `compare_sce()` functions. Users just
 need to specify `parallel = TRUE` and `cores = x` to use parallel processing instead of calling
 `compare_pathways_parallel()`
+
+#### Minor changes
+
+- Fix downsample [#31](https://github.com/jackbibby1/SCPA/pull/31/commits/da5b7bf3a11abbf071ca5e2a9c5743a3a9f320fb)
 
 ## SCPA v1.4.0
 

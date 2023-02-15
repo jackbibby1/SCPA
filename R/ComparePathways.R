@@ -382,16 +382,16 @@ compare_pathways <- function(samples,
     mcm_output <- single_comparison(samples,
                                  pathways,
                                  downsample = downsample,
-                                 min_genes = 15,
-                                 max_genes = 500)
+                                 min_genes = min_genes,
+                                 max_genes = max_genes)
 
   } else {
 
     mcm_output <- parallel_comparison(samples,
                                   pathways,
                                   downsample = downsample,
-                                  min_genes = 15,
-                                  max_genes = 500,
+                                  min_genes = min_genes,
+                                  max_genes = max_genes,
                                   cores = cores)
 
   }

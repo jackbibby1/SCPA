@@ -40,8 +40,6 @@ get_paths <- function(pathway_filepath) {
 
       pathways <- purrr::list_c(pathways)
 
-      return(pathways)
-
     } else if (all(stringr::str_ends(filepath_test, "csv"))) {
 
       pathways <- utils::read.csv(pathway_filepath, row.names = 1, header = F)
@@ -49,7 +47,6 @@ get_paths <- function(pathway_filepath) {
       pathways <- tidyr::pivot_longer(pathways, cols = 1:length(pathways), names_to = "Pathway", values_to = "Genes")
       pathways <- dplyr::group_split(pathways, Pathway)
       pathways <- lapply(pathways, function(x) x[x$Genes != "",])
-      return(pathways)
 
     } else {
 

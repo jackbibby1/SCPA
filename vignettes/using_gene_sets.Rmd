@@ -110,7 +110,7 @@ Using something like this makes it easy to pull large and/or relevant gene set l
 ### 2. Using a gmt file
 SCPA has a built in function to read gmt files and format them properly, after you remove the url from the original file. You just need to
 open the gmt file in excel, delete the second column containing the url, and save. Then you just specify the filepath. An improvement
-to this is currently being worked on, so you can just use the original .gmt files, and specifying as many as you like.
+to this is currently being worked on, which will let you just use the unmodified .gmt file, and allow you to specify multiple files.
 
 ```{r, eval=F}
 pathways <- "path/to/geneset/file.gmt"

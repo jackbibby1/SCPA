@@ -25,7 +25,7 @@ get_paths <- function(pathway_filepath) {
   number_of_files <- length(pathway_filepath)
 
   for (i in 1:length(gmt_files)) {
-    message("Using: ", gmt_files[i], "\n")
+    message("Generating gene sets from: \n", paste(gmt_files, collapse = "\n"), "\n")
   }
 
     if (all(stringr::str_ends(filepath_test, "gmt"))) {

@@ -22,13 +22,13 @@
 get_paths <- function(pathway_filepath) {
 
   filepath_test <- as.character(pathway_filepath)
+  number_of_files <- length(pathway_filepath)
 
     if (stringr::str_ends(filepath_test, "gmt")) {
-      pathways <- utils::read.delim(pathway_filepath, row.names = 1, header = F)
-      pathways <- as.data.frame(t(pathways))
-      pathways <- tidyr::pivot_longer(pathways, cols = 1:length(pathways), names_to = "Pathway", values_to = "Genes")
-      pathways <- dplyr::group_split(pathways, Pathway)
-      pathways <- lapply(pathways, function(x) x[x$Genes != "",])
+
+      pathways <- clustermole::read_gmt(pathway_filepath, geneset_label = "Pathway", gene_label = "Genes") %>%
+      pathways <- group_split(pathways, Pathway)
+      pathways <- lapply(pathways, function(x) x[x$Genes != "", ])
       return(pathways)
 
     } else if (stringr::str_ends(filepath_test, "csv")) {

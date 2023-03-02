@@ -47,7 +47,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">Single Cell Pathway Analysis (SCPA)</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.5.1</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.5.2</span>
       </span>
     </div>
 
@@ -266,7 +266,11 @@ gene set lists for direct use within SCPA.</p>
 <h3 id="using-a-gmt-file">2. Using a gmt file<a class="anchor" aria-label="anchor" href="#using-a-gmt-file"></a>
 </h3>
 <p>SCPA has a built in function to read gmt files and format them
-properly. All you need to do is specify the filepath.</p>
+properly, after you remove the url from the original file. You just need
+to open the gmt file in excel, delete the second column containing the
+url, and save. Then you just specify the filepath. An improvement to
+this is currently being worked on, so you can just use the original .gmt
+files, and specifying as many as you like.</p>
 <div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">pathways</span> <span class="op">&lt;-</span> <span class="st">"path/to/geneset/file.gmt"</span></span></code></pre></div>
 <p>And then you can just use this in the <code>compare_pathways</code>

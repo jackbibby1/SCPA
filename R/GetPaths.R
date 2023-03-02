@@ -26,9 +26,16 @@ get_paths <- function(pathway_filepath) {
 
     if (stringr::str_ends(filepath_test, "gmt")) {
 
-      pathways <- clustermole::read_gmt(pathway_filepath, geneset_label = "Pathway", gene_label = "Genes") %>%
-      pathways <- group_split(pathways, Pathway)
-      pathways <- lapply(pathways, function(x) x[x$Genes != "", ])
+      pathways <- lapply(pathway_filepath, function(x) {
+
+        clustermole::read_gmt(x, geneset_label = "Pathway", gene_label = "Genes") %>%
+          dplyr::group_split(Pathway) %>%
+          lapply(function(x) x[x$Genes != "", ])
+
+      })
+
+      pathways <- purrr::list_c(pathways)
+
       return(pathways)
 
     } else if (stringr::str_ends(filepath_test, "csv")) {

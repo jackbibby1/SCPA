@@ -24,7 +24,11 @@ get_paths <- function(pathway_filepath) {
   filepath_test <- as.character(pathway_filepath)
   number_of_files <- length(pathway_filepath)
 
-    if (stringr::str_ends(filepath_test, "gmt")) {
+  for (i in 1:length(gmt_files)) {
+    message("Using: ", gmt_files[i])
+  }
+
+    if (all(stringr::str_ends(filepath_test, "gmt"))) {
 
       pathways <- lapply(pathway_filepath, function(x) {
 
@@ -38,7 +42,7 @@ get_paths <- function(pathway_filepath) {
 
       return(pathways)
 
-    } else if (stringr::str_ends(filepath_test, "csv")) {
+    } else if (all(stringr::str_ends(filepath_test, "csv"))) {
 
       pathways <- utils::read.csv(pathway_filepath, row.names = 1, header = F)
       pathways <- as.data.frame(t(pathways))

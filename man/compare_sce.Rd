@@ -39,6 +39,10 @@ e.g. 24}
 \item{pathways}{Pathway gene sets with each pathway in a separate list. For formatting of
 gene lists, see documentation at https://jackbibby1.github.io/SCPA/articles/using_gene_sets.html}
 
+\item{min_genes}{Gene sets with fewer than this number of genes will be excluded}
+
+\item{max_genes}{Gene sets with more than this number of genes will be excluded}
+
 \item{downsample}{Option to downsample cell numbers. Defaults to 500 cells per condition. If a population
 has < 500 cells, all cells from that condition are used.}
 

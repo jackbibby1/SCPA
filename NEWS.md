@@ -1,3 +1,9 @@
+## SCPA v1.5.2
+
+### Minor changes
+
+Ability to specify multiple gmt filepaths in the pathway argument of `compare_pathways()`
+
 ## SCPA v1.5.1
 
 ### Minor changes

@@ -2,7 +2,7 @@
 % Please edit documentation in R/ComparePathways.R
 \name{parallel_comparison}
 \alias{parallel_comparison}
-\title{Use SCPA to compare gene sets}
+\title{Internal function for compare_pathways()}
 \usage{
 parallel_comparison(
   samples,

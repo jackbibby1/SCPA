@@ -108,18 +108,18 @@ hkr_sets <- msigdbr("Homo sapiens") %>%
 Using something like this makes it easy to pull large and/or relevant gene set lists for direct use within SCPA.
 
 ### 2. Using a gmt file
-SCPA has a built in function to read gmt files and format them properly, after you remove the url from the original file. You just need to
-open the gmt file in excel, delete the second column containing the url, and save. Then you just specify the filepath. An improvement
-to this is currently being worked on, which will let you just use the unmodified .gmt file, and allow you to specify multiple files.
+You can download gmt files for both [human](https://www.gsea-msigdb.org/gsea/msigdb/human/collections.jsp) and [mouse](https://www.gsea-msigdb.org/gsea/msigdb/mouse/collections.jsp) from the MSigDB, selecting the "gene symbols" version.
+SCPA has a built in function to read gmt files and format them properly, so all you need to do is specify the filepath(s); this can be a
+single file or multiple gmt files e.g.
 
 ```{r, eval=F}
-pathways <- "path/to/geneset/file.gmt"
+gmt_files <- list.files(path = "gene_sets", pattern = "gmt", full.names = T)
 ```
 
 And then you can just use this in the `compare_pathways` function
 
 ```{r, eval=F}
-scpa_out <- compare_pathways(samples = samples, pathways = pathways)
+scpa_out <- compare_pathways(samples = samples, pathways = gmt_files)
 ```
 
 

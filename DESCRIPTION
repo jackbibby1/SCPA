@@ -18,6 +18,7 @@ URL: jackbibby1.github.io/SCPA, https://github.com/jackbibby1/SCPA/
 BugReports: https://github.com/jackbibby1/SCPA/issues/
 Imports: 
     circlize,
+    clustermole,
     ComplexHeatmap (>= 2.13.1),
     doParallel,
     dplyr (>= 1.0.9),

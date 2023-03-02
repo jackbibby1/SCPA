@@ -22,23 +22,29 @@
 get_paths <- function(pathway_filepath) {
 
   filepath_test <- as.character(pathway_filepath)
+  number_of_files <- length(pathway_filepath)
 
-    if (stringr::str_ends(filepath_test, "gmt")) {
-      pathways <- utils::read.delim(pathway_filepath, row.names = 1, header = F)
-      pathways <- as.data.frame(t(pathways))
-      pathways <- tidyr::pivot_longer(pathways, cols = 1:length(pathways), names_to = "Pathway", values_to = "Genes")
-      pathways <- dplyr::group_split(pathways, Pathway)
-      pathways <- lapply(pathways, function(x) x[x$Genes != "",])
-      return(pathways)
+    message("Generating gene sets from: \n", paste(gmt_files, collapse = "\n"), "\n")
 
-    } else if (stringr::str_ends(filepath_test, "csv")) {
+    if (all(stringr::str_ends(filepath_test, "gmt"))) {
+
+      pathways <- lapply(pathway_filepath, function(x) {
+
+        clustermole::read_gmt(x, geneset_label = "Pathway", gene_label = "Genes") %>%
+          dplyr::group_split(Pathway) %>%
+          lapply(function(x) x[x$Genes != "", ])
+
+      })
+
+      pathways <- purrr::list_c(pathways)
+
+    } else if (all(stringr::str_ends(filepath_test, "csv"))) {
 
       pathways <- utils::read.csv(pathway_filepath, row.names = 1, header = F)
       pathways <- as.data.frame(t(pathways))
       pathways <- tidyr::pivot_longer(pathways, cols = 1:length(pathways), names_to = "Pathway", values_to = "Genes")
       pathways <- dplyr::group_split(pathways, Pathway)
       pathways <- lapply(pathways, function(x) x[x$Genes != "",])
-      return(pathways)
 
     } else {
 

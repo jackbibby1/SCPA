@@ -2,7 +2,8 @@
 
 ### Minor changes
 
-Ability to specify multiple gmt filepaths in the pathway argument of `compare_pathways()`
+Ability to specify multiple gmt filepaths in the pathway argument of `compare_pathways()`. For
+exmaples see [here](https://jackbibby1.github.io/SCPA/articles/using_gene_sets.html#using-a-gmt-file)
 
 ## SCPA v1.5.1
 

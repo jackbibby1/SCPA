@@ -42,15 +42,17 @@ pathways <- msigdbr(species = "Homo sapiens", category = "H") %>%
 ```
 
 ### More detailed example
-msigdbr is a handy R package that contains a large number of pathways. You can see
+msigdbr is a handy R package that contains a huge number of pathways that are derived from
+the Molecular Signatures Database (MSigDB) v7.5.1. Using msigdbr is probably the easiest and
+most efficient way to generate all the gene sets that you're interested in. You can see
 a detailed explanation of how to use different aspects of the package in the 
-[msigdbr vignette](https://cran.r-project.org/web/packages/msigdbr/vignettes/msigdbr-intro.html).
+[msigdbr vignette](https://igordot.github.io/msigdbr/articles/msigdbr-intro.html).
 We're going to use it to generate lists of gene sets that we want to analyse in our data using SCPA.
 
 For example, we can generate a data frame containing all of the Homo sapiens
 Hallmark gene sets using the "H" call within `msigdbr`. This data is in tidy format
-with all the pathway names in the gs_name category, and gene names in the gene_symbol
-category
+with all the pathway names in the gs_name column, and gene names in the gene_symbol
+column
 
 ```{r}
 hallmark <- msigdbr("Homo sapiens", "H")
@@ -67,21 +69,22 @@ hallmark$gs_name %>%
 
 ```
 
-We only really need the pathway name and gene symbol though. For SCPA, we also need it to be formatted
-into separate lists for each pathway. We can do this easily using the `format_pathways` function
+We only need the pathway name and gene symbol though. For SCPA, we also need it to be formatted
+into separate lists for each pathway. We can do this easily using the `format_pathways()` function
 within SCPA
 
 ```{r}
 hallmark <- format_pathways(hallmark)
 ```
 
-This will result in a list of pathways and all the genes of that pathway. We can see this if we just look at the first element of the pathway list
+This will result in a separate list for each pathway that contains the pathway name and all the genes of that pathway. 
+We can see this if we just look at the top of the first pathway list
 
 ```{r}
 head(hallmark[[1]])
 ```
 
-Now we've generated pathways that can be analysed directly in the `compare_pathways` function of SCPA
+Now we've generated pathways that can be analysed directly in the `compare_pathways()` function of SCPA
 
 
 ### Versatility in using msigdbr
@@ -110,13 +113,13 @@ Using something like this makes it easy to pull large and/or relevant gene set l
 ### 2. Using a gmt file
 You can download gmt files for both [human](https://www.gsea-msigdb.org/gsea/msigdb/human/collections.jsp) and [mouse](https://www.gsea-msigdb.org/gsea/msigdb/mouse/collections.jsp) from the MSigDB, selecting the "gene symbols" version.
 SCPA has a built in function to read gmt files and format them properly, so all you need to do is specify the filepath(s); this can be a
-single file or multiple gmt files e.g.
+single file or multiple gmt files e.g. creating a list of all the gmt files in a particular directory:
 
 ```{r, eval=F}
 gmt_files <- list.files(path = "gene_sets", pattern = "gmt", full.names = T)
 ```
 
-And then you can just use this in the `compare_pathways` function
+And then you can just use this in the `compare_pathways()` function
 
 ```{r, eval=F}
 scpa_out <- compare_pathways(samples = samples, pathways = gmt_files)

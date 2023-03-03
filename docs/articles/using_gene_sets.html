@@ -182,16 +182,18 @@ msigdbr</p>
 <div class="section level3">
 <h3 id="more-detailed-example">More detailed example<a class="anchor" aria-label="anchor" href="#more-detailed-example"></a>
 </h3>
-<p>msigdbr is a handy R package that contains a large number of
-pathways. You can see a detailed explanation of how to use different
-aspects of the package in the <a href="https://cran.r-project.org/web/packages/msigdbr/vignettes/msigdbr-intro.html" class="external-link">msigdbr
+<p>msigdbr is a handy R package that contains a huge number of pathways
+that are derived from the Molecular Signatures Database (MSigDB) v7.5.1.
+Using msigdbr is probably the easiest and most efficient way to generate
+all the gene sets that you’re interested in. You can see a detailed
+explanation of how to use different aspects of the package in the <a href="https://igordot.github.io/msigdbr/articles/msigdbr-intro.html" class="external-link">msigdbr
 vignette</a>. We’re going to use it to generate lists of gene sets that
 we want to analyse in our data using SCPA.</p>
 <p>For example, we can generate a data frame containing all of the Homo
 sapiens Hallmark gene sets using the “H” call within
 <code>msigdbr</code>. This data is in tidy format with all the pathway
-names in the gs_name category, and gene names in the gene_symbol
-category</p>
+names in the gs_name column, and gene names in the gene_symbol
+column</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">hallmark</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://igordot.github.io/msigdbr/reference/msigdbr.html" class="external-link">msigdbr</a></span><span class="op">(</span><span class="st">"Homo sapiens"</span>, <span class="st">"H"</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="va">hallmark</span><span class="op">)</span></span>
@@ -218,15 +220,15 @@ category</p>
 <span><span class="co">#&gt;  [5] "HALLMARK_APICAL_JUNCTION"         "HALLMARK_APICAL_SURFACE"         </span></span>
 <span><span class="co">#&gt;  [7] "HALLMARK_APOPTOSIS"               "HALLMARK_BILE_ACID_METABOLISM"   </span></span>
 <span><span class="co">#&gt;  [9] "HALLMARK_CHOLESTEROL_HOMEOSTASIS" "HALLMARK_COAGULATION"</span></span></code></pre></div>
-<p>We only really need the pathway name and gene symbol though. For
-SCPA, we also need it to be formatted into separate lists for each
-pathway. We can do this easily using the <code>format_pathways</code>
-function within SCPA</p>
+<p>We only need the pathway name and gene symbol though. For SCPA, we
+also need it to be formatted into separate lists for each pathway. We
+can do this easily using the <code><a href="../reference/format_pathways.html">format_pathways()</a></code> function
+within SCPA</p>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">hallmark</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/format_pathways.html">format_pathways</a></span><span class="op">(</span><span class="va">hallmark</span><span class="op">)</span></span></code></pre></div>
-<p>This will result in a list of pathways and all the genes of that
-pathway. We can see this if we just look at the first element of the
-pathway list</p>
+<p>This will result in a separate list for each pathway that contains
+the pathway name and all the genes of that pathway. We can see this if
+we just look at the top of the first pathway list</p>
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="va">hallmark</span><span class="op">[[</span><span class="fl">1</span><span class="op">]</span><span class="op">]</span><span class="op">)</span></span>
 <span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 6 × 2</span></span></span>
@@ -239,7 +241,7 @@ pathway list</p>
 <span><span class="co">#&gt; <span style="color: #BCBCBC;">5</span> HALLMARK_ADIPOGENESIS ACADM</span></span>
 <span><span class="co">#&gt; <span style="color: #BCBCBC;">6</span> HALLMARK_ADIPOGENESIS ACADS</span></span></code></pre></div>
 <p>Now we’ve generated pathways that can be analysed directly in the
-<code>compare_pathways</code> function of SCPA</p>
+<code><a href="../reference/compare_pathways.html">compare_pathways()</a></code> function of SCPA</p>
 </div>
 <div class="section level3">
 <h3 id="versatility-in-using-msigdbr">Versatility in using msigdbr<a class="anchor" aria-label="anchor" href="#versatility-in-using-msigdbr"></a>
@@ -270,10 +272,11 @@ and <a href="https://www.gsea-msigdb.org/gsea/msigdb/mouse/collections.jsp" clas
 from the MSigDB, selecting the “gene symbols” version. SCPA has a built
 in function to read gmt files and format them properly, so all you need
 to do is specify the filepath(s); this can be a single file or multiple
-gmt files e.g.</p>
+gmt files e.g. creating a list of all the gmt files in a particular
+directory:</p>
 <div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">gmt_files</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.files.html" class="external-link">list.files</a></span><span class="op">(</span>path <span class="op">=</span> <span class="st">"gene_sets"</span>, pattern <span class="op">=</span> <span class="st">"gmt"</span>, full.names <span class="op">=</span> <span class="cn">T</span><span class="op">)</span></span></code></pre></div>
-<p>And then you can just use this in the <code>compare_pathways</code>
+<p>And then you can just use this in the <code><a href="../reference/compare_pathways.html">compare_pathways()</a></code>
 function</p>
 <div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">scpa_out</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/compare_pathways.html">compare_pathways</a></span><span class="op">(</span>samples <span class="op">=</span> <span class="va">samples</span>, pathways <span class="op">=</span> <span class="va">gmt_files</span><span class="op">)</span></span></code></pre></div>

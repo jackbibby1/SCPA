@@ -269,9 +269,6 @@ parallel_comparison <- function(samples,
 
   }
 
-  if (!require(doParallel, quietly = T, warn.conflicts = F)) {
-        stop('doParallel library not loaded. Please exeucte library("doParallel").')
-  } else {
     cluster <- parallel::makeCluster(cores, type = "PSOCK")
     doParallel::registerDoParallel(cluster)
 
@@ -334,7 +331,6 @@ parallel_comparison <- function(samples,
 
     return(scpa_result)
 
-  }
 }
 
 #' Use SCPA to compare gene sets

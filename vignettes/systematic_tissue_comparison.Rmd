@@ -1,5 +1,5 @@
 ---
-title: "Systems level tissue comarison"
+title: "Systems level tissue comparison"
 output: rmarkdown::html_vignette
 vignette: >
   %\VignetteIndexEntry{systematic_tissue_comparison}
@@ -43,7 +43,7 @@ DimPlot(tissue_data, split.by = "tis_stim", group.by = "fine", ncol = 4)
 ![](../man/figures/tissue_umap.png){width=100%}
 
 
-### Defining gene sets to analyze
+### Defining gene sets to analyse
 Now we're going to define all the pathways that we want to use. For this analysis we're going to use a bunch of different gene sets that include many of the canonical pathways listed on the [MSigDB website](https://www.gsea-msigdb.org/gsea/msigdb/genesets.jsp). In total, this list contains around 3000 pathways.
 
 ```{r, eval=F}

@@ -123,7 +123,7 @@ blood_paths <- c("HALLMARK_TNFA_SIGNALING_VIA_NFKB", "HALLMARK_INFLAMMATORY_RESP
                  "HALLMARK_MYC_TARGETS_V1", "HALLMARK_OXIDATIVE_PHOSPHORYLATION")
 ```
 
-And create row annotations for the heatmap to highlight these pathways, and color scale
+And create row annotations for the heatmap to highlight these pathways, and colour scale
 ```{r, eval=F}
 position <- which(rownames(scpa_out) %in% blood_paths)
 row_an <- rowAnnotation(Genes = anno_mark(at = which(rownames(scpa_out) %in% blood_paths),
@@ -138,7 +138,7 @@ col_hm <- colorRamp2(colors = c("blue", "white", "red"), breaks = c(0, 3, 6))
 </details>
 \
 
-Now we have all the results, we can plot a heatmap of the qvals to get an idea of any broad patterns. Interestingly, we see a large dysregulation of pathways in CD14^+^ monocytes in the peripheral blood of COVID-19 patients, suggesting that these cell show the greatest deviation from CD14^+^ monocytes from healthy donors. These pathways include well defined immunologcal signatures in response to viral infection, including interferon response pathways, and complement cascades. We've just chosen to highlight a few on the heatmap below.
+Now we have all the results, we can plot a heatmap of the qvals to get an idea of any broad patterns. Interestingly, we see a large dysregulation of pathways in CD14^+^ monocytes in the peripheral blood of COVID-19 patients, suggesting that these cell show the greatest deviation from CD14^+^ monocytes from healthy donors. These pathways include well defined immunological signatures in response to viral infection, including interferon response pathways, and complement cascades. We've just chosen to highlight a few on the heatmap below.
 
 ```{r, eval=F}
 Heatmap(scpa_out,

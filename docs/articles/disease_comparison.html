@@ -256,7 +256,7 @@ plot</p>
 <span>                 <span class="st">"HALLMARK_MTORC1_SIGNALING"</span>, <span class="st">"HALLMARK_INTERFERON_ALPHA_RESPONSE"</span>,</span>
 <span>                 <span class="st">"HALLMARK_MYC_TARGETS_V1"</span>, <span class="st">"HALLMARK_OXIDATIVE_PHOSPHORYLATION"</span><span class="op">)</span></span></code></pre></div>
 <p>And create row annotations for the heatmap to highlight these
-pathways, and color scale</p>
+pathways, and colour scale</p>
 <div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">position</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/which.html" class="external-link">which</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/colnames.html" class="external-link">rownames</a></span><span class="op">(</span><span class="va">scpa_out</span><span class="op">)</span> <span class="op"><a href="https://rdrr.io/r/base/match.html" class="external-link">%in%</a></span> <span class="va">blood_paths</span><span class="op">)</span></span>
 <span><span class="va">row_an</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/ComplexHeatmap/man/rowAnnotation.html" class="external-link">rowAnnotation</a></span><span class="op">(</span>Genes <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/pkg/ComplexHeatmap/man/anno_mark.html" class="external-link">anno_mark</a></span><span class="op">(</span>at <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/which.html" class="external-link">which</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/colnames.html" class="external-link">rownames</a></span><span class="op">(</span><span class="va">scpa_out</span><span class="op">)</span> <span class="op"><a href="https://rdrr.io/r/base/match.html" class="external-link">%in%</a></span> <span class="va">blood_paths</span><span class="op">)</span>,</span>
@@ -272,7 +272,7 @@ get an idea of any broad patterns. Interestingly, we see a large
 dysregulation of pathways in CD14<sup>+</sup> monocytes in the
 peripheral blood of COVID-19 patients, suggesting that these cell show
 the greatest deviation from CD14<sup>+</sup> monocytes from healthy
-donors. These pathways include well defined immunologcal signatures in
+donors. These pathways include well defined immunological signatures in
 response to viral infection, including interferon response pathways, and
 complement cascades. We’ve just chosen to highlight a few on the heatmap
 below.</p>

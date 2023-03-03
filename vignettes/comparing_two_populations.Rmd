@@ -25,7 +25,7 @@ library(tidyverse)
 
 
 ### Loading in data and visualizing
-And let's load in the data we're going to use. In this dataset, CD4^+^ T cells were left unstimulated, or stimuated for 12 or 24 hours with anti-CD3 and anti-CD28
+And let's load in the data we're going to use. In this dataset, CD4^+^ T cells were left unstimulated, or stimulated for 12 or 24 hours with anti-CD3 and anti-CD28
 
 ```{r, eval=F}
 naive_cd4 <- readRDS("naive_cd4.rds")
@@ -104,7 +104,7 @@ ggplot(rest_act, aes(-FC, qval)) +
 ![](../man/figures/v_plot_rest_act.png){width=45%}
 
 ### Some conclusions about SCPA
-An important aspect of SCPA is highlighted here, in that pathways showing large changes in multivariate distribution (i.e. pathway 'activity') do not always show mean changes. So looking at the plot, we see a large number of pathways that have high qvals, but no enrichment in any given population. In the plot above we highlight arachidonic acid as one particular pathway that shows this pattern, and in our wet lab work, we have shown that these pathways are also very relevant when understanding pathway importance (see figure 4 in our paper [here](https://www.cell.com/cell-reports/fulltext/S2211-1247(22)01571-6) . So here we suggest that the qval should be used as the primary statistic when judging biological relevance, and the pathway fold change/enirchment should only be a secondary informative value. For more on interpreting the output of SCPA, see [this tutorial](https://jackbibby1.github.io/SCPA/articles/interpreting_scpa_output.html)
+An important aspect of SCPA is highlighted here, in that pathways showing large changes in multivariate distribution (i.e. pathway 'activity') do not always show mean changes. So looking at the plot, we see a large number of pathways that have high qvals, but no enrichment in any given population. In the plot above we highlight arachidonic acid as one particular pathway that shows this pattern, and in our wet lab work, we have shown that these pathways are also very relevant when understanding pathway importance (see figure 4 in our paper [here](https://www.cell.com/cell-reports/fulltext/S2211-1247(22)01571-6) . So here we suggest that the qval should be used as the primary statistic when judging biological relevance, and the pathway fold change/enrichment should only be a secondary informative value. For more on interpreting the output of SCPA, see [this tutorial](https://jackbibby1.github.io/SCPA/articles/interpreting_scpa_output.html)
 
 
 

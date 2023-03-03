@@ -77,7 +77,7 @@ You can use the `plot_heatmap` option within SCPA to visualise the output, which
 [ComplexHeatmap](https://github.com/jokergoo/ComplexHeatmap) package. Like the
 `plot_rank` function, you can choose to highlight general or specific pathways. By default, this function
 looks for any column names that contain "qval", and uses them to plot the heatmap. This means you can combine
-muliple SCPA results into a single heatmap. See `?plot_heatmap` for graphical parameters.
+multiple SCPA results into a single heatmap. See `?plot_heatmap` for graphical parameters.
 
 
 ```{r, warning=FALSE, eval=FALSE}

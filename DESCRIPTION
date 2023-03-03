@@ -8,7 +8,7 @@ Description: SCPA performs pathway analysis on single cell data.
     It relies on understanding changes in multivariate distributions 
     of pathways between samples as a basis for judging biological 
     relevance. Two basic arguments are necessary: matrices of data
-    and pathways that you want to analyze. See the GitHub page:
+    and pathways that you want to analyse. See the GitHub page:
     https://github.com/jackbibby1/SCPA for a detailed description and tutorials.
 License: GPL (>= 3)
 Encoding: UTF-8
@@ -38,7 +38,9 @@ Imports:
     utils (>= 4.1.0)
 Suggests: 
     rmarkdown,
-    knitr
+    knitr,
+    spelling
 VignetteBuilder: knitr
 Depends: 
     R (>= 2.10)
+Language: en-GB

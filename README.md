@@ -40,7 +40,7 @@ conditions, rather than enrichment or over representation of genes.
 
 This approach allows for a number of benefits over current methods:
 
-1.  Multivariate distributuion testing allows for the identification of
+1.  Multivariate distribution testing allows for the identification of
     pathways that show enrichment in a given population AND also
     pathways that show transcriptional change independent of enrichment.
     You essentially get the best of both worlds, as pathways with

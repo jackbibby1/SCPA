@@ -32,7 +32,7 @@ you're able to detect 1) enriched pathways and 2) non-enriched pathways that hav
 of enrichment. This output is reflected in the qval, and we recommend people to use this as their primary statistic. Here,
 the larger the qval, the larger the change in pathway 'activity'. As SCPA measures multivariate distributions, there will be pathways
 that show significantly large qvals, but no overall fold change/enrichment in a given population. Whilst these pathways are not enriched, 
-we know that these distribution changes identified by SCPA are still important for cellular behavior. We show an example of this in Figure 4 
+we know that these distribution changes identified by SCPA are still important for cellular behaviour. We show an example of this in Figure 4 
 [our paper](https://www.cell.com/cell-reports/fulltext/S2211-1247(22)01571-6), where arachidonic acid metabolism is not enriched, but shows
 changes in multivariate distribution, and is shown to be critical for T cell activation. We are therefore proposing that considering changes in
 multivariate distributions of pathways is a better overall reflection of pathway activity, and because of this, you should use the qval as your statistical
@@ -41,7 +41,7 @@ measurement of pathway activity, and fold change only as a secondary informative
 ### Filtering and visualizing the SCPA output
 In general, it's most informative to visualize the whole output of the pathway analysis so you can understand the global pattern of pathway changes
 that are occurring in your populations. So whilst you can use a typical statistical filter e.g. adjusted pval < 0.01, we generally
-propose using something like a ranking plot to visualize thw distribution of qvals, whilst still being able to highlight certain pathways. We provide
+propose using something like a ranking plot to visualize the distribution of qvals, whilst still being able to highlight certain pathways. We provide
 some basic functions including `plot_rank()` that can visualize the SCPA output like this, and also provide the `plot_heatmap()` function that can visualize
 more than one comparison. See the [Visualization tutorial](https://jackbibby1.github.io/SCPA/articles/visualisation.html) for some examples of this.
 

@@ -5,3 +5,5 @@
 ^_pkgdown\.yml$
 ^docs$
 ^pkgdown$
+^gene_sets$
+^rds_files$

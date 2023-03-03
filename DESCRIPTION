@@ -2,8 +2,8 @@ Package: SCPA
 Title: Single Cell Pathway Analysis
 Version: 1.5.2
 Authors@R: 
-    c(person("Jack", "Bibby", , "jack.bibby@nih.gov", role = c("aut", "cre")),
-      person("Divyansh", "Agarwal", role = c("aut")))
+    c(person(given = "Jack", family = "Bibby", email = "jack.bibby@nih.gov", role = c("aut", "cre")),
+      person(given = "Divyansh", family = "Agarwal", role = c("aut")))
 Description: SCPA performs pathway analysis on single cell data. 
     It relies on understanding changes in multivariate distributions 
     of pathways between samples as a basis for judging biological 

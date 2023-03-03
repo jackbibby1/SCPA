@@ -8,10 +8,13 @@ citEntry(
   journal  = "Cell Reports",
   year     = "2022",
   volume   = "41",
-  number   = "8",
-  pages    = ,
   url      = "https://doi.org/10.1016/j.celrep.2022.111697",
   textVersion = paste(
+
+  Jack A Bibby, Divyansh Agarwal, Tilo Freiwald, Natalia Kunz, Nicolas S Merle, Erin E West, Parul Singh,
+  Andre Larochelle, Fariba Chinian, Somabha Mukherjee, Behdad Afzali, Claudia Kemper, Nancy R Zhang, (2022),
+  Systematic single-cell pathway analysis to characterize early T cell activation, Cell Reports 41(8),
+  https://doi.org/10.1016/j.celrep.2022.111697
 
   )
 )

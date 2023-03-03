@@ -4,12 +4,12 @@ Version: 1.5.2
 Authors@R: 
     c(person(given = "Jack", family = "Bibby", email = "jack.bibby@nih.gov", role = c("aut", "cre")),
       person(given = "Divyansh", family = "Agarwal", role = c("aut")))
-Description: SCPA performs pathway analysis on single cell data. 
-    It relies on understanding changes in multivariate distributions 
+Description: A package for performing pathway analysis on single cell data. 
+    SCPA relies on understanding changes in multivariate distributions 
     of pathways between samples as a basis for judging biological 
     relevance. Two basic arguments are necessary: matrices of data
     and pathways that you want to analyse. See the GitHub page:
-    https://github.com/jackbibby1/SCPA for a detailed description and tutorials.
+    <https://github.com/jackbibby1/SCPA> for a detailed description and tutorials.
 License: GPL (>= 3)
 Encoding: UTF-8
 Roxygen: list(markdown = TRUE)

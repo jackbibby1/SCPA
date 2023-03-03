@@ -195,6 +195,7 @@ single_comparison <- function(samples,
 #' expression in population1 - population2, so a negative FC means the pathway is
 #' higher in population2.
 #'
+#' @importFrom foreach %dopar%
 #' @export
 
 parallel_comparison <- function(samples,

@@ -3,7 +3,7 @@ citHeader("To cite SCPA in publications use:")
 citEntry(
   entry    = "Article",
   title    = "Systematic single-cell pathway analysis to characterize early T cell activation",
-  author   = "Jack A Bibby, Divyansh Agarwal, Tilo Freiwald, Natalia Kunz, Nicolas S Merle, Erin E West, Parul Singh, Andre Larochelle, Fariba Chinian, Somabha Mukherjee, Behdad Afzali, Claudia Kemper, Nancy R Zhang",
+  author   = "Jack A. Bibby, Divyansh Agarwal, Tilo Freiwald, Natalia Kunz, Nicolas S. Merle, Erin E. West, Parul Singh, Andre Larochelle, Fariba Chinian, Somabha Mukherjee, Behdad Afzali, Claudia Kemper, Nancy R. Zhang",
   journal  = "Cell Reports",
   year     = 2022,
   volume   = 41,

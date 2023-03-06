@@ -6,5 +6,4 @@
 ^docs$
 ^pkgdown$
 ^gene_sets$
-^rds_files$
 ^cran-comments\.md$

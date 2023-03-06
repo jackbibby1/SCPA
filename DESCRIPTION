@@ -16,6 +16,7 @@ Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.2.3
 URL: jackbibby1.github.io/SCPA, https://github.com/jackbibby1/SCPA/
 BugReports: https://github.com/jackbibby1/SCPA/issues/
+Remotes: url::https://cran.r-project.org/src/contrib/Archive/crossmatch/crossmatch_1.3-1.tar.gz, url::https://cran.r-project.org/src/contrib/Archive/multicross/multicross_2.1.0.tar.gz
 Imports: 
     circlize,
     clustermole,
@@ -27,7 +28,6 @@ Imports:
     ggrepel (>= 0.9.1),
     magrittr (>= 2.0.3),
     msigdbr (>= 7.5.1),
-    multicross (>= 2.1.0),
     purrr (>= 0.3.4),
     Seurat (>= 4.1.1),
     stats (>= 4.1.0),

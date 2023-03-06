@@ -24,6 +24,7 @@ Imports:
     doParallel (>= 1.0.17),
     dplyr (>= 1.0.9),
     multicross (>= 1.3),
+    msigdbr (>= 7.5.1),
     foreach (>= 1.5.2),
     ggplot2 (>= 3.3.6),
     ggrepel (>= 0.9.1),

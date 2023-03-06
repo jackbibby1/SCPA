@@ -27,7 +27,6 @@ Imports:
     ggplot2 (>= 3.3.6),
     ggrepel (>= 0.9.1),
     magrittr (>= 2.0.3),
-    msigdbr (>= 7.5.1),
     purrr (>= 0.3.4),
     Seurat (>= 4.1.1),
     stats (>= 4.1.0),

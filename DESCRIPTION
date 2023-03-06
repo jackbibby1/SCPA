@@ -18,12 +18,12 @@ URL: jackbibby1.github.io/SCPA, https://github.com/jackbibby1/SCPA/
 BugReports: https://github.com/jackbibby1/SCPA/issues/
 Remotes: url::https://cran.r-project.org/src/contrib/Archive/crossmatch/crossmatch_1.3-1.tar.gz, url::https://cran.r-project.org/src/contrib/Archive/multicross/multicross_2.1.0.tar.gz
 Imports: 
-    circlize,
-    clustermole,
+    circlize (>= 0.4.15),
+    clustermole (>= 1.1.0),
     ComplexHeatmap (>= 2.13.1),
-    doParallel,
+    doParallel (>= 1.0.17),
     dplyr (>= 1.0.9),
-    foreach,
+    foreach (>= 1.5.2),
     ggplot2 (>= 3.3.6),
     ggrepel (>= 0.9.1),
     magrittr (>= 2.0.3),
@@ -32,7 +32,7 @@ Imports:
     Seurat (>= 4.1.1),
     stats (>= 4.1.0),
     stringr (>= 1.4.0),
-    SummarizedExperiment,
+    SummarizedExperiment (>= 1.26.1),
     tibble (>= 3.1.7),
     tidyr (>= 1.2.0),
     utils (>= 4.1.0)

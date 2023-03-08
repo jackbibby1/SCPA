@@ -141,7 +141,7 @@ The csv file needs to be formatted in the style of a classical
 gene set gmt file. This being the pathway name in column 1, and genes of that pathway in subsequent
 columns. To generate something like this, all you need to do is download a gmt file, open it in something like excel, delete the second column containing a url, and save it as a csv file. Using this method means you can manually create a list of gene sets you're interested in, where you're not limited to existing databases. The file should look something like this:
 
-![](../man/figures/pathway_screenshot.png){width=100%}
+![](../man/figures/final_figures/pathway_screenshot.jpg){width=100%}
 
 
 

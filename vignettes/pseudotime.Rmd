@@ -52,7 +52,7 @@ We can see that the populations include both naive/activated T cells, and Tregs
 ```{r plot_umap, eval=F}
 DimPlot(naive_cd4, split.by = "Hour")
 ```
-![](../man/figures/naive_cd4_umap.png){width=100%}
+![](../man/figures/final_figures/naive_cd4_umap.jpg){width=100%}
 
 ### Filter out cells we don't want
 We'll get rid of the Tregs because we're just interested in naive T cell activation in the non Treg populations
@@ -97,7 +97,7 @@ plot_dimred(model_n4,
   theme(aspect.ratio = 1)
 ```
 
-![](../man/figures/naive_cd4_pseudo.png){width=50%}
+![](../man/figures/final_figures/naive_cd4_pseudo.jpg){width=50%}
 
 
 Once we have our trajectory calculated, we can generate distinct nodes of cells across the trajectory
@@ -114,7 +114,7 @@ plot_dimred(model_n4,
   theme(aspect.ratio = 1)
 ```
 
-![](../man/figures/naive_cd4_milestone.png){width=50%}
+![](../man/figures/final_figures/naive_cd4_milestone.jpg){width=50%}
 
 
 
@@ -185,7 +185,7 @@ Heatmap(t(cd4_metabolism),
         show_column_names = F)
 ```
 
-![](../man/figures/metabolic_heatmap.png){width=70%}
+![](../man/figures/final_figures/metabolic_heatmap.jpg){width=70%}
 
 
 ### Highlight pathway by rank
@@ -200,7 +200,7 @@ plot_rank(scpa_out = cd4_metabolism,
           highlight_point_size = 3)
 ```
 
-![](../man/figures/pseudotime_rank.png){width=40%}
+![](../man/figures/final_figures/pseudotime_rank.png){width=40%}
 
 
 

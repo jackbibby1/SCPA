@@ -192,7 +192,7 @@ activation.</p>
 and Tregs</p>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://satijalab.org/seurat/reference/DimPlot.html" class="external-link">DimPlot</a></span><span class="op">(</span><span class="va">naive_cd4</span>, split.by <span class="op">=</span> <span class="st">"Hour"</span><span class="op">)</span></span></code></pre></div>
-<p><img src="../reference/figures/naive_cd4_umap.png" style="width:100.0%"></p>
+<p><img src="../reference/figures/final_figures/naive_cd4_umap.jpg" style="width:100.0%"></p>
 </div>
 <div class="section level3">
 <h3 id="filter-out-cells-we-dont-want">Filter out cells we don’t want<a class="anchor" aria-label="anchor" href="#filter-out-cells-we-dont-want"></a>
@@ -232,7 +232,7 @@ slingshot as the modeller</p>
 <span>            plot_trajectory <span class="op">=</span> <span class="cn">T</span>, </span>
 <span>            size_cells <span class="op">=</span> <span class="fl">1</span>, alpha_cells <span class="op">=</span> <span class="fl">0.8</span><span class="op">)</span> <span class="op">+</span> </span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/theme.html" class="external-link">theme</a></span><span class="op">(</span>aspect.ratio <span class="op">=</span> <span class="fl">1</span><span class="op">)</span></span></code></pre></div>
-<p><img src="../reference/figures/naive_cd4_pseudo.png" style="width:50.0%"></p>
+<p><img src="../reference/figures/final_figures/naive_cd4_pseudo.jpg" style="width:50.0%"></p>
 <p>Once we have our trajectory calculated, we can generate distinct
 nodes of cells across the trajectory to use as an input for SCPA. To
 generate the nodes, we can use the
@@ -247,7 +247,7 @@ trajectory to see what we’re extracting</p>
 <span>            plot_trajectory <span class="op">=</span> <span class="cn">T</span>, </span>
 <span>            size_cells <span class="op">=</span> <span class="fl">1</span>, alpha_cells <span class="op">=</span> <span class="fl">0.8</span><span class="op">)</span> <span class="op">+</span> </span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/theme.html" class="external-link">theme</a></span><span class="op">(</span>aspect.ratio <span class="op">=</span> <span class="fl">1</span><span class="op">)</span></span></code></pre></div>
-<p><img src="../reference/figures/naive_cd4_milestone.png" style="width:50.0%"></p>
+<p><img src="../reference/figures/final_figures/naive_cd4_milestone.jpg" style="width:50.0%"></p>
 <p>And extract the cells based on this grouping</p>
 <div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">mile_group</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html" class="external-link">data.frame</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/pkg/dynwrap/man/group_from_trajectory.html" class="external-link">group_onto_nearest_milestones</a></span><span class="op">(</span><span class="va">model_n4</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span></span>
@@ -312,7 +312,7 @@ to highlight pathways)</p>
 <span>        show_column_dend <span class="op">=</span> <span class="cn">F</span>,</span>
 <span>        show_row_names <span class="op">=</span> <span class="cn">F</span>,</span>
 <span>        show_column_names <span class="op">=</span> <span class="cn">F</span><span class="op">)</span></span></code></pre></div>
-<p><img src="../reference/figures/metabolic_heatmap.png" style="width:70.0%"></p>
+<p><img src="../reference/figures/final_figures/metabolic_heatmap.jpg" style="width:70.0%"></p>
 </div>
 <div class="section level3">
 <h3 id="highlight-pathway-by-rank">Highlight pathway by rank<a class="anchor" aria-label="anchor" href="#highlight-pathway-by-rank"></a>
@@ -326,7 +326,7 @@ one.</p>
 <span>          pathway <span class="op">=</span> <span class="st">"hallmark_gly"</span>,</span>
 <span>          base_point_size <span class="op">=</span> <span class="fl">2.5</span>,</span>
 <span>          highlight_point_size <span class="op">=</span> <span class="fl">3</span><span class="op">)</span></span></code></pre></div>
-<p><img src="../reference/figures/pseudotime_rank.png" style="width:40.0%"></p>
+<p><img src="../reference/figures/final_figures/pseudotime_rank.png" style="width:40.0%"></p>
 </div>
 </div>
   </div>

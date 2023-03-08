@@ -48,7 +48,7 @@ DimPlot(blood_atlas, label = T, group.by = "cell.type.fine", split.by = "Status"
   theme(aspect.ratio = 1)
 ```
 
-![](../man/figures/covid_atlas.png){width=100%}
+![](../man/figures/final_figures/covid_atlas.jpg){width=100%}
 
 ```{r, eval=F}
 idents <- c("Class-switched B", "IgG PB", "IgA PB", "CD14 Monocyte", "CD8m T",
@@ -154,7 +154,7 @@ Heatmap(scpa_out,
                           "nCD4 T", "B", "NK", "Neut", "CD16 Mono", "gdT", "pDC", "Eosin", "DC"))
 ```
 
-![](../man/figures/covid_heatmap.png){width=75%}
+![](../man/figures/final_figures/covid_heatmap.png){width=75%}
 
 
 

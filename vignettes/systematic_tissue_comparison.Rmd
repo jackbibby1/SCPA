@@ -40,7 +40,7 @@ Let's have a quick look at the data
 DimPlot(tissue_data, split.by = "tis_stim", group.by = "fine", ncol = 4)
 ```
 
-![](../man/figures/tissue_umap.png){width=100%}
+![](../man/figures/final_figures/tissue_umap.jpg){width=100%}
 
 
 ### Defining gene sets to analyse
@@ -204,7 +204,7 @@ hm <- all_data %>%
 ht <- draw(hm)
 ```
 
-![](../man/figures/tissue_heatmap.png){width=60%}
+![](../man/figures/final_figures/tissue_heatmap.jpg){width=60%}
 
 ### Finding something a bit more specific
 You obviously now want to use this data to find something a bit more biologically relevant. One way to do this would be to see if any pathways were tissue specific. To do this, we calculated the most variable pathways across comparisons, and then plotted the variance against the pathway (pathway names added later). Here we can see signatures for antimicrobial peptide production and prostaglandin synthesis at highly variable across conditions.
@@ -225,7 +225,7 @@ apply(all_data, 1, var) %>%
         panel.border = element_rect(fill = NA))
 ```
 
-![](../man/figures/tissue_variance.png){width=30%}
+![](../man/figures/final_figures/tissue_variance.png){width=30%}
 
 
 ### Highlighting genes from the antimicrobial pathway
@@ -257,7 +257,7 @@ patchwork::wrap_plots(p1, p2, ncol = 1)
 ```
 
 
-![](../man/figures/defa_expression.png){width=40%}
+![](../man/figures/final_figures/defa_expression.png){width=40%}
 
 
 

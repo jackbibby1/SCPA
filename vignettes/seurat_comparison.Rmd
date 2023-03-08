@@ -38,7 +38,7 @@ DimPlot(t_cells) +
   theme(aspect.ratio = 1)
 ```
 
-![](../man/figures/cd4_cell_types.png){width=50%}
+![](../man/figures/final_figures/cd4_cell_types.jpg){width=50%}
 
 ### Getting the gene sets
 We need to define our gene sets, and we can do this through the msigdbr package that contains a bunch of biological gene sets that can be found [here](https://www.gsea-msigdb.org/gsea/msigdb/genesets.jsp). Here we just take the Hallmark gene sets (using the "H" call to msigdbr), and use the format_pathways function to get them in a readable format for SCPA.

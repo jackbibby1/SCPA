@@ -257,7 +257,7 @@ patchwork::wrap_plots(p1, p2, ncol = 1)
 ```
 
 
-![](../man/figures/final_figures/defa_expression.png){width=40%}
+![](../man/figures/defa_expression.png){width=40%}
 
 
 

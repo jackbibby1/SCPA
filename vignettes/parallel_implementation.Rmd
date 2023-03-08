@@ -71,7 +71,7 @@ two_sample_times %>%
 </details>
 \
 
-![](../man/figures/final_figures/two_sample_time_paths.jpg){width=60%}
+![](../man/figures/two_sample_time_paths.png){width=60%}
 
 And here's some equivalent benchmarking using the multisample comparison across three populations:
 
@@ -115,7 +115,7 @@ df %>%
 </details>
 \
 
-![](../man/figures/final_figures/multisample_time.jpg){width=60%}
+![](../man/figures/multisample_time.png){width=60%}
 
 
 

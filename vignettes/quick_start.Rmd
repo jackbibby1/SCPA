@@ -71,7 +71,7 @@ DimPlot(t_cells) +
   theme(aspect.ratio = 1)
 ```
 
-![](../man/figures/final_figures/fine_tissue.jpg){width=60%}
+![](../man/figures/fine_tissue.png){width=60%}
 
 
 ### Generating samples from a Seurat object
@@ -127,7 +127,7 @@ plot_rank(scpa_out = scpa_out,
           highlight_point_size = 3)
 ```
 
-![](../man/figures/final_figures/mtorc1_rank.png){width=50%}
+![](../man/figures/mtorc1_rank.png){width=50%}
 
 
 

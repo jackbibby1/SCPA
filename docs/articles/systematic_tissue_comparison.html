@@ -173,7 +173,7 @@ download the dataset <a href="https://drive.google.com/file/d/1-HJHfSMw5EBP02ZjT
 <p>Let’s have a quick look at the data</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://satijalab.org/seurat/reference/DimPlot.html" class="external-link">DimPlot</a></span><span class="op">(</span><span class="va">tissue_data</span>, split.by <span class="op">=</span> <span class="st">"tis_stim"</span>, group.by <span class="op">=</span> <span class="st">"fine"</span>, ncol <span class="op">=</span> <span class="fl">4</span><span class="op">)</span></span></code></pre></div>
-<p><img src="../reference/figures/final_figures/tissue_umap.jpg" style="width:100.0%"></p>
+<p><img src="../reference/figures/tissue_umap.png" style="width:100.0%"></p>
 </div>
 <div class="section level3">
 <h3 id="defining-gene-sets-to-analyse">Defining gene sets to analyse<a class="anchor" aria-label="anchor" href="#defining-gene-sets-to-analyse"></a>
@@ -350,7 +350,7 @@ package.</p>
 <span>          show_column_names <span class="op">=</span> <span class="cn">F</span><span class="op">)</span></span>
 <span></span>
 <span><span class="va">ht</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/ComplexHeatmap/man/draw-dispatch.html" class="external-link">draw</a></span><span class="op">(</span><span class="va">hm</span><span class="op">)</span></span></code></pre></div>
-<p><img src="../reference/figures/final_figures/tissue_heatmap.jpg" style="width:60.0%"></p>
+<p><img src="../reference/figures/tissue_heatmap.png" style="width:60.0%"></p>
 </div>
 <div class="section level3">
 <h3 id="finding-something-a-bit-more-specific">Finding something a bit more specific<a class="anchor" aria-label="anchor" href="#finding-something-a-bit-more-specific"></a>
@@ -376,7 +376,7 @@ synthesis at highly variable across conditions.</p>
 <span>        axis.ticks.x <span class="op">=</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/element.html" class="external-link">element_blank</a></span><span class="op">(</span><span class="op">)</span>,</span>
 <span>        panel.background <span class="op">=</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/element.html" class="external-link">element_blank</a></span><span class="op">(</span><span class="op">)</span>,</span>
 <span>        panel.border <span class="op">=</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/element.html" class="external-link">element_rect</a></span><span class="op">(</span>fill <span class="op">=</span> <span class="cn">NA</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
-<p><img src="../reference/figures/final_figures/tissue_variance.png" style="width:30.0%"></p>
+<p><img src="../reference/figures/tissue_variance.png" style="width:30.0%"></p>
 </div>
 <div class="section level3">
 <h3 id="highlighting-genes-from-the-antimicrobial-pathway">Highlighting genes from the antimicrobial pathway<a class="anchor" aria-label="anchor" href="#highlighting-genes-from-the-antimicrobial-pathway"></a>
@@ -408,7 +408,7 @@ defensin genes by tissue:</p>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html" class="external-link">ylab</a></span><span class="op">(</span><span class="st">"Log1p"</span><span class="op">)</span></span>
 <span></span>
 <span><span class="fu">patchwork</span><span class="fu">::</span><span class="fu"><a href="https://patchwork.data-imaginist.com/reference/wrap_plots.html" class="external-link">wrap_plots</a></span><span class="op">(</span><span class="va">p1</span>, <span class="va">p2</span>, ncol <span class="op">=</span> <span class="fl">1</span><span class="op">)</span></span></code></pre></div>
-<p><img src="../reference/figures/defa_expression.png" style="width:40.0%"></p>
+<p><img src="../reference/figures/final_figures/defa_expression.png" style="width:40.0%"></p>
 </div>
   </div>
 

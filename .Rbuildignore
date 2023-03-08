@@ -7,3 +7,5 @@
 ^pkgdown$
 ^gene_sets$
 ^cran-comments\.md$
+^doc$
+^Meta$

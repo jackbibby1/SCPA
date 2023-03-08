@@ -57,7 +57,7 @@ activated <- seurat_extract(naive_cd4,
 
 
 ### Defining metabolic pathways
-After we have our data, we can define the pathways to compare. We curated a list of metabolic pathways from a few different sources (Hallmark, KEGG, and Reactome), which can be found [here](https://github.com/jackbibby1/SCPA/blob/main/gene_sets/.csv). The file is in standard gmt file format with the pathway name in column 1 and genes of that pathway in subsequent columns. Here we just converted a gmt file to csv, and manually curated a single file with all metabolic gene sets. SCPA just needs the filepath to these gene sets, so we can add this as an object to simplify our final chunk of code
+After we have our data, we can define the pathways to compare. We curated a list of metabolic pathways from a few different sources (Hallmark, KEGG, and Reactome), which can be found [here](https://github.com/jackbibby1/SCPA/tree/main/gene_sets). The file is in standard gmt file format with the pathway name in column 1 and genes of that pathway in subsequent columns. Here we just converted a gmt file to csv, and manually curated a single file with all metabolic gene sets. SCPA just needs the filepath to these gene sets, so we can add this as an object to simplify our final chunk of code
 
 
 ```{r, eval=F}

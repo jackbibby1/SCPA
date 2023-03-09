@@ -1,0 +1,20 @@
+citHeader("To cite SCPA in publications use:")
+
+bibentry(
+  entry    = "Article",
+  title    = "Systematic single-cell pathway analysis to characterize early T cell activation",
+  author   = c(as.person("Jack A. Bibby"), as.person("Divyansh Agarwal"), as.person("Tilo Freiwald"), as.person("Natalia Kunz"), as.person("Nicolas S. Merle"), as.person("Erin E. West"), as.person("Parul Singh"), as.person("Andre Larochelle"), as.person("Fariba Chinian"), as.person("Somabha Mukherjee"), as.person("Behdad Afzali"), as.person("Claudia Kemper"), as.person("Nancy R. Zhang")),
+  journal  = "Cell Reports",
+  year     = 2022,
+  volume   = 41,
+  issue    = 8,
+  url      = "https://www.sciencedirect.com/science/article/pii/S2211124722015716?via%3Dihub",
+
+  textVersion = paste(
+
+  "Jack A Bibby, Divyansh Agarwal, Tilo Freiwald, Natalia Kunz, Nicolas S. Merle, Erin E. West,
+  Parul Singh, Andre Larochelle, Fariba Chinian, Somabha Mukherjee, Behdad Afzali,
+  Claudia Kemper, Nancy R. Zhang (2022), Systematic single-cell pathway analysis to characterize early T cell activation, Cell Reports, volume 41, issue 8, doi: https://doi.org/10.1016/j.celrep.2022.111697"
+
+  )
+)

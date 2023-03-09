@@ -1,7 +1,7 @@
 citHeader("To cite SCPA in publications use:")
 
 bibentry(
-  entry    = "Article",
+  bibtype    = "Article",
   title    = "Systematic single-cell pathway analysis to characterize early T cell activation",
   author   = c(as.person("Jack A. Bibby"), as.person("Divyansh Agarwal"), as.person("Tilo Freiwald"), as.person("Natalia Kunz"), as.person("Nicolas S. Merle"), as.person("Erin E. West"), as.person("Parul Singh"), as.person("Andre Larochelle"), as.person("Fariba Chinian"), as.person("Somabha Mukherjee"), as.person("Behdad Afzali"), as.person("Claudia Kemper"), as.person("Nancy R. Zhang")),
   journal  = "Cell Reports",

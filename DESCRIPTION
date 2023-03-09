@@ -17,29 +17,29 @@ RoxygenNote: 7.2.3
 URL: jackbibby1.github.io/SCPA, https://github.com/jackbibby1/SCPA/
 BugReports: https://github.com/jackbibby1/SCPA/issues/
 Imports: 
-    circlize,
-    clustermole,
+    circlize (>= 0.4.15),
+    clustermole (>= 1.1.0),
     ComplexHeatmap (>= 2.13.1),
-    doParallel,
+    doParallel (>= 1.0.17),
     dplyr (>= 1.0.9),
-    foreach,
+    foreach (>= 1.5.2),
     ggplot2 (>= 3.3.6),
     ggrepel (>= 0.9.1),
     magrittr (>= 2.0.3),
-    msigdbr (>= 7.5.1),
     multicross (>= 2.1.0),
     purrr (>= 0.3.4),
     Seurat (>= 4.1.1),
     stats (>= 4.1.0),
     stringr (>= 1.4.0),
-    SummarizedExperiment,
+    SummarizedExperiment (>= 1.26.1),
     tibble (>= 3.1.7),
     tidyr (>= 1.2.0),
     utils (>= 4.1.0)
 Suggests: 
     rmarkdown,
     knitr,
-    spelling
+    spelling,
+    msigdbr (>= 7.5.1)
 VignetteBuilder: knitr
 Depends: 
     R (>= 2.10)

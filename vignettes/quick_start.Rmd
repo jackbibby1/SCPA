@@ -107,7 +107,7 @@ scpa_out <- compare_pathways(samples = list(tcm, th1),
 ```
 
 ```{r, echo=F}
-scpa_out <- readRDS("~/My Drive/r_packages/SCPA/rds_files/th1_tcm.rds")
+scpa_out <- readRDS("../inst/rds_files/th1_tcm.rds")
 ```
 
 

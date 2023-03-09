@@ -18,7 +18,7 @@ knitr::opts_chunk$set(
 The output from SCPA provides 4-5 columns, depending on the type of comparison. These will be 1) your pathways 2) raw pval 3) adjusted pval 4) qval, and, if a two-sample comparison is done 5) fold change. Here is an example output:
 
 ```{r, echo=FALSE}
-scpa_out <- readRDS("~/My Drive/r_packages/SCPA/rds_files/th1_tcm.rds")
+scpa_out <- readRDS("../inst/rds_files/th1_tcm.rds")
 ```
 
 ```{r}

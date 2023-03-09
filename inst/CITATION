@@ -12,9 +12,9 @@ bibentry(
 
   textVersion = paste(
 
-  "Jack A Bibby, Divyansh Agarwal, Tilo Freiwald, Natalia Kunz, Nicolas S. Merle, Erin E. West,
+  "Jack A. Bibby, Divyansh Agarwal, Tilo Freiwald, Natalia Kunz, Nicolas S. Merle, Erin E. West,
   Parul Singh, Andre Larochelle, Fariba Chinian, Somabha Mukherjee, Behdad Afzali,
-  Claudia Kemper, Nancy R. Zhang (2022), Systematic single-cell pathway analysis to characterize early T cell activation, Cell Reports, volume 41, issue 8, doi: https://doi.org/10.1016/j.celrep.2022.111697"
+  Claudia Kemper, Nancy R. Zhang (2022). Systematic single-cell pathway analysis to characterize early T cell activation. Cell Reports, volume 41, issue 8, doi: https://doi.org/10.1016/j.celrep.2022.111697"
 
   )
 )

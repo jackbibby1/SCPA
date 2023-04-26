@@ -5,12 +5,12 @@
 #' pathway. The resulting output is a nested list of expression
 #' matrices for each pathway by each sample.
 #'
-#' @param samples Expression file for each population, with each population
-#'   as a separate list
-#' @param pathways Either a gene set gmt file, csv file, or output from SCPA::format_pathways()
+#' @param samples Expression matrix for each population, with each population
+#'   as a separate list. These matrices can be generated with e.g. `SCPA::seurat_extract()`
+#' @param pathways Either a gene set gmt file, csv file, or output from `SCPA::format_pathways()`
 #'   that contains your gene sets of interest. Information on formatting gene sets can be found
 #'   at https://jackbibby1.github.io/SCPA/articles/using_gene_sets.html.
-#' @param sample_names Names of the samples to be used in output
+#' @param sample_names Names of the samples to be used in the output
 #'
 #' @export
 #'

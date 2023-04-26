@@ -1,15 +1,14 @@
 #' Create pathway matrices from gene sets
 #'
-#' This function takes a matrix and pathway list as
+#' This function takes a matrix and pathway csv/gmt files
 #' and input and creates expression matrices for each
-#' pathway. The resulting output is a list of expression
-#' matrices for each pathway
+#' pathway. The resulting output is a nested list of expression
+#' matrices for each pathway by each sample.
 #'
 #' @param samples Expression file for each population, with each population
 #'   as a separate list
 #' @param pathways List of pathways to create pathway specific matrices.
 #' @param sample_names Names of the samples to be used in output
-#' @param pathway_names Names of pathways to be used in output
 #'
 #' @export
 #'
@@ -17,8 +16,7 @@
 
 pathway_matrices <- function(samples,
                              pathways,
-                             sample_names = NULL,
-                             pathway_names = NULL) {
+                             sample_names = NULL) {
 
   pathways <- get_paths(pathways)
 
@@ -33,10 +31,13 @@ pathway_matrices <- function(samples,
     names(pop_paths) <- sample_names
   }
 
-  if (!is.null(pathway_names)) {
-    path_names <- sapply(pathways, function(x) unique(x$Pathway))
-  }
+  path_names <- sapply(pathways, function(x) unique(x$Pathway))
+  pop_paths <- lapply(pop_paths, function(x) magrittr::set_names(x, path_names))
 
   return(pop_paths)
 }
+
+
+
+
 

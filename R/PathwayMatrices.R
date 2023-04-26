@@ -18,7 +18,9 @@ pathway_matrices <- function(samples,
                              pathways,
                              sample_names = NULL) {
 
-  pathways <- get_paths(pathways)
+  if (class(pathways)[1] == "character") {
+    pathways <- get_paths(pathways)
+  }
 
   pop_paths <- vector(mode = "list", length = length(samples))
   for (i in 1:length(pop_paths)) {

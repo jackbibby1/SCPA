@@ -7,7 +7,9 @@
 #'
 #' @param samples Expression file for each population, with each population
 #'   as a separate list
-#' @param pathways List of pathways to create pathway specific matrices.
+#' @param pathways Either a gene set gmt file, csv file, or output from SCPA::format_pathways()
+#'   that contains your gene sets of interest. Information on formatting gene sets can be found
+#'   at https://jackbibby1.github.io/SCPA/articles/using_gene_sets.html.
 #' @param sample_names Names of the samples to be used in output
 #'
 #' @export

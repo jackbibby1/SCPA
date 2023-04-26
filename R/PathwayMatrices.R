@@ -12,6 +12,13 @@
 #'   at https://jackbibby1.github.io/SCPA/articles/using_gene_sets.html.
 #' @param sample_names Names of the samples to be used in the output
 #'
+#'@examples \dontrun{
+#' pathway_expression <- pathway_matrices(
+#'      list(sample1, sample2),
+#'      pathways = "your/path_to_gmt",
+#'      sample_names = c("population1", "population2"))
+#' }
+#'
 #' @export
 #'
 #'

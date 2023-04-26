@@ -47,7 +47,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">Single Cell Pathway Analysis (SCPA)</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.5.2</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.5.3</span>
       </span>
     </div>
 
@@ -164,7 +164,8 @@ the methods. First let’s load in a couple of packages we’ll need</p>
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://jackbibby1.github.io/SCPA/">SCPA</a></span><span class="op">)</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://igordot.github.io/msigdbr/" class="external-link">msigdbr</a></span><span class="op">)</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://magrittr.tidyverse.org" class="external-link">magrittr</a></span><span class="op">)</span></span>
-<span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://dplyr.tidyverse.org" class="external-link">dplyr</a></span><span class="op">)</span></span></code></pre></div>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://dplyr.tidyverse.org" class="external-link">dplyr</a></span><span class="op">)</span></span>
+<span><span class="co">#&gt; Warning: package 'dplyr' was built under R version 4.1.2</span></span></code></pre></div>
 <div class="section level3">
 <h3 id="generating-gene-sets-within-r-using-msigdbr">1. Generating gene sets within R using msigdbr<a class="anchor" aria-label="anchor" href="#generating-gene-sets-within-r-using-msigdbr"></a>
 </h3>
@@ -198,18 +199,17 @@ column</p>
 <code class="sourceCode R"><span><span class="va">hallmark</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://igordot.github.io/msigdbr/reference/msigdbr.html" class="external-link">msigdbr</a></span><span class="op">(</span><span class="st">"Homo sapiens"</span>, <span class="st">"H"</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="va">hallmark</span><span class="op">)</span></span>
 <span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 6 × 15</span></span></span>
-<span><span class="co">#&gt;   gs_cat gs_subcat gs_name gene_…¹ entre…² ensem…³ human…⁴ human…⁵ human…⁶ gs_id</span></span>
-<span><span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span></span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span> H      <span style="color: #949494;">""</span>        HALLMA… ABCA1        19 ENSG00… ABCA1        19 ENSG00… M5905</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">2</span> H      <span style="color: #949494;">""</span>        HALLMA… ABCB8     <span style="text-decoration: underline;">11</span>194 ENSG00… ABCB8     <span style="text-decoration: underline;">11</span>194 ENSG00… M5905</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">3</span> H      <span style="color: #949494;">""</span>        HALLMA… ACAA2     <span style="text-decoration: underline;">10</span>449 ENSG00… ACAA2     <span style="text-decoration: underline;">10</span>449 ENSG00… M5905</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">4</span> H      <span style="color: #949494;">""</span>        HALLMA… ACADL        33 ENSG00… ACADL        33 ENSG00… M5905</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">5</span> H      <span style="color: #949494;">""</span>        HALLMA… ACADM        34 ENSG00… ACADM        34 ENSG00… M5905</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">6</span> H      <span style="color: #949494;">""</span>        HALLMA… ACADS        35 ENSG00… ACADS        35 ENSG00… M5905</span></span>
-<span><span class="co">#&gt; <span style="color: #949494;"># … with 5 more variables: gs_pmid &lt;chr&gt;, gs_geoid &lt;chr&gt;,</span></span></span>
-<span><span class="co">#&gt; <span style="color: #949494;">#   gs_exact_source &lt;chr&gt;, gs_url &lt;chr&gt;, gs_description &lt;chr&gt;, and abbreviated</span></span></span>
-<span><span class="co">#&gt; <span style="color: #949494;">#   variable names ¹​gene_symbol, ²​entrez_gene, ³​ensembl_gene,</span></span></span>
-<span><span class="co">#&gt; <span style="color: #949494;">#   ⁴​human_gene_symbol, ⁵​human_entrez_gene, ⁶​human_ensembl_gene</span></span></span></code></pre></div>
+<span><span class="co">#&gt;   gs_cat gs_subcat gs_name               gene_symbol entrez_gene ensembl_gene   </span></span>
+<span><span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                 <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>             <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>          </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span> H      <span style="color: #949494;">""</span>        HALLMARK_ADIPOGENESIS ABCA1                19 ENSG00000165029</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">2</span> H      <span style="color: #949494;">""</span>        HALLMARK_ADIPOGENESIS ABCB8             <span style="text-decoration: underline;">11</span>194 ENSG00000197150</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">3</span> H      <span style="color: #949494;">""</span>        HALLMARK_ADIPOGENESIS ACAA2             <span style="text-decoration: underline;">10</span>449 ENSG00000167315</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">4</span> H      <span style="color: #949494;">""</span>        HALLMARK_ADIPOGENESIS ACADL                33 ENSG00000115361</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">5</span> H      <span style="color: #949494;">""</span>        HALLMARK_ADIPOGENESIS ACADM                34 ENSG00000117054</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">6</span> H      <span style="color: #949494;">""</span>        HALLMARK_ADIPOGENESIS ACADS                35 ENSG00000122971</span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># ℹ 9 more variables: human_gene_symbol &lt;chr&gt;, human_entrez_gene &lt;int&gt;,</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;">#   human_ensembl_gene &lt;chr&gt;, gs_id &lt;chr&gt;, gs_pmid &lt;chr&gt;, gs_geoid &lt;chr&gt;,</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;">#   gs_exact_source &lt;chr&gt;, gs_url &lt;chr&gt;, gs_description &lt;chr&gt;</span></span></span></code></pre></div>
 <p>We can have a look at a few of these pathways</p>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">hallmark</span><span class="op">$</span><span class="va">gs_name</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span> </span>

@@ -1,14 +1,14 @@
 Package: SCPA
 Title: Single Cell Pathway Analysis
-Version: 1.5.3
+Version: 1.5.4
 Authors@R: 
     c(person(given = "Jack", family = "Bibby", email = "jack.bibby@nih.gov", role = c("aut", "cre")),
       person(given = "Divyansh", family = "Agarwal", role = c("aut")))
 Description: A package for performing pathway analysis on single cell data. 
     SCPA relies on understanding changes in multivariate distributions 
     of pathways between samples as a basis for judging biological 
-    relevance. Two basic arguments are necessary: matrices of data
-    and pathways that you want to analyse. See the GitHub page:
+    relevance. Two basic arguments are necessary = 1) matrices of data,
+    and 2) pathways that you want to analyse. See the GitHub page at
     <https://github.com/jackbibby1/SCPA> for a detailed description and tutorials.
 License: GPL (>= 3)
 Encoding: UTF-8
@@ -19,7 +19,7 @@ BugReports: https://github.com/jackbibby1/SCPA/issues/
 Imports: 
     circlize (>= 0.4.15),
     clustermole (>= 1.1.0),
-    ComplexHeatmap (>= 2.13.1),
+    ComplexHeatmap,
     doParallel (>= 1.0.17),
     dplyr (>= 1.0.9),
     foreach (>= 1.5.2),
@@ -31,7 +31,7 @@ Imports:
     Seurat (>= 4.1.1),
     stats (>= 4.1.0),
     stringr (>= 1.4.0),
-    SummarizedExperiment (>= 1.26.1),
+    SummarizedExperiment,
     tibble (>= 3.1.7),
     tidyr (>= 1.2.0),
     utils (>= 4.1.0)

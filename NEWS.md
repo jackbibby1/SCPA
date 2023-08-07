@@ -1,3 +1,9 @@
+## SCPA v1.5.4
+
+### Minor changes
+
+Change package dependeny version to improve installation
+
 ## SCPA v1.5.2
 
 ### Minor changes

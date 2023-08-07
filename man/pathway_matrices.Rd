@@ -4,21 +4,30 @@
 \alias{pathway_matrices}
 \title{Create pathway matrices from gene sets}
 \usage{
-pathway_matrices(samples, pathways, sample_names = NULL, pathway_names = NULL)
+pathway_matrices(samples, pathways, sample_names = NULL)
 }
 \arguments{
-\item{samples}{Expression file for each population, with each population
-as a separate list}
+\item{samples}{Expression matrix for each population, with each population
+as a separate list. These matrices can be generated with e.g. \code{SCPA::seurat_extract()}}
 
-\item{pathways}{List of pathways to create pathway specific matrices.}
+\item{pathways}{Either a gene set gmt file, csv file, or output from \code{SCPA::format_pathways()}
+that contains your gene sets of interest. Information on formatting gene sets can be found
+at https://jackbibby1.github.io/SCPA/articles/using_gene_sets.html.}
 
-\item{sample_names}{Names of the samples to be used in output}
-
-\item{pathway_names}{Names of pathways to be used in output}
+\item{sample_names}{Names of the samples to be used in the output}
 }
 \description{
-This function takes a matrix and pathway list as
+This function takes a matrix and pathway csv/gmt files
 and input and creates expression matrices for each
-pathway. The resulting output is a list of expression
-matrices for each pathway
+pathway. The resulting output is a nested list of expression
+matrices for each pathway by each sample.
+}
+\examples{
+\dontrun{
+pathway_expression <- pathway_matrices(
+     list(sample1, sample2),
+     pathways = "your/path_to_gmt",
+     sample_names = c("population1", "population2"))
+}
+
 }

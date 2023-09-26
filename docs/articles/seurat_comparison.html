@@ -213,14 +213,14 @@ SCE object using the <code>compare_sce</code> function.</p>
 e.g. multiple time points, you just need to supply more arguments to the
 <code>group1_population</code> call. For example, on a hypothetical
 dataset:</p>
-<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>scpa_out <span class="ot">&lt;-</span> <span class="fu">compare_seurat</span>(different_dataset,</span>
-<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>                           <span class="at">group1 =</span> <span class="st">"hour"</span>, </span>
-<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>                           <span class="at">group1_population =</span> <span class="fu">c</span>(<span class="st">"0"</span>, <span class="st">"12"</span>, <span class="st">"24"</span>),</span>
-<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>                           <span class="at">group2 =</span> <span class="st">"cell"</span>,</span>
-<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>                           <span class="at">group2_population =</span> <span class="st">"t_cells"</span></span>
-<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>                           <span class="at">pathways =</span> pathways)</span>
-<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a><span class="co"># For faster analysis with parallel processing, use 'parallel = TRUE' and 'cores = x' arguments</span></span></code></pre></div>
+<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" tabindex="-1"></a>scpa_out <span class="ot">&lt;-</span> <span class="fu">compare_seurat</span>(different_dataset,</span>
+<span id="cb6-2"><a href="#cb6-2" tabindex="-1"></a>                           <span class="at">group1 =</span> <span class="st">"hour"</span>, </span>
+<span id="cb6-3"><a href="#cb6-3" tabindex="-1"></a>                           <span class="at">group1_population =</span> <span class="fu">c</span>(<span class="st">"0"</span>, <span class="st">"12"</span>, <span class="st">"24"</span>),</span>
+<span id="cb6-4"><a href="#cb6-4" tabindex="-1"></a>                           <span class="at">group2 =</span> <span class="st">"cell"</span>,</span>
+<span id="cb6-5"><a href="#cb6-5" tabindex="-1"></a>                           <span class="at">group2_population =</span> <span class="st">"t_cells"</span></span>
+<span id="cb6-6"><a href="#cb6-6" tabindex="-1"></a>                           <span class="at">pathways =</span> pathways)</span>
+<span id="cb6-7"><a href="#cb6-7" tabindex="-1"></a></span>
+<span id="cb6-8"><a href="#cb6-8" tabindex="-1"></a><span class="co"># For faster analysis with parallel processing, use 'parallel = TRUE' and 'cores = x' arguments</span></span></code></pre></div>
 </div>
   </div>
 

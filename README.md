@@ -80,6 +80,8 @@ devtools::install_version("multicross", version = "2.1.0", repos = "http://cran.
 devtools::install_github("jackbibby1/SCPA")
 ```
 
+### Installation problems
+
 If you’re running into installation errors, you’ll likely need to
 manually install the dependencies that are mentioned in the error. For
 example, see these issues

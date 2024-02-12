@@ -1,3 +1,10 @@
+## SCPA v1.6
+
+#### Major changes
+
+Updated compatability with Seurat v5
+  - Specify Seurat version in `compare_seurat()` and `seurat_extract()` with `seurat_v5 = TRUE` option
+
 ## SCPA v1.5.4
 
 ### Minor changes

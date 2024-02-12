@@ -31,11 +31,20 @@ seurat_extract <- function(seu_obj,
                            value_meta1 = NULL,
                            meta2 = NULL,
                            value_meta2 = NULL,
-                           pseudocount = 0.001) {
+                           pseudocount = 0.001,
+                           seurat_v5 = FALSE) {
+
+  if (seurat_v5 == FALSE) {
+    message("Expecting Seurat object < version 5. If using v5 object, specify seurat_v5 = T")
+  }
 
   if (is.null(meta1) && is.null(meta2)) {
     message("No metadata selected. Will convert whole Seurat object to matrix")
-    seu_obj <- as.matrix(Seurat::GetAssay(seu_obj, assay)@data) + pseudocount
+    if (seurat_v5 == FALSE) {
+      seu_obj <- as.matrix(Seurat::GetAssay(seu_obj, assay)@data) + pseudocount
+    } else {
+      seu_obj <- as.matrix(SeuratObject::LayerData(seu_obj, assay = assay, layer = "data")) + pseudocount
+    }
     message("Extracting data from the ", assay, " assay")
     return(seu_obj)
   }
@@ -44,7 +53,11 @@ seurat_extract <- function(seu_obj,
     message(paste0("Extracting cells where ", meta1, " == ", value_meta1))
     met_1 <- Seurat::FetchData(object = seu_obj, vars = meta1)
     seu_obj <- seu_obj[, which(met_1 == value_meta1)]
-    seu_obj <- as.matrix(Seurat::GetAssay(seu_obj, assay)@data) + pseudocount
+    if (seurat_v5 == FALSE) {
+      seu_obj <- as.matrix(Seurat::GetAssay(seu_obj, assay)@data) + pseudocount
+    } else {
+      seu_obj <- as.matrix(SeuratObject::LayerData(seu_obj, assay = assay, layer = "data")) + pseudocount
+    }
     message("Extracting data from the ", assay, " assay")
     return(seu_obj)
   }
@@ -55,11 +68,15 @@ seurat_extract <- function(seu_obj,
     met_1 <- Seurat::FetchData(object = seu_obj, vars = meta1)
     met_2 <- Seurat::FetchData(object = seu_obj, vars = meta2)
     seu_obj <- seu_obj[, which(met_1 == value_meta1 & met_2 == value_meta2)]
-    seu_obj <- as.matrix(Seurat::GetAssay(seu_obj, assay)@data) + pseudocount
+    if (seurat_v5 == FALSE) {
+      seu_obj <- as.matrix(Seurat::GetAssay(seu_obj, assay)@data) + pseudocount
+    } else {
+      seu_obj <- as.matrix(SeuratObject::LayerData(seu_obj, assay = assay, layer = "data")) + pseudocount
+    }
     message("Extracting data from the ", assay, " assay")
     return(seu_obj)
   }
-}
 
+}
 
 

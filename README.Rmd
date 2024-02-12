@@ -28,6 +28,7 @@ knitr::opts_chunk$set(
 1. [Improvements/changes/updates](https://jackbibby1.github.io/SCPA/news/index.html) to SCPA
 
 ### Recent updates
+- Compatability with Seurat v5 objects to use the layer system in `seurat_extract()` and `compare_seurat()` (v1.6) through specifying `seurat_v5 = TRUE`. Currently default is FALSE, but this will change after a while
 - Ability to specify [multiple gmt files](https://jackbibby1.github.io/SCPA/articles/using_gene_sets.html#using-a-gmt-file) as your pathway input (v1.5.2)
 - [Parallel processing](https://jackbibby1.github.io/SCPA/articles/parallel_implementation.html) implemented to speed up analyses (v1.5.0)
 - Much more efficient usage of memory, so this shouldn't be limiting (v1.3.0)

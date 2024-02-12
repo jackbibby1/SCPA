@@ -52,7 +52,6 @@ compare_seurat <- function(seurat_object,
                            downsample = 500,
                            min_genes = 15,
                            max_genes = 500,
-                           seurat_v5 = FALSE,
                            parallel = FALSE,
                            cores = NULL) {
 
@@ -69,8 +68,7 @@ compare_seurat <- function(seurat_object,
       samples[[i]] <- seurat_extract(seurat_object,
                                      assay = assay,
                                      meta1 = group1,
-                                     value_meta1 = i,
-                                     seurat_v5 = seurat_v5)
+                                     value_meta1 = i)
     }
   }
 
@@ -82,8 +80,7 @@ compare_seurat <- function(seurat_object,
                                      meta1 = group1,
                                      value_meta1 = i,
                                      meta2 = group2,
-                                     value_meta2 = group2_population,
-                                     seurat_v5 = seurat_v5)
+                                     value_meta2 = group2_population)
     }
   }
 

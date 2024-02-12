@@ -23,7 +23,8 @@
 ### Recent updates
 
 - Compatability with Seurat v5 objects to use the layer system in
-  `seurat_extract()` and `compare_seurat()` (v1.6)
+  `seurat_extract()` and `compare_seurat()` (v1.6). SCPA automatically
+  detects Seurat object version
 - Ability to specify [multiple gmt
   files](https://jackbibby1.github.io/SCPA/articles/using_gene_sets.html#using-a-gmt-file)
   as your pathway input (v1.5.2)

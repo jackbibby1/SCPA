@@ -47,7 +47,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">Single Cell Pathway Analysis (SCPA)</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.5.4</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.6.0</span>
       </span>
     </div>
 
@@ -174,7 +174,7 @@ C</a> that creates a single cell atlas of peripheral blood immune cells
 in COVID-19 patients. You can download this dataset <a href="https://drive.google.com/file/d/1eYGW0psWFsxaRRtKTZCK6ESfPSQX0zeq/view?usp=sharing" class="external-link">here</a></p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">blood_atlas</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/readRDS.html" class="external-link">readRDS</a></span><span class="op">(</span><span class="st">"covid_blood_atlas.rds"</span><span class="op">)</span></span>
-<span><span class="fu"><a href="https://mojaveazure.github.io/seurat-object/reference/Idents.html" class="external-link">Idents</a></span><span class="op">(</span><span class="va">blood_atlas</span><span class="op">)</span> <span class="op">&lt;-</span> <span class="va">blood_atlas</span><span class="op">$</span><span class="va">cell.type</span></span></code></pre></div>
+<span><span class="fu"><a href="https://rdrr.io/pkg/SeuratObject/man/Idents.html" class="external-link">Idents</a></span><span class="op">(</span><span class="va">blood_atlas</span><span class="op">)</span> <span class="op">&lt;-</span> <span class="va">blood_atlas</span><span class="op">$</span><span class="va">cell.type</span></span></code></pre></div>
 <p>Let’s have a quick look at the data, and get rid of any cell
 populations that aren’t represented in both healthy and disease
 datasets.</p>

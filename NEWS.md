@@ -1,3 +1,9 @@
+## SCPA v1.6.1
+
+### Minor changes
+
+Add compatability for numeric vectors in `compare_seurat()`
+
 ## SCPA v1.6
 
 #### Major changes

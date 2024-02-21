@@ -61,6 +61,9 @@ compare_seurat <- function(seurat_object,
   }
   path_names <- sapply(pathways, function(x) unique(x$Pathway))
 
+  ## Convert population to character vector
+  group1_population <- as.character(group1_population)
+
   ## Seurat extract
   if (is.null(group2)) {
     samples <- list()

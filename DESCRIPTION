@@ -29,6 +29,7 @@ Imports:
     multicross (>= 2.1.0),
     purrr (>= 0.3.4),
     Seurat (>= 4.1.1),
+    SeuratObject (>= 5.0.1),
     stats (>= 4.1.0),
     stringr (>= 1.4.0),
     SummarizedExperiment (>= 1.30),
@@ -44,4 +45,3 @@ VignetteBuilder: knitr
 Depends: 
     R (>= 2.10)
 Language: en-GB
-

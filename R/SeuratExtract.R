@@ -34,6 +34,7 @@ seurat_extract <- function(seu_obj,
                            pseudocount = 0.001) {
 
   seurat_version <- SeuratObject::Version(seu_obj)
+  seurat_version <- unlist(seurat_version)[1]
 
   if (is.null(meta1) && is.null(meta2)) {
     message("No metadata selected. Will convert whole Seurat object to matrix")

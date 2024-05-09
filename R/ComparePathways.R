@@ -347,7 +347,7 @@ parallel_comparison <- function(samples,
 #' @param min_genes Gene sets with fewer than this number of genes will be excluded
 #' @param max_genes Gene sets with more than this number of genes will be excluded
 #' @param parallel Should parallel processing be used?
-#' @param cores The number of cores used for parallel processing
+#' @param cores The number of cores used for parallel processing. Defaults to 3 if not specified
 #'
 #' @examples \dontrun{
 #' scpa_result <- compare_pathways(
@@ -373,24 +373,28 @@ compare_pathways <- function(samples,
                              max_genes = 500,
                              parallel = FALSE,
                              cores = NULL) {
-
-  if (parallel == FALSE) {
-
-    mcm_output <- single_comparison(samples,
-                                 pathways,
-                                 downsample = downsample,
-                                 min_genes = min_genes,
-                                 max_genes = max_genes)
-
-  } else {
-
+  
+  if (parallel == TRUE) {
+    
+    if (is.null(cores)) {
+      cores = 3
+    }
     mcm_output <- parallel_comparison(samples,
-                                  pathways,
-                                  downsample = downsample,
-                                  min_genes = min_genes,
-                                  max_genes = max_genes,
-                                  cores = cores)
-
+                                      pathways,
+                                      downsample = downsample,
+                                      min_genes = min_genes,
+                                      max_genes = max_genes,
+                                      cores = cores)
+    
+  } else {
+    
+    mcm_output <- single_comparison(samples,
+                                    pathways,
+                                    downsample = downsample,
+                                    min_genes = min_genes,
+                                    max_genes = max_genes)
+    
+    
   }
 
   return(mcm_output)

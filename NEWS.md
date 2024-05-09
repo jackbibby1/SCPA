@@ -1,3 +1,7 @@
+## SCPA v1.6.2
+
+Default to cores = 3 if parallel = TRUE is supplied with no cores argument
+
 ## SCPA v1.6.1
 
 ### Minor changes

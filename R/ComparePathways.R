@@ -199,11 +199,11 @@ single_comparison <- function(samples,
 #' @export
 
 parallel_comparison <- function(samples,
-                             pathways,
-                             downsample = 500,
-                             min_genes = 15,
-                             max_genes = 500,
-                             cores = 2) {
+                                pathways,
+                                downsample = 500,
+                                min_genes = 15,
+                                max_genes = 500,
+                                cores = 2) {
 
   message("Processing in parallel using ", cores, " cores\n")
 
@@ -269,68 +269,61 @@ parallel_comparison <- function(samples,
 
   }
 
-    cluster <- parallel::makeCluster(cores, type = "PSOCK")
-    doParallel::registerDoParallel(cluster)
+  scpa_result <- parallel::mclapply(pathways_filtered, function(pathway) {
+    tryCatch({
+      # subset data to get one pathway
+      path_subset <- lapply(samples, function(x) x[rownames(x) %in% pathway$Genes, ])
+      path_subset <- lapply(path_subset, function(x) t(x))
+      path_subset <- lapply(path_subset, function(x) x[, sort(colnames(x))])
 
-    scpa_result <- foreach::foreach(pathway = pathways_filtered) %dopar% {
-      res <- tryCatch(
-        expr = {
-          # subset data to get one pathway
-          path_subset <- lapply(samples, function(x) x[rownames(x) %in% pathway$Genes, ])
-          path_subset <- lapply(path_subset, function(x) t(x))
-          path_subset <- lapply(path_subset, function(x) x[, sort(colnames(x))])
+      if (length(path_subset) == 2) {
 
-          if (length(path_subset) == 2) {
+        avg_expression <- lapply(path_subset, function(x) data.frame(colMeans(x)))
+        samp_combined <- cbind(avg_expression[[1]], avg_expression[[2]])
+        samp_combined <- magrittr::set_colnames(samp_combined, c("Pop1", "Pop2"))
+        samp_combined <- cbind(samp_combined, logFC = samp_combined[, "Pop1"]-samp_combined[, "Pop2"])
+        path_fc <- sum(samp_combined[, "logFC"])
 
-            avg_expression <- lapply(path_subset, function(x) data.frame(colMeans(x)))
-            samp_combined <- cbind(avg_expression[[1]], avg_expression[[2]])
-            samp_combined <- magrittr::set_colnames(samp_combined, c("Pop1", "Pop2"))
-            samp_combined <- cbind(samp_combined, logFC = samp_combined[, "Pop1"]-samp_combined[, "Pop2"])
-            path_fc <- sum(samp_combined[, "logFC"])
+        multicross::mcm(path_subset, level = 0.05) %>%
+          data.frame() %>%
+          t() %>%
+          data.frame() %>%
+          dplyr::mutate(FC = path_fc) %>%
+          dplyr::mutate(Pathway = pathway$Pathway[1]) %>%
+          dplyr::select(-X2) %>%
+          dplyr::mutate(Pval = as.numeric(X1)) %>%
+          dplyr::select(-X1) %>%
+          dplyr::mutate(adjPval = stats::p.adjust(Pval , method = "bonferroni",
+                                                  n = length(pathways_filtered))) %>%
+          dplyr::mutate(qval = sqrt(-log10(adjPval))) %>%
+          dplyr::select(Pathway, Pval, adjPval, qval, FC)
 
-            multicross::mcm(path_subset, level = 0.05) %>%
-              data.frame() %>%
-              t() %>%
-              data.frame() %>%
-              dplyr::mutate(FC = path_fc) %>%
-              dplyr::mutate(Pathway = pathway$Pathway[1]) %>%
-              dplyr::select(-X2) %>%
-              dplyr::mutate(Pval = as.numeric(X1)) %>%
-              dplyr::select(-X1) %>%
-              dplyr::mutate(adjPval = stats::p.adjust(Pval , method = "bonferroni",
-                                              n = length(pathways_filtered))) %>%
-              dplyr::mutate(qval = sqrt(-log10(adjPval))) %>%
-              dplyr::select(Pathway, Pval, adjPval, qval, FC)
+      } else {
 
-          } else {
+        multicross::mcm(path_subset, level = 0.05) %>%
+          data.frame() %>%
+          t() %>%
+          data.frame() %>%
+          dplyr::mutate(Pathway = pathway$Pathway[1]) %>%
+          dplyr::select(-X2) %>%
+          dplyr::mutate(Pval = as.numeric(X1)) %>%
+          dplyr::select(-X1) %>%
+          dplyr::mutate(adjPval = stats::p.adjust(Pval , method = "bonferroni",
+                                                  n = length(pathways_filtered))) %>%
+          dplyr::mutate(qval = sqrt(-log10(adjPval))) %>%
+          dplyr::select(Pathway, Pval, adjPval, qval)
+      }
+    }, error = function(e) {
+      NULL
+    })
+  }, mc.cores = cores)
 
-            multicross::mcm(path_subset, level = 0.05) %>%
-              data.frame() %>%
-              t() %>%
-              data.frame() %>%
-              dplyr::mutate(Pathway = pathway$Pathway[1]) %>%
-              dplyr::select(-X2) %>%
-              dplyr::mutate(Pval = as.numeric(X1)) %>%
-              dplyr::select(-X1) %>%
-              dplyr::mutate(adjPval = stats::p.adjust(Pval , method = "bonferroni",
-                                              n = length(pathways_filtered))) %>%
-              dplyr::mutate(qval = sqrt(-log10(adjPval))) %>%
-              dplyr::select(Pathway, Pval, adjPval, qval)
-          }
-        },
-        error = function(e) {
-        })
-    }
+  scpa_result <- scpa_result %>%
+    dplyr::bind_rows() %>%
+    tibble::remove_rownames() %>%
+    dplyr::arrange(dplyr::desc(qval))
 
-    parallel::stopCluster(cluster)
-
-    scpa_result <- scpa_result %>%
-      dplyr::bind_rows() %>%
-      tibble::remove_rownames() %>%
-      dplyr::arrange(dplyr::desc(qval))
-
-    return(scpa_result)
-
+  return(scpa_result)
 }
 
 #' Use SCPA to compare gene sets
